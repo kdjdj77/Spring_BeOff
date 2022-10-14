@@ -21,7 +21,7 @@
       mysql -u root -p
       CREATE DATABASE travel default CHARACTER SET UTF8;
       CREATE USER 'beoff'@'localhost' IDENTIFIED BY '1234';
-      GRANT ALL PRIVILEGES ON cinema.* TO 'beoff'@'localhost';
+      GRANT ALL PRIVILEGES ON travel.* TO 'beoff'@'localhost';
       FLUSH PRIVILEGES;
 
 1. dbeaver 설정 (db 설정한 대로)
