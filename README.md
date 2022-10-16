@@ -21,7 +21,7 @@
       GRANT ALL PRIVILEGES ON beoff.* TO 'beoff'@'localhost';
       FLUSH PRIVILEGES;
 
-1. dbeaver 설정 (db 설정한 대로)
+1. dbeaver 설정
 
     db  : beoff
     id  : beoff
