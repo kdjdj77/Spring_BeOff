@@ -1,5 +1,5 @@
 //댓글의 목록을 담기 위한 용도
-package com.lec.spring.domain;
+package com.lec.spring.domain.qna;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class QryCommentList extends QryResult{
+public class QqryCommentList extends QqryResult{
 	@JsonProperty("data") //Json으로 매핑될 property name
-	List<Comment> list; //목록데이터
+	List<Qcomment> list; //목록데이터
 }

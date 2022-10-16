@@ -6,24 +6,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.lec.spring.domain.Authority;
-import com.lec.spring.domain.Comment;
-import com.lec.spring.domain.FileDTO;
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.Write;
+import com.lec.spring.domain.qna.FileDTO;
+import com.lec.spring.domain.qna.Qcomment;
+import com.lec.spring.domain.qna.Qna;
 
 @SpringBootTest
-class WriteRepositoryTest {
+class RepositoryTest {
 
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private WriteRepository writeRepository;
+	private QnaRepository writeRepository;
 	@Autowired
 	private AuthorityRepository authorityRepository;
 	@Autowired
-	private CommentRepository commentRepository;
+	private QCommentRepository commentRepository;
 	@Autowired
-	private FileRepository fileRepository;
+	private QfileRepository fileRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
@@ -66,36 +66,50 @@ class WriteRepositoryTest {
 //				.password("1234")  // 나중에 Security 적용하면 PasswordEncoder사용해야함.
 				.password(passwordEncoder.encode("1234"))
 				.name("회원1")
+				.phonenum("01011111111")
+				.email("111@gmail.com")
 				.build();		
 		User user2 = User.builder()
 				.username("USER2")
 				.password(passwordEncoder.encode("1234"))
 				.name("회원2")
+				.phonenum("01022222222")
+				.email("222@gmail.com")
 				.build();
 		User adminqna = User.builder()
 				.username("ADMINQNA")
 				.password(passwordEncoder.encode("1234"))
 				.name("관리자0")
+				.phonenum("01033333333")
+				.email("333@gmail.com")
 				.build();
 		User adminair = User.builder()
 				.username("ADMINAIR")
 				.password(passwordEncoder.encode("1234"))
 				.name("관리자1")
+				.phonenum("01044444444")
+				.email("444@gmail.com")
 				.build();
 		User adminhotel = User.builder()
 				.username("ADMINHOTEL")
 				.password(passwordEncoder.encode("1234"))
 				.name("관리자2")
+				.phonenum("01055555555")
+				.email("555@gmail.com")
 				.build();
 		User adminrental = User.builder()
 				.username("ADMINRENTAL")
 				.password(passwordEncoder.encode("1234"))
 				.name("관리자3")
+				.phonenum("01066666666")
+				.email("666@gmail.com")
 				.build();
 		User adminshop = User.builder()
 				.username("ADMINSHOP")
 				.password(passwordEncoder.encode("1234"))
 				.name("관리자4")
+				.phonenum("01077777777")
+				.email("777@gmail.com")
 				.build();
 
 		user1.addAuthority(auth_member);
@@ -116,25 +130,25 @@ class WriteRepositoryTest {
 		userRepository.findAll().forEach(System.out::println);
 
 		// 글 Write 작성
-		Write w1 = Write.builder()
+		Qna w1 = Qna.builder()
 				.subject("제목입니다1")
 				.content("내용입니다1")
 				.user(user1)
 				.build();
 		
-		Write w2 = Write.builder()
+		Qna w2 = Qna.builder()
 				.subject("제목입니다2")
 				.content("내용입니다2")
 				.user(user1)
 				.build();
 		
-		Write w3 = Write.builder()
+		Qna w3 = Qna.builder()
 				.subject("제목입니다3")
 				.content("내용입니다3")
 				.user(adminqna)
 				.build();
 		
-		Write w4 = Write.builder()
+		Qna w4 = Qna.builder()
 				.subject("제목입니다4")
 				.content("내용입니다4")
 				.user(adminqna)
@@ -149,82 +163,42 @@ class WriteRepositoryTest {
 		
 		
 		// 댓글 Comment
-		Comment c1 = Comment.builder()
-				.content("1. user1이 1번글에 댓글 작성.")
-				.user(user1)  // 누가 작성
-				.write(w1.getId())  // 어느글의 댓글?
-				.build();
-		Comment c2 = Comment.builder()
-				.content("2. user1이 1번글에 댓글 작성.")
-				.user(user1)
-				.write(w1.getId())
-				.build();
-		Comment c3 = Comment.builder()
-				.content("3. user1이 2번글에 댓글 작성.")
-				.user(user1)
-				.write(w2.getId())
-				.build();
-		Comment c4 = Comment.builder()
-				.content("4. user1이 2번글에 댓글 작성.")
-				.user(user1)
-				.write(w2.getId())
-				.build();
-		Comment c5 = Comment.builder()
-				.content("5. user1이 3번글에 댓글 작성.")
-				.user(user1)
-				.write(w3.getId())
-				.build();
-		Comment c6 = Comment.builder()
-				.content("6. user1이 3번글에 댓글 작성.")
-				.user(user1)
-				.write(w3.getId())
-				.build();
-		Comment c7 = Comment.builder()
-				.content("7. user1이 4번글에 댓글 작성.")
-				.user(user1)
-				.write(w4.getId())
-				.build();
-		Comment c8 = Comment.builder()
-				.content("8. user1이 4번글에 댓글 작성.")
-				.user(user1)
-				.write(w4.getId())
-				.build();
-		Comment c9 = Comment.builder()
+		Qcomment c9 = Qcomment.builder()
 				.content("9. admin1이 1번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w1.getId())
 				.build();
-		Comment c10 = Comment.builder()
+		Qcomment c10 = Qcomment.builder()
 				.content("10. admin1이 1번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w1.getId())
 				.build();
-		Comment c11 = Comment.builder()
+		Qcomment c11 = Qcomment.builder()
 				.content("11. admin1이 2번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w2.getId())
 				.build();
-		Comment c12 = Comment.builder()
+		Qcomment c12 = Qcomment.builder()
 				.content("12. admin1이 2번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w2.getId())
 				.build();
-		Comment c13 = Comment.builder()
+		Qcomment c13 = Qcomment.builder()
 				.content("13. admin1이 3번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w3.getId())
 				.build();
-		Comment c14 = Comment.builder()
+		Qcomment c14 = Qcomment.builder()
 				.content("14. admin1이 3번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w3.getId())
 				.build();
-		Comment c15 = Comment.builder()
+		Qcomment c15 = Qcomment.builder()
 				.content("15. admin1이 4번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w4.getId())
 				.build();
-		Comment c16 = Comment.builder()
+		Qcomment c16 = Qcomment.builder()
 				.content("16. admin1이 4번글에 댓글 작성.")
 				.user(adminqna)
 				.write(w4.getId())
@@ -232,14 +206,6 @@ class WriteRepositoryTest {
 		
 		
 		
-		c1 = commentRepository.save(c1);
-		c2 = commentRepository.save(c2);
-		c3 = commentRepository.save(c3);
-		c4 = commentRepository.save(c4);
-		c5 = commentRepository.save(c5);
-		c6 = commentRepository.save(c6);
-		c7 = commentRepository.save(c7);
-		c8 = commentRepository.save(c8);
 		c9 = commentRepository.save(c9);
 		c10 = commentRepository.save(c10);
 		c11 = commentRepository.save(c11);

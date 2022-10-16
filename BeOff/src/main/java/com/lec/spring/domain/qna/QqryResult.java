@@ -1,4 +1,4 @@
-package com.lec.spring.domain;
+package com.lec.spring.domain.qna;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class QryResult {
+public class QqryResult {
 	int count; // 결과값 (정수)
 	String status; // 결과 메시지
 }

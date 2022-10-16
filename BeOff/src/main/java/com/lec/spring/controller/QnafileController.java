@@ -20,14 +20,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lec.spring.domain.FileDTO;
-import com.lec.spring.repository.FileRepository;
+import com.lec.spring.domain.qna.FileDTO;
+import com.lec.spring.repository.QfileRepository;
 
 // 파일 다운로드를 위한 컨트롤러
 // 데이터를 response 하기 위함
 
 @RestController
-public class FileController {
+public class QnafileController {
 
 	@Value("${app.upload.path}")  // org.springframework.beans.factory.annotation.Value
 	private String uploadDir;
@@ -35,15 +35,15 @@ public class FileController {
 	@Autowired
 	ServletContext context;   // ServletContext 도 주입 받을수 있다.
 	
-	private FileRepository fileRepository;
+	private QfileRepository fileRepository;
 
 	@Autowired
-	public void setFileRepository(FileRepository fileRepository) {
+	public void setFileRepository(QfileRepository fileRepository) {
 		this.fileRepository = fileRepository;
 	}
 
 	
-	public FileController() {
+	public QnafileController() {
 		System.out.println(getClass().getName() + "() 생성");
 	}
 	

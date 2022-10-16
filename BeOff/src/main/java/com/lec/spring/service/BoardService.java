@@ -27,12 +27,12 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lec.spring.domain.FileDTO;
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.Write;
-import com.lec.spring.repository.FileRepository;
+import com.lec.spring.domain.qna.FileDTO;
+import com.lec.spring.domain.qna.Qna;
+import com.lec.spring.repository.QfileRepository;
 import com.lec.spring.repository.UserRepository;
-import com.lec.spring.repository.WriteRepository;
+import com.lec.spring.repository.QnaRepository;
 import com.lec.spring.util.C;
 import com.lec.spring.util.U;
 
@@ -45,12 +45,12 @@ public class BoardService {
 	@Autowired
 	ServletContext context;   // ServletContext 도 주입받을수 있다.
 	
-	private WriteRepository writeRepository;
+	private QnaRepository writeRepository;
 	private UserRepository userRepository;
-	private FileRepository fileRepository;
+	private QfileRepository fileRepository;
 
 	@Autowired
-	public void setWriteRepository(WriteRepository writeRepository) {
+	public void setWriteRepository(QnaRepository writeRepository) {
 		this.writeRepository = writeRepository;
 	}
 	
@@ -60,7 +60,7 @@ public class BoardService {
 	}
 
 	@Autowired
-	public void setFileRepository(FileRepository fileRepository) {
+	public void setFileRepository(QfileRepository fileRepository) {
 		this.fileRepository = fileRepository;
 	}
 
@@ -70,7 +70,7 @@ public class BoardService {
 		System.out.println(getClass().getName() + "() 생성");
 	}
 
-	public int write(Write write
+	public int write(Qna write
 			, Map<String, MultipartFile> files) {
 		
 		// 현재 로그인 한 작성자 정보
@@ -175,14 +175,14 @@ public class BoardService {
 	
 
 	@Transactional
-	public List<Write> detail(Long id) {
+	public List<Qna> detail(Long id) {
 		// ※사실, 트랜잭션은 여기서 발생해야 한다.
 		//  1. 조회수 증가
 		//  2. 글 하나 읽어오기	
 		
-		List<Write> list = new ArrayList<>();
+		List<Qna> list = new ArrayList<>();
 		
-		Write write = writeRepository.findById(id).orElse(null);
+		Qna write = writeRepository.findById(id).orElse(null);
 		if(write != null) {
 			write.setViewCnt(write.getViewCnt() + 1);
 			writeRepository.saveAndFlush(write);  // UPDATE
@@ -224,8 +224,8 @@ public class BoardService {
 	
 	
 	// 전체 목록
-	public List<Write> list() {
-		List<Write> list = null;
+	public List<Qna> list() {
+		List<Qna> list = null;
 		
 		list = writeRepository.findAll(Sort.by(Order.desc("id")));
 		
@@ -233,7 +233,7 @@ public class BoardService {
 	}
 	
 	// 페이징 목록
-	public List<Write> list(Integer page, Model model){
+	public List<Qna> list(Integer page, Model model){
 		//  현재 페이지 parameter
 		if(page == null) page = 1; // 디폴트는 1 page
 		if(page < 1) page = 1;
@@ -249,7 +249,7 @@ public class BoardService {
 		session.setAttribute("page", page);  // 현재 페이지 (세션에 저장해두자)
 		
 		// page 의 데이터 읽어오기
-		Page<Write> pageWrites = writeRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));
+		Page<Qna> pageWrites = writeRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));
 		
 		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
 		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
@@ -271,7 +271,7 @@ public class BoardService {
 		model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
 		model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
 		
-		List<Write> list = pageWrites.getContent();	
+		List<Qna> list = pageWrites.getContent();	
 		model.addAttribute("list", list);
 		
 		return list;
@@ -279,10 +279,10 @@ public class BoardService {
 
 	}
 
-	public List<Write> selectById(Long id) {
-		List<Write> list = new ArrayList<>();
+	public List<Qna> selectById(Long id) {
+		List<Qna> list = new ArrayList<>();
 		
-		Write write = writeRepository.findById(id).orElse(null);
+		Qna write = writeRepository.findById(id).orElse(null);
 		
 		if(write != null) {
 			// 첨부파일 정보 가져오기
@@ -294,14 +294,14 @@ public class BoardService {
 		return list;
 	}
 
-	public int update(Write write
+	public int update(Qna write
 			, Map<String, MultipartFile> files // 새로 추가될 첨부파일들
 			, Long [] delfile   // 삭제될 첨부파일들
 			) {
 		int result = 0;
 		
 		// update 하고자 하는 데이터 읽어오기
-		Write w = writeRepository.findById(write.getId()).orElse(null);
+		Qna w = writeRepository.findById(write.getId()).orElse(null);
 		if(w != null) {
 			w.setSubject(write.getSubject());
 			w.setContent(write.getContent());
@@ -330,7 +330,7 @@ public class BoardService {
 	public int deleteById(Long id) {
 		int result = 0;
 		
-		Write write = writeRepository.findById(id).orElse(null);
+		Qna write = writeRepository.findById(id).orElse(null);
 		
 		if(write != null) {
 			

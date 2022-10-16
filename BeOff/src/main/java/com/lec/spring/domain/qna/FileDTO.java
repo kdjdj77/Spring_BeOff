@@ -1,4 +1,4 @@
-package com.lec.spring.domain;
+package com.lec.spring.domain.qna;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

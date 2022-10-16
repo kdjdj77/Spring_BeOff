@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lec.spring.domain.Write;
+import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.service.BoardService;
 import com.lec.spring.util.U;
 
 @Controller
 @RequestMapping("/board")
-public class BoardController {
+public class QnaController {
 	
 	private BoardService boardService;
 	
@@ -27,7 +27,7 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 
-	public BoardController() {
+	public QnaController() {
 		System.out.println(getClass().getName() + "() 생성");
 	}
 	
@@ -46,7 +46,7 @@ public class BoardController {
 	@PostMapping("/write")
 	public String writeOk(
 			@RequestParam Map<String, MultipartFile> files   // 첨부파일들
-			, @ModelAttribute("dto") Write write
+			, @ModelAttribute("dto") Qna write
 			, Model model) {
 		System.out.println("POST: /board/write " + write);		
 		model.addAttribute("result", boardService.write(write, files));
@@ -71,7 +71,7 @@ public class BoardController {
 	@PostMapping("/update")
 	public String updateOk(
 			@RequestParam Map<String, MultipartFile> files  // 새로 추가될 첨부파일들
-			, @ModelAttribute("dto") Write write
+			, @ModelAttribute("dto") Qna write
 			, Model model
 			, Long[] delfile    // 삭제될 파일들
 			) {

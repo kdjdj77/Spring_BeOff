@@ -37,6 +37,10 @@ public class User extends BaseEntity{
 	private String password; // 회원 비밀번호
 	@Column(nullable = false)
 	private String name; // 회원 이름
+	@Column(nullable = false)
+	private String phonenum;
+	@Column(nullable = false)
+	private String email;
 	@Transient // DB에 반영 안함 javax.persistence
 	@ToString.Exclude
 	private String re_password; // 바인딩 전용

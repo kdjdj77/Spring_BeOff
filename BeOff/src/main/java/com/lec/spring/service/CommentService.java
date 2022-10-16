@@ -7,17 +7,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
-import com.lec.spring.domain.Comment;
-import com.lec.spring.domain.QryCommentList;
-import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.User;
-import com.lec.spring.repository.CommentRepository;
+import com.lec.spring.domain.qna.Qcomment;
+import com.lec.spring.domain.qna.QqryCommentList;
+import com.lec.spring.domain.qna.QqryResult;
+import com.lec.spring.repository.QCommentRepository;
 import com.lec.spring.repository.UserRepository;
 
 @Service
 public class CommentService {
 	@Autowired
-	private CommentRepository commentRepository;
+	private QCommentRepository commentRepository;
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -26,9 +26,9 @@ public class CommentService {
 	}
 	
 	// 특정 글(id)의 댓글 목록들
-	public QryCommentList list(Long id) {
-		QryCommentList list = new QryCommentList();
-		List<Comment> comments = null;
+	public QqryCommentList list(Long id) {
+		QqryCommentList list = new QqryCommentList();
+		List<Qcomment> comments = null;
 		
 		// 특정 글의 댓글들을 id역순으로 comments에 저장
 		comments = commentRepository.findByWrite(id, Sort.by(Order.desc("id")));
@@ -40,17 +40,17 @@ public class CommentService {
 	}
 	
 	// 특정 글(writeId)에 특정 사용자(UserId)가 댓글 작성
-	public QryResult write(Long writeId, Long userId, String content) {
+	public QqryResult write(Long writeId, Long userId, String content) {
 		User user = userRepository.findById(userId).orElse(null);
 		
-		Comment comment = Comment.builder()
+		Qcomment comment = Qcomment.builder()
 				.user(user)
 				.content(content)
 				.write(writeId)
 				.build()
 				;
 		commentRepository.save(comment); // INSERT
-		QryResult result = QryResult.builder()
+		QqryResult result = QqryResult.builder()
 				.count(1)
 				.status("OK")
 				.build()
@@ -59,8 +59,8 @@ public class CommentService {
 	}
 	
 	// 특정 댓글(id) 삭제
-	public QryResult delete(Long id) {
-		Comment comment = commentRepository.findById(id).orElse(null);
+	public QqryResult delete(Long id) {
+		Qcomment comment = commentRepository.findById(id).orElse(null);
 		
 		int count = 0;
 		String status = "FAIL";
@@ -69,7 +69,7 @@ public class CommentService {
 			count = 1;
 			status = "OK";
 		}
-		QryResult result = QryResult.builder()
+		QqryResult result = QqryResult.builder()
 				.count(count)
 				.status(status)
 				.build()

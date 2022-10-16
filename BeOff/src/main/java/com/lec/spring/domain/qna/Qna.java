@@ -1,4 +1,4 @@
-package com.lec.spring.domain;
+package com.lec.spring.domain.qna;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +17,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.lec.spring.domain.BaseEntity;
+import com.lec.spring.domain.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,10 +33,10 @@ import lombok.ToString;
 @Builder
 @ToString
 @EqualsAndHashCode(callSuper = true)
-@Entity(name="db_write")
+@Entity(name="db_qna")
 @DynamicInsert // insert 동작 시 null인 필드는 제외
 @DynamicUpdate // update 동작 시 null인 필드는 제외
-public class Write extends BaseEntity{
+public class Qna extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // AI
 	private Long id;		// 글의 id(PK)
@@ -50,7 +53,7 @@ public class Write extends BaseEntity{
 	@OneToMany(mappedBy = "write", cascade = CascadeType.ALL)  // 삭제등의 동작 발생시 child 도 함께 삭제
 	@ToString.Exclude
 	@Builder.Default
-	private List<Comment> comments = new ArrayList<>();
+	private List<Qcomment> comments = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "write", cascade = CascadeType.ALL)
 	@ToString.Exclude
