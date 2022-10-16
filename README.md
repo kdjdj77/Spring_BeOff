@@ -16,7 +16,9 @@
 
     DB 설정
       mysql -u root -p
+      
       비밀번호 입력
+      
       CREATE DATABASE beoff default CHARACTER SET UTF8;
       CREATE USER 'beoff'@'localhost' IDENTIFIED BY '1234';
       GRANT ALL PRIVILEGES ON beoff.* TO 'beoff'@'localhost';
@@ -25,7 +27,9 @@
 2. dbeaver 설정
 
     db  : beoff
+    
     id  : beoff
+    
     pw  : 1234
     
     allowPublicKeyRetrieval=true
