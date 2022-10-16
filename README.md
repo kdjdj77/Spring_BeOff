@@ -13,9 +13,6 @@
 ★처음 프로젝트 실행 시 해야 할 것
 
 0. db 설정할 것
-    (db name : beoff
-    id	 : beoff
-    pw   : 1234)
 
     DB 설정
       mysql -u root -p
@@ -25,3 +22,10 @@
       FLUSH PRIVILEGES;
 
 1. dbeaver 설정 (db 설정한 대로)
+
+    db  : beoff
+    id  : beoff
+    pw  : 1234
+    
+    allowPublicKeyRetrieval=true
+
