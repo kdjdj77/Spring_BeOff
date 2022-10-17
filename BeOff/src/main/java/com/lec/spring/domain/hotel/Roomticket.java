@@ -1,5 +1,9 @@
 package com.lec.spring.domain.hotel;
 
-public class Roomticket {
+import java.util.Date;
 
+public class Roomticket {
+	private Long id;
+	
+	private Date date;
 }
