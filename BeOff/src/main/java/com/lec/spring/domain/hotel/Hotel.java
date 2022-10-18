@@ -1,10 +1,5 @@
 package com.lec.spring.domain.hotel;
 
-public class Hotel {
-
-<<<<<<< Updated upstream
-=======
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,5 +54,5 @@ public class Hotel extends BaseEntity{
 	// one to many -- comment -- hotel : comment
 	// one to many -- room -- hotel : room
 
->>>>>>> Stashed changes
+
 }
