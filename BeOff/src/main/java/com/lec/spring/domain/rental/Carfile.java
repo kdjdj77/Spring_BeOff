@@ -27,7 +27,7 @@ public class Carfile {
 	@Column(nullable = false, name = "car_id")
 	@ManyToOne
 	@ToString.Exclude
-	private Long car;
+	private Car car;
 	
 	@Column(nullable = false)
 	private String file;

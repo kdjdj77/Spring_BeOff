@@ -37,7 +37,7 @@ public class Car {
 	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
-	private Long rental_id; 
+	private Rental rental_id; 
 	
 	@Column(nullable = false)
 	private String carname;
