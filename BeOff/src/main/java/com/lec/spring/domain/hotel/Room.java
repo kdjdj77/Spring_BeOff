@@ -42,7 +42,7 @@ public class Room {
 		}
 	}
 	
-//	@Column(name = "hotel_id") 이게 왜안되지
+//	@Column(name = "hotel_id") // 이게 왜안되지
 //	private Long hotel; // 어느 호텔의 룸 ? (FK)
 	
 	@ManyToOne
