@@ -38,22 +38,34 @@ public class Hotel extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(nullable = false)
 	private String hotelname; // 호텔 이름
+	
 	@Column
 	private String content; // 호텔 내용
+	
 	@ColumnDefault(value = "0")
 	private float avgstar; // 별점 평균
-	@ManyToOne(cascade = CascadeType.ALL)
-	private User user;
+	
 	@ManyToOne
+	@ToString.Exclude
+	private User user;
+	
+	@ManyToOne
+	@ToString.Exclude
 	private Region region;
-	@OneToMany
+	
+	@OneToMany(mappedBy ="hotel" , cascade = CascadeType.ALL)
+	@ToString.Exclude
+	@Builder.Default
 	private List<Room> rooms = new ArrayList<>();
-	@OneToMany
+	
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+	@ToString.Exclude
+	@Builder.Default
 	private List<Hcomment> hcomments = new ArrayList<>();
 	
-	// one to many -- comment -- hotel : comment
-	// one to many -- room -- hotel : room
+
 
 }
