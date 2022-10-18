@@ -30,7 +30,7 @@ class RepositoryTest {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@Test
+//	@Test
 	void init() {
 		System.out.println("[init]");
 		
