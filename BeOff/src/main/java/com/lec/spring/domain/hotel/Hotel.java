@@ -55,4 +55,5 @@ public class Hotel extends BaseEntity{
 	
 	// one to many -- comment -- hotel : comment
 	// one to many -- room -- hotel : room
+
 }
