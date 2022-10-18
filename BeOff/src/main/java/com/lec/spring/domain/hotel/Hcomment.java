@@ -23,7 +23,7 @@ import lombok.ToString;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@Entity(name="db_Hcomment")
+@Entity(name="db_hcomment")
 public class Hcomment extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

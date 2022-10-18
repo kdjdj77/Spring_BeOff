@@ -25,9 +25,8 @@ public class Roomfile {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@ToString.Exclude
-	private Room room; 
+	@Column(name="room_id")
+	private Long room;
 
 	@Column(nullable = false)
 	private String source;  

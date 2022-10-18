@@ -46,11 +46,13 @@ public class Room {
 //	private Long hotel; // 어느 호텔의 룸 ? (FK)
 	
 	@ManyToOne
+	@ToString.Exclude
 	private Hotel hotel;
 	
 	@Column(nullable = false)
-	private Long roomname;
+	private String roomname;
 	@Column(nullable = false)
 	private float price;
+	@Column(nullable=false)
 	private Long bed;
 }
