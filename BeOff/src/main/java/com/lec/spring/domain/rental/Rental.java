@@ -42,10 +42,11 @@ public class Rental extends BaseEntity{
 	@Column(nullable = false)
 	private String rentalname;
 	
+	@Column
 	private String content;
 	
 	@ColumnDefault(value = "0")
-	private Long avgstar;
+	private float avgstar;
 	
 
 }

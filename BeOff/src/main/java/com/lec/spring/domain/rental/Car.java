@@ -42,8 +42,10 @@ public class Car {
 	@Column(nullable = false)
 	private String cartype;
 	
+	@Column
 	private String fuel;
 	
+	@Column
 	private String fueleff;
 	
 
