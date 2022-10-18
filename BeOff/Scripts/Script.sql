@@ -7,6 +7,7 @@ drop table db_qna;
 drop table db_user;
 drop table db_authority;
 
+
 select * from db_user;
 select * from db_authority;
 select * from db_qcomment;
@@ -18,3 +19,4 @@ select * from db_rental;
 select * from db_car;
 select * from db_rentalticket;
 select * from db_carfile;
+
