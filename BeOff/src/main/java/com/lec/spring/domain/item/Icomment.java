@@ -7,7 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.ColumnDefault;
+
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.User;
 
@@ -36,11 +37,11 @@ public class Icomment extends BaseEntity{
 	private User user; 
 	
 	@Column(name="item_id")
-	@ToString.Exclude
 	private Long item;
 		
 	@Column(nullable = false)
 	private String content;   // 댓글 내용
-		
+	
+	@ColumnDefault(value="0")
 	private Long star; // 별점
 }
