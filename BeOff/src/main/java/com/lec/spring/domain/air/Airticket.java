@@ -38,7 +38,7 @@ public class Airticket extends BaseEntity{
 	
 	@Column(nullable=false)
 	private Long date;
-	@Column
+	@Column(nullable=false)
 	private String seat;
 	
 }
