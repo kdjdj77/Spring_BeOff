@@ -1,7 +1,5 @@
 package com.lec.spring.domain.hotel;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.lec.spring.domain.BaseEntity;
-import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
 
 import lombok.AllArgsConstructor;
@@ -36,12 +33,14 @@ public class Hcomment extends BaseEntity{
 	@Column(nullable = false)
 	private Long star;
 	
+
 	@ManyToOne
+	@ToString.Exclude
 	private User user;
 	@ManyToOne
+	@ToString.Exclude
 	private Hotel hotel;
 }
 
 
 
-// many to one -- user , hotel
