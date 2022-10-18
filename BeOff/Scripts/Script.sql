@@ -13,5 +13,5 @@ select * from db_qcomment;
 select * from db_qfile;
 select * from db_user_authorities;
 select * from db_qna;
-
+select * from db_region;
 
