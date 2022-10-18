@@ -1,4 +1,4 @@
-package com.lec.spring.repository;
+package com.lec.spring.repository.qna;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

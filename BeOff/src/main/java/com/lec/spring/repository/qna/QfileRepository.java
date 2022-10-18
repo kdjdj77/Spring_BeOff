@@ -1,4 +1,4 @@
-package com.lec.spring.repository;
+package com.lec.spring.repository.qna;
 
 import java.util.List;
 
