@@ -48,8 +48,8 @@ public class Hotel extends BaseEntity{
 	private User user;
 	@ManyToOne
 	private Region region;
-//	@OneToMany
-//	private List<Room> rooms = new ArrayList<>();
+	@OneToMany
+	private List<Room> rooms = new ArrayList<>();
 	@OneToMany
 	private List<Hcomment> hcomments = new ArrayList<>();
 	
