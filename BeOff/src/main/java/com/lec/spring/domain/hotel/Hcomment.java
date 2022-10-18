@@ -2,6 +2,7 @@ package com.lec.spring.domain.hotel;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,9 +37,9 @@ public class Hcomment extends BaseEntity{
 	@Column(nullable = false)
 	private Long star;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Hotel hotel;
 }
 

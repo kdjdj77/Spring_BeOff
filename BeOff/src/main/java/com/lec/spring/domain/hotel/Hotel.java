@@ -5,6 +5,7 @@ package com.lec.spring.domain.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,12 +40,12 @@ public class Hotel extends BaseEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable = false)
-	private String name; // 호텔 이름
-	
+	private String hotelname; // 호텔 이름
+	@Column
 	private String content; // 호텔 내용
 	@ColumnDefault(value = "0")
 	private float avgstar; // 별점 평균
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
 	@ManyToOne
 	private Region region;
