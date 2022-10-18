@@ -30,9 +30,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.qna.FileDTO;
 import com.lec.spring.domain.qna.Qna;
-import com.lec.spring.repository.QfileRepository;
 import com.lec.spring.repository.UserRepository;
-import com.lec.spring.repository.QnaRepository;
+import com.lec.spring.repository.qna.QfileRepository;
+import com.lec.spring.repository.qna.QnaRepository;
 import com.lec.spring.util.C;
 import com.lec.spring.util.U;
 
