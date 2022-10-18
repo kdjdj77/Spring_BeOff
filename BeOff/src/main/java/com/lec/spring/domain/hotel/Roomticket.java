@@ -1,7 +1,5 @@
 package com.lec.spring.domain.hotel;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,9 +31,11 @@ public class Roomticket extends BaseEntity{
 	private Long id;
 	
 	@ManyToOne
+	@ToString.Exclude
 	private User user; 
 	
 	@ManyToOne
+	@ToString.Exclude
 	private Room room;
 	
 	@Column(nullable = false)
