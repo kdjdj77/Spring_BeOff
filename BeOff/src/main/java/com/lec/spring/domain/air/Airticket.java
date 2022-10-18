@@ -1,15 +1,11 @@
 package com.lec.spring.domain.air;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.User;
@@ -43,8 +39,4 @@ public class Airticket extends BaseEntity{
 	@Column(name="seat")
 	private String seat;
 	
-	@OneToMany(mappedBy = "air")  // 삭제등의 동작 발생시 child 도 함께 삭제
-	@ToString.Exclude
-	@Builder.Default
-	private List<Airticket> airticket = new ArrayList<>();
 }
