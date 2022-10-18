@@ -13,3 +13,8 @@ select * from db_qcomment;
 select * from db_qfile;
 select * from db_user_authorities;
 select * from db_qna;
+
+select * from db_rental;
+select * from db_car;
+select * from db_rentalticket;
+select * from db_carfile;
