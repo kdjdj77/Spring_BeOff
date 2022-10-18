@@ -12,20 +12,32 @@
 
 ★처음 프로젝트 실행 시 해야 할 것
 
-0. db 설정할 것
+1. db 설정할 것
 
     DB 설정
       mysql -u root -p
+      
+      비밀번호 입력
+      
       CREATE DATABASE beoff default CHARACTER SET UTF8;
       CREATE USER 'beoff'@'localhost' IDENTIFIED BY '1234';
       GRANT ALL PRIVILEGES ON beoff.* TO 'beoff'@'localhost';
       FLUSH PRIVILEGES;
 
-1. dbeaver 설정
+2. dbeaver 설정
 
     db  : beoff
+    
     id  : beoff
+    
     pw  : 1234
     
     allowPublicKeyRetrieval=true
+   
+3. 테이블 + 더미데이터 생성
+    
+    1) application.properties 에서 spring.jpa.hibernate.ddl-auto=create 로 수정
+    2) src/test/java/com/lec/repository/RepositoryTest 를 JUnitTest로 실행
+    3) application.properties 에서 spring.jpa.hibernate.ddl-auto=update 로 수정
+    
 
