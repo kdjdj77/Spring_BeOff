@@ -1,21 +1,27 @@
 package com.lec.spring.domain.rental;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.Columns;
+import javax.persistence.OneToMany;
 
 import com.lec.spring.domain.qna.FileDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 
 @Data
 @NoArgsConstructor
@@ -48,5 +54,14 @@ public class Car {
 	@Column
 	private String fueleff;
 	
-
+	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+	@ToString.Exclude
+	@Builder.Default 
+	private List<Carfile> files = new ArrayList<>();
+	
+	public void addFiles(Carfile... files) {
+		if(files != null) {
+			Collections.addAll(this.files, files);
+		}
+	}
 }

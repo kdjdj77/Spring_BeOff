@@ -1,5 +1,7 @@
 package com.lec.spring.domain.rental;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.lec.spring.domain.BaseEntity;
+import com.lec.spring.domain.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -19,6 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity(name = "db_rentalticket")
 public class Rentalticket extends BaseEntity{
@@ -27,12 +32,15 @@ public class Rentalticket extends BaseEntity{
 	private Long id;
 	
 	@Column(nullable = false)
-	private Long car_id;
+	private Car car;
 	
 	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
-	private Long user_id;
+	private User user;
+	
+	@Column(nullable = false, length = 8)
+	private Long date;
 
 
 }

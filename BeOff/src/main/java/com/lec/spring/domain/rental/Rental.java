@@ -11,10 +11,13 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.lec.spring.domain.BaseEntity;
+import com.lec.spring.domain.Region;
+import com.lec.spring.domain.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -22,6 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity(name = "db_rental")
 public class Rental extends BaseEntity{
@@ -32,12 +36,12 @@ public class Rental extends BaseEntity{
 	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
-	private Long region_id;
+	private Region region;
 	
 	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
-	private Long user_id;
+	private User user;
 	
 	@Column(nullable = false)
 	private String rentalname;
