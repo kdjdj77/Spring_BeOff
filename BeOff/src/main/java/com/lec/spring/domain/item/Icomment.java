@@ -34,9 +34,10 @@ public class Icomment extends BaseEntity{
 	@ManyToOne
 	@ToString.Exclude
 	private User user; 
-	@ManyToOne
+	
+	@Column(name="item_id")
 	@ToString.Exclude
-	private Item item;
+	private Long item;
 		
 	@Column(nullable = false)
 	private String content;   // 댓글 내용

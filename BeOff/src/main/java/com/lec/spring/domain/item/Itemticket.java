@@ -2,6 +2,7 @@ package com.lec.spring.domain.item;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -41,9 +42,10 @@ public class Itemticket extends BaseEntity{
 	@ToString.Exclude
 	private Item item; 
 
-	
+	@Column(nullable=false)
 	private Long count; // 상품 수량
 	
+	@Column
 	@Enumerated(EnumType.STRING)
 	private Orderstatus orderstatus; // 상품 주문 상태
 	

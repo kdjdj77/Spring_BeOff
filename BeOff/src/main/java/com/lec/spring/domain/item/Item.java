@@ -60,6 +60,7 @@ public class Item extends BaseEntity{
 	private float avgstar; // 총 별점
 	@ColumnDefault(value = "0")
 	private Long viewcnt; // 조회수
+	@Column
 	@Enumerated(EnumType.STRING)
 	private Sellstatus sellstatus; // 상품 판매 상태
 	
@@ -78,15 +79,5 @@ public class Item extends BaseEntity{
 			Collections.addAll(this.files, files);
 		}
 	}
-	
-	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)  
-	@ToString.Exclude
-	@Builder.Default
-	private List<Itemticket> tickets = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)  
-	@ToString.Exclude
-	@Builder.Default
-	private List<Itemcart> carts = new ArrayList<>();
 
 }

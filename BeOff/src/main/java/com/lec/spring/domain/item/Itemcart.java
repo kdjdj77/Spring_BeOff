@@ -1,5 +1,6 @@
 package com.lec.spring.domain.item;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +22,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
 @Entity(name = "db_itemcart")
 
-public class Itemcart extends BaseEntity{
+public class Itemcart{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
@@ -36,8 +36,10 @@ public class Itemcart extends BaseEntity{
 	@ManyToOne
 	@ToString.Exclude
 	private Item item; 
-
+	
+	@Column
 	private Long count; // 상품 갯수
+	@Column
 	private float orderprice; // 주문 가격
 
 }
