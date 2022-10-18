@@ -56,10 +56,11 @@ public class Hotel extends BaseEntity{
 	@ToString.Exclude
 	private Region region;
 	
-	@OneToMany(mappedBy ="hotel" , cascade = CascadeType.ALL)
-	@ToString.Exclude
-	@Builder.Default
+	@OneToMany
 	private List<Room> rooms = new ArrayList<>();
+	
+	@OneToMany
+	private List<Hcomment> hcomments = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
 	@ToString.Exclude
