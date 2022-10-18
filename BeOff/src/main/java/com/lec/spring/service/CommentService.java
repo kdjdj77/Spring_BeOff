@@ -11,8 +11,8 @@ import com.lec.spring.domain.User;
 import com.lec.spring.domain.qna.Qcomment;
 import com.lec.spring.domain.qna.QqryCommentList;
 import com.lec.spring.domain.qna.QqryResult;
-import com.lec.spring.repository.QCommentRepository;
 import com.lec.spring.repository.UserRepository;
+import com.lec.spring.repository.qna.QCommentRepository;
 
 @Service
 public class CommentService {

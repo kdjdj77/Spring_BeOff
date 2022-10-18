@@ -14,6 +14,7 @@ import com.lec.spring.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -21,6 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity(name="db_roomticket")
 public class Roomticket {
@@ -36,5 +38,6 @@ public class Roomticket {
 	private Room room;
 	
 	@Column(nullable = false)
-	private Date date;
+	private Long date;
+
 }

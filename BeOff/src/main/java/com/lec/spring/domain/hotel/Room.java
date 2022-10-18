@@ -41,12 +41,19 @@ public class Room {
 		}
 	}
 	
-	@Column(name = "hotel_id")
-	private Long hotel; // 어느 글의 첨부파일 ? (FK)
+
+//	@Column(name = "hotel_id") // 이게 왜안되지
+//	private Long hotel; // 어느 호텔의 룸 ? (FK)
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Hotel hotel;
 	
 	@Column(nullable = false)
-	private int roomname;
+	private String roomname;
 	@Column(nullable = false)
 	private float price;
-	private int bed;
+	@Column(nullable=false)
+	private Long bed;
+
 }

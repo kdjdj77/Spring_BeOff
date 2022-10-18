@@ -10,6 +10,9 @@ import com.lec.spring.domain.User;
 import com.lec.spring.domain.qna.FileDTO;
 import com.lec.spring.domain.qna.Qcomment;
 import com.lec.spring.domain.qna.Qna;
+import com.lec.spring.repository.qna.QCommentRepository;
+import com.lec.spring.repository.qna.QfileRepository;
+import com.lec.spring.repository.qna.QnaRepository;
 
 @SpringBootTest
 class RepositoryTest {

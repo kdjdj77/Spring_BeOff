@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lec.spring.domain.qna.FileDTO;
-import com.lec.spring.repository.QfileRepository;
+import com.lec.spring.repository.qna.QfileRepository;
 
 // 파일 다운로드를 위한 컨트롤러
 // 데이터를 response 하기 위함
