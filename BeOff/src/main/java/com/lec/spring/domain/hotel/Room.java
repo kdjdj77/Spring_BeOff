@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -41,12 +42,15 @@ public class Room {
 		}
 	}
 	
-	@Column(name = "hotel_id")
-	private Long hotel; // 어느 글의 첨부파일 ? (FK)
+//	@Column(name = "hotel_id") 이게 왜안되지
+//	private Long hotel; // 어느 호텔의 룸 ? (FK)
+	
+	@ManyToOne
+	private Hotel hotel;
 	
 	@Column(nullable = false)
-	private int roomname;
+	private Long roomname;
 	@Column(nullable = false)
 	private float price;
-	private int bed;
+	private Long bed;
 }

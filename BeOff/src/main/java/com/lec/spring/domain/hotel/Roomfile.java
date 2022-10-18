@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,11 +26,15 @@ public class Roomfile {
 	private Long id;
 	
 	@ManyToOne
+	@ToString.Exclude
 	private Room room; 
 
 	@Column(nullable = false)
 	private String source;  
 	@Column(nullable = false)
 	private String file; 
+	
+	@Transient
+	private boolean isImage; // 이미지 여부
 
 }
