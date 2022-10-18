@@ -36,7 +36,9 @@ public class Airticket extends BaseEntity{
 	@ToString.Exclude
 	private Airplane airplane;
 	
-	@Column(name="seat")
+	@Column(nullable=false)
+	private Long date;
+	@Column
 	private String seat;
 	
 }

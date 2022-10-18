@@ -43,10 +43,7 @@ public class Airplane {
 	@ToString.Exclude
 	private Airname name;
 	
-	@Column(name="date", nullable=false)
-	private Long date;
-	
-	@OneToMany(mappedBy = "air")  // 삭제등의 동작 발생시 child 도 함께 삭제
+	@OneToMany(mappedBy = "airplane")
 	@ToString.Exclude
 	@Builder.Default
 	private List<Airticket> airticket = new ArrayList<>();
