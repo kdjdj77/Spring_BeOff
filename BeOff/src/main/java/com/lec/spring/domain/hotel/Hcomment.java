@@ -37,9 +37,11 @@ public class Hcomment extends BaseEntity{
 	@Column(nullable = false)
 	private Long star;
 	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
 	@ManyToOne(cascade = CascadeType.ALL)
+
 	private Hotel hotel;
 }
 

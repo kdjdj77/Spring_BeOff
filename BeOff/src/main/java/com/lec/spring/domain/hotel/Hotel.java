@@ -1,11 +1,10 @@
 package com.lec.spring.domain.hotel;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,5 +55,4 @@ public class Hotel extends BaseEntity{
 	
 	// one to many -- comment -- hotel : comment
 	// one to many -- room -- hotel : room
-
 }
