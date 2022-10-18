@@ -10,11 +10,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(callSuper = true)
 @Entity(name = "db_airtime")
 public class Airtime {
 	@Id
@@ -23,4 +25,5 @@ public class Airtime {
 	
 	@Column(length=4, nullable=false, unique=true)
 	private Long time;
+
 }
