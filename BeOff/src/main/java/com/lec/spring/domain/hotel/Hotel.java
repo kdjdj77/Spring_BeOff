@@ -46,12 +46,12 @@ public class Hotel extends BaseEntity{
 	private float avgstar; // 별점 평균
 	@ManyToOne
 	private User user;
-//	@ManyToOne
-//	private Region region;
+	@ManyToOne
+	private Region region;
 //	@OneToMany
 //	private List<Room> rooms = new ArrayList<>();
-//	@OneToMany
-//	private List<Hcomment> hcomments = new ArrayList<>();
+	@OneToMany
+	private List<Hcomment> hcomments = new ArrayList<>();
 	
 	// one to many -- comment -- hotel : comment
 	// one to many -- room -- hotel : room
