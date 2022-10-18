@@ -3,7 +3,6 @@ package com.lec.spring.domain.air;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
