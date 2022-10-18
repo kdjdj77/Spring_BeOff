@@ -34,10 +34,9 @@ public class Car {
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
-	private Rental rental_id; 
+	private Rental rental; 
 	
 	@Column(nullable = false)
 	private String carname;
@@ -54,7 +53,7 @@ public class Car {
 	@Column
 	private String fueleff;
 	
-	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "car_id", cascade = CascadeType.ALL)
 	@ToString.Exclude
 	@Builder.Default 
 	private List<Carfile> files = new ArrayList<>();

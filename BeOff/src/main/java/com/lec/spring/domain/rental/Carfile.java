@@ -24,10 +24,8 @@ public class Carfile {
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false, name = "car_id")
-	@ManyToOne
-	@ToString.Exclude
-	private Car car;
+	@Column(nullable = false)
+	private Long car_id;
 	
 	@Column(nullable = false)
 	private String file;

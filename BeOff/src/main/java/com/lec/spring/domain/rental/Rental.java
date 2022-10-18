@@ -1,5 +1,9 @@
 package com.lec.spring.domain.rental;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,12 +37,10 @@ public class Rental extends BaseEntity{
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
 	private Region region;
 	
-	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
 	private User user;
@@ -52,5 +54,8 @@ public class Rental extends BaseEntity{
 	@ColumnDefault(value = "0")
 	private float avgstar;
 	
-
+	@OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
+	@ToString.Exclude
+	@Builder.Default 
+	private List<Car> cars = new ArrayList<>();
 }

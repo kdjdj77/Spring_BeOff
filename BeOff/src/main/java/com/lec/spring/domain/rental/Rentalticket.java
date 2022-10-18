@@ -31,16 +31,15 @@ public class Rentalticket extends BaseEntity{
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	@ManyToOne
+	@ToString.Exclude
 	private Car car;
 	
-	@Column(nullable = false)
 	@ManyToOne
 	@ToString.Exclude
 	private User user;
 	
 	@Column(nullable = false, length = 8)
 	private Long date;
-
 
 }
