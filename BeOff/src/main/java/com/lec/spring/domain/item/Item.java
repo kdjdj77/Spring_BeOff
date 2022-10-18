@@ -73,7 +73,6 @@ public class Item extends BaseEntity{
 	@ToString.Exclude
 	@Builder.Default  
 	private List<Itemfile> files = new ArrayList<>();  
-	
 	public void addFiles(Itemfile... files) {  
 		if(files != null) {
 			Collections.addAll(this.files, files);

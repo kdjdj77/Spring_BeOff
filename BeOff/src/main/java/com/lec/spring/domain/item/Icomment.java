@@ -36,12 +36,7 @@ public class Icomment extends BaseEntity{
 	private User user; 
 	@ManyToOne
 	@ToString.Exclude
-	private Item item_id;
-
-		
-	@Column(name = "item_id")
-	@JsonIgnore
-	private Long item;   // 게시글 (FK)
+	private Item item;
 		
 	@Column(nullable = false)
 	private String content;   // 댓글 내용
