@@ -110,10 +110,4 @@ public class AirTest {
 			}
 		}
 	}
-	
-	Airplane getAir(Region S, Region E, Airtime T, Airname N) {
-		Airplane airplane = 
-				airplaneRepository.findByDepartAndArriveAndTimeAndName(S, E, T, N);
-		return airplane;
-	}
 }
