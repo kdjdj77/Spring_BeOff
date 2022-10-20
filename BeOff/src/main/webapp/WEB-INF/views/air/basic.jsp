@@ -20,9 +20,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <title>목록</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	
+	<title>비행기 예매</title>
 </head>
 
 <body style="margin-bottom: 200px">
@@ -32,7 +35,7 @@
 	<div class="container mt-3">
 		<h2>비행기 표 예매하기</h2>
 		<hr>
-		<form name="frm" action="chkround" method="post">
+		<form name="frm" id="frm" action="settime" method="post">
 			<table width="100%">
 				<thead>
 					<tr>
@@ -47,64 +50,117 @@
 				<tbody>
 					<tr>
 						<td>
-							<select name="depart">
+							<select name="departregion" id="in1">
+								<option value="null" selected>선택</option>
 								<c:forEach var="region" items="${regionList}">
 									<option value = "${region}">${region}</option>
 								</c:forEach>
 							</select>
 						</td>
 						<td>
-							<select name="arrive">
+							<select name="arriveregion" id="in2">
+								<option value="null" selected>선택</option>
 								<c:forEach var="region" items="${regionList}">
 									<option value="${region}">${region}</option>
 								</c:forEach>
 							</select>
+						</td> 
+						<td>
+							<input name="dd" type="button" id="in3">
+							<input name="departdate" type="hidden" id="in3h">
 						</td>
 						<td>
-							달력
+							<input name="ad" type="button" id="in4">
+							<input name="arrivedate" type="hidden" id="in4h">
 						</td>
 						<td>
-							달력
-						</td>
-						<td>
-							<select name="round_oneway">
-								<option value="round">왕복</option>
+							<select name="round_oneway" id="in5">
+								<option value="round" selected>왕복</option>
 								<option value="oneway">편도</option>
 							</select>
 						</td>
+						
 						<td>
 							<button type="button" class="minus">-</button>
 							<span id="num">1</span>
-							<input type="hidden" name="num_person" id="num_person" value="1"></input>
+							<input type="hidden" name="num_person" id="in6" value="1"></input>
 							<button type="button" class="plus">+</button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<button onclick="submit()">비행기 예매 시작</button>
+			<button type="button" onclick="mysubmit()">비행기 예매 시작</button>
 		</form>
 	</div>
 </body>
 <script>
+	$( function() {
+		$( "#in3" ).datepicker({
+			showMonthAfterYear:true,
+			showOn:"button",           
+			buttonImage:"${pageContext.request.contextPath }/img/aircalender.png",            
+			buttonImageOnly:true,
+			dateFormat:'yy-mm-dd', 
+			minDate: 0,          
+			nextText:'다음 달',            
+			prevText:'이전 달',            
+			dayNamesMin:['일','월','화','수','목','금','토'],            
+			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+			
+		});
+		$( "#in4" ).datepicker({
+			showMonthAfterYear:true,
+			showOn:"button",            
+			buttonImage:"${pageContext.request.contextPath }/img/aircalender.png",            
+			buttonImageOnly:true,
+			dateFormat:'yy-mm-dd',
+			minDate: 0,           
+			nextText:'다음 달',            
+			prevText:'이전 달',            
+			dayNamesMin:['일','월','화','수','목','금','토'],            
+			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		});
+		$("#in3").datepicker('setDate', 'today');
+		$("#in4").datepicker('setDate', 'today');
+	});
+</script>
+<script>
 	let num = document.querySelector("#num");
 	let plus = document.querySelector(".plus");
 	let minus = document.querySelector(".minus");
-	let np = document.querySelector("#num_person")
+	
 	let frm = document.querySelector("#frm");
+	let in1 = document.querySelector("#in1");
+	let in2 = document.querySelector("#in2");
+	let in6 = document.querySelector("#in6");
+	
+	let in3 = document.querySelector("#in3");
+	let in4 = document.querySelector("#in4");
+	let in3h = document.querySelector("#in3h");
+	let in4h = document.querySelector("#in4h");
+	
 	
 	let cnt = 1;
 	
 	plus.addEventListener("click", function () {
 		cnt++; 
 		num.textContent = cnt;
-		np.value = cnt;
+		in6.value = cnt;
 	})
 	minus.addEventListener("click", function () {
 		if (cnt > 1) {
 			cnt--;
 			num.textContent = cnt;
-			np.value = cnt;
+			in6.value = cnt;
 		}
 	})
+	function mysubmit() {
+		if (in1.value == "null") {alert('출발지를 선택해주세요'); return;}
+		if (in2.value == "null") {alert('목적지를 선택해주세요'); return;}
+		if (in1.value == in2.value) {alert('출발지와 목적지는 달라야 합니다'); return;}
+		in3h.value = in3.value.toString();
+		in4h.value = in4.value.toString();
+		frm.submit();
+	}
 </script>
 </html>

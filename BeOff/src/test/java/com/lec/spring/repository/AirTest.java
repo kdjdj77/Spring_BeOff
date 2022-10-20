@@ -51,14 +51,14 @@ public class AirTest {
 		List<Airname> airN = new ArrayList<Airname>();
 		airN.add(asiana);airN.add(daehan);airN.add(jinair);
 		
-		Airtime t0800 = Airtime.builder().time(800L).build();
-		Airtime t1000 = Airtime.builder().time(1000L).build();
-		Airtime t1200 = Airtime.builder().time(1200L).build();
-		Airtime t1400 = Airtime.builder().time(1400L).build();
-		Airtime t1600 = Airtime.builder().time(1600L).build();
-		Airtime t1800 = Airtime.builder().time(1800L).build();
-		Airtime t2000 = Airtime.builder().time(2000L).build();
-		Airtime t2200 = Airtime.builder().time(2200L).build();
+		Airtime t0800 = Airtime.builder().time("08:00").build();
+		Airtime t1000 = Airtime.builder().time("10:00").build();
+		Airtime t1200 = Airtime.builder().time("12:00").build();
+		Airtime t1400 = Airtime.builder().time("14:00").build();
+		Airtime t1600 = Airtime.builder().time("16:00").build();
+		Airtime t1800 = Airtime.builder().time("18:00").build();
+		Airtime t2000 = Airtime.builder().time("20:00").build();
+		Airtime t2200 = Airtime.builder().time("22:00").build();
 		t0800 = airtimeRepository.saveAndFlush(t0800);
 		t1000 = airtimeRepository.saveAndFlush(t1000);
 		t1200 = airtimeRepository.saveAndFlush(t1200);
