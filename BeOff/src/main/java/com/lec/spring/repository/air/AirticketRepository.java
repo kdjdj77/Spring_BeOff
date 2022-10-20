@@ -9,4 +9,5 @@ import com.lec.spring.domain.air.Airticket;
 
 public interface AirticketRepository extends JpaRepository<Airticket, Long> {
 	List<Airticket> findByAirplaneAndDate(Airplane airplane, Long date);
+	List<Airticket> findBySeatAndDate(String seat, Long date);
 }
