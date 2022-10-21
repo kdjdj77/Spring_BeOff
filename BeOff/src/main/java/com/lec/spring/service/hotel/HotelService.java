@@ -6,6 +6,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
+import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
@@ -54,8 +57,7 @@ public class HotelService {
 		System.out.println(getClass().getName() + "() 생성");
 	}
 
-	// hotel search 지역 이름
-
+	// hotel 지역 목록
 	public List<String> getReionList() {
 		List<String> RList = new ArrayList<String>();
 		List<Region> regionList = regionRepository.findAll();
@@ -77,34 +79,19 @@ public class HotelService {
 //		}
 		return RInfo;
 	}
+	// 전체 목록
+	public List<Room> RoomList() {
+		List<Room> RoomList = null;
+		
+		RoomList = roomRepository.findAll(Sort.by(Order.desc("id")));
+		
+		return RoomList;
+	}
+
 	
 
 	
-	// 관리자
-	
-//	// 호텔등록
-//	public int intsertHotel(Hotel hotel) {
-//		
-//		// 작성자
-//		User user = U.getLoggedUser();  // 현재 로그인한 유저
-//		user = userRepository.findById(user.getId()).orElse(null);
-//		hotel.setUser(user);
-//		
-////		Region region = regionRepository.findById(region.getId());
-////		hotel.setRegion(region); // 호텔 지역
-//		
-//		hotel.setHotelname(hotel.getHotelname()); // 호텔 이름
-//		
-//		hotel.setContent(hotel.getContent()); // 호텔 내용
-//		
-////		List<Room> room = roomRepository.findAll();
-////		hotel.setRooms(room.get(0));
-//		
-//		// 별점 regdate
-//		
-//		hotel = hotelRepository.save(hotel); // 저장
-//		return 1;
-//	}
+
 
 
 

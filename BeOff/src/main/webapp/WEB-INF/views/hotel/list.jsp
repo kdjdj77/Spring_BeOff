@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta charset="UTF-8">
-<title>basic</title>
+<title>list</title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/hotel/list">
@@ -42,8 +42,7 @@
 					<td><input type="text" id="end" name="enddate"></td>
 					<td>
 						<input type='button' onclick='count("minus")' value='-' />
-							<span id='result'>0</span>
-							<input type="hidden" name="bed" id='result'>
+							<span id='result'>0</span> 
 						<input type='button' onclick='count("plus")' value='+' />
 					</td>
 					<td>
@@ -54,8 +53,16 @@
 		</table>
 	</form>
 </body>
-
-
+<div></div>
+<div></div>
+<div>z
+<c:forEach var="room" items="${roomList }">
+	<p>${room. }</p>
+	<p></p>
+	<p></p>
+	<p></p>
+</c:forEach>
+</div>
 <script>
 	$(function() {
 		//input을 datepicker로 선언
