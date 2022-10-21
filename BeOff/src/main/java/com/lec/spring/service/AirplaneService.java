@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lec.spring.domain.Region;
-import com.lec.spring.domain.air.AirDTO;
 import com.lec.spring.domain.air.Airplane;
 import com.lec.spring.domain.air.Airticket;
 import com.lec.spring.domain.air.Airtime;
@@ -48,7 +47,6 @@ public class AirplaneService {
 			String departregion, String arriveregion, String time, String num_person, Long date) {
 		AqryList list = new AqryList();
 		List<Airplane> airplanes = null;
-		List<AirDTO> airdto = new ArrayList<AirDTO>();
 		
 		Region dr = regionRepository.findByRegion(departregion);
 		Region ar = regionRepository.findByRegion(arriveregion);
@@ -56,24 +54,18 @@ public class AirplaneService {
 		
 		// 특정 글의 댓글들을 id역순으로 comments에 저장
 		airplanes = airplaneRepository.findByDepartAndArriveAndTime(dr, ar, t);
+		List<Airplane> delAir = new ArrayList<Airplane>();
 		for(Airplane a : airplanes) {
 			
-			AirDTO dto = new AirDTO();
+			a.setRemain(135 - (airticketRepository.findByAirplaneAndDate(a, date)).size());
+			a.setDate(Long.toString(date));
 			
-			dto.setRemain(135 - (airticketRepository.findByAirplaneAndDate(a, date)).size());
-			dto.setDate(Long.toString(date));
-			dto.setPrice(a.getName().getPrice());
-			dto.setName(a.getName().getName());
-			dto.setTime(a.getTime().getTime());
-			dto.setDepart(a.getDepart().getRegion());
-			dto.setArrive(a.getArrive().getRegion());
-			
-			if (dto.getRemain() >= Integer.parseInt(num_person)) airdto.add(dto);
-			
+			if (a.getRemain() < Integer.parseInt(num_person)) delAir.add(a);
 		}
+		for(Airplane i : delAir) { airplanes.remove(i); }
 		
-		list.setCount(airdto.size());
-		list.setList(airdto);		
+		list.setCount(airplanes.size());
+		list.setList(airplanes);		
 		list.setStatus("OK");
 		return list;
 	}

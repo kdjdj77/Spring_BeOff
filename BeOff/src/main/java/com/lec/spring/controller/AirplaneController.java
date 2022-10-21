@@ -24,7 +24,9 @@ public class AirplaneController {
 			String time, String num_person, String date) {
 		String datestr = date.replaceAll("-", "");
 		
-		return airplaneService.search(departregion, arriveregion, time, num_person, Long.parseLong(datestr));	
+		
+		AqryList search = airplaneService.search(departregion, arriveregion, time, num_person, Long.parseLong(datestr));
+		return search;	
 	}
 	
 

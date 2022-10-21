@@ -48,12 +48,12 @@ function buildAirList(result) {
 	const out = [];
 	
 	result.data.forEach(airplane => {
-		let depart = airplane.depart;
-		let arrive = airplane.arrive;
-		let time = airplane.time;
+		let depart = airplane.depart.region;
+		let arrive = airplane.arrive.region;
+		let time = airplane.time.time;
 		let date = airplane.date;
-		let name = airplane.name;
-		let price = airplane.price;
+		let name = airplane.name.name;
+		let price = airplane.name.price;
 		let remain = airplane.remain;
 		
 		let strdate = date.substring(0, 4) + "." + date.substring(4, 6) + "." + date.substring(6, 8)

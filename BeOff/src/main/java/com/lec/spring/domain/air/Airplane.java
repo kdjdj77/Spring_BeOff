@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lec.spring.domain.Region;
 
 import lombok.AllArgsConstructor;
@@ -43,6 +44,12 @@ public class Airplane {
 	@ToString.Exclude
 	private Airname name;
 	
+	@Transient
+	private int remain;
+	@Transient
+	private String date;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "airplane")
 	@ToString.Exclude
 	@Builder.Default

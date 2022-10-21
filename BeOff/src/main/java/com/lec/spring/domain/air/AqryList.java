@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AqryList extends AqryResult{
 	@JsonProperty("data") //Json으로 매핑될 property name
-	List<AirDTO> list; //목록데이터
+	List<Airplane> list; //목록데이터
 }
