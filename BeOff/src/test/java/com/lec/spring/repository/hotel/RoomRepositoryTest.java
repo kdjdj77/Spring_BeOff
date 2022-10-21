@@ -18,7 +18,7 @@ class RoomRepositoryTest {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private HotelRepository hotelRepository;
+	private AdminHotelRepository hotelRepository;
 	@Autowired
 	private RoomRepository roomRepository;
 	@Autowired
