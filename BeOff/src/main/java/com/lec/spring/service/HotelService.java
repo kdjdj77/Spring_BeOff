@@ -17,36 +17,17 @@ import com.lec.spring.repository.hotel.RoomRepository;
 
 @Service
 public class HotelService {
+	@Autowired
 	private HotelRepository hotelRepository;
+	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private HcommentRepository hcommentRepository;
+	@Autowired
 	private RoomRepository roomRepository;
+	@Autowired
 	private RegionRepository regionRepository;
 
-	@Autowired
-	public void setHotelRepository(HotelRepository hotelRepository) {
-		this.hotelRepository = hotelRepository;
-	}
-
-	@Autowired
-	public void setHcommentRepository(HcommentRepository hcommentRepository) {
-		this.hcommentRepository = hcommentRepository;
-	}
-
-	@Autowired
-	public void setUserRepository(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
-
-	@Autowired
-	public void setRoomRepository(RoomRepository roomRepository) {
-		this.roomRepository = roomRepository;
-	}
-
-	@Autowired
-	public void setRegionRepository(RegionRepository regionRepository) {
-		this.regionRepository = regionRepository;
-	}
 
 	public HotelService() {
 		System.out.println(getClass().getName() + "() 생성");

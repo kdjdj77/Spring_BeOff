@@ -62,10 +62,6 @@
 
 </div>
 <div>
-	<c:forEach name="hotelname" items="${hotelList }">
-		<div>${hotelname}</div>
-		<div>${hotelcontent}</div>
-	</c:forEach>
 </div>
 </body>
 
