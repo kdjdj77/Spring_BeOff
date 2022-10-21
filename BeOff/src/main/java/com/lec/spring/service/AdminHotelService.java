@@ -14,20 +14,29 @@ import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.AdminHotelRepository;
+import com.lec.spring.repository.hotel.HotelRepository;
 
 @Service
 public class AdminHotelService {
 	
 	@Autowired
 	private AdminHotelRepository adminHotelRepository;
-	
 	@Autowired
 	private UserRepository userRepository;
-	
 	@Autowired
-	private AuthorityRepository authorityRepository;
+	private AuthorityRepository authorityRepository;
 	@Autowired
 	private RegionRepository regionRepository;
+	@Autowired
+	private HotelRepository hotelRepository;
 	
-
+	public int registerHotel(String username, String hotelname, String region, String content) {
+		Hotel h = new Hotel();
+		h.setUser(userRepository.findByUsername(username));
+		h.setHotelname(hotelname);
+		h.setRegion(regionRepository.findByRegion(region));
+		h.setContent(content);
+		hotelRepository.saveAndFlush(h);
+		return 1;
+	}
 }
