@@ -95,7 +95,7 @@
 </body>
 <script>
 	$( function() {
-		$( "#in3" ).datepicker({
+		$( "#in3, #in4" ).datepicker({
 			showMonthAfterYear:true,
 			showOn:"button",           
 			buttonImage:"${pageContext.request.contextPath }/img/aircalender.png",            
@@ -107,18 +107,6 @@
 			dayNamesMin:['일','월','화','수','목','금','토'],            
 			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 			
-		});
-		$( "#in4" ).datepicker({
-			showMonthAfterYear:true,
-			showOn:"button",            
-			buttonImage:"${pageContext.request.contextPath }/img/aircalender.png",            
-			buttonImageOnly:true,
-			dateFormat:'yy-mm-dd',
-			minDate: 0,           
-			nextText:'다음 달',            
-			prevText:'이전 달',            
-			dayNamesMin:['일','월','화','수','목','금','토'],            
-			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 		});
 		$("#in3").datepicker('setDate', 'today');
 		$("#in4").datepicker('setDate', 'today');
@@ -158,6 +146,7 @@
 		if (in1.value == "null") {alert('출발지를 선택해주세요'); return;}
 		if (in2.value == "null") {alert('목적지를 선택해주세요'); return;}
 		if (in1.value == in2.value) {alert('출발지와 목적지는 달라야 합니다'); return;}
+		if (in3.value > in4.value) {alert('오는날은 가는날 이전이어야 합니다'); return;}
 		in3h.value = in3.value.toString();
 		in4h.value = in4.value.toString();
 		frm.submit();
