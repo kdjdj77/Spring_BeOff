@@ -15,3 +15,6 @@ select * from db_user_authorities;
 select * from db_qna;
 select * from db_region;
 
+select * from db_hotel;
+select * from db_room;
+select * from db_roomfile;
