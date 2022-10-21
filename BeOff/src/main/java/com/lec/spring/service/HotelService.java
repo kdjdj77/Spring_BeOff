@@ -1,4 +1,4 @@
-package com.lec.spring.service.hotel;
+package com.lec.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
