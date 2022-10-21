@@ -8,5 +8,6 @@ import com.lec.spring.domain.Region;
 
 public interface RegionRepository extends JpaRepository<Region, Long> {
 	Region findByRegion(String region);
+
 	List<Region> findAll();
 }
