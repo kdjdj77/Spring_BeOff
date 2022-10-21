@@ -3,25 +3,17 @@ package com.lec.spring.service.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import com.lec.spring.domain.Region;
-import com.lec.spring.domain.User;
 import com.lec.spring.domain.hotel.Hotel;
-import com.lec.spring.domain.hotel.Room;
-import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
 import com.lec.spring.repository.hotel.HotelRepository;
 import com.lec.spring.repository.hotel.RoomRepository;
-import com.lec.spring.util.U;
 
 @Service
 public class HotelService {
@@ -40,14 +32,17 @@ public class HotelService {
 	public void setHcommentRepository(HcommentRepository hcommentRepository) {
 		this.hcommentRepository = hcommentRepository;
 	}
+
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
+
 	@Autowired
 	public void setRoomRepository(RoomRepository roomRepository) {
 		this.roomRepository = roomRepository;
 	}
+
 	@Autowired
 	public void setRegionRepository(RegionRepository regionRepository) {
 		this.regionRepository = regionRepository;
@@ -58,44 +53,43 @@ public class HotelService {
 	}
 
 	// hotel 지역 목록
-	public List<String> getReionList() {
+	public List<String> getRegionList() {
 		List<String> RList = new ArrayList<String>();
 		List<Region> regionList = regionRepository.findAll();
-		for(Region r : regionList) {
+		for (Region r : regionList) {
 			RList.add(r.getRegion());
-		}		
+		}
 		return RList;
 	}
 
-	public List<String> getRoomInfo() {
-		List<String> RInfo = new ArrayList<String>();
-		List<Room> roomInfo = roomRepository.findAll();
-//		List<Hotel> hotelInfo = hotelRepository.findAll();
-		for(Room room : roomInfo) {
-			RInfo.add(room.getRoomname());
+	// 전체 숙소 목록
+	public List<String> getHname() {
+		List<String> Hname = new ArrayList<String>();
+		List<Hotel> hotelList = hotelRepository.findAll();
+//		List<String> RList = new ArrayList<String>();
+//		List<Room> roomList = roomRepository.findByHotel();
+		for (Hotel h : hotelList) {
+			Hname.add(h.getHotelname());
 		}
-//		for(Hotel hotel : hotelInfo) {
-//			RInfo.add(hotel.getAvgstar());
-//		}
-		return RInfo;
+		return Hname;
 	}
-	// 전체 목록
-	public List<Room> RoomList() {
-		List<Room> RoomList = null;
+	
+	public List<String> getHcontent(){
+		List<String> Hcontent = new ArrayList<String>();
+		List<Hotel> hotelList = hotelRepository.findAll();
 		
-		RoomList = roomRepository.findAll(Sort.by(Order.desc("id")));
+		for(Hotel h : hotelList) {
+			Hcontent.add(h.getContent());
+			
+		}
+		return Hcontent;
 		
-		return RoomList;
 	}
 
+//	public Object getHotelList() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
-
 	
-
-
-
-
-
-
-
 }

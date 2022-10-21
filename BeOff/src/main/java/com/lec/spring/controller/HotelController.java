@@ -26,20 +26,16 @@ public class HotelController {
 		System.out.println(getClass().getName() + "() 생성");
 	}
 	
-	// /hotel/basic
-	@GetMapping("/basic")
-	public String basic(Model model) {
-		model.addAttribute("regionList", hotelService.getReionList());
-		return "/hotel/basic";	
-		
-	}
 	// /hotel/list
 	@GetMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("roomInfo", hotelService.getRoomInfo());
+		model.addAttribute("regionList", hotelService.getRegionList());
+		model.addAttribute("hotelname", hotelService.getHname());		
+		model.addAttribute("hotelcontent", hotelService.getHcontent());		
+//		model.addAttribute("hotelList", hotelService.getHotelList());
 		return "/hotel/list";	
 		
 	}
-	// /hotel/room/detail
+
 	
 }

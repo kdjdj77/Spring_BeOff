@@ -20,8 +20,10 @@
 <meta charset="UTF-8">
 <title>list</title>
 </head>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <body>
-	<form action="${pageContext.request.contextPath}/hotel/list">
+<div>
+	<form action="${pageContext.request.contextPath}/hotel/list" name="frm" id="frm">
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -38,31 +40,36 @@
 							</c:forEach>
 						</select>
 					</td>
-					<td><input type="text" id="start" name="startdate"></td>
-					<td><input type="text" id="end" name="enddate"></td>
+					<td><input type="text" id="start" name="in"></td>
+					<td><input type="text" id="end" name="out"></td>
 					<td>
 						<input type='button' onclick='count("minus")' value='-' />
-							<span id='result'>0</span> 
+							<span id='result'>0</span>
+							<input type="hidden" name="bed" id="${number}">
 						<input type='button' onclick='count("plus")' value='+' />
 					</td>
 					<td>
-						<button type="submit">숙소 검색</button>
+						<button type="submit" onclick="onsubmit()">숙소 검색</button>
 					</td>
 				</tr>
 			</thead>
 		</table>
 	</form>
-</body>
-<div></div>
-<div></div>
-<div>z
-<c:forEach var="room" items="${roomList }">
-	<p>${room. }</p>
-	<p></p>
-	<p></p>
-	<p></p>
-</c:forEach>
 </div>
+<div>
+
+		
+
+</div>
+<div>
+	<c:forEach name="hotelname" items="${hotelList }">
+		<div>${hotelname}</div>
+		<div>${hotelcontent}</div>
+	</c:forEach>
+</div>
+</body>
+
+
 <script>
 	$(function() {
 		//input을 datepicker로 선언
@@ -109,7 +116,8 @@
 		$('#datepicker').datepicker('setDate', 'today');
 
 	});
-
+</script>
+<script>
 	function count(type) {
 		let resultElement = document.getElementById('result');
 		let number = resultElement.innerText;
@@ -122,6 +130,14 @@
 			}
 		}
 		resultElement.innerText = number;
+	}
+	function onsubmit(){
+		let start = document.querySeletor("#start");
+		let end = document.querySeletor("#end");
+		if(start.value == "null"){alert('체크인 날짜를 선택해주세요'); return;}
+		if(end.value == "null"){console.log('체크아웃 날짜를 선택해주세요'); return;}
+		if(start.value > end.value){alert('체크아웃 날짜는 체크인 날짜 이후로 선택해주세요'); return;}
+		frm.submit();
 	}
 </script>
 
