@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lec.spring.domain.Region;
 import com.lec.spring.domain.hotel.Hotel;
-import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.service.AdminHotelService;
 import com.lec.spring.service.HotelService;
 
@@ -30,7 +28,7 @@ public class AdminHotelController {
 
 	// hotel/admin/list
 	@GetMapping("/list")
-	public String list() {
+	public String list(Model model) {
 		
 		
 		
@@ -39,17 +37,25 @@ public class AdminHotelController {
 	
 	@GetMapping("/write")
 	public String write(Model model) {
-		List<String> list = hotelService.getRegionList();
+		List<String> list = adminHotelService.getRegionList();
 		model.addAttribute("regionList", list);
 		return "/hotel/admin/write";
 	}
 	
-	@PostMapping("/writeOk")
+	@PostMapping("/HotelWriteOk")
 	public String writeOk(String username, String hotelname, String region, String content, Model model) {
 		int result = 0;
 		result = adminHotelService.registerHotel(username, hotelname, region, content);
 		model.addAttribute("result", result);
-		return "/hotel/admin/writeOk";
+		return "/hotel/admin/HotelWriteOk";
+	}
+	
+	@PostMapping("/RoomWriteOk")
+	public String writeOk(String roomname, float price, Long bed, Model model) {
+		int result = 0;
+		result = adminHotelService.registerRoom(roomname, price, bed);
+		model.addAttribute("result", result);
+		return "/hotel/admin/RoomWriteOk";
 	}
 	
 	// hotel/admin/update

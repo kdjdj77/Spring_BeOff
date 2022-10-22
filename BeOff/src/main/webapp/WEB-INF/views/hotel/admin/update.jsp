@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+수정, 삭제 페이지로 이동완료.
 </body>
 </html>
