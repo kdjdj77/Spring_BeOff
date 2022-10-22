@@ -69,7 +69,7 @@
 							<input name="dd" type="button" id="in3">
 							<input name="departdate" type="hidden" id="in3h">
 						</td>
-						<td>
+						<td id="arrivebox" style="visibility:hidden">
 							<input name="ad" type="button" id="in4">
 							<input name="arrivedate" type="hidden" id="in4h">
 						</td>
@@ -110,6 +110,14 @@
 		});
 		$("#in3").datepicker('setDate', 'today');
 		$("#in4").datepicker('setDate', 'today');
+		
+		$('#in5').change(function() {
+			if ($('#in5').val() == "oneway") {
+				$('#arrivebox').css("visibility", "hidden");
+			} else {
+				$('#arrivebox').css("visibility", "visible");
+			}
+		});
 	});
 </script>
 <script>
@@ -120,6 +128,7 @@
 	let frm = document.querySelector("#frm");
 	let in1 = document.querySelector("#in1");
 	let in2 = document.querySelector("#in2");
+	let in5 = document.querySelector("#in5");
 	let in6 = document.querySelector("#in6");
 	
 	let in3 = document.querySelector("#in3");
@@ -146,7 +155,10 @@
 		if (in1.value == "null") {alert('출발지를 선택해주세요'); return;}
 		if (in2.value == "null") {alert('목적지를 선택해주세요'); return;}
 		if (in1.value == in2.value) {alert('출발지와 목적지는 달라야 합니다'); return;}
-		if (in3.value > in4.value) {alert('오는날은 가는날 이전이어야 합니다'); return;}
+		if (in5.value == "round" && in3.value > in4.value) {
+			alert('오는날은 가는날 이전이어야 합니다'); 
+			return;
+		}
 		in3h.value = in3.value.toString();
 		in4h.value = in4.value.toString();
 		frm.submit();
