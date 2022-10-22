@@ -10,4 +10,6 @@ import com.lec.spring.domain.hotel.Hotel;
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
 	List<Hotel> findAll();
+
+	List<Hotel> findByRegion(Region region);
 }
