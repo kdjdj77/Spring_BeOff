@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 
 import com.lec.spring.domain.Region;
+import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
+import com.lec.spring.domain.hotel.Room;
+import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
@@ -42,35 +47,29 @@ public class HotelService {
 		}
 		return RList;
 	}
+//	public List<Hotel> getHotelList() {
+//		List<String> HList = new ArrayList<String>();
+//		List<Hotel> hotelList = hotelRepository.findAll();
+//	}
+	public List<Hotel> getHotelList() {
+		List<Hotel> HotelList = null;
+		
+		HotelList = hotelRepository.findAll(Sort.by(Order.asc("id")));
+		return HotelList;
+	}
 
-	// 전체 숙소 목록
-	public List<String> getHname() {
-		List<String> Hname = new ArrayList<String>();
-		List<Hotel> hotelList = hotelRepository.findAll();
-//		List<String> RList = new ArrayList<String>();
-//		List<Room> roomList = roomRepository.findByHotel();
-		for (Hotel h : hotelList) {
-			Hname.add(h.getHotelname());
-		}
-		return Hname;
+	public List<Hcomment> getHcommentList() {
+		List<Hcomment> HcommentList = null;
+		HcommentList = hcommentRepository.findAll(Sort.by(Order.asc("id")));
+		return HcommentList;
+	}
+
+	public List<Room> getRoomList() {
+		List<Room> RoomList = null;
+		RoomList = roomRepository.findAll(Sort.by(Order.asc("id")));
+		return RoomList;
 	}
 	
-	public List<String> getHcontent(){
-		List<String> Hcontent = new ArrayList<String>();
-		List<Hotel> hotelList = hotelRepository.findAll();
-		
-		for(Hotel h : hotelList) {
-			Hcontent.add(h.getContent());
-			
-		}
-		return Hcontent;
-		
-	}
-
-//	public Object getHotelList() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 	
 	
 }

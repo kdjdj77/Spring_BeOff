@@ -45,7 +45,6 @@
 					<td>
 						<input type='button' onclick='count("minus")' value='-' />
 							<span id='result'>0</span>
-							<input type="hidden" name="bed" id="${number}">
 						<input type='button' onclick='count("plus")' value='+' />
 					</td>
 					<td>
@@ -56,13 +55,52 @@
 		</table>
 	</form>
 </div>
-<div>
-
-		
-
-</div>
-<div>
-</div>
+	<table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>호텔 지역</th>
+                    <th>호텔 이름</th>
+                    <th>호텔 정보</th>
+                    <th>등록일</th>
+                    <th>별점</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="dto" items="${hotelList }" varStatus="status">
+                <tr>
+                	<td>${dto.id }</td>
+                	<td>${dto.region.region }</td>
+                    <td>${dto.hotelname }</td>
+                    <td>${dto.content }</td>
+                    <td>${dto.regDateTime}</td>
+ 					<td>${dto.avgstar }</td>
+ 					<td>${dto }</td>
+ 					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>
+                </tr>            
+            </c:forEach>           
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>#</th>
+        			<th>방이름</th>
+        			<th>가격</th>
+        			<th>침대갯수</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<c:forEach var ="dto1" items="${roomList }">	
+        			<tr>
+        				<td>${dto1.id }</td>
+        				<td>${dto1.roomname }</td>
+        				<td>${dto1.price }</td>
+        				<td>${dto1.bed }</td>
+        			</tr>
+        		</c:forEach>
+        	</tbody>
+        </table>
 </body>
 
 
@@ -112,8 +150,7 @@
 		$('#datepicker').datepicker('setDate', 'today');
 
 	});
-</script>
-<script>
+
 	function count(type) {
 		let resultElement = document.getElementById('result');
 		let number = resultElement.innerText;

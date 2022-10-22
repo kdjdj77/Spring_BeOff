@@ -30,9 +30,11 @@ public class HotelController {
 	@GetMapping("/list")
 	public String list(Model model) {
 		model.addAttribute("regionList", hotelService.getRegionList());
-		model.addAttribute("hotelname", hotelService.getHname());		
-		model.addAttribute("hotelcontent", hotelService.getHcontent());		
-//		model.addAttribute("hotelList", hotelService.getHotelList());
+//		model.addAttribute("hotelname", hotelService.getHname());		
+//		model.addAttribute("hotelcontent", hotelService.getHcontent());		
+		model.addAttribute("hotelList", hotelService.getHotelList());
+		model.addAttribute("hcommentList", hotelService.getHcommentList());
+		model.addAttribute("roomList", hotelService.getRoomList());
 		return "/hotel/list";	
 		
 	}
