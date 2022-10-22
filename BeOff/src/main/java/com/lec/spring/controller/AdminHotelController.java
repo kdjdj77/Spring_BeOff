@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.service.AdminHotelService;
-import com.lec.spring.service.HotelService;
 
 @Controller
 @RequestMapping("/hotel/admin")
@@ -19,8 +18,6 @@ public class AdminHotelController {
 
 	@Autowired
 	private AdminHotelService adminHotelService;
-	@Autowired
-	private HotelService hotelService;
 
 	public AdminHotelController() {
 		System.out.println(getClass().getName() + "() 생성");
@@ -28,20 +25,24 @@ public class AdminHotelController {
 
 	// hotel/admin/list
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String getHotelList(Model model) {
 		
-		
+		List<Hotel> list = adminHotelService.getHotelList();
+		model.addAttribute("hotelList", list);
+		System.out.println(list);
 		
 		return "/hotel/admin/list";
 	}
 	
+	// hotel/admin/write : 호텔, 룸 등록 
 	@GetMapping("/write")
-	public String write(Model model) {
+	public String RoomWrite(Model model) {
 		List<String> list = adminHotelService.getRegionList();
 		model.addAttribute("regionList", list);
 		return "/hotel/admin/write";
 	}
 	
+	// hotel/admin/HotelWriteOk : 호텔 등록 완료
 	@PostMapping("/HotelWriteOk")
 	public String writeOk(String username, String hotelname, String region, String content, Model model) {
 		int result = 0;
@@ -50,6 +51,7 @@ public class AdminHotelController {
 		return "/hotel/admin/HotelWriteOk";
 	}
 	
+	// hotel/admin/RoomWriteOk : 룸 등록 완료
 	@PostMapping("/RoomWriteOk")
 	public String writeOk(String roomname, float price, Long bed, Model model) {
 		int result = 0;

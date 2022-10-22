@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lec.spring.domain.Region;
+import com.lec.spring.domain.User;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.repository.AuthorityRepository;
@@ -17,6 +18,7 @@ import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.AdminHotelRepository;
 import com.lec.spring.repository.hotel.HotelRepository;
 import com.lec.spring.repository.hotel.RoomRepository;
+import com.lec.spring.util.U;
 
 @Service
 public class AdminHotelService {
@@ -73,17 +75,18 @@ public class AdminHotelService {
 		return sList;
 	}
 
-	// 모든 호텔 리스트 조회
-	public List<String> getHotelList() {
-		List<Hotel> list = adminHotelRepository.findAll();
-		List<String> hList = new ArrayList<String>();
+	// 로그인 한 관리자(adminhotel) "본인"이 등록한 모든 호텔 리스트 조회
+	public List<Hotel> getHotelList() {
+		// 가격대신 내용으로 해볼거라 킵
+//		List<Room> list = roomRepository.findAll();
 		
-		for(Hotel line : list) {
-			hList.add(line.getHotelname());
-		}
+		// 로그인한 유저정보
+		User u = U.getLoggedUser();
 		
-		return hList;
+		List<Hotel> h = hotelRepository.findByUser(u);
+		System.out.println(h);
+		
+		return h;
 	}
-
-	
+		
 }
