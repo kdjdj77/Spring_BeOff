@@ -9,6 +9,7 @@ import com.lec.spring.domain.User;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.domain.hotel.Roomfile;
+import com.lec.spring.domain.hotel.Roomticket;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 
@@ -25,6 +26,8 @@ class RoomRepositoryTest {
 	private RoomfileRepository roomfileRepository;
 	@Autowired
 	private RegionRepository regionRepository;
+	@Autowired
+	private RoomticketRepository roomticketRepository;
 	
 	@Test
 	void test() {
@@ -344,6 +347,15 @@ class RoomRepositoryTest {
 		rf63 = roomfileRepository.save(rf63);
 		
 		roomfileRepository.findAll().forEach(System.out::println);
+		
+		Roomticket t1 = Roomticket.builder().user(user1).room(r4).date(20221212L).build(); 
+		Roomticket t2 = Roomticket.builder().user(user1).room(r5).date(20221212L).build(); 
+		Roomticket t3 = Roomticket.builder().user(user1).room(r6).date(20221212L).build(); 
+		
+		t1 = roomticketRepository.save(t1);
+		t2 = roomticketRepository.save(t2);
+		t3 = roomticketRepository.save(t3);
 	}
+	
 
 }

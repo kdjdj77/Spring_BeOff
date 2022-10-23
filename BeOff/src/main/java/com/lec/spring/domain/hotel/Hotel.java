@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.Transient;
 
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.Region;
@@ -67,5 +68,8 @@ public class Hotel extends BaseEntity{
 	@ToString.Exclude
 	@Builder.Default
 	private List<Hcomment> hcomments = new ArrayList<>();
+	
+	
+
 
 }
