@@ -47,8 +47,12 @@ public class AdminHotelController {
 	
 	// hotel/admin/write : 룸 등록 
 	@GetMapping("/roomWrite")
-	public String roomWrite(Model model) {
-
+	public String roomWrite(String id, Model model) {
+		
+		System.out.println("id : "+ id);
+		
+		model.addAttribute("id", id);
+		
 		return "/hotel/admin/roomWrite";
 	}
 	
@@ -63,10 +67,10 @@ public class AdminHotelController {
 	
 	// hotel/admin/RoomWriteOk : 룸 등록 완료
 	@PostMapping("/RoomWriteOk")
-	public String writeOk(String roomname, Double price, Long bed, Model model) {
+	public String writeOk(String id, String roomname, Double price, Long bed, Model model) {
 		int result = 0;
 		
-		result = adminHotelService.registerRoom(roomname, price, bed);
+		result = adminHotelService.registerRoom(id, roomname, price, bed);
 		model.addAttribute("result", result);
 		
 		return "/hotel/admin/RoomWriteOk";

@@ -52,10 +52,13 @@ public class AdminHotelService {
 	
 	// 룸 등록 - 선택한 호텔에 대한 룸 등록.
 	@Transactional
-	public int registerRoom(String roomname, Double price, Long bed) {
+	public int registerRoom(String id, String roomname, Double price, Long bed) {
 		Room r = new Room();
 		
-//		r.getHotel().setId(id);
+		Long hotelId = Long.parseLong(id);
+		
+		Hotel h = hotelRepository.findById(hotelId).get();
+		r.setHotel(h);
 		r.setRoomname(roomname);
 		r.setPrice(price);
 		r.setBed(bed);
@@ -113,6 +116,15 @@ public class AdminHotelService {
 		List<Room> RoomList = null;
 		RoomList = roomRepository.findAll(Sort.by(Order.asc("id")));
 		return RoomList;
+	}
+
+	public Hotel getHotelById(String id) {
+		
+		Long lId = Long.parseLong(id);
+		
+		Hotel h = hotelRepository.findById(lId).get();
+		
+		return h;
 	}
 		
 }
