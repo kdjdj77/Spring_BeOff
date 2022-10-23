@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lec.spring.domain.air.AqryList;
-import com.lec.spring.service.AirplaneService;
+import com.lec.spring.service.AirService;
 
 @RestController
 @RequestMapping("/air/airplane")
 public class AirplaneController {
 	@Autowired
-	private AirplaneService airplaneService;
+	private AirService airService;
 
 	public AirplaneController() {
 		System.out.println(getClass().getName() + "() 생성");
@@ -25,7 +25,7 @@ public class AirplaneController {
 		String datestr = date.replaceAll("-", "");
 		
 		
-		AqryList search = airplaneService.search(departregion, arriveregion, time, num_person, Long.parseLong(datestr));
+		AqryList search = airService.search(departregion, arriveregion, time, num_person, Long.parseLong(datestr));
 		return search;	
 	}
 	

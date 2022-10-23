@@ -1,14 +1,14 @@
 $(function() {
 	const departregion = $("input[name='departregion']").val().trim();
 	const arriveregion = $("input[name='arriveregion']").val().trim();
-	let time = $("input[name='time']").val().trim();
+	let time = "08:00";
 	const num_person = $("input[name='num_person']").val().trim();
 	const date = $("input[name='departdate']").val().trim();
 	
 	loadAirList(departregion, arriveregion, time, num_person, date);
 	
 	
-	$("#btnsearch").click(function(){
+	$("select[name='time_sel']").change(function(){
 		time = $("select[name='time_sel']").val().trim();
 		loadAirList(departregion, arriveregion, time, num_person, date);
 	})
@@ -48,6 +48,7 @@ function buildAirList(result) {
 	const out = [];
 	
 	result.data.forEach(airplane => {
+		let id = airplane.id;
 		let depart = airplane.depart.region;
 		let arrive = airplane.arrive.region;
 		let time = airplane.time.time;
@@ -61,7 +62,10 @@ function buildAirList(result) {
 		const row = 
 			`<tr style="border:1px solid black">
 		        <td><span>${name}<br>출발시각 ${time}<br>가격(1인) ${price}</span></td>
-		        <td><span>${strdate}<br>남은좌석 ${remain}<br>${depart} → ${arrive}</span></td>
+		        <td><span>${strdate}<br>남은좌석 ${remain}<br>${depart} → ${arrive}</span>
+		        <br><input type="radio" name="air_id" id="air_id" value="${id}" 
+		        	style="width:20px; height:20px;">
+		        </td>
 	        </tr>`;
 		out.push(row);
 	});

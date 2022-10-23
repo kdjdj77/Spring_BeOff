@@ -42,29 +42,33 @@
 					<option value = "${t}">${t}</option>
 				</c:forEach>
 			</select>
-			<button type="button" id="btnsearch">검색</button>
 		</div>
 		
 		<div>
 			<label>개수: <span id="air_cnt"></span> 개</label>
-			<table id="air_list" width="40%">
-			
-			</table>
+			<form id="frm" action="onewayReserv" method="post">
+				<table id="air_list" width="40%">
+					<!-- 비행기 리스트(input id 포함) -->
+				</table>
+				<input type="hidden" name="departdate" value="${departdate}">
+				<input type="hidden" name="num_person" value="${num_person}">
+				<button type="button" onclick="frmsubmit()">다음</button>
+			</form>
 		</div>
-		
-		<form id="frm">
-			<input type="hidden" name="departregion" value="${departregion}">
-			<input type="hidden" name="arriveregion" value="${arriveregion}">
-			<input type="hidden" name="departdate" value="${departdate}">
-			<input type="hidden" name="num_person" value="${num_person}">
-			<input type="hidden" name="time" value="08:00">
-			<button>다음</button>
-		</form>
+	</div>
+	<div id="notSend">
+		<input type="hidden" name="departregion" value="${departregion}">
+		<input type="hidden" name="arriveregion" value="${arriveregion}">
 	</div>
 </body>
 
 <script>
 	const conPath = "${pageContext.request.contextPath }";
+	function frmsubmit() {
+		let frm = document.getElementById("frm");	
+		
+		frm.submit();
+	}
 </script>
 <script src="${pageContext.request.contextPath }/js/airlist.js"></script>
 

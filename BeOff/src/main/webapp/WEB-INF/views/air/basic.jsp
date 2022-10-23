@@ -69,7 +69,7 @@
 							<input name="dd" type="button" id="in3">
 							<input name="departdate" type="hidden" id="in3h">
 						</td>
-						<td id="arrivebox" style="visibility:hidden">
+						<td id="arrivebox">
 							<input name="ad" type="button" id="in4">
 							<input name="arrivedate" type="hidden" id="in4h">
 						</td>
