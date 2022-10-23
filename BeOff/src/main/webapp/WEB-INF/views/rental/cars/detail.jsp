@@ -67,24 +67,6 @@
 				</div>
 				<div class="col-lg-2"></div>
 			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2"></div>
-				<div class="col-lg-2">
-					<select class="form-select" id="validationCustom04" required>
-						<option selected disabled value="">소형</option>
-						<option>중형</option>
-						<option>대형</option>
-						<option>suv</option>
-					</select>
-				</div>
-				<div class="col-lg-2">
-					<button type="button" class="btn btn-outline-secondary">검색</button>
-				</div>
-				<div class="col-lg-6"></div>
-			</div>
 		</div><br>
 
 		<div class="container">
@@ -92,13 +74,13 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<div class="card mb-3">
-						<img src="../upload/g80.jpg" class="card-img-top" alt="...">
+						<img src="/upload/g80.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">Card title</h5>
 							<p class="card-text">This is a wider card with supporting
 								text below as a natural lead-in to additional content. This
 								content is a little bit longer.</p>
-							<button type="button" class="btn btn-outline-secondary">자세히 알아보기</button>
+							<button type="button" class="btn btn-outline-secondary">예약하기</button>
 						</div>
 					</div>
 				</div>
