@@ -9,8 +9,10 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/resources/css/style.css" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
+<script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -21,8 +23,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <body>
 <div>
-	
-	<form action="${pageContext.request.contextPath}/hotel/list" name="frm" id="frm" method="post">
+	<form action="${pageContext.request.contextPath}/hotel/list" name="frm" id="frm">
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -39,21 +40,19 @@
 							</c:forEach>
 						</select>
 					</td>
-					<td><input type="text" id="start" name="in1"></td>
-					<td><input type="text" id="end" name="out1"></td>
+					<td><input type="text" id="start" name="in"></td>
+					<td><input type="text" id="end" name="out"></td>
 					<td>
 						<input type='button' onclick='count("minus")' value='-' />
 							<span id='result'>0</span>
 						<input type='button' onclick='count("plus")' value='+' />
 					</td>
 					<td>
-						<button type="button" id="sub" name="sub">숙소 검색</button>
+						<button type="submit" onclick="onsubmit()">숙소 검색</button>
 					</td>
 				</tr>
 			</thead>
 		</table>
-		<input type="hidden" name="inn" id="inn">
-		<input type="hidden" name="out" id="out">
 	</form>
 </div>
 	<table class="table table-bordered">
@@ -76,6 +75,7 @@
                     <td>${dto.content }</td>
                     <td>${dto.regDateTime}</td>
  					<td>${dto.avgstar }</td>
+ 					<td>${dto }</td>
  					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>
                 </tr>            
             </c:forEach>           
@@ -102,6 +102,7 @@
         	</tbody>
         </table>
 </body>
+
 
 <script>
 	$(function() {
@@ -147,9 +148,8 @@
 
 		//초기값을 오늘
 		$('#datepicker').datepicker('setDate', 'today');
+
 	});
-</script>
-<script>
 
 	function count(type) {
 		let resultElement = document.getElementById('result');
@@ -164,18 +164,14 @@
 		}
 		resultElement.innerText = number;
 	}
-	
-	let btn = document.getElementById("sub");
-	btn.addEventListener("click",function onsubmit(){
-		let inn = document.getElementById("inn");
-		let out = document.getElementById("out");
-		let in1 = document.getElementById("start");
-		let out1 = document.getElementById("end");
-		inn.value = in1.value.toString();
-		out.value = out1.value.toString();
+	function onsubmit(){
+		let start = document.querySeletor("#start");
+		let end = document.querySeletor("#end");
+		if(start.value == "null"){alert('체크인 날짜를 선택해주세요'); return;}
+		if(end.value == "null"){console.log('체크아웃 날짜를 선택해주세요'); return;}
+		if(start.value > end.value){alert('체크아웃 날짜는 체크인 날짜 이후로 선택해주세요'); return;}
 		frm.submit();
-	} );
-	
+	}
 </script>
 
 </html>
