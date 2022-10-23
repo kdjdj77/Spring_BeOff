@@ -1,4 +1,4 @@
-package com.lec.spring.service.rental;
+package com.lec.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

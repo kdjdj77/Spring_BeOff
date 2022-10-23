@@ -1,12 +1,8 @@
 package com.lec.spring.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.lec.spring.service.rental.RentalService;
 
 @Controller
 @RequestMapping("/rental")
@@ -30,7 +26,7 @@ public class RentalController {
 		
 	}
 	
-	@GetMapping("/cars/detail") // /rental/cars/datail
+	@GetMapping("/cars/detail") // /rental/cars/detail
 	public String carsDetail() {
 		
 		return "rental/cars/datail";
