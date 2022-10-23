@@ -4,14 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-	crossorigin="anonymous">
-<title>Insert title here</title>
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/resources/css/style.css" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
+<script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta charset="UTF-8">
+<title>list</title>
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
@@ -103,9 +110,9 @@
 								</tr>
 								<tr>
 									<td><select name="rentalregion" id="region">
-											<option>한국</option>
-											<option>미국</option>
-											<option>일본</option>
+											<c:forEach var="region" items="${regionList}">    
+                        						<option value="${region }">${region }</option>
+											</c:forEach>
 									</select></td>
 									<td><input type="text" id="" name=""></td>
 									<td><input type="text" id="" name=""></td>

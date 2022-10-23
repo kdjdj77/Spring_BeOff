@@ -1,20 +1,28 @@
 package com.lec.spring.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.lec.spring.service.RentalService;
 
 @Controller
 @RequestMapping("/rental")
 public class RentalController {
+	
+	private RentalService rentalService;
 
-   public RentalController() {
-      System.out.println(getClass().getName() + "() 생성");
-   }
+    public RentalController() {
+       System.out.println(getClass().getName() + "() 생성");
+    }
    
    	
 	@GetMapping("/basic") // /rental/basic
-	public void basic() {}
+	public void basic() {
+
+	}
 	
 	@GetMapping("/list") // /rental/list
 	public void list() {}
