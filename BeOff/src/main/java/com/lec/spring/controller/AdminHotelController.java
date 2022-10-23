@@ -23,7 +23,7 @@ public class AdminHotelController {
 		System.out.println(getClass().getName() + "() 생성");
 	}	
 
-	// hotel/admin/list
+	// hotel/admin/list : 로그인 한 관리자(adminhotel) "본인"이 등록한 모든 호텔 리스트 조회
 	@GetMapping("/list")
 	public String getHotelList(Model model) {
 		
@@ -34,12 +34,21 @@ public class AdminHotelController {
 		return "/hotel/admin/list";
 	}
 	
-	// hotel/admin/write : 호텔, 룸 등록 
-	@GetMapping("/write")
-	public String RoomWrite(Model model) {
+	// hotel/admin/write : 호텔 등록 
+	@GetMapping("/hotelWrite")
+	public String writeHotel(Model model) {
 		List<String> list = adminHotelService.getRegionList();
 		model.addAttribute("regionList", list);
-		return "/hotel/admin/write";
+		return "/hotel/admin/hotelWrite";
+	}
+	
+	// hotel/admin/write : 룸 등록 
+	@GetMapping("/roomWrite")
+	public String roomWrite(Model model) {
+		List<String> list = adminHotelService.getRegionList();
+		model.addAttribute("regionList", list);
+		
+		return "/hotel/admin/roomWrite";
 	}
 	
 	// hotel/admin/HotelWriteOk : 호텔 등록 완료
@@ -55,8 +64,11 @@ public class AdminHotelController {
 	@PostMapping("/RoomWriteOk")
 	public String writeOk(String roomname, float price, Long bed, Model model) {
 		int result = 0;
+		
+		List<Hotel> h = adminHotelService.getHotelList();
 		result = adminHotelService.registerRoom(roomname, price, bed);
 		model.addAttribute("result", result);
+		
 		return "/hotel/admin/RoomWriteOk";
 	}
 	

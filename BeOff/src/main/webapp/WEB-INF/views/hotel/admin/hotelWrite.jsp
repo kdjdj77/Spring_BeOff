@@ -69,39 +69,6 @@
                 </div>
             </header>
    </form>
-   <form name="frm" action="RoomWriteOk" method="post" enctype="Multipart/form-data">         
-            <!-- Room Header-->
-            <header class="bg-write py-5">
-                <div class="container px-5">
-                    <div class="row gx-5 align-items-center justify-content-center">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-8 col-xl-6">
-                            <div class="text-center">
-                                <h3 class="display-6 fw-bolder text-black mb-2 ">ROOM</h3>
-                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5 text-center text-xl-start">
-                            	<h3 class="display-7 fw-bolder text-black mb-2 ">Room Name</h3>
-                            	<input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="roomname" placeholder="Room Name을 입력하세요" name="roomname" required>
-                                <h3 class="display-7 fw-bolder text-black mb-2 ">Room Price</h3>
-                                <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="price" placeholder="가격을 입력하세요" name="price" required>
-                                <h3 class="display-7 fw-bolder text-black mb-2 ">Room bed</h3>
-                                <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="bed" placeholder="침대갯수를 입력하세요" name="bed" required>
-                    		
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <button class="btn btn-outline-dark">등록</button>
-                                    <a class="btn btn-outline-dark" href="list">목록</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
-                    </div>
-                </div>
-            </header>
-    </form>    
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

@@ -48,7 +48,7 @@ public class AdminHotelService {
 		return 1;
 	}
 	
-	// 룸 등록
+	// 룸 등록 - 선택한 호텔에 대한 룸 등록.
 	@Transactional
 	public int registerRoom(String roomname, float price, Long bed) {
 		Room r = new Room();
@@ -57,6 +57,7 @@ public class AdminHotelService {
 		r.setPrice(price);
 		r.setBed(bed);
 		roomRepository.saveAndFlush(r);
+
 		return 1;
 	}
 	

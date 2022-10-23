@@ -36,17 +36,24 @@
                 </div>
             </div>
         </header>
-<!-- Section-->		
+<!-- Section-->
+<!-- 여기 forEach 지워야함 -->
+<c:forEach var="h" items="${hotelList }">
+	<span>${h.hotelname }</span>
+	<span>${h.id }</span>
+</c:forEach>	
+	
 <section class="py-5">
 	<div class="container px-4 px-lg-5 mt-5">
 	<ul id="nav3" class="nav justify-content-end">
-		<li class="nav-item"><a class="btn btn-outline-dark" href="write">호텔 등록</a></li>
+		<li class="nav-item"><a class="btn btn-outline-dark" href="hotelWrite">호텔 등록</a></li>
 	</ul>
 	<br>
 		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 			<c:forEach var="hotel" items="${hotelList }">
 			<div class="col mb-5">
 				<div class="card h-100">
+				<input type="hidden" name="hotelId" value="${hotel.id }">
 					<!-- Product image-->
 					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/room/room3.jpg" alt="..." />
 					<!-- Product details-->
@@ -70,6 +77,7 @@
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="roomWrite?id=${hotel.id }">방등록</a>
 							<a class="btn btn-outline-dark mt-auto" href="update">수정</a>
 							<a class="btn btn-outline-dark mt-auto" href="delete">삭제</a>
 						</div>
