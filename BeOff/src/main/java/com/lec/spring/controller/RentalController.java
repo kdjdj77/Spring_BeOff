@@ -11,8 +11,12 @@ import com.lec.spring.service.RentalService;
 @Controller
 @RequestMapping("/rental")
 public class RentalController {
-	
+	@Autowired
 	private RentalService rentalService;
+	
+	public void setRentalService(RentalService rentalService) {
+		this.rentalService = rentalService;
+	}
 
     public RentalController() {
        System.out.println(getClass().getName() + "() 생성");
@@ -20,8 +24,10 @@ public class RentalController {
    
    	
 	@GetMapping("/basic") // /rental/basic
-	public void basic() {
-
+	public String basic(Model model) {
+		model.addAttribute("regionList", rentalService.getRegionList());
+		return "/rental/basic";
+		
 	}
 	
 	@GetMapping("/list") // /rental/list

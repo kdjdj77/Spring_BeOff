@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.lec.spring.domain.Region;
 import com.lec.spring.repository.RegionRepository;
@@ -12,6 +13,7 @@ import com.lec.spring.repository.rental.CarRepository;
 import com.lec.spring.repository.rental.CarfileRepository;
 import com.lec.spring.repository.rental.RentalRepository;
 
+@Service
 public class RentalService {
 	
 	@Autowired
@@ -29,13 +31,13 @@ public class RentalService {
 		System.out.println(getClass().getName() + "()생성");
 	}	
 	
-//	public List<String> getRegionList(){
-//		List<String> rList = new ArrayList<>();
-//		List<Region> regionList = regionRepository.findAll();
-//		for(Region r : regionList) {
-//			rList.add(r.getRegion());
-//		}
-//		return rList;
-//	}
+	public List<String> getRegionList(){
+		List<String> rList = new ArrayList<>();
+		List<Region> regionList = regionRepository.findAll();
+		for(Region r : regionList) {
+			rList.add(r.getRegion());
+		}
+		return rList;
+	}
 
 }
