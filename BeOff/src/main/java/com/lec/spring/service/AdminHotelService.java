@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,9 +52,10 @@ public class AdminHotelService {
 	
 	// 룸 등록 - 선택한 호텔에 대한 룸 등록.
 	@Transactional
-	public int registerRoom(String roomname, float price, Long bed) {
+	public int registerRoom(String roomname, Double price, Long bed) {
 		Room r = new Room();
-
+		
+//		r.getHotel().setId(id);
 		r.setRoomname(roomname);
 		r.setPrice(price);
 		r.setBed(bed);
@@ -84,10 +87,32 @@ public class AdminHotelService {
 		// 로그인한 유저정보
 		User u = U.getLoggedUser();
 		
+		List<Double> pList = new ArrayList<Double>();
+		
 		List<Hotel> h = hotelRepository.findByUser(u);
-		System.out.println(h);
+		for(Hotel i : h) {
+			pList.clear();
+			for(Room j : i.getRooms()) {
+				pList.add(j.getPrice());			
+			}
+			for(Double p : pList) {
+				if(i.getPriceList() != null) {
+					i.setPriceList(i.getPriceList()+" , "+Double.toString(p));					
+				}else {
+					i.setPriceList(Double.toString(p));
+				}
+			}
+			System.out.println(i.getPriceList());
+		}
 		
 		return h;
+	}
+	
+	//
+	public List<Room> getRoomList() {
+		List<Room> RoomList = null;
+		RoomList = roomRepository.findAll(Sort.by(Order.asc("id")));
+		return RoomList;
 	}
 		
 }

@@ -28,6 +28,9 @@ public class AdminHotelController {
 	public String getHotelList(Model model) {
 		
 		List<Hotel> list = adminHotelService.getHotelList();
+		
+		model.addAttribute("roomList", adminHotelService.getRoomList());
+		
 		model.addAttribute("hotelList", list);
 		System.out.println(list);
 		
@@ -45,9 +48,7 @@ public class AdminHotelController {
 	// hotel/admin/write : 룸 등록 
 	@GetMapping("/roomWrite")
 	public String roomWrite(Model model) {
-		List<String> list = adminHotelService.getRegionList();
-		model.addAttribute("regionList", list);
-		
+
 		return "/hotel/admin/roomWrite";
 	}
 	
@@ -62,10 +63,9 @@ public class AdminHotelController {
 	
 	// hotel/admin/RoomWriteOk : 룸 등록 완료
 	@PostMapping("/RoomWriteOk")
-	public String writeOk(String roomname, float price, Long bed, Model model) {
+	public String writeOk(String roomname, Double price, Long bed, Model model) {
 		int result = 0;
 		
-		List<Hotel> h = adminHotelService.getHotelList();
 		result = adminHotelService.registerRoom(roomname, price, bed);
 		model.addAttribute("result", result);
 		

@@ -37,12 +37,6 @@
             </div>
         </header>
 <!-- Section-->
-<!-- 여기 forEach 지워야함 -->
-<c:forEach var="h" items="${hotelList }">
-	<span>${h.hotelname }</span>
-	<span>${h.id }</span>
-</c:forEach>	
-	
 <section class="py-5">
 	<div class="container px-4 px-lg-5 mt-5">
 	<ul id="nav3" class="nav justify-content-end">
@@ -53,7 +47,7 @@
 			<c:forEach var="hotel" items="${hotelList }">
 			<div class="col mb-5">
 				<div class="card h-100">
-				<input type="hidden" name="hotelId" value="${hotel.id }">
+				<!-- <input type="hidden" name="hotelId" value="${hotel.id }"> -->
 					<!-- Product image-->
 					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/room/room3.jpg" alt="..." />
 					<!-- Product details-->
@@ -70,6 +64,7 @@
 							</div>
 							<!-- Product Content-->
 							<div>${hotel.content }</div>
+							<div>${hotel.priceList }</div>
 							<br>
 							<div>${hotel.region.region } </div>
 						</div>
