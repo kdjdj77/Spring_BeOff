@@ -32,8 +32,84 @@
 	<div class="container mt-3">
 		<h2>왕복 비행기 시간 설정</h2>
 		<hr>
-		
+		<form id="frm" action="roundReserv" method="post">
+		<table width="100%">
+			<tr>
+				<td>
+					<span>출발일자 : ${departdate}</span>
+					<span>${departregion} → ${arriveregion}</span>
+					<div>
+						<span>인원 : ${num_person}</span>
+						출발시각
+						<select name="time_sel">
+							<c:forEach var="t" items="${timeList}">
+								<option value = "${t}">${t}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</td>
+				<td>
+					<span>출발일자 : ${departdate2}</span>
+					<span>${departregion2} → ${arriveregion2}</span>
+					<div>
+						<span>인원 : ${num_person2}</span>
+						출발시각
+						<select name="time_sel2">
+							<c:forEach var="t" items="${timeList}">
+								<option value = "${t}">${t}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div>
+						<label>개수: <span id="air_cnt"></span> 개</label>
+						
+						<table id="air_list" width="60%">
+							<!-- 비행기 리스트(input airplane_id 포함) -->
+						</table>
+						<input type="hidden" name="departdate" value="${departdate}">
+						<input type="hidden" name="num_person" value="${num_person}">
+						
+					</div>
+				</td>
+				<td>
+					<div>
+						<label>개수: <span id="air_cnt2"></span> 개</label>
+					
+						<table id="air_list2" width="60%">
+							<!-- 비행기 리스트(input airplane_id 포함) -->
+						</table>
+						<input type="hidden" name="departdate2" value="${departdate2}">
+						<input type="hidden" name="num_person2" value="${num_person2}">
+						
+					</div>
+				</td>
+			</tr>
+		</table>
+		</form>
+		<div class="container mt-3"style="width:100%;">
+	        <button type="button" onclick="frmsubmit()" style="position:absolute; left:35%; height:50px; width:100px;" class="btn btn-outline-dark mx-3">다음</button>
+	    </div>
+	</div>
+	<div id="notSend">
+		<input type="hidden" name="departregion" value="${departregion}">
+		<input type="hidden" name="arriveregion" value="${arriveregion}">
+		<input type="hidden" name="departregion2" value="${departregion2}">
+		<input type="hidden" name="arriveregion2" value="${arriveregion2}">
 	</div>
 </body>
+
+<script>
+	const conPath = "${pageContext.request.contextPath }";
+	function frmsubmit() {
+		let frm = document.getElementById("frm");
+		frm.submit();
+	}
+</script>
+<script src="${pageContext.request.contextPath }/js/airlist.js"></script>
+<script src="${pageContext.request.contextPath }/js/airlist2.js"></script>
 
 </html>

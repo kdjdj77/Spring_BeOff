@@ -12,12 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.air.Airname;
 import com.lec.spring.domain.air.Airplane;
 import com.lec.spring.domain.air.Airticket;
 import com.lec.spring.domain.air.Airtime;
 import com.lec.spring.domain.air.AqryList;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
+import com.lec.spring.repository.air.AirnameRepository;
 import com.lec.spring.repository.air.AirplaneRepository;
 import com.lec.spring.repository.air.AirticketRepository;
 import com.lec.spring.repository.air.AirtimeRepository;
@@ -39,6 +41,8 @@ public class AirService {
 	private RegionRepository regionRepository;
 	@Autowired
 	private AirticketRepository airticketRepository;
+	@Autowired
+	private AirnameRepository airnameRepository;
 
 	public AirService() {
 		System.out.println(getClass().getName() + "() 생성");
@@ -51,7 +55,7 @@ public class AirService {
 		for (Region i : regionList) {
 			rNameList.add(i.getRegion());
 		}
-		return rNameList;		
+		return rNameList;
 	}
 	
 	@Transactional
@@ -127,6 +131,15 @@ public class AirService {
 		}
 		if (cnt == seatList.size()) return 1;
 		else return 0;
+	}
+
+	public List<String> getAirNameList() {
+		List<String> rNameList = new ArrayList<String>();
+		List<Airname> airNameList = airnameRepository.findAll();
+		for (Airname i : airNameList) {
+			rNameList.add(i.getName());
+		}
+		return rNameList;
 	}
 
 } // end Service

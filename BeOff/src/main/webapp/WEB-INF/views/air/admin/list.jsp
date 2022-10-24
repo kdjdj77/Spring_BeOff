@@ -20,7 +20,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	
 	<title>비행기 예매</title>
 </head>
@@ -30,46 +33,48 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<div class="container mt-3">
-		<h2>편도 비행기 시간 설정</h2>
+		<h2>국가/비행기시간/항공사 관리</h2>
 		<hr>
-		<span>출발일자 : ${departdate}</span>
-		<span>${departregion} → ${arriveregion}</span>
-		<span>인원 : ${num_person}</span>
-		<div>
-			출발시각
-			<select name="time_sel">
-				<c:forEach var="t" items="${timeList}">
-					<option value = "${t}">${t}</option>
-				</c:forEach>
-			</select>
-		</div>
-		
-		<div>
-			<label>개수: <span id="air_cnt"></span> 개</label>
-			<form id="frm" action="onewayReserv" method="post">
-				<table id="air_list" width="40%">
-					<!-- 비행기 리스트(input airplane_id 포함) -->
-				</table>
-				<input type="hidden" name="departdate" value="${departdate}">
-				<input type="hidden" name="num_person" value="${num_person}">
-				<button type="button" onclick="frmsubmit()">다음</button>
-			</form>
-		</div>
+		<table>
+			<thead>
+				<tr>
+                    <th width="40%">국가</th>
+                    <th width="40%">출국시간</th>
+                    <th width="40%">항공사</th>
+                </tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td valign="top" >
+						<table>
+							<input type="text" name="addregion">
+							<button type="button">추가</button>
+							<c:forEach var="region" items="${regionList}">
+								<tr><td>${region}</td></tr>
+							</c:forEach>
+						</table>
+					</td>
+					<td valign="top">
+						<table>
+							<input type="text" name="addtime">
+							<button type="button">추가</button>
+							<c:forEach var="time" items="${timeList}">
+								<tr><td>${time}</td></tr>
+							</c:forEach>
+						</table>
+					</td>
+					<td valign="top">
+						<table>
+							<input type="text" name="addname">
+							<button type="button">추가</button>
+							<c:forEach var="name" items="${nameList}">
+								<tr><td>${name}</td></tr>
+							</c:forEach>
+						</table>
+					</td>							
+				</tr>
+			</tbody>
+		</table>
 	</div>
-	<div id="notSend">
-		<input type="hidden" name="departregion" value="${departregion}">
-		<input type="hidden" name="arriveregion" value="${arriveregion}">
-	</div>
-</body>
-
-<script>
-	const conPath = "${pageContext.request.contextPath }";
-	function frmsubmit() {
-		let frm = document.getElementById("frm");	
-		
-		frm.submit();
-	}
-</script>
-<script src="${pageContext.request.contextPath }/js/airlist.js"></script>
-
+</body>	
 </html>

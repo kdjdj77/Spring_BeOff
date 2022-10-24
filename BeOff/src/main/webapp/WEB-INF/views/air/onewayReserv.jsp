@@ -35,7 +35,7 @@
     <div class="container"><h3>좌석예매 - 편도</h3></div>
     <div class="container mt-3"style="display:flex; justify-content:center;">
         <div class="seat-wrapper">
-			<div style="width:500px; height:50px; text-align:center; background-color:white" class="mb-5 border">
+			<div style="width:485px; height:50px; text-align:center; background-color:white" class="mb-5 border">
 				<table width="100%">
 					<tr>
 						<td>
@@ -70,5 +70,45 @@
 	<script>reserved.push("${item}");</script>
 </c:forEach>
 
-<script src="${pageContext.request.contextPath }/js/onewayReservAir.js"></script>
+<script src="${pageContext.request.contextPath }/js/reservAir.js"></script>
+<script>
+	function frmSubmit() {
+		let air_id = document.getElementById("id").value;
+		let dDate = document.getElementById("date").value;
+		let numInt = document.getElementById("num").value;
+		
+		let newForm = document.createElement('form');
+		newForm.name = 'newForm';
+		newForm.method = 'post';
+		newForm.action = 'onewayReservOk';
+	
+		for (let i = 0; i < selectedSeats.length; i++) {
+			let input1 = document.createElement("input");
+	
+			input1.type = "hidden";
+			input1.name = "seats";
+			input1.value = selectedSeats[i];
+	
+			newForm.append(input1);
+		}
+		
+		const input2 = document.createElement('input');
+		input2.type = "hidden";
+		input2.name = "id";
+		input2.value = air_id;
+		newForm.append(input2);
+		
+		const input3 = document.createElement('input');
+		input3.type = "hidden";
+		input3.name = "departDate";
+		input3.value = dDate;
+		newForm.append(input3);	
+		
+		document.body.appendChild(newForm);
+		
+		if (selectedSeats.length != numInt) alert("좌석수와 인원 수가 다릅니다");
+		else if (confirm("예매하시겠습니까?")) newForm.submit();
+		else return;
+	}
+</script>
 </html>

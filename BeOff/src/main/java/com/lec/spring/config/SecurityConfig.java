@@ -42,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/board/write/**", "/board/update/**", "/board/delete/**").access("hasRole('ROLE_MEMBER') or hasRole('ROLE_ADMIN')")
 			
 			//비행기 관련 페이지 권한
-			.antMatchers("/air/onewayReserv").access("hasRole('ROLE_MEMBER')")
+			.antMatchers("/air/onewayReserv", "/air/roundReserv").access("hasRole('ROLE_MEMBER')")
+			.antMatchers("/air/admin/**").access("hasRole('ROLE_ADMIN_AIR')")
 			
 			// ↓ 그 밖의 다른 요청은 모두 permit! (위 주소들만 아니면 누구나 접근 가능!)
 			.anyRequest().permitAll()

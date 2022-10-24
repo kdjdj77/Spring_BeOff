@@ -33,7 +33,12 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<div class="container mt-3">
-		<h2>비행기 표 예매하기</h2>
+		<h2>
+			비행기 표 예매하기
+			<sec:authorize access="hasAnyRole('ADMIN_AIR')">
+            	<a class="btn btn-outline-dark" href="admin/list">관리</a>
+            </sec:authorize>
+		</h2>
 		<hr>
 		<form name="frm" id="frm" action="settime" method="post">
 			<table width="100%">
