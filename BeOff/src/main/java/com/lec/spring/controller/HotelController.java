@@ -50,10 +50,6 @@ public class HotelController {
 	public String searchList(String hotelregion,String inn,String out, Model model) {
 		String in1 = inn.replaceAll("-","");
 		String out1 = out.replaceAll("-","");
-		System.out.println("-------------------------------------------");
-		System.out.println(inn);
-		System.out.println(out);
-		System.out.println("-------------------------------------------");
 		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
 		model.addAttribute("hotelList",list);
 		model.addAttribute("roomList", hotelService.getRoomList());
