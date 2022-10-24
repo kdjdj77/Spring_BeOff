@@ -73,6 +73,33 @@ public class HotelService {
 		return RoomList;
 	}
 
+	
+	// 호텔 id 에 해당하는 룸 들 get 
+	
+//	public List<Hotel> getRoomPrice() {
+//		List<Room> RoomPrice = new ArrayList<Room>();
+//		List<Hotel> HotelList = new ArrayList<Hotel>();
+//		RoomPrice = roomRepository.findById();
+//		HotelList = hotelRepository.findAll();		
+//		
+//		
+//		
+//		for(Hotel h : HotelList) {
+//			for(Room r : RoomPrice) {
+//				HotelList.addAll(r.getRoomname());
+//			}
+//		}
+//		HotelList.add((Hotel) RoomPrice);
+//		
+//		
+//		
+//		return HotelList;
+//	}
+	
+
+	
+	
+	
 	public List<Hotel> getSearchHotels(String hotelregion, String checkinDate, String checkoutDate) {
 		Region region = regionRepository.findByRegion(hotelregion);
 		List<Hotel> list = hotelRepository.findByRegion(region);
@@ -110,7 +137,11 @@ public class HotelService {
 		}
 		return list;
 	}
-	
+
+
+
+
+
 	
 	
 }
