@@ -55,28 +55,55 @@ public class HotelService {
 //		List<Hotel> hotelList = hotelRepository.findAll();
 //	}
 	public List<Hotel> getHotelList() {
-		List<Hotel> HotelList = null;
-		
-		HotelList = hotelRepository.findAll(Sort.by(Order.asc("id")));
-		return HotelList;
+		List<Hotel> h = null;
+		List<Double> pList = new ArrayList<Double>();
+		h = hotelRepository.findAll(Sort.by(Order.asc("id")));
+		for(Hotel i : h) {
+			pList.clear();
+			System.out.println(i.getId());
+			System.out.println(i.getUser());
+			System.out.println(i.getHcomments());
+			for(Room j : i.getRooms()) {
+				System.out.println("누구 : " + j.getRoomname() + " " + "가격 : " + j.getPrice());
+				pList.add(j.getPrice());
+			}
+			
+			for(Double p : pList) {
+				if(i.getPriceList() != null) {
+					i.setPriceList(i.getPriceList() + " , " + Double.toString(p));
+				}else {
+					i.setPriceList(Double.toString(p));
+				}
+				System.out.println("가격 : "+i.getPriceList());
+			}
+		}
+		return h;
 	}
+
+
+	public List<Room> getRoomList() {
+		List<Room> RoomList = null;
+		RoomList = roomRepository.findAll(Sort.by(Order.asc("id")));
+		return RoomList;
+	}
+	
 
 	public List<Hcomment> getHcommentList() {
 		List<Hcomment> HcommentList = null;
 		HcommentList = hcommentRepository.findAll(Sort.by(Order.asc("id")));
 		return HcommentList;
 	}
-
-	public List<Room> getRoomList() {
-		Hotel h = new Hotel();
-		Room r = new Room();
-		List<Room> RoomList = null;
-		RoomList = roomRepository.findAll(Sort.by(Order.asc("id")));
-		return RoomList;
-	}
-
 	
 	// 호텔 id 에 해당하는 룸 들 get 
+	
+//	public List<Room> getPrice() {
+//		Long id = null;
+//		List<Room> roomPrice = null;
+//		roomPrice = roomRepository.findById(id);
+//		
+//		return roomPrice;
+//	}
+	
 	
 //	public List<Hotel> getRoomPrice() {
 //		List<Room> RoomPrice = new ArrayList<Room>();
@@ -139,6 +166,8 @@ public class HotelService {
 		}
 		return list;
 	}
+
+
 
 
 

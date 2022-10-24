@@ -19,3 +19,4 @@ select * from db_hotel;
 select * from db_room;
 select * from db_roomfile;
 select * from db_roomticket;
+select * from db_hcomment dh ;

@@ -63,8 +63,9 @@
                     <th>호텔 지역</th>
                     <th>호텔 이름</th>
                     <th>호텔 정보</th>
+                    <th>가격</th>
                     <th>등록일</th>
-                    <th>별점</th>
+                    <th>별점</th>  
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +75,7 @@
                 	<td>${dto.region.region }</td>
                     <td>${dto.hotelname }</td>
                     <td>${dto.content }</td>
+                    <td>${dto.priceList }</td>
                     <td>${dto.regDateTime}</td>
  					<td>${dto.avgstar }</td>
  					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>

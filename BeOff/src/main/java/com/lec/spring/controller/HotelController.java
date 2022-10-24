@@ -38,6 +38,7 @@ public class HotelController {
 //		model.addAttribute("hotelcontent", hotelService.getHcontent());		
 		model.addAttribute("hotelList", hotelService.getHotelList());
 		model.addAttribute("roomList", hotelService.getRoomList());
+//		model.addAttribute("roomPrice", hotelService.getPrice());
 		return "/hotel/list";	
 		
 	}
@@ -58,11 +59,26 @@ public class HotelController {
 	
 	
 	
+	// /hotel/detail
+	// 필요한 정보
+	// 클릭한 숙소 ID name content
+	// 클릭한 숙소의 방 정보  room (image , name, price , bed)
+	// 클릭한 숙소의 후기 정보  hcomment(user, reg, star,  content)
+	public String detail(Long id, Model model) {
+		
+		model.addAttribute("hotelList",hotelService);
+		
+		
+		
+		return "/hotel/detail?id="+id;
+	}
 	
 	
 	
-	
-	
+	// /hotel/reserv
+	// 필요한 정보
+	// 로그인된 유저 ID
+	// 룸티켓..?
 	
 	
 	
