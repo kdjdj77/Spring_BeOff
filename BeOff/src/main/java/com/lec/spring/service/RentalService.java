@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lec.spring.domain.Region;
+import com.lec.spring.domain.rental.Car;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.rental.CarRepository;
@@ -38,6 +39,16 @@ public class RentalService {
 			rList.add(r.getRegion());
 		}
 		return rList;
+	}
+	
+	public List<String> getCarNameList() {
+		List<String> cList = new ArrayList<>();
+		List<Car> carNameList = carRepository.findAll();
+		for(Car c : carNameList) {
+			cList.add(c.getCarname());
+		}
+		return cList;
+				
 	}
 
 }
