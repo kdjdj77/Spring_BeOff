@@ -68,6 +68,8 @@ public class HotelService {
 	}
 
 	public List<Room> getRoomList() {
+		Hotel h = new Hotel();
+		Room r = new Room();
 		List<Room> RoomList = null;
 		RoomList = roomRepository.findAll(Sort.by(Order.asc("id")));
 		return RoomList;
