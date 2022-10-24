@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lec.spring.domain.hotel.Hotel;
+import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.service.AdminHotelService;
 
 @Controller
@@ -28,6 +29,9 @@ public class AdminHotelController {
 	public String getHotelList(Model model) {
 		
 		List<Hotel> list = adminHotelService.getHotelList();
+		
+		model.addAttribute("roomList", adminHotelService.getRoomList());
+		
 		model.addAttribute("hotelList", list);
 		System.out.println(list);
 		
@@ -42,11 +46,13 @@ public class AdminHotelController {
 		return "/hotel/admin/hotelWrite";
 	}
 	
-	// hotel/admin/write : 룸 등록 
+	// hotel/admin/write : 룸 등록 : 선택한 호텔의 룸
 	@GetMapping("/roomWrite")
-	public String roomWrite(Model model) {
-		List<String> list = adminHotelService.getRegionList();
-		model.addAttribute("regionList", list);
+	public String roomWrite(String id, Model model) {
+		
+		System.out.println("id : "+ id);
+		
+		model.addAttribute("id", id);
 		
 		return "/hotel/admin/roomWrite";
 	}
@@ -62,20 +68,32 @@ public class AdminHotelController {
 	
 	// hotel/admin/RoomWriteOk : 룸 등록 완료
 	@PostMapping("/RoomWriteOk")
-	public String writeOk(String roomname, float price, Long bed, Model model) {
+	public String writeOk(String id, String roomname, Double price, Long bed, Model model) {
 		int result = 0;
 		
-		List<Hotel> h = adminHotelService.getHotelList();
-		result = adminHotelService.registerRoom(roomname, price, bed);
+		result = adminHotelService.registerRoom(id, roomname, price, bed);
 		model.addAttribute("result", result);
 		
 		return "/hotel/admin/RoomWriteOk";
 	}
 	
+	
+	// 이거하다말앗음 update.jsp, updateOk.jsp 포함.
 	// hotel/admin/update
 	@GetMapping("/update")
-	public void update() {
+	public String update(Hotel hotel, Room room, Model model) {
 		
+		int result = 0;
+		
+		List<String> list = adminHotelService.getRegionList();
+		model.addAttribute("regionList", list);
+		
+		result = adminHotelService.updateHotel(hotel, room);
+		
+		model.addAttribute("hotel", hotel);
+		model.addAttribute("room", room);
+		
+		return "/hotel/admin/update";
 	}
 	
 

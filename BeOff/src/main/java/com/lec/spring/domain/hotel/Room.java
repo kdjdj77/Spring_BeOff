@@ -53,7 +53,7 @@ public class Room {
 	@Column(nullable = false)
 	private String roomname;
 	@Column(nullable = false)
-	private float price;
+	private Double price;
 	@Column(nullable=false)
 	private Long bed;
 

@@ -11,9 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.Transient;
 
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.Region;
@@ -48,6 +48,10 @@ public class Hotel extends BaseEntity{
 	@ColumnDefault(value = "0")
 	private float avgstar; // 별점 평균
 	
+	// 금액을 받아오는 list
+	@Transient
+	private String priceList;
+	
 	@ManyToOne
 	@ToString.Exclude
 	private User user;
@@ -67,8 +71,6 @@ public class Hotel extends BaseEntity{
 	@ToString.Exclude
 	@Builder.Default
 	private List<Hcomment> hcomments = new ArrayList<>();
-	
-	
 
 
 }
