@@ -31,7 +31,10 @@ public class RentalController {
 	}
 	
 	@GetMapping("/list") // /rental/list
-	public void list() {}
+	public String list(Model model) {
+		model.addAttribute("carNameList", rentalService.getCarNameList());
+		return "/rental/list";
+	}
 	
 	@GetMapping("/cars/list") // /rental/cars/list
 	public String carsList() {
