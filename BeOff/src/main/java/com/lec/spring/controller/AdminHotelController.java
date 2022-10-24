@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lec.spring.domain.hotel.Hotel;
+import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.service.AdminHotelService;
 
 @Controller
@@ -45,7 +46,7 @@ public class AdminHotelController {
 		return "/hotel/admin/hotelWrite";
 	}
 	
-	// hotel/admin/write : 룸 등록 
+	// hotel/admin/write : 룸 등록 : 선택한 호텔의 룸
 	@GetMapping("/roomWrite")
 	public String roomWrite(String id, Model model) {
 		
@@ -76,10 +77,23 @@ public class AdminHotelController {
 		return "/hotel/admin/RoomWriteOk";
 	}
 	
+	
+	// 이거하다말앗음 update.jsp, updateOk.jsp 포함.
 	// hotel/admin/update
 	@GetMapping("/update")
-	public void update() {
+	public String update(Hotel hotel, Room room, Model model) {
 		
+		int result = 0;
+		
+		List<String> list = adminHotelService.getRegionList();
+		model.addAttribute("regionList", list);
+		
+		result = adminHotelService.updateHotel(hotel, room);
+		
+		model.addAttribute("hotel", hotel);
+		model.addAttribute("room", room);
+		
+		return "/hotel/admin/update";
 	}
 	
 

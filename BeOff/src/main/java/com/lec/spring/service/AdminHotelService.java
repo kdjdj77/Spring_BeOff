@@ -4,6 +4,8 @@ package com.lec.spring.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
@@ -84,8 +86,6 @@ public class AdminHotelService {
 
 	// 로그인 한 관리자(adminhotel) "본인"이 등록한 모든 호텔 리스트 조회
 	public List<Hotel> getHotelList() {
-		// 가격대신 내용으로 해볼거라 킵
-//		List<Room> list = roomRepository.findAll();
 		
 		// 로그인한 유저정보
 		User u = U.getLoggedUser();
@@ -119,12 +119,17 @@ public class AdminHotelService {
 	}
 
 	public Hotel getHotelById(String id) {
-		
 		Long lId = Long.parseLong(id);
-		
 		Hotel h = hotelRepository.findById(lId).get();
-		
 		return h;
+	}
+
+	// 이거하다 말앗음
+	@Transient
+	public int updateHotel(Hotel hotel, Room room) {
+		
+		
+		return 1;
 	}
 		
 }
