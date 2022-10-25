@@ -177,6 +177,27 @@ public class AirController {
 		model.addAttribute("result", result);
 		return "air/admin/deleteOk";
 	}
+	@PostMapping("/admin/updateregion")
+	public String updRegion(String updateregion, String regionId, Model model) {
+		int result = 0;
+		if (!updateregion.equals("")) result = airService.rUpdate(regionId, updateregion);
+		model.addAttribute("result", result);
+		return "air/admin/updateOk";
+	}
+	@PostMapping("/admin/updatetime")
+	public String updTime(String updatetime, String timeId, Model model) {
+		int result = 0;
+		if (!updatetime.equals("")) result = airService.tUpdate(timeId, updatetime);
+		model.addAttribute("result", result);
+		return "air/admin/updateOk";
+	}
+	@PostMapping("/admin/updatename")
+	public String updName(String updatename, Double updateprice, String nameId, Model model) {
+		int result = 0;
+		if (!updatename.equals("")) result = airService.nUpdate(nameId, updatename, updateprice);
+		model.addAttribute("result", result);
+		return "air/admin/updateOk";
+	}
 	
 	
 	

@@ -51,32 +51,37 @@
 				<tr>
 					<td valign="top" >
 						<table>
-							<tr><td>&nbsp;</td></tr>
+							<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 							<form action="addregion" method="post">
 								<tr>
-									<td><input type="text" name="addregion" placeholder="국가"></td>
+									<td><input type="text" name="addregion" placeholder="국가" required></td>
 									<td><button class="w-100 btn btn-sm btn-outline-dark">추가</button></td>
 								</tr>
 							</form>
-							<tr><td>&nbsp;</td></tr>
+							<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 							<c:forEach var="r" items="${regionList}">
-								<tr>
+								<tr style="border-top:1px solid #000;">
 									<td>${r.region}</td>
 									<td class="d-flex">
-										<button type="button" class="btn btn-sm btn-outline-dark">수정</button>
+										<button onclick="updateOpen('region${r.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
 										<form action="delregion" method="post">
 											<input type="hidden" name="delregion" value="${r.id}">
 											<button class="btn btn-sm btn-outline-dark">삭제</button>
 										</form>
 									</td>
 								</tr>
-								<tr style="border-bottom:1px solid #000;">
-									<td><input type="text" name="updateregion"></td>
-									<td class="d-flex">
-										<button class="btn btn-sm btn-outline-dark">완료</button>
-										<button class="btn btn-sm btn-outline-dark">취소</button>
-									</td>
-								</tr>
+								<form action="updateregion" method="post">
+									<tr id="region${r.id}" style="display:none;">
+										<td>
+											<input type="text" name="updateregion" placeholder="국가수정" value="${r.region}" required>
+											<input type="hidden" name="regionId" value="${r.id}">
+										</td>
+										<td class="d-flex justify-content-end">
+											<button class="btn btn-sm btn-outline-dark">완료</button>
+											<button onclick="updateClose('region${r.id}')" type="button" class="btn btn-sm btn-outline-dark">취소</button>
+										</td>
+									</tr>
+								</form>
 							</c:forEach>
 						</table>
 					</td>
@@ -85,25 +90,34 @@
 							<tr><td>&nbsp;</td></tr>
 							<form action="addtime" method="post">
 								<tr>
-									<td><input type="text" name="addtime" placeholder="시간"></td>
+									<td><input type="text" name="addtime" placeholder="시간" required></td>
 									<td><button class="w-100 btn btn-sm btn-outline-dark">추가</button></td>
 								</tr>
 							</form>
 							<tr><td>&nbsp;</td></tr>
 							<c:forEach var="t" items="${timeList}">
-								<tr style="border-bottom:1px solid #000;padding:10px;">
+								<tr style="border-top:1px solid #000;">
 									<td>${t.time}</td>
 									<td class="d-flex">
-										<form action="updatetime" method="post">
-											<input type="hidden" name="updatetime" value="${t.id}">
-											<button class="btn btn-sm btn-outline-dark">수정</button>
-										</form>
+										<button onclick="updateOpen('time${t.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
 										<form action="deltime" method="post">
 											<input type="hidden" name="deltime" value="${t.id}">
 											<button class="btn btn-sm btn-outline-dark">삭제</button>
 										</form>
 									</td>
 								</tr>
+								<form action="updatetime" method="post">
+									<tr id="time${t.id}" style="display:none;">
+										<td>
+											<input type="text" name="updatetime" placeholder="시간수정" value="${t.time}" required>
+											<input type="hidden" name="timeId" value="${t.id}">
+										</td>
+										<td class="d-flex justify-content-end">
+											<button class="btn btn-sm btn-outline-dark">완료</button>
+											<button onclick="updateClose('time${t.id}')" type="button" class="btn btn-sm btn-outline-dark">취소</button>
+										</td>
+									</tr>
+								</form>
 							</c:forEach>
 						</table>
 					</td>
@@ -112,27 +126,39 @@
 							<tr><td>&nbsp;</td></tr>
 							<form action="addname" method="post">
 								<tr>
-									<td><input type="text" name="addname" placeholder="항공사"></td>
-									<td><input type="number" name="addprice" step="0.1" placeholder="가격"></td>
+									<td><input type="text" name="addname" placeholder="항공사" required></td>
+									<td><input type="number" name="addprice" step="0.1" placeholder="가격" required></td>
 									<td><button class="w-100 btn btn-sm btn-outline-dark">추가</button></td>
 								</tr>
 							</form>
 							<tr><td>&nbsp;</td></tr>
 							<c:forEach var="n" items="${nameList}">
-								<tr style="border-bottom:1px solid #000;padding:10px;">
+								<tr style="border-top:1px solid #000;">
 									<td>${n.name}</td>
-									<td>${n.price}</td>
+									<td>${n.price}￦</td>
 									<td class="d-flex">
-										<form action="updatename" method="post">
-											<input type="hidden" name="updatename" value="${n.id}">
-											<button class="btn btn-sm btn-outline-dark">수정</button>
-										</form>
+										<button onclick="updateOpen('name${n.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
 										<form action="delname" method="post">
 											<input type="hidden" name="delname" value="${n.id}">
 											<button class="btn btn-sm btn-outline-dark">삭제</button>
 										</form>
 									</td>
 								</tr>
+								<form action="updatename" method="post">
+									<tr id="name${n.id}" style="display:none;">
+										<td>
+											<input type="text" name="updatename" placeholder="항공사수정" value="${n.name}" required>
+											<input type="hidden" name="nameId" value="${n.id}">
+										</td>
+										<td>
+											<input type="number" name="updateprice" step="0.1" placeholder="가격수정" value="${n.price}" required>
+										</td>
+										<td class="d-flex justify-content-end">
+											<button class="btn btn-sm btn-outline-dark">완료</button>
+											<button onclick="updateClose('name${n.id}')" type="button" class="btn btn-sm btn-outline-dark">취소</button>
+										</td>
+									</tr>
+								</form>
 							</c:forEach>
 						</table>
 					</td>							
@@ -141,4 +167,16 @@
 		</table>
 	</div>
 </body>	
+<script>
+	function updateOpen(id) {
+		let tr = document.getElementById(id);
+		tr.style.display = "";
+	}
+	
+	function updateClose(id) {
+		let tr = document.getElementById(id);
+		tr.style.display = "none";
+	}
+
+</script>
 </html>

@@ -194,5 +194,30 @@ public class AirService {
 		airnameRepository.delete(n);
 		return 1;
 	}
+	@Transactional
+	public int rUpdate(String regionId, String updateregion) {
+		Long id = Long.parseLong(regionId);
+		Region r = regionRepository.findById(id).get();
+		r.setRegion(updateregion);
+		regionRepository.save(r);		
+		return 1;
+	}
+	@Transactional
+	public int tUpdate(String timeId, String updatetime) {
+		Long id = Long.parseLong(timeId);
+		Airtime t = airtimeRepository.findById(id).get();
+		t.setTime(updatetime);
+		airtimeRepository.save(t);		
+		return 1;
+	}
+
+	public int nUpdate(String nameId, String updatename, Double updateprice) {
+		Long id = Long.parseLong(nameId);
+		Airname t = airnameRepository.findById(id).get();
+		t.setName(updatename);
+		t.setPrice(updateprice);
+		airnameRepository.save(t);		
+		return 1;
+	}
 
 } // end Service
