@@ -1,7 +1,9 @@
 package com.lec.spring.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -13,12 +15,14 @@ import com.lec.spring.domain.Region;
 import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
+import com.lec.spring.domain.qna.FileDTO;
 import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
 import com.lec.spring.repository.hotel.HotelRepository;
 import com.lec.spring.repository.hotel.RoomRepository;
+import com.lec.spring.repository.hotel.RoomfileRepository;
 import com.lec.spring.repository.hotel.RoomticketRepository;
 
 @Service
@@ -35,7 +39,8 @@ public class HotelService {
 	private RegionRepository regionRepository;
 	@Autowired
 	private RoomticketRepository roomticketRepository;
-
+	@Autowired
+	private RoomfileRepository roomfileRepository;
 
 	public HotelService() {
 		System.out.println(getClass().getName() + "() 생성");
@@ -50,85 +55,38 @@ public class HotelService {
 		}
 		return RList;
 	}
-//	public List<Hotel> getHotelList() {
-//		List<String> HList = new ArrayList<String>();
-//		List<Hotel> hotelList = hotelRepository.findAll();
-//	}
+		
+	
+	//호텔 리스트 + 룸 가격
 	public List<Hotel> getHotelList() {
-		List<Hotel> h = null;
 		List<Double> pList = new ArrayList<Double>();
+		List<Hotel> h = null;
+
+	
 		h = hotelRepository.findAll(Sort.by(Order.asc("id")));
+		
 		for(Hotel i : h) {
 			pList.clear();
-			System.out.println(i.getId());
-			System.out.println(i.getUser());
-			System.out.println(i.getHcomments());
+
 			for(Room j : i.getRooms()) {
-				System.out.println("누구 : " + j.getRoomname() + " " + "가격 : " + j.getPrice());
+	
 				pList.add(j.getPrice());
 			}
-			
 			for(Double p : pList) {
 				if(i.getPriceList() != null) {
-					i.setPriceList(i.getPriceList() + " , " + Double.toString(p));
+					i.setPriceList(i.getPriceList() + Double.toString(p));
 				}else {
 					i.setPriceList(Double.toString(p));
 				}
-				System.out.println("가격 : "+i.getPriceList());
+				Double a = Collections.max(pList);
+				Double b = Collections.min(pList);
+				i.setPriceList(Double.toString(b)+"원  ~ " + Double.toString(a)+"원");
 			}
 		}
 		return h;
 	}
-
-
-	public List<Room> getRoomList() {
-		List<Room> RoomList = null;
-		RoomList = roomRepository.findAll(Sort.by(Order.asc("id")));
-		return RoomList;
-	}
 	
-
-	public List<Hcomment> getHcommentList() {
-		List<Hcomment> HcommentList = null;
-		HcommentList = hcommentRepository.findAll(Sort.by(Order.asc("id")));
-		return HcommentList;
-	}
-	
-	// 호텔 id 에 해당하는 룸 들 get 
-	
-//	public List<Room> getPrice() {
-//		Long id = null;
-//		List<Room> roomPrice = null;
-//		roomPrice = roomRepository.findById(id);
-//		
-//		return roomPrice;
-//	}
-	
-	
-//	public List<Hotel> getRoomPrice() {
-//		List<Room> RoomPrice = new ArrayList<Room>();
-//		List<Hotel> HotelList = new ArrayList<Hotel>();
-//		RoomPrice = roomRepository.findById();
-//		HotelList = hotelRepository.findAll();		
-//		
-//		
-//		
-//		for(Hotel h : HotelList) {
-//			for(Room r : RoomPrice) {
-//				HotelList.addAll(r.getRoomname());
-//			}
-//		}
-//		HotelList.add((Hotel) RoomPrice);
-//		
-//		
-//		
-//		return HotelList;
-//	}
-	
-
-	
-	
-	
+	// 숙소 검색
 	public List<Hotel> getSearchHotels(String hotelregion, String checkinDate, String checkoutDate) {
 		Region region = regionRepository.findByRegion(hotelregion);
 		List<Hotel> list = hotelRepository.findByRegion(region);
@@ -169,8 +127,18 @@ public class HotelService {
 
 
 
+	// 숙소 id 값으로 정보 (hotel, room, comment)
+	// detail 
+	public Hotel getHotelById(String id) {
+		Long lId = Long.parseLong(id);
+		Hotel h = hotelRepository.findById(lId).get();
+
+		
+		return h;
+	}
 
 
+	
 
 
 	

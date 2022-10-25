@@ -65,7 +65,7 @@
                     <th>호텔 정보</th>
                     <th>가격</th>
                     <th>등록일</th>
-                    <th>별점</th>  
+                    <th>별점</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,26 +82,6 @@
                 </tr>            
             </c:forEach>           
             </tbody>
-        </table>
-        <table class="table table-bordered">
-        	<thead>
-        		<tr>
-        			<th>#</th>
-        			<th>방이름</th>
-        			<th>가격</th>
-        			<th>침대갯수</th>
-        		</tr>
-        	</thead>
-        	<tbody>
-        		<c:forEach var ="dto1" items="${roomList }">	
-        			<tr>
-        				<td>${dto1.id }</td>
-        				<td>${dto1.roomname }</td>
-        				<td>${dto1.price }</td>
-        				<td>${dto1.bed }</td>
-        			</tr>
-        		</c:forEach>
-        	</tbody>
         </table>
 </body>
 

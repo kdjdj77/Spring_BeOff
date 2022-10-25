@@ -35,10 +35,7 @@ public class HotelController {
 	@GetMapping("/list")
 	public String list(Model model) {
 		model.addAttribute("regionList", hotelService.getRegionList());	
-//		model.addAttribute("hotelcontent", hotelService.getHcontent());		
 		model.addAttribute("hotelList", hotelService.getHotelList());
-		model.addAttribute("roomList", hotelService.getRoomList());
-//		model.addAttribute("roomPrice", hotelService.getPrice());
 		return "/hotel/list";	
 		
 	}
@@ -51,7 +48,7 @@ public class HotelController {
 		String out1 = out.replaceAll("-","");
 		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
 		model.addAttribute("hotelList",list);
-		model.addAttribute("roomList", hotelService.getRoomList());
+		model.addAttribute("hotel",hotelService.getHotelList());
 		model.addAttribute("regionList", hotelService.getRegionList());
 			
 		return "/hotel/list";
@@ -64,13 +61,12 @@ public class HotelController {
 	// 클릭한 숙소 ID name content
 	// 클릭한 숙소의 방 정보  room (image , name, price , bed)
 	// 클릭한 숙소의 후기 정보  hcomment(user, reg, star,  content)
-	public String detail(Long id, Model model) {
+	@GetMapping("/detail")
+	public String detail(String id, Model model) {
+		model.addAttribute("hotel",hotelService.getHotelById(id));
+//		model.addAttribute("room",hotelService.getRoomFile(id));
 		
-		model.addAttribute("hotelList",hotelService);
-		
-		
-		
-		return "/hotel/detail?id="+id;
+		return "/hotel/detail"; 
 	}
 	
 	
@@ -88,17 +84,17 @@ public class HotelController {
 	
 	
 	// /hotel/list
-	@GetMapping("/detail")
-	public String detail(Model model) {
-		model.addAttribute("regionList", hotelService.getRegionList());
-//		model.addAttribute("hotelname", hotelService.getHname());		
-//		model.addAttribute("hotelcontent", hotelService.getHcontent());		
-		model.addAttribute("hotelList", hotelService.getHotelList());
-		model.addAttribute("hcommentList", hotelService.getHcommentList());
-		model.addAttribute("roomList", hotelService.getRoomList());
-		return "/hotel/detail";	
-		
-	}
+//	@GetMapping("/detail")
+//	public String detail(Model model) {
+//		model.addAttribute("regionList", hotelService.getRegionList());
+////		model.addAttribute("hotelname", hotelService.getHname());		
+////		model.addAttribute("hotelcontent", hotelService.getHcontent());		
+//		model.addAttribute("hotelList", hotelService.getHotelList());
+//		model.addAttribute("hcommentList", hotelService.getHcommentList());
+//		model.addAttribute("roomList", hotelService.getRoomList());
+//		return "/hotel/detail";	
+//		
+//	}
 
 	
 }
