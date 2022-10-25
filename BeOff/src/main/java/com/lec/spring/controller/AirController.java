@@ -128,12 +128,57 @@ public class AirController {
 	
 	@GetMapping("/admin/list")
 	public String adminList(Model model) {		
-		model.addAttribute("regionList", airService.getRegionList());
-		model.addAttribute("nameList", airService.getAirNameList());
-		model.addAttribute("timeList", airService.getAirTimeList());
+		model.addAttribute("regionList", airService.getRegions());
+		model.addAttribute("nameList", airService.getAirNames());
+		model.addAttribute("timeList", airService.getAirTimes());
 		
 		return "air/admin/list";
 	}
+	
+	@PostMapping("/admin/addregion")
+	public String addregion(String addregion, Model model) {
+		int result = 0;
+		if (!addregion.equals("")) result = airService.addregion(addregion);
+		model.addAttribute("result", result);
+		return "air/admin/writeOk";
+	}
+	@PostMapping("/admin/addtime")
+	public String addtime(String addtime, Model model) {
+		int result = 0;
+		if (!addtime.equals("")) result = airService.addtime(addtime);
+		model.addAttribute("result", result);
+		return "air/admin/writeOk";
+	}
+	@PostMapping("/admin/addname")
+	public String addname(String addname, Double addprice, Model model) {
+		int result = 0;
+		if (!addname.equals("")) result = airService.addname(addname, addprice);
+		model.addAttribute("result", result);
+		return "air/admin/writeOk";
+	}
+	@PostMapping("/admin/delregion")
+	public String delRegionBySId(String delregion, Model model) {
+		int result = 0;
+		result = airService.delRegionById(delregion);
+		model.addAttribute("result", result);
+		return "air/admin/deleteOk";
+	}
+	@PostMapping("/admin/deltime")
+	public String delTimeBySId(String deltime, Model model) {
+		int result = 0;
+		result = airService.delTimeById(deltime);
+		model.addAttribute("result", result);
+		return "air/admin/deleteOk";
+	}
+	@PostMapping("/admin/delname")
+	public String delNameBySId(String delname, Model model) {
+		int result = 0;
+		result = airService.delNameById(delname);
+		model.addAttribute("result", result);
+		return "air/admin/deleteOk";
+	}
+	
+	
 	
 	
 } // end controller

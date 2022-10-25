@@ -40,11 +40,11 @@ public class AirTest {
 		Region usa = regionRepository.findByRegion("미국");
 		
 		Airname asiana = Airname.builder()
-				.name("아시아나항공").price(510000).build();
+				.name("아시아나항공").price(510000D).build();
 		Airname daehan = Airname.builder()
-				.name("대한항공").price(420000).build();
+				.name("대한항공").price(420000D).build();
 		Airname jinair = Airname.builder()
-				.name("진에어항공").price(310000).build();
+				.name("진에어항공").price(310000D).build();
 		asiana = airnameRepository.saveAndFlush(asiana);
 		daehan = airnameRepository.saveAndFlush(daehan);
 		jinair = airnameRepository.saveAndFlush(jinair);

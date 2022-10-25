@@ -26,6 +26,10 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	
 	<title>비행기 예매</title>
+	<style>
+		input[type="number"]::-webkit-outer-spin-button,
+		input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}
+	</style>
 </head>
 
 <body style="margin-bottom: 200px">
@@ -33,13 +37,13 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<div class="container mt-3">
-		<h2>국가/비행기시간/항공사 관리</h2>
+		<h2>국가/타임테이블/항공사 관리</h2>
 		<hr>
 		<table>
 			<thead>
 				<tr>
-                    <th width="40%">국가</th>
-                    <th width="40%">출국시간</th>
+                    <th width="30%">국가</th>
+                    <th width="30%">출국시간</th>
                     <th width="40%">항공사</th>
                 </tr>
 			</thead>
@@ -47,28 +51,88 @@
 				<tr>
 					<td valign="top" >
 						<table>
-							<input type="text" name="addregion">
-							<button type="button">추가</button>
-							<c:forEach var="region" items="${regionList}">
-								<tr><td>${region}</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<form action="addregion" method="post">
+								<tr>
+									<td><input type="text" name="addregion" placeholder="국가"></td>
+									<td><button class="w-100 btn btn-sm btn-outline-dark">추가</button></td>
+								</tr>
+							</form>
+							<tr><td>&nbsp;</td></tr>
+							<c:forEach var="r" items="${regionList}">
+								<tr>
+									<td>${r.region}</td>
+									<td class="d-flex">
+										<button type="button" class="btn btn-sm btn-outline-dark">수정</button>
+										<form action="delregion" method="post">
+											<input type="hidden" name="delregion" value="${r.id}">
+											<button class="btn btn-sm btn-outline-dark">삭제</button>
+										</form>
+									</td>
+								</tr>
+								<tr style="border-bottom:1px solid #000;">
+									<td><input type="text" name="updateregion"></td>
+									<td class="d-flex">
+										<button class="btn btn-sm btn-outline-dark">완료</button>
+										<button class="btn btn-sm btn-outline-dark">취소</button>
+									</td>
+								</tr>
 							</c:forEach>
 						</table>
 					</td>
 					<td valign="top">
 						<table>
-							<input type="text" name="addtime">
-							<button type="button">추가</button>
-							<c:forEach var="time" items="${timeList}">
-								<tr><td>${time}</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<form action="addtime" method="post">
+								<tr>
+									<td><input type="text" name="addtime" placeholder="시간"></td>
+									<td><button class="w-100 btn btn-sm btn-outline-dark">추가</button></td>
+								</tr>
+							</form>
+							<tr><td>&nbsp;</td></tr>
+							<c:forEach var="t" items="${timeList}">
+								<tr style="border-bottom:1px solid #000;padding:10px;">
+									<td>${t.time}</td>
+									<td class="d-flex">
+										<form action="updatetime" method="post">
+											<input type="hidden" name="updatetime" value="${t.id}">
+											<button class="btn btn-sm btn-outline-dark">수정</button>
+										</form>
+										<form action="deltime" method="post">
+											<input type="hidden" name="deltime" value="${t.id}">
+											<button class="btn btn-sm btn-outline-dark">삭제</button>
+										</form>
+									</td>
+								</tr>
 							</c:forEach>
 						</table>
 					</td>
 					<td valign="top">
 						<table>
-							<input type="text" name="addname">
-							<button type="button">추가</button>
-							<c:forEach var="name" items="${nameList}">
-								<tr><td>${name}</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<form action="addname" method="post">
+								<tr>
+									<td><input type="text" name="addname" placeholder="항공사"></td>
+									<td><input type="number" name="addprice" step="0.1" placeholder="가격"></td>
+									<td><button class="w-100 btn btn-sm btn-outline-dark">추가</button></td>
+								</tr>
+							</form>
+							<tr><td>&nbsp;</td></tr>
+							<c:forEach var="n" items="${nameList}">
+								<tr style="border-bottom:1px solid #000;padding:10px;">
+									<td>${n.name}</td>
+									<td>${n.price}</td>
+									<td class="d-flex">
+										<form action="updatename" method="post">
+											<input type="hidden" name="updatename" value="${n.id}">
+											<button class="btn btn-sm btn-outline-dark">수정</button>
+										</form>
+										<form action="delname" method="post">
+											<input type="hidden" name="delname" value="${n.id}">
+											<button class="btn btn-sm btn-outline-dark">삭제</button>
+										</form>
+									</td>
+								</tr>
 							</c:forEach>
 						</table>
 					</td>							

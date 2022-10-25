@@ -2,7 +2,6 @@ package com.lec.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
@@ -57,15 +56,14 @@ public class AirService {
 		}
 		return rNameList;
 	}
-	
 	@Transactional
 	public List<String> getAirTimeList() {
 		List<String> rTimeList = new ArrayList<String>();
-		List<Airtime> airTimeList = airtimeRepository.findAll();
-		for (Airtime i : airTimeList) {
+		List<Airtime> airtimeList = airtimeRepository.findAll();
+		for (Airtime i : airtimeList) {
 			rTimeList.add(i.getTime());
 		}
-		return rTimeList;		
+		return rTimeList;
 	}
 	
 	@Transactional
@@ -132,14 +130,69 @@ public class AirService {
 		if (cnt == seatList.size()) return 1;
 		else return 0;
 	}
-
-	public List<String> getAirNameList() {
-		List<String> rNameList = new ArrayList<String>();
+	@Transactional
+	public List<Region> getRegions() {
+		List<Region> regionList = regionRepository.findAll();
+		return regionList;		
+	}
+	@Transactional
+	public List<Airtime> getAirTimes() {
+		List<Airtime> airTimeList = airtimeRepository.findAll();
+		return airTimeList;		
+	}
+	@Transactional
+	public List<Airname> getAirNames() {
 		List<Airname> airNameList = airnameRepository.findAll();
-		for (Airname i : airNameList) {
-			rNameList.add(i.getName());
+		return airNameList;
+	}
+	@Transactional
+	public int addregion(String addregion) {
+		for(Region i : getRegions()) {
+			if (addregion.equals(i.getRegion())) return 0;
 		}
-		return rNameList;
+		Region r = new Region();
+		r.setRegion(addregion);
+		regionRepository.saveAndFlush(r);
+		return 1;
+	}
+	@Transactional
+	public int addtime(String addtime) {
+		for(Airtime i : getAirTimes()) {
+			if (addtime.equals(i.getTime())) return 0;
+		}
+		Airtime t = new Airtime();
+		t.setTime(addtime);
+		airtimeRepository.saveAndFlush(t);
+		return 1;
+	}
+	@Transactional
+	public int addname(String addname, Double addprice) {
+		for(Airname i : getAirNames()) {
+			if (addname.equals(i.getName())) return 0;
+		}
+		Airname n = new Airname();
+		n.setName(addname);
+		n.setPrice(addprice);
+		airnameRepository.saveAndFlush(n);
+		return 1;
+	}
+	@Transactional
+	public int delRegionById(String region) {
+		Region r = regionRepository.findById(Long.parseLong(region)).get();
+		regionRepository.delete(r);
+		return 1;
+	}
+	@Transactional
+	public int delTimeById(String time) {
+		Airtime t = airtimeRepository.findById(Long.parseLong(time)).get();
+		airtimeRepository.delete(t);
+		return 1;
+	}
+	@Transactional
+	public int delNameById(String name) {
+		Airname n = airnameRepository.findById(Long.parseLong(name)).get();
+		airnameRepository.delete(n);
+		return 1;
 	}
 
 } // end Service
