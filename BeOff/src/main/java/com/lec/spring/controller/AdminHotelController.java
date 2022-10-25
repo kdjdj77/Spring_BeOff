@@ -38,6 +38,17 @@ public class AdminHotelController {
 		return "/hotel/admin/list";
 	}
 	
+	// hotel/admin/roomList : 선택한 호텔의 모든 룸 리스트 조회
+	@GetMapping("/roomList")
+	public String getRoomList(String id, Model model) {
+		
+		Hotel h = adminHotelService.getHotelById(id);
+		
+		model.addAttribute("roomList", h);
+		System.out.println("roomList h ? "+h.getRooms());
+		return "/hotel/admin/roomList";
+	}
+	
 	// hotel/admin/write : 호텔 등록 
 	@GetMapping("/hotelWrite")
 	public String writeHotel(Model model) {
@@ -57,28 +68,28 @@ public class AdminHotelController {
 		return "/hotel/admin/roomWrite";
 	}
 	
-	// hotel/admin/HotelWriteOk : 호텔 등록 완료
-	@PostMapping("/HotelWriteOk")
+	// hotel/admin/hotelWriteOk : 호텔 등록 완료
+	@PostMapping("/hotelWriteOk")
 	public String writeOk(String username, String hotelname, String region, String content, Model model) {
 		int result = 0;
 		result = adminHotelService.registerHotel(username, hotelname, region, content);
 		model.addAttribute("result", result);
-		return "/hotel/admin/HotelWriteOk";
+		return "/hotel/admin/hotelWriteOk";
 	}
 	
-	// hotel/admin/RoomWriteOk : 룸 등록 완료
-	@PostMapping("/RoomWriteOk")
+	// hotel/admin/roomWriteOk : 룸 등록 완료
+	@PostMapping("/roomWriteOk")
 	public String writeOk(String id, String roomname, Double price, Long bed, Model model) {
 		int result = 0;
 		
 		result = adminHotelService.registerRoom(id, roomname, price, bed);
 		model.addAttribute("result", result);
 		
-		return "/hotel/admin/RoomWriteOk";
+		return "/hotel/admin/roomWriteOk";
 	}
 	
 	
-	// hotel/admin/update
+	// hotel/admin/update : 호텔, 방 업데이트
 	@GetMapping("/update")
 	public String update(String id, Model model) {
 		
@@ -87,25 +98,42 @@ public class AdminHotelController {
 		
 		model.addAttribute("regionList", list);
 		model.addAttribute("hotel", h);
-	
+//		System.out.println("여기 뜨는게 중요함 "+h.getRooms()); 이러면 해당 호텔의 방의 정보도 넘어가는게 맞음
+
 		return "/hotel/admin/update";
 	}
-	
-	@PostMapping("/updateOk")
+
+	@PostMapping("/hotelUpdateOk") // 호텔 업데이트 완료
 	public String hotelUpdateOk(String id, String hotelname, String region, String content, Model model) {
 		int result = adminHotelService.updateHotel(id, hotelname, region, content);
 		model.addAttribute(result);
 		
-		return "hotel/admin/updateOk";
+		return "hotel/admin/hotelUpdateOk";
+	}
+	
+	@PostMapping("/roomUpdateOk") // 룸 업데이트 완료
+	public String roomUpdateOk(String id, String roomname, Double price, Long bed, Model model) {
+		int result = adminHotelService.updateRoom(id, roomname, price, bed);
+		model.addAttribute(result);
+		
+		return "hotel/admin/roomUpdateOk";
 	}
 
 	
-	@GetMapping("/delete")
-	public String hotelUpdateOk(String id, Model model) {
+	@GetMapping("/delete") // 호텔 삭제 완료
+	public String hotelDeleteOk(String id, Model model) {
 		int result = adminHotelService.deleteHotel(id);
 		model.addAttribute(result);
 		
 		return "hotel/admin/deleteOk";
 	}
-
+	
+	@GetMapping("/roomDelete") // 룸 삭제 완료
+	public String roomDeleteOk(String id, Model model) {
+		System.out.println("컨트롤러에서 id "+id);
+		int result = adminHotelService.deleteRoom(id);
+		model.addAttribute(result);
+		
+		return "hotel/admin/deleteOk";
+	}
 }

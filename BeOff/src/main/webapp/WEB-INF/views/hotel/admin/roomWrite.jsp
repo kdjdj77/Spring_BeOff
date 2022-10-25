@@ -28,7 +28,7 @@
     <body class="d-flex flex-column h-100">
     <%-- 인증 헤더 --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-   <form name="frm" action="RoomWriteOk" method="post" enctype="Multipart/form-data">         
+   <form name="frm" action="roomWriteOk" method="post" enctype="Multipart/form-data">         
             <!-- Room Header-->
             <header class="bg-write py-5">
                 <div class="container px-5">

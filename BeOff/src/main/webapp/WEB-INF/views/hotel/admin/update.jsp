@@ -29,7 +29,7 @@
     <%-- 인증 헤더 --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-    <form name="frm" action="updateOk" method="post" enctype="Multipart/form-data">
+    <form name="frm" action="hotelUpdateOk" method="post" enctype="Multipart/form-data">
         <main class="flex-shrink-0">
             <!-- Hotel Header-->
             <header class="bg-dark py-5">
@@ -81,7 +81,7 @@
             </header>
          </main>   
      </form>
-            <!-- Room Header-->
+      <!-- Room Header-->
             <header class="bg-write py-5">
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
@@ -93,30 +93,35 @@
                             </div>
                         </div>
                     </div>
-                    	<c:forEach var="r" items="${hotel.rooms }">
-            			<form name="frm" action="updateOk" method="post" enctype="Multipart/form-data">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5 text-center text-xl-start">
-                            	<h3 class="display-7 fw-bolder text-black mb-2 ">Room Name</h3>
-                            	<input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="roomname" value="${r.roomname}" name="roomname" required>
-                                <h3 class="display-7 fw-bolder text-black mb-2 ">Room Price</h3>
-                                <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="price" value="${r.price }" name="price" required>
-                                <h3 class="display-7 fw-bolder text-black mb-2 ">Room bed</h3>
-                                <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="bed" value="${r.bed }" name="bed" required>
-                    			<input type="hidden" name="id" value="${r.id }">
-                    			<div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <button class="btn btn-outline-dark">수정완료</button>
-                                    <a class="btn btn-outline-dark" href="delete">삭제</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
-                        </form>        
-                        </c:forEach>
-                    </div>
+                    <div class="row container px-4 px-lg-5 row-cols-lg-3 justify-content-center mx-auto">
+					       <c:forEach var="r" items="${hotel.rooms }">
+					       <form name="frm" action="roomUpdateOk" method="post" enctype="Multipart/form-data">
+					       <!-- Content Row-->
+					       <div class="row gx-4 gx-lg-5 ">
+					         <div class="col-md-9 mb-5 ">
+					           <div class="card h-100 ">
+					              <div class="card-body ">
+					            	<img class="card-img-top" src="${pageContext.request.contextPath }/upload/room/test.jpg" alt="..." /><br><br>
+					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="roomname" value="${r.roomname}" name="roomname" placeholder="Room Name을 입력하세요" required>
+					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="price" value="${r.price}" name="price" placeholder="가격을 입력하세요" required>
+					                <input type="number" class="form-control display-5 fw-bolder text-black mb-1"  id="bed" value="${r.bed}" name="bed" placeholder="침대갯수를 입력하세요" required>
+					                <input type="hidden" name="id" value="${r.id }">
+					              </div>
+					              <div class="card-footer">
+					                 <button class="btn btn-outline-dark">수정완료</button>
+					                 <a class="btn btn-outline-dark mt-auto" href="list">목록</a>
+					                 <a class="btn btn-outline-dark mt-auto" href="roomDelete?id=${r.id}">삭제</a>
+					              </div>
+					           </div>
+					         </div>
+					       </div>
+					       </form>
+					       </c:forEach>
+					    </div> 	
                 </div>
-            </header>
-   		
+            </div>
+        </header>
+   	
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

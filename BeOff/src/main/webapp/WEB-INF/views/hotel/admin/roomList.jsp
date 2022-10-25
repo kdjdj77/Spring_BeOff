@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Hotel</title>
+        <title>Room</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -31,7 +31,7 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Hotel List</h1>
+                    <h1 class="display-4 fw-bolder">Room List</h1>
                     <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 	</ul>
 	<br>
 		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
-			<c:forEach var="hotel" items="${hotelList }">
+			<c:forEach var="room" items="${roomList.rooms }">
 			<div class="col mb-5">
 				<div class="card h-100">
 				<!-- <input type="hidden" name="hotelId" value="${hotel.id }"> -->
@@ -54,7 +54,7 @@
 					<div class="card-body p-4">
 						<div class="text-center">
 							<!-- Product name-->
-							<h5 class="fw-bolder">${hotel.hotelname }</h5>
+							<h5 class="fw-bolder">${room.roomname }</h5>
 							<!-- Product reviews-->
 							<div
 								class="d-flex justify-content-center small text-warning mb-2">
@@ -63,17 +63,14 @@
 								<div class="bi-star-fill"></div>
 							</div>
 							<!-- Product Content-->
-							<div>${hotel.content }</div>
-							<div>${hotel.priceList }</div>
-							<br>
-							<div>${hotel.region.region } </div>
+							<div>${room.price }￦ (1박)</div>
+							<div>침대 : ${room.bed }개</div>
 						</div>
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 						<div class="text-center">
 							<a class="btn btn-outline-dark mt-auto" href="roomWrite?id=${hotel.id }">방등록</a>
-							<a class="btn btn-outline-dark mt-auto" href="roomList?id=${hotel.id }">방목록</a>
 							<a class="btn btn-outline-dark mt-auto" href="update?id=${hotel.id }">수정</a>
 							<a class="btn btn-outline-dark mt-auto" href="delete?id=${hotel.id }">삭제</a>
 						</div>
