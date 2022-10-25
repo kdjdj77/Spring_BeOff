@@ -113,6 +113,7 @@
 			<td>${i.carname }</td>
 			<td>${i.price }</td>
 			<td>${i.cartype }</td>
+			<td>${i.cartype }</td>
 		</tr>
 	</c:forEach>
 	</table>
