@@ -2,6 +2,7 @@ package com.lec.spring.service;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Transient;
@@ -59,13 +60,13 @@ public class AdminHotelService {
 		
 		Long hotelId = Long.parseLong(id);
 		
-		Hotel h = hotelRepository.findById(hotelId).get();
+		Hotel h = adminHotelRepository.findById(hotelId).get();
 		r.setHotel(h);
 		r.setRoomname(roomname);
 		r.setPrice(price);
 		r.setBed(bed);
 		roomRepository.saveAndFlush(r);
-
+		
 		return 1;
 	}
 	
@@ -118,18 +119,42 @@ public class AdminHotelService {
 		return RoomList;
 	}
 
+	// 호텔의 id 값을 받아옴
 	public Hotel getHotelById(String id) {
 		Long lId = Long.parseLong(id);
 		Hotel h = hotelRepository.findById(lId).get();
 		return h;
 	}
 
-	// 이거하다 말앗음
-	@Transient
-	public int updateHotel(Hotel hotel, Room room) {
+	@Transactional
+	public int updateHotel(String id, String hotelname, String region, String content) {
+
+		int result = 0;
 		
+		Long lId = Long.parseLong(id);
 		
-		return 1;
+		Hotel h = hotelRepository.findById(lId).get();
+		Region r = regionRepository.findByRegion(region);
+		h.setHotelname(hotelname);
+		h.setRegion(r);
+		h.setContent(content);
+		hotelRepository.save(h);
+		
+		result = 1;
+		
+		return result;
+	}
+
+	public int deleteHotel(String id) {
+		int result = 0;
+		
+		Long lId = Long.parseLong(id);
+		
+		Hotel h = hotelRepository.findById(lId).get();
+		hotelRepository.delete(h);
+		result = 1;
+		
+		return result;
 	}
 		
 }

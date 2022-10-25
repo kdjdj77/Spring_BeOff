@@ -73,8 +73,8 @@
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 						<div class="text-center">
 							<a class="btn btn-outline-dark mt-auto" href="roomWrite?id=${hotel.id }">방등록</a>
-							<a class="btn btn-outline-dark mt-auto" href="update">수정</a>
-							<a class="btn btn-outline-dark mt-auto" href="delete">삭제</a>
+							<a class="btn btn-outline-dark mt-auto" href="update?id=${hotel.id }">수정</a>
+							<a class="btn btn-outline-dark mt-auto" href="delete?id=${hotel.id }">삭제</a>
 						</div>
 					</div>
 				</div>

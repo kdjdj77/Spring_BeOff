@@ -78,26 +78,34 @@ public class AdminHotelController {
 	}
 	
 	
-	// 이거하다말앗음 update.jsp, updateOk.jsp 포함.
 	// hotel/admin/update
 	@GetMapping("/update")
-	public String update(Hotel hotel, Room room, Model model) {
+	public String update(String id, Model model) {
 		
-		int result = 0;
-		
+		Hotel h = adminHotelService.getHotelById(id);
 		List<String> list = adminHotelService.getRegionList();
+		
 		model.addAttribute("regionList", list);
-		
-		result = adminHotelService.updateHotel(hotel, room);
-		
-		model.addAttribute("hotel", hotel);
-		model.addAttribute("room", room);
-		
+		model.addAttribute("hotel", h);
+	
 		return "/hotel/admin/update";
 	}
 	
+	@PostMapping("/updateOk")
+	public String hotelUpdateOk(String id, String hotelname, String region, String content, Model model) {
+		int result = adminHotelService.updateHotel(id, hotelname, region, content);
+		model.addAttribute(result);
+		
+		return "hotel/admin/updateOk";
+	}
 
 	
-	// hotel/admin/delete
+	@GetMapping("/delete")
+	public String hotelUpdateOk(String id, Model model) {
+		int result = adminHotelService.deleteHotel(id);
+		model.addAttribute(result);
+		
+		return "hotel/admin/deleteOk";
+	}
 
 }
