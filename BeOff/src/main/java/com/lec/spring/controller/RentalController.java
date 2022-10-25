@@ -32,13 +32,13 @@ public class RentalController {
 	
 	@GetMapping("/list") // /rental/list
 	public String list(Model model) {
-		model.addAttribute("carNameList", rentalService.getCarNameList());
+		model.addAttribute("regionList", rentalService.getRegionList());
 		return "/rental/list";
 	}
 	
 	@GetMapping("/cars/list") // /rental/cars/list
-	public String carsList() {
-		
+	public String carsList(Model model) {
+		model.addAttribute("carNameList", rentalService.getCarNameList());
 		return "rental/cars/list";
 		
 	}
@@ -46,7 +46,7 @@ public class RentalController {
 	@GetMapping("/cars/detail") // /rental/cars/detail
 	public String carsDetail() {
 		
-		return "rental/cars/datail";
+		return "rental/cars/detail";
 	}
 	
 	@GetMapping("/reserv") // /rental/reserv
