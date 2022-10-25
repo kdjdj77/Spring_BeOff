@@ -52,12 +52,23 @@ public class RentalService {
 	 * }
 	 */
 	
+	// 업체 리스트 
 	public List<Rental> getRentalList() {
-	      List<Rental> rentalList = null;
+	    List<Rental> rentalList = null;
 	      
-	      rentalList = rentalRepository.findAll(Sort.by(Order.asc("id")));
-	      return rentalList;
-	   }
+	    rentalList = rentalRepository.findAll(Sort.by(Order.asc("id")));
+	    return rentalList;
+	}
+
+	public Rental getRentalById(String rentalId) {
+		Long id = Long.parseLong(rentalId);
+		Rental r = rentalRepository.findById(id).get();
+		
+		return r;
+	}
+	
+	// 특정 업체 디테일
+	
 	
 
 }

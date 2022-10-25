@@ -72,6 +72,8 @@
 		</div><br>
 		
 		<c:forEach var="dto" items="${rentalList }" varStatus="status">
+		<form action="cars/list" method="POST">
+		<input type="hidden" name="rentalId" value="${dto.id }">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-1"></div>
@@ -83,13 +85,14 @@
 							<h4>${dto.region.region }</h4>
 							<h5 class="card-title">${dto.rentalname }[${dto.avgstar }]</h5>
 							<p class="card-text">${dto.content }</p>
-							<button type="button" class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/rental/cars/detail?id=${dto.id}';">자세히 알아보기</button>
+							<button class="btn btn-outline-secondary">자세히 알아보기</button>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-1"></div>
 			</div>
 		</div>
+		</form>
 		</c:forEach>
 	</main>
 

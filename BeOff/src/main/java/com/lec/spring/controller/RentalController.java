@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lec.spring.service.RentalService;
@@ -31,16 +32,21 @@ public class RentalController {
 		return "/rental/list";
 	}
 	
-	@GetMapping("/cars/list") // /rental/cars/list
-	public String carsList(Model model) {
+	@PostMapping("/cars/list") // /rental/cars/list
+	public String carsList(String rentalId, Model model) {
+		model.addAttribute("rental", rentalService.getRentalById(rentalId));
+		model.addAttribute("regionList", rentalService.getRegionList());
+		model.addAttribute("rentalList", rentalService.getRentalList());
 //		model.addAttribute("carNameList", rentalService.getCarNameList());
 		return "rental/cars/list";
 		
 	}
 	
 	@GetMapping("/cars/detail") // /rental/cars/detail
-	public String carsDetail() {
-		
+	public String carsDetail(String rentalId, Model model) {
+		model.addAttribute("rental", rentalService.getRentalById(rentalId));
+		model.addAttribute("regionList", rentalService.getRegionList());
+		model.addAttribute("rentalList", rentalService.getRentalList());
 		return "rental/cars/detail";
 	}
 	
