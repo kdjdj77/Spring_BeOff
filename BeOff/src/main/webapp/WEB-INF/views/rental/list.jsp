@@ -45,11 +45,10 @@
 								</tr>
 
 								<tr>
-									<td><select class="form-select" id="validationCustom04"
-										required>
-											<option selected disabled value="">한국</option>
-											<option>미국</option>
-											<option>일본</option>
+									<td><select name="rentalregion" id="region">
+											<c:forEach var="region" items="${regionList}">    
+                        						<option value="${region }">${region }</option>
+											</c:forEach>
 									</select></td>
 									<td><input type="text" class="form-control"
 										id="formGroupExampleInput"
@@ -66,24 +65,6 @@
 
 				</div>
 				<div class="col-lg-2"></div>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2"></div>
-				<div class="col-lg-2">
-					<select class="form-select" id="validationCustom04" required>
-						<option selected disabled value="">소형</option>
-						<option>중형</option>
-						<option>대형</option>
-						<option>suv</option>
-					</select>
-				</div>
-				<div class="col-lg-2">
-					<button type="button" class="btn btn-outline-secondary">검색</button>
-				</div>
-				<div class="col-lg-6"></div>
 			</div>
 		</div><br>
 
