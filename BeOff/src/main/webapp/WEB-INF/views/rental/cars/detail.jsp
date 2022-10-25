@@ -45,11 +45,10 @@
 								</tr>
 
 								<tr>
-									<td><select class="form-select" id="validationCustom04"
-										required>
-											<option selected disabled value="">한국</option>
-											<option>미국</option>
-											<option>일본</option>
+									<td><select name="rentalregion" id="region">
+											<c:forEach var="region" items="${regionList}">    
+                        						<option value="${region }">${region }</option>
+											</c:forEach>
 									</select></td>
 									<td><input type="text" class="form-control"
 										id="formGroupExampleInput"
@@ -67,6 +66,23 @@
 				</div>
 				<div class="col-lg-2"></div>
 			</div>
+		</div>
+		<br>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<h3>${rental.rentalname }</h3>
+					<select name="rentalregion" id="region">   
+                        <option value="small">소형</option>
+                        <option value="middle">중형</option>
+                        <option value="large">대형</option>
+                        <option value="suv">SUV</option>
+					</select>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
 		</div><br>
 
 		<div class="container">
@@ -76,7 +92,7 @@
 					<div class="card mb-3">
 						<img src="/upload/g80.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
+							<h5 class="card-title">${dto.rentalname }</h5>
 							<p class="card-text">This is a wider card with supporting
 								text below as a natural lead-in to additional content. This
 								content is a little bit longer.</p>

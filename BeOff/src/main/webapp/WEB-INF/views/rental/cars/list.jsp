@@ -68,21 +68,21 @@
 			</div>
 		</div>
 
+		<br>
+
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-2"></div>
-				<div class="col-lg-2">
-					<select class="form-select" id="validationCustom04" required>
-						<option selected disabled value="">소형</option>
-						<option>중형</option>
-						<option>대형</option>
-						<option>suv</option>
+				<div class="col-lg-8">
+					<h3>${rental.rentalname }</h3>
+					<select name="rentalregion" id="region">   
+                        <option value="small">소형</option>
+                        <option value="middle">중형</option>
+                        <option value="large">대형</option>
+                        <option value="suv">SUV</option>
 					</select>
 				</div>
-				<div class="col-lg-2">
-					<button type="button" class="btn btn-outline-secondary">검색</button>
-				</div>
-				<div class="col-lg-6"></div>
+				<div class="col-lg-2"></div>
 			</div>
 		</div><br>
 
@@ -91,7 +91,7 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<div class="card mb-3">
-						<img src="../upload/g80.jpg" class="card-img-top" alt="...">
+						<img src="/upload/g80.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">Card title</h5>
 							<p class="card-text">This is a wider card with supporting
@@ -106,6 +106,16 @@
 		</div>
 
 	</main>
+	
+	<table>
+	<c:forEach var="i" items="${rental.cars }">
+		<tr>
+			<td>${i.carname }</td>
+			<td>${i.price }</td>
+			<td>${i.cartype }</td>
+		</tr>
+	</c:forEach>
+	</table>
 
 	<footer> </footer>
 
