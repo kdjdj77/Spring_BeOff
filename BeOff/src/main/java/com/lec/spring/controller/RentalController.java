@@ -22,23 +22,18 @@ public class RentalController {
        System.out.println(getClass().getName() + "() 생성");
     }
    
-   	
-	@GetMapping("/basic") // /rental/basic
-	public String basic(Model model) {
-		model.addAttribute("regionList", rentalService.getRegionList());
-		return "/rental/basic";
-		
-	}
 	
 	@GetMapping("/list") // /rental/list
 	public String list(Model model) {
 		model.addAttribute("regionList", rentalService.getRegionList());
+		model.addAttribute("rentalList", rentalService.getRentalList());
+		
 		return "/rental/list";
 	}
 	
 	@GetMapping("/cars/list") // /rental/cars/list
 	public String carsList(Model model) {
-		model.addAttribute("carNameList", rentalService.getCarNameList());
+//		model.addAttribute("carNameList", rentalService.getCarNameList());
 		return "rental/cars/list";
 		
 	}
