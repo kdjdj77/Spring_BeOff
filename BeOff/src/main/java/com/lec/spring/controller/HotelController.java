@@ -58,17 +58,28 @@ public class HotelController {
 	
 	// /hotel/detail
 	// 필요한 정보
-	// 클릭한 숙소 ID name content
+	// 클릭한 숙소 ID name content -- 
 	// 클릭한 숙소의 방 정보  room (image , name, price , bed)
-	// 클릭한 숙소의 후기 정보  hcomment(user, reg, star,  content)
+	// 클릭한 숙소의 후기 정보  hcomment(user, reg, star,  content) --
 	@GetMapping("/detail")
 	public String detail(String id, Model model) {
 		model.addAttribute("hotel",hotelService.getHotelById(id));
-//		model.addAttribute("room",hotelService.getRoomFile(id));
+		model.addAttribute("regionList", hotelService.getRegionList());
 		
 		return "/hotel/detail"; 
 	}
 	
+	@PostMapping("/detail")
+	public String searchList1(String hotelregion,String inn,String out, Model model) {
+		String in1 = inn.replaceAll("-","");
+		String out1 = out.replaceAll("-","");
+		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
+		model.addAttribute("hotelList",list);
+		model.addAttribute("hotel",hotelService.getHotelList());
+		model.addAttribute("regionList", hotelService.getRegionList());
+			
+		return "/hotel/list";
+	}
 	
 	
 	// /hotel/reserv
