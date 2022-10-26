@@ -82,6 +82,15 @@ public class RentalService {
 		
 	}
 
+	public List<Rental> getRentalRList(String rRegion, String sDate, String eDate) {
+		Region region = regionRepository.findByRegion(rRegion);
+		List<Rental> list = rentalRepository.findByRegion(region);
+		
+		return list;
+	}
+
+
+
 	
 	
 	// 특정 업체 디테일

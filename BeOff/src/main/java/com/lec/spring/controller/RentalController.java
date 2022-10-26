@@ -32,6 +32,11 @@ public class RentalController {
 		return "/rental/list";
 	}
 	
+//	@PostMapping("/list")
+//	public String rentalrList(Model model) {
+////		model.addAttribute("rList", rentalService.getRentalRList());
+//	}
+	
 	@PostMapping("/cars/list") // /rental/cars/list
 	public String carsList(String rentalId, Model model) {
 		model.addAttribute("rental", rentalService.getRentalById(rentalId));
@@ -58,9 +63,5 @@ public class RentalController {
 		
 		return "rental/reserv";
 	}
-	
-	
-	
-	
 
 }
