@@ -31,6 +31,7 @@
 		input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}
 		td {padding-top:0.5rem;padding-bottom:0.5rem;}
 		select {height:32px; width:95%;}
+		input[type=checkbox] {width:20px; height:20px;}
 	</style>
 </head>
 
@@ -43,21 +44,35 @@
 			항공기 타임테이블
 			<a class="btn btn-outline-dark" href="list">목록</a>
 		</h2>
-		
-		<span>${departregion.region } → ${arriveregion.region }</span><br>
-		<span>${airname.name }</span>
-		
-		<c:forEach var="t" items="${timeList}">
-			<label for="${t.id}">${t.time}</label>
-			<c:choose>
-				<c:when test="${existList.contains(t)}">
-					<input type="checkbox" name="etimelist" id="${t.id}" value="${t.time}" checked>
-				</c:when>
-				<c:otherwise>
-					<input type="checkbox" name="etimelist" id="${t.id}" value="${t.time}">
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
+		<hr>
+		<span class="fs-4">항공사 : ${airname.name }</span><br>
+		<span class="fs-4">경로&nbsp;&nbsp;&nbsp; : ${departregion.region } → ${arriveregion.region }</span>
+		<p></p>
+		<hr>
+		<form action="airplaneupdateOk" method="post">
+			<input type="hidden" name="departregion" value="${departregion.id}">
+			<input type="hidden" name="arriveregion" value="${arriveregion.id}">
+			<input type="hidden" name="airname" value="${airname.id}">
+			<span class="fs-4">
+				타임테이블 
+				<button class="btn btn-outline-dark">등록</button>
+			</span><br><br>
+			<div class="d-flex">
+				<c:forEach var="t" items="${timeList}">
+					<div class="border mx-4 p-2">
+						<label for="${t.id}" class="fs-5">${t.time}</label>
+						<c:choose>
+							<c:when test="${existList.contains(t)}">
+								<input class="mt-1" type="checkbox" name="etimelist" id="${t.id}" value="${t.time}" checked>
+							</c:when>
+							<c:otherwise>
+								<input class="mt-1" type="checkbox" name="etimelist" id="${t.id}" value="${t.time}">
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:forEach>
+			</div>
+		</form>
 	</div>
 </body>	
 </html>

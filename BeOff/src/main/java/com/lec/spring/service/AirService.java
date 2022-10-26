@@ -246,5 +246,31 @@ public class AirService {
 		}
 		return times;
 	}
+	@Transactional
+	public int updateAirplaneTable(Region s, Region e, Airname n, List<String> etimeList) {
+		List<Airplane> airplanes = airplaneRepository.findByDepartAndArriveAndName(s, e, n);
+		List<String> airplaneTimes = new ArrayList<String>();
+		List<Airplane> addAir = new ArrayList<Airplane>();
+		List<Airplane> delAir = new ArrayList<Airplane>();
+		for (Airplane a : airplanes) {
+			if (!etimeList.contains(a.getTime().getTime())) delAir.add(a);
+			else airplaneTimes.add(a.getTime().getTime());
+		}
+		for (String time : etimeList) {
+			if(!airplaneTimes.contains(time)) {
+				Airplane newAir = new Airplane();
+				newAir.setDepart(s);
+				newAir.setArrive(e);
+				newAir.setName(n);
+				newAir.setTime(airtimeRepository.findByTime(time));
+				addAir.add(newAir);
+			}
+		}
+		for (Airplane a : delAir) airplaneRepository.delete(a);
+		for (Airplane a : addAir) airplaneRepository.saveAndFlush(a);
+		
+		
+		return 1;
+	}
 
 } // end Service

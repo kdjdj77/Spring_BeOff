@@ -219,7 +219,23 @@ public class AirController {
 		model.addAttribute("airname", n);
 		return "air/admin/aircrudtime";
 	}
-	
+	@PostMapping("/admin/airplaneupdateOk")
+	public String airplaneUpd(
+			String departregion, String arriveregion, String airname, 
+			@RequestParam List<String> etimelist, Model model) {
+		List<String> list = etimelist;
+		int result = 0;
+		
+		Region s = airService.getRegionById(departregion);
+		Region e = airService.getRegionById(arriveregion);
+		Airname n = airService.getNameById(airname);
+		
+		result = airService.updateAirplaneTable(s, e, n, list);
+		
+		model.addAttribute("result", result);
+
+		return "air/admin/updateOk";
+	}
 	
 	
 	
