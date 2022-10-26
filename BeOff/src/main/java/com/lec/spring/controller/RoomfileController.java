@@ -20,46 +20,45 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lec.spring.domain.qna.Roomfile;
-import com.lec.spring.repository.qna.QfileRepository;
+import com.lec.spring.domain.hotel.Roomfile;
+import com.lec.spring.repository.hotel.RoomfileRepository;
 
 // 파일 다운로드를 위한 컨트롤러
 // 데이터를 response 하기 위함
 
 @RestController
-public class QnafileController {
-
+public class RoomfileController {
+	
 	@Value("${app.upload.path}")  // org.springframework.beans.factory.annotation.Value
 	private String uploadDir;
 	
 	@Autowired
 	ServletContext context;   // ServletContext 도 주입 받을수 있다.
 	
-	private QfileRepository fileRepository;
+	private RoomfileRepository roomFileRepository;
 
 	@Autowired
-	public void setFileRepository(QfileRepository fileRepository) {
-		this.fileRepository = fileRepository;
+	public void setFileRepository(RoomfileRepository roomFileRepository) {
+		this.roomFileRepository = roomFileRepository;
 	}
 
 	
-	public QnafileController() {
+	public RoomfileController() {
 		System.out.println(getClass().getName() + "() 생성");
-	}
-	
-	
-	// 파일 다운로드
-	// id: 파일의 id
-	@RequestMapping("/board/download")
+	}	
+
+	// 파일 다운로드를 위한 핸들러
+	// id : 파일의 id
+	@RequestMapping("/hotel/admin/download")
 	public ResponseEntity<Object> download(Long id){
-		if(id == null) return new ResponseEntity<Object>(null, HttpStatus.BAD_REQUEST);  // 400
+		if(id == null) return new ResponseEntity<Object>(null, HttpStatus.BAD_REQUEST); // httpStatus.BAD_REQUEST == 400
 		
-		Roomfile file = fileRepository.findById(id).orElse(null);
-		if(file == null) return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);  // 404
+		Roomfile file = roomFileRepository.findById(id).orElse(null);
+		if(file == null) return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND); // 404
 		
-		String sourceName = file.getSource();   // 원본 이름
-		String fileName = file.getFile();      // 저장된 파일명
-		String path = context.getRealPath(uploadDir) + File.separator + fileName;  // 파일의 물리적인 경로
+		String sourceName = file.getSource(); // 원본 파일이름
+		String fileName = file.getFile(); // 저장된 파일명
+		String path = context.getRealPath(uploadDir) + File.separator + fileName; // 파일의 물리적인 경로
 		
 		try {
 			// 파일 유형 (MimeType) 추출
@@ -69,31 +68,24 @@ public class QnafileController {
 				mimeType = "application/octet-stream";
 			}
 			
-			Path filePath = Paths.get(path); // java.nio.file.Path, java.nio.file.Paths
-			Resource resource   // org.springframework.core.io.Resource
+			Path filePath = Paths.get(path);
+			Resource resource // import org.springframework.core.io.Resource;
 				= new InputStreamResource(Files.newInputStream(filePath));
 			
 			// response header 세팅
-			HttpHeaders headers = new HttpHeaders(); // org.springframework.http.HttpHeaders
-			headers.setContentDisposition(ContentDisposition.builder("attachement").filename(URLEncoder.encode(sourceName, "utf-8")).build());  
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentDisposition(ContentDisposition.builder("attachement").filename(URLEncoder.encode(sourceName, "utf-8")).build());
 			headers.setCacheControl("no-cache");
 			headers.setContentType(MediaType.parseMediaType(mimeType));
 			
 			// ResponseEntity 에 담아서 리턴 (body, header, status)
-			return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);   // 200
+			return new ResponseEntity<Object>(resource, headers, HttpStatus.OK); // 200;
 			
-		} catch(Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);  // 409
+		}catch(Exception e) {
+			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT); // 409
 		}
-		
 	}
-	
 }
-
-
-
-
 
 
 

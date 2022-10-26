@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 @ToString(callSuper = true)
 @Entity(name = "db_qfile")
-public class FileDTO {
+public class Roomfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

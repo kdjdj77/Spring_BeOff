@@ -23,6 +23,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
    
     <body class="d-flex flex-column h-100">
@@ -101,7 +103,47 @@
 					         <div class="col-md-9 mb-5 ">
 					           <div class="card h-100 ">
 					              <div class="card-body ">
-					            	<img class="card-img-top" src="${pageContext.request.contextPath }/upload/room/test.jpg" alt="..." /><br><br>
+					    <%--
+					            	<label for="room${r.id }">
+					            		<img class="card-img-top" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="..." /><br><br>
+					            	</label>
+					            	<div style="display: none">
+					            		<input type="file" name="upfile" id="room${r.id }"/>	
+					            	</div>
+					     --%>       
+					              
+					             
+							                <div class="image-container">
+										         <img style="width: 200px;" id="preview-image" src="${pageContext.request.contextPath }/upload/${r.files[0].file}"/>
+										    	 <input style="display: block;" type="file" id="room${r.id }" onchange="load('room${r.id }')">
+										    </div>
+											<script>
+												function readImage(input) {
+												    // 인풋 태그에 파일이 있는 경우
+												    if(input.files && input.files[0]) {
+												        // 이미지 파일인지 검사 (생략)
+												        // FileReader 인스턴스 생성
+												        const reader = new FileReader()
+												        // 이미지가 로드가 된 경우
+												        reader.onload = e => {
+												            const previewImage = document.getElementById("preview-image")
+												            previewImage.src = e.target.result
+												        }
+												        // reader가 이미지 읽도록 하기
+												        reader.readAsDataURL(input.files[0])
+												    }
+												}
+												
+												function load(id){
+													// input file에 change 이벤트 부여
+													const inputImage = document.getElementById(id)
+													inputImage.addEventListener("change", e => {
+													    readImage(e.target)
+													})
+												})
+									        </script> 
+						       
+									 	
 					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="roomname" value="${r.roomname}" name="roomname" placeholder="Room Name을 입력하세요" required>
 					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="price" value="${r.price}" name="price" placeholder="가격을 입력하세요" required>
 					                <input type="number" class="form-control display-5 fw-bolder text-black mb-1"  id="bed" value="${r.bed}" name="bed" placeholder="침대갯수를 입력하세요" required>
@@ -117,11 +159,11 @@
 					       </div>
 					       </form>
 					       </c:forEach>
-					    </div> 	
+					    </div>     
                 </div>
             </div>
         </header>
-   	
+   		
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

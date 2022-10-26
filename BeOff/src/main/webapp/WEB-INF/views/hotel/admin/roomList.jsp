@@ -27,60 +27,55 @@
     <body>
     	<%-- 인증 헤더 --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Room List</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+			<!-- Room Header-->
+            <header class="bg-write py-5">
+                <div class="container px-5">
+                    <div class="row gx-5 align-items-center justify-content-center">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6">
+                            <div class="text-center">
+                                <h3 class="display-6 fw-bolder text-black mb-2 ">ROOM - List</h3>
+                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row container px-4 px-lg-5 row-cols-lg-3 justify-content-center mx-auto">
+					       <c:forEach var="r" items="${roomList.rooms }">
+					       <form name="frm" action="roomUpdateOk" method="post" enctype="Multipart/form-data">
+					       <!-- Content Row-->
+					       <div class="row gx-4 gx-lg-5 ">
+					         <div class="col-md-9 mb-5 ">
+					           <div class="card h-100 ">
+					              <div class="card-body ">
+					            	<img class="card-img-top" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="..." /><br><br>
+					            	<!-- Product reviews-->
+									<div
+										class="d-flex justify-content-center small text-warning mb-2">
+										<div class="bi-star-fill"></div>
+										<div class="bi-star-fill"></div>
+										<div class="bi-star-fill"></div>
+									</div>
+					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="roomname" value="${r.roomname}" name="roomname" placeholder="Room Name을 입력하세요" readOnly>
+					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="price" value="${r.price}" name="price" placeholder="가격을 입력하세요" readOnly>
+					                <input type="number" class="form-control display-5 fw-bolder text-black mb-1"  id="bed" value="${r.bed}" name="bed" placeholder="침대갯수를 입력하세요" readOnly>
+									<input type="hidden" name="id" value="${r.id }">
+					              </div>
+					            <!-- Product actions-->
+								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+									<div class="text-center">
+										<a class="btn btn-outline-dark mt-auto" href="update?id=${r.id }">수정안됨</a>
+										<a class="btn btn-outline-dark mt-auto" href="roomDelete?id=${r.id }">삭제안됨</a>
+									</div>
+								</div>
+					           </div>
+					         </div>
+					       </div>
+					       </form>
+					       </c:forEach>
+					    </div>     
                 </div>
             </div>
         </header>
-<!-- Section-->
-<section class="py-5">
-	<div class="container px-4 px-lg-5 mt-5">
-	<ul id="nav3" class="nav justify-content-end">
-		<li class="nav-item"><a class="btn btn-outline-dark" href="hotelWrite">호텔 등록</a></li>
-	</ul>
-	<br>
-		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
-			<c:forEach var="room" items="${roomList.rooms }">
-			<div class="col mb-5">
-				<div class="card h-100">
-				<!-- <input type="hidden" name="hotelId" value="${hotel.id }"> -->
-					<!-- Product image-->
-					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/room/room3.jpg" alt="..." />
-					<!-- Product details-->
-					<div class="card-body p-4">
-						<div class="text-center">
-							<!-- Product name-->
-							<h5 class="fw-bolder">${room.roomname }</h5>
-							<!-- Product reviews-->
-							<div
-								class="d-flex justify-content-center small text-warning mb-2">
-								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
-							</div>
-							<!-- Product Content-->
-							<div>${room.price }￦ (1박)</div>
-							<div>침대 : ${room.bed }개</div>
-						</div>
-					</div>
-					<!-- Product actions-->
-					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-dark mt-auto" href="roomWrite?id=${hotel.id }">방등록</a>
-							<a class="btn btn-outline-dark mt-auto" href="update?id=${hotel.id }">수정</a>
-							<a class="btn btn-outline-dark mt-auto" href="delete?id=${hotel.id }">삭제</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			</c:forEach>
-		</div>			
-	</div>
-</section>
 	
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">

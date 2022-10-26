@@ -1,13 +1,17 @@
 package com.lec.spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
@@ -49,7 +53,7 @@ public class AdminHotelController {
 		return "/hotel/admin/roomList";
 	}
 	
-	// hotel/admin/write : 호텔 등록 
+	// hotel/admin/hotelWrite : 호텔 등록 
 	@GetMapping("/hotelWrite")
 	public String writeHotel(Model model) {
 		List<String> list = adminHotelService.getRegionList();
@@ -57,7 +61,7 @@ public class AdminHotelController {
 		return "/hotel/admin/hotelWrite";
 	}
 	
-	// hotel/admin/write : 룸 등록 : 선택한 호텔의 룸
+	// hotel/admin/roomWrite : 룸 등록 : 선택한 호텔의 룸
 	@GetMapping("/roomWrite")
 	public String roomWrite(String id, Model model) {
 		
@@ -78,12 +82,24 @@ public class AdminHotelController {
 	}
 	
 	// hotel/admin/roomWriteOk : 룸 등록 완료
+//	@PostMapping("/roomWriteOk")
+//	public String writeOk(String id, String roomname, Double price, Long bed, Model model) {
+//		int result = 0;
+//		
+//		result = adminHotelService.registerRoom(id, roomname, price, bed);
+//		model.addAttribute("result", result);
+//		
+//		return "/hotel/admin/roomWriteOk";
+//	}
+	
+	// 룸 등록 파일첨부로 테스트
 	@PostMapping("/roomWriteOk")
-	public String writeOk(String id, String roomname, Double price, Long bed, Model model) {
-		int result = 0;
+	public String writeOk(
+			@RequestParam Map<String, MultipartFile> files // 첨부파일들
+			,String id, String roomname, Double price, Long bed
+			, Model model) {
 		
-		result = adminHotelService.registerRoom(id, roomname, price, bed);
-		model.addAttribute("result", result);
+		model.addAttribute("result", adminHotelService.registerRoom(id, roomname, price, bed, files));
 		
 		return "/hotel/admin/roomWriteOk";
 	}
@@ -111,6 +127,19 @@ public class AdminHotelController {
 		return "hotel/admin/hotelUpdateOk";
 	}
 	
+//	@PostMapping("/roomUpdateOk") // 룸 업데이트 완료
+//	public String roomUpdateOk(
+//			String id, String roomname, Double price, Long bed, Model model,
+//			@RequestParam Map<String, MultipartFile> files
+//			) {
+//		int result = adminHotelService.updateRoom(id, roomname, price, bed, files);
+//		model.addAttribute(result);
+//		
+//		return "hotel/admin/roomUpdateOk";
+//	}
+	
+	
+	// 파일 업데이트 테스트중
 	@PostMapping("/roomUpdateOk") // 룸 업데이트 완료
 	public String roomUpdateOk(String id, String roomname, Double price, Long bed, Model model) {
 		int result = adminHotelService.updateRoom(id, roomname, price, bed);
@@ -119,6 +148,7 @@ public class AdminHotelController {
 		return "hotel/admin/roomUpdateOk";
 	}
 
+	
 	
 	@GetMapping("/delete") // 호텔 삭제 완료
 	public String hotelDeleteOk(String id, Model model) {
