@@ -29,6 +29,7 @@
 	<style>
 		input[type="number"]::-webkit-outer-spin-button,
 		input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}
+		td {padding-top:0.5rem;padding-bottom:0.5rem;}
 	</style>
 </head>
 
@@ -37,7 +38,10 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<div class="container mt-3">
-		<h2>국가/타임테이블/항공사 관리</h2>
+		<h2>
+			국가/타임테이블/항공사 관리
+			<a class="btn btn-outline-dark" href="aircrud">항공기 관리</a>
+		</h2>
 		<hr>
 		<table>
 			<thead>
@@ -51,7 +55,6 @@
 				<tr>
 					<td valign="top" >
 						<table>
-							<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 							<form action="addregion" method="post">
 								<tr>
 									<td><input type="text" name="addregion" placeholder="국가" required></td>
@@ -87,7 +90,6 @@
 					</td>
 					<td valign="top">
 						<table>
-							<tr><td>&nbsp;</td></tr>
 							<form action="addtime" method="post">
 								<tr>
 									<td><input type="text" name="addtime" placeholder="시간" required></td>
@@ -123,7 +125,6 @@
 					</td>
 					<td valign="top">
 						<table>
-							<tr><td>&nbsp;</td></tr>
 							<form action="addname" method="post">
 								<tr>
 									<td><input type="text" name="addname" placeholder="항공사" required></td>

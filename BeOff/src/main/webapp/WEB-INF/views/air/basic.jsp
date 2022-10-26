@@ -26,6 +26,11 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	
 	<title>비행기 예매</title>
+	<style>
+		select {height:32px; width:95%;}
+		input[type=button] {height:32px;width:70%;}
+		img {cursor:pointer;}
+	</style>
 </head>
 
 <body style="margin-bottom: 200px">
@@ -44,12 +49,12 @@
 			<table width="100%">
 				<thead>
 					<tr>
-	                    <th>출발지</th>
-	                    <th>목적지</th>
-	                    <th>가는날</th>
-	                    <th>오는날</th>
-	                    <th>편도/왕복</th>
-	                    <th>인원</th>
+	                    <th width="17%">출발지</th>
+	                    <th width="17%">목적지</th>
+	                    <th width="17%">가는날</th>
+	                    <th width="17%">오는날</th>
+	                    <th width="17%">편도/왕복</th>
+	                    <th width="17%">인원</th>
 	                </tr>
 				</thead>
 				<tbody>
@@ -86,15 +91,18 @@
 						</td>
 						
 						<td>
-							<button type="button" class="minus">-</button>
+							<button type="button" class="minus btn btn-sm btn-outline-dark">-</button>
 							<span id="num">1</span>
 							<input type="hidden" name="num_person" id="in6" value="1"></input>
-							<button type="button" class="plus">+</button>
+							<button type="button" class="plus btn btn-sm btn-outline-dark">+</button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<button type="button" onclick="mysubmit()">비행기 예매 시작</button>
+			<p></p>
+			<div class="px-5 d-flex justify-content-end">
+				<button type="button" class="btn btn-outline-dark" onclick="mysubmit()">비행기 예매 시작</button>
+			</div>
 		</form>
 	</div>
 </body>

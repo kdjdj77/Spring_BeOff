@@ -216,8 +216,35 @@ public class AirService {
 		Airname t = airnameRepository.findById(id).get();
 		t.setName(updatename);
 		t.setPrice(updateprice);
-		airnameRepository.save(t);		
+		airnameRepository.save(t);
 		return 1;
+	}
+
+	public Region getRegionById(String region) {
+		Long id = Long.parseLong(region);
+		Region r = regionRepository.findById(id).get();
+		return r;
+	}
+
+	public Airname getNameById(String aircomp) {
+		Long id = Long.parseLong(aircomp);
+		Airname n = airnameRepository.findById(id).get();
+		return n;
+	}
+
+	public List<Airtime> findAirtimeExist(Region s, Region e, Airname n) {
+		List<Airplane> airplanes = airplaneRepository.findByDepartAndArriveAndName(s, e, n);
+		List<Airtime> airtimes = airtimeRepository.findAll();
+		List<Airtime> times = new ArrayList<Airtime>();
+		
+		for (Airplane a : airplanes) {
+			for (Airtime t : airtimes) {
+				if (a.getTime().getId() == t.getId()) {
+					if (!times.contains(t)) times.add(t);
+				}
+			}
+		}
+		return times;
 	}
 
 } // end Service

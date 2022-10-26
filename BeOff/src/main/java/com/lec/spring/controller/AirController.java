@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lec.spring.domain.Region;
+import com.lec.spring.domain.air.Airname;
 import com.lec.spring.service.AirService;
 
 @Controller
@@ -197,6 +199,25 @@ public class AirController {
 		if (!updatename.equals("")) result = airService.nUpdate(nameId, updatename, updateprice);
 		model.addAttribute("result", result);
 		return "air/admin/updateOk";
+	}
+	@GetMapping("/admin/aircrud")
+	public String aircrud(Model model) {
+		model.addAttribute("regionList", airService.getRegions());
+		model.addAttribute("airnameList", airService.getAirNames());
+		return "air/admin/aircrud";
+	}
+	@PostMapping("/admin/aircrudtime")
+	public String aircrudtime(String departregion, String arriveregion, String aircomp, Model model) {
+		Region s = airService.getRegionById(departregion);
+		Region e = airService.getRegionById(arriveregion);
+		Airname n = airService.getNameById(aircomp);
+		
+		model.addAttribute("existList", airService.findAirtimeExist(s, e, n));
+		model.addAttribute("timeList", airService.getAirTimes());
+		model.addAttribute("departregion", s);
+		model.addAttribute("arriveregion", e);
+		model.addAttribute("airname", n);
+		return "air/admin/aircrudtime";
 	}
 	
 	

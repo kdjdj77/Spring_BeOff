@@ -23,6 +23,29 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
 	<title>비행기 예매</title>
+	<style>
+		input[type=radio]{
+		    display: none;
+		}
+		input[type=radio]+label{
+		    display: inline-block;
+		    cursor: pointer;
+		    height: 24px;
+		    width: 50px;
+		    border: 1px solid #333;
+		    border-radius:3px;
+		    line-height: 24px;
+		    text-align: center;
+		}
+		input[type=radio]+label{
+		    background-color: #fff;
+		    color: #333;
+		}
+		input[type=radio]:checked+label{
+		    background-color: #333;
+		    color: #fff;
+		}
+	</style>
 </head>
 
 <body style="margin-bottom: 200px">
