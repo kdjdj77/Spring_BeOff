@@ -50,8 +50,14 @@ public class RentalController {
 		return "rental/cars/detail";
 	}
 	
-	@GetMapping("/reserv") // /rental/reserv
-	public void reserv() {}
+	@PostMapping("/cars/reserv") // /rental/reserv
+	public String reserv(String carId, Model model) {
+		model.addAttribute("car", rentalService.getCarById(carId));
+		model.addAttribute("user", rentalService.getUserData());
+		
+		
+		return "rental/reserv";
+	}
 	
 	
 	

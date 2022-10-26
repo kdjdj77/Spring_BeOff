@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import com.lec.spring.domain.Region;
+import com.lec.spring.domain.User;
 import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Rental;
 import com.lec.spring.repository.RegionRepository;
@@ -16,6 +17,7 @@ import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.rental.CarRepository;
 import com.lec.spring.repository.rental.CarfileRepository;
 import com.lec.spring.repository.rental.RentalRepository;
+import com.lec.spring.util.U;
 
 @Service
 public class RentalService {
@@ -66,6 +68,21 @@ public class RentalService {
 		
 		return r;
 	}
+
+	public User getUserData() {
+		
+		return U.getLoggedUser();
+	}
+
+	public Car getCarById(String carId) {
+		Long id = Long.parseLong(carId);
+		Car c = carRepository.findById(id).get();
+		
+		return c;
+		
+	}
+
+	
 	
 	// 특정 업체 디테일
 	

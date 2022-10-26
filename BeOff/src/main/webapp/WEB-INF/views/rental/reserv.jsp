@@ -13,6 +13,7 @@
 	crossorigin="anonymous">
 <title>reserve</title>
 </head>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
 
 <main>
@@ -31,15 +32,15 @@
                 <form action="">
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Name</p>
-                        <input class="form-control" type="name" value="">
+                        <input class="form-control" type="name" value="${user.name } " readonly>
                     </div>
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Phone</p>
-                        <input class="form-control" type="phone" value="">
+                        <input class="form-control" type="phone" value="${user.phonenum }" readonly>
                     </div>
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Email</p>
-                        <input class="form-control" type="email" value="">
+                        <input class="form-control" type="email" value="${user.email }" readonly>
                     </div>
                     <div>
                         <p class="dis fw-bold mb-2">Card details</p>
@@ -89,7 +90,7 @@
         <div class="h-100 p-5 text-bg-dark rounded-3">
           <div class="box-inner-1 pb-3 mb-3 ">
                 <div class="d-flex justify-content-between mb-3 userdetails">
-                    <p class="fw-bold">제품명 들어갈자리</p>
+                    <p class="fw-bold">${car.carname }</p>
                     <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>33.00+</p>
                 </div>
                 <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
