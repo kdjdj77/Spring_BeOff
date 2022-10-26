@@ -303,8 +303,8 @@ public class AdminHotelService {
 	
 	// 방 업데이트
 	@Transactional
-	public int updateRoom(String id, String roomname, Double price, Long bed) {
-
+	public int updateRoom(String id, String roomname, Double price, Long bed, Map<String, MultipartFile> files) {
+		
 		int result = 0;
 		
 		Long lId = Long.parseLong(id);

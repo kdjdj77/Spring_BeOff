@@ -141,8 +141,12 @@ public class AdminHotelController {
 	
 	// 파일 업데이트 테스트중
 	@PostMapping("/roomUpdateOk") // 룸 업데이트 완료
-	public String roomUpdateOk(String id, String roomname, Double price, Long bed, Model model) {
-		int result = adminHotelService.updateRoom(id, roomname, price, bed);
+	public String roomUpdateOk(
+			@RequestParam Map<String, MultipartFile> files,
+			String id, String roomname, 
+			Double price, Long bed, Model model) {
+		
+		int result = adminHotelService.updateRoom(id, roomname, price, bed, files);
 		model.addAttribute(result);
 		
 		return "hotel/admin/roomUpdateOk";
