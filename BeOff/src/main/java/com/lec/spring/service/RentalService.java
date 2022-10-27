@@ -2,11 +2,20 @@ package com.lec.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.AbstractPlatformTransactionManager;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
@@ -17,9 +26,11 @@ import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.rental.CarRepository;
 import com.lec.spring.repository.rental.CarfileRepository;
 import com.lec.spring.repository.rental.RentalRepository;
+import com.lec.spring.repository.rental.RentalticketRepository;
 import com.lec.spring.util.U;
 
 @Service
+@Transactional
 public class RentalService {
 	
 	@Autowired
@@ -32,18 +43,17 @@ public class RentalService {
 	private UserRepository userRepository;
 	@Autowired
 	private RegionRepository regionRepository;
+	@Autowired
+	private RentalticketRepository rentalticketRepository;
 	
 	public RentalService() {
 		System.out.println(getClass().getName() + "()생성");
 	}	
 	
 	public List<String> getRegionList(){
-		List<String> rList = new ArrayList<>();
-		List<Region> regionList = regionRepository.findAll();
-		for(Region r : regionList) {
-			rList.add(r.getRegion());
-		}
-		return rList;
+		return regionRepository.findAll().stream()
+				.map(Region::getRegion)
+				.collect(Collectors.toList());
 	}
 	
 	/*
@@ -56,17 +66,12 @@ public class RentalService {
 	
 	// 업체 리스트 
 	public List<Rental> getRentalList() {
-	    List<Rental> rentalList = null;
-	      
-	    rentalList = rentalRepository.findAll(Sort.by(Order.asc("id")));
-	    return rentalList;
+	    return rentalRepository.findAll(Sort.by(Order.asc("id")));
 	}
 
 	public Rental getRentalById(String rentalId) {
 		Long id = Long.parseLong(rentalId);
-		Rental r = rentalRepository.findById(id).get();
-		
-		return r;
+		return rentalRepository.findById(id).get();
 	}
 
 	public User getUserData() {
@@ -76,25 +81,19 @@ public class RentalService {
 
 	public Car getCarById(String carId) {
 		Long id = Long.parseLong(carId);
-		Car c = carRepository.findById(id).get();
-		
-		return c;
-		
+		return carRepository.findById(id).get();
 	}
 
 	public List<Rental> getRentalRList(String rRegion, String sDate, String eDate) {
 		Region region = regionRepository.findByRegion(rRegion);
-		List<Rental> list = rentalRepository.findByRegion(region);
-		
-		return list;
+		return rentalRepository.findByRegion(region).stream()
+				.filter(rental -> {
+					return rental.getCars().stream()
+						.anyMatch(car -> car.enabled(sDate, eDate));
+				})
+				.collect(Collectors.toList());
 	}
-
-
-
-	
 	
 	// 특정 업체 디테일
 	
-	
-
 }

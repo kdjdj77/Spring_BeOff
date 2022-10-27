@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,5 +60,21 @@ public class Car {
 		if(files != null) {
 			Collections.addAll(this.files, files);
 		}
+	}
+	
+	@OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
+	@ToString.Exclude
+	private List<Rentalticket> rentaltickets;
+	
+	public boolean enabled(String sDate, String eDate) {
+		if (rentaltickets.isEmpty()) {
+			return true;
+		}
+		
+		Long start = Long.parseLong(sDate);
+		Long end = Long.parseLong(eDate);
+		return rentaltickets.stream().allMatch(ticket -> {
+			return !(start <= ticket.getDate() && ticket.getDate() <= end);
+		});
 	}
 }
