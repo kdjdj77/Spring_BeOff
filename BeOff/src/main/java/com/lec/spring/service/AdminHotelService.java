@@ -306,27 +306,32 @@ public class AdminHotelService {
 //	}
 	
 	// 방 업데이트 2차테스트 중
-	@Transactional
 	public int updateRoom(
 			String id, String roomname, Double price, Long bed, 
 			Map<String, MultipartFile> files) {
 		
 		int result = 0;
-		
-		Long lId = Long.parseLong(id);
-		Room r = roomRepository.findById(lId).get();
+		String sId = id;
+		Long lId = Long.parseLong(sId);
+		Room r = roomRepository.findById(lId).orElse(null);
 
 		r.setRoomname(roomname);
-		r.setPrice(price);
+		r.setPrice(price + 1);
 		r.setBed(bed);
 		
 		roomRepository.save(r);
 		List<Roomfile> delfile = roomfileRepository.findByRoom(r.getId());
 		
-		if (addFiles(files, r.getId()) == 1) {
-				delFile(r.getFiles().get(0));
-				roomfileRepository.delete(delfile.get(0));
+		String x = files.get("files").getOriginalFilename();
+		
+		if (!x.equals("")) {
+			for(Roomfile i : delfile) {
+				delFile(i);
+				roomfileRepository.deleteById(i.getId());
+			}
 		}
+
+		addFiles(files, r.getId());
 
 		result = 1;
 		

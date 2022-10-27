@@ -105,10 +105,9 @@
 					              <div class="card-body ">
 					                <div class="image-container">
 					                	<c:forEach var="file" items="${r.files }">
-								         	<img style="width: 200px;" id="preview${r.id}" src="${pageContext.request.contextPath }/upload/${file.file}"/>
+								         	<img style="height: 150px; width:230px" id="preview${r.id}" src="${pageContext.request.contextPath }/upload/${file.file}"/>
 								    	</c:forEach>
 								    	 <input type="file" name="files" id="room${r.id}" onchange="readURL(this, 'preview${r.id}');">
-								    	 <button type="button"  class="btn btn-outline-danger" onclick="deleteFiles(${r.files[0].id }); $(this).parent().remove(); ">파일삭제</button>
 								    </div>
 									<script>
 										function readURL(input, pre) {
@@ -122,13 +121,6 @@
 												document.getElementById(pre).src = "";
 											}
 										}
-									</script>
-						       	
-						       		<script>
-									function deleteFiles(fileId){
-										// 삭제할 file 의 id 값(들)을 #delFiles 에 담아 submit 한다
-										$("#delFiles").append(`<input type='hidden' name='delfile' value='\${fileId}'>`);
-									}
 									</script>
 									 	
 					                <input type="text"  name="roomname" class="form-control display-5 fw-bolder text-black mb-1"  id="roomname" value="${r.roomname}" placeholder="Room Name을 입력하세요" required>
