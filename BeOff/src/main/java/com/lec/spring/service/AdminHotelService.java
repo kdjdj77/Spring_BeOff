@@ -99,8 +99,8 @@ public class AdminHotelService {
 	}
 	
 	// 특정 글(id) 에 첨부파일 추가
-	private void addFiles(Map<String, MultipartFile> files, Long id) {
-		if(files == null) return;
+	private int addFiles(Map<String, MultipartFile> files, Long id) {
+		if(files == null) return 0;
 		
 		for(Map.Entry<String, MultipartFile> e : files.entrySet()) {
 			// 첨부파일들 정보 출력
@@ -117,6 +117,8 @@ public class AdminHotelService {
 				file = roomfileRepository.save(file); // INSERT
 			}
 		}
+		return 1;
+	
 	} // end addFiles()
 
 	// 물리적으로 파일 저장. 중복된 이름 처리
@@ -319,22 +321,13 @@ public class AdminHotelService {
 		r.setBed(bed);
 		
 		roomRepository.save(r);
+		List<Roomfile> delfile = roomfileRepository.findByRoom(r.getId());
+		
+		if (addFiles(files, r.getId()) == 1) {
+				delFile(r.getFiles().get(0));
+				roomfileRepository.delete(delfile.get(0));
+		}
 
-		addFiles(files, r.getId());
-		
-		System.out.println("여기로 안오는건가 ? "+r.getId());
-//		System.out.println("delfile 이 null ? "+ delfile);
-		
-		
-		
-//		for(Long fileId : delfile) {
-//			Roomfile file = roomfileRepository.findById(fileId).orElse(null);
-//			if(file != null) {
-//				delFile(file); // 물리적으로 삭제
-//				roomfileRepository.delete(file); // DB에서 삭제
-//			}
-//		}
-		
 		result = 1;
 		
 		return result;
@@ -381,6 +374,7 @@ public class AdminHotelService {
 		
 		Room r = roomRepository.findById(lId).get();
 		roomRepository.delete(r);
+		delFile(r.getFiles().get(0));
 		System.out.println("서비스에서 id "+id);
 		result = 1;
 		

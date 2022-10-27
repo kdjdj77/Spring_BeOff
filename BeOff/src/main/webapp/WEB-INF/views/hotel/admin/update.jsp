@@ -104,7 +104,9 @@
 					           <div class="card h-100 ">
 					              <div class="card-body ">
 					                <div class="image-container">
-								         <img style="width: 200px;" id="preview${r.id}" src="${pageContext.request.contextPath }/upload/${r.files[0].file}"/>
+					                	<c:forEach var="file" items="${r.files }">
+								         	<img style="width: 200px;" id="preview${r.id}" src="${pageContext.request.contextPath }/upload/${file.file}"/>
+								    	</c:forEach>
 								    	 <input type="file" name="files" id="room${r.id}" onchange="readURL(this, 'preview${r.id}');">
 								    	 <button type="button"  class="btn btn-outline-danger" onclick="deleteFiles(${r.files[0].id }); $(this).parent().remove(); ">파일삭제</button>
 								    </div>
