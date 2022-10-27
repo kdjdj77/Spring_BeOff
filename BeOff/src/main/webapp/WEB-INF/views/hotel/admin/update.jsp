@@ -106,6 +106,7 @@
 					                <div class="image-container">
 								         <img style="width: 200px;" id="preview${r.id}" src="${pageContext.request.contextPath }/upload/${r.files[0].file}"/>
 								    	 <input type="file" name="files" id="room${r.id}" onchange="readURL(this, 'preview${r.id}');">
+								    	 <button type="button"  class="btn btn-outline-danger" onclick="deleteFiles(${r.files[0].id }); $(this).parent().remove(); ">파일삭제</button>
 								    </div>
 									<script>
 										function readURL(input, pre) {
@@ -120,7 +121,13 @@
 											}
 										}
 									</script>
-						       
+						       	
+						       		<script>
+									function deleteFiles(fileId){
+										// 삭제할 file 의 id 값(들)을 #delFiles 에 담아 submit 한다
+										$("#delFiles").append(`<input type='hidden' name='delfile' value='\${fileId}'>`);
+									}
+									</script>
 									 	
 					                <input type="text"  name="roomname" class="form-control display-5 fw-bolder text-black mb-1"  id="roomname" value="${r.roomname}" placeholder="Room Name을 입력하세요" required>
 					                <input type="text" name="price" class="form-control display-5 fw-bolder text-black mb-1"  id="price" value="${r.price}" placeholder="가격을 입력하세요" required>
