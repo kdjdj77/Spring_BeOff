@@ -56,9 +56,9 @@
 											</c:forEach>
 									</select></td>
 									<td><input type="text" class=""
-										id="start" name="in1"></td>
+										id="start" name="in1" value="${sDate}" ></td>
 									<td><input type="text" class=""
-										id="end" name="out1"></td>
+										id="end" name="out1" value="${eDate}"  ></td>
 									<td><button type="button"
 											class="btn btn-outline-secondary" id="sub" name ="sub">검색</button></td>
 								</tr>
@@ -74,6 +74,9 @@
 		<c:forEach var="dto" items="${rentalList }" varStatus="status">
 		<form action="cars/list" method="POST">
 		<input type="hidden" name="rentalId" value="${dto.id }">
+		<input type="hidden" name="sDate" value="${sDate }">
+		<input type="hidden" name="eDate" value="${eDate }">
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-1"></div>
