@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lec.spring.domain.Region;
 import com.lec.spring.domain.hotel.Hotel;
@@ -76,7 +77,7 @@ public class HotelController {
 		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
 		model.addAttribute("hotelList",list);
 		model.addAttribute("hotel",hotelService.getHotelList());
-		model.addAttribute("regionList", hotelService.getRegionList());
+		model.addAttribute("regionList", hotelService.getRegionList());;
 			
 		return "/hotel/list";
 	}
@@ -94,18 +95,7 @@ public class HotelController {
 	
 	
 	
-	// /hotel/list
-//	@GetMapping("/detail")
-//	public String detail(Model model) {
-//		model.addAttribute("regionList", hotelService.getRegionList());
-////		model.addAttribute("hotelname", hotelService.getHname());		
-////		model.addAttribute("hotelcontent", hotelService.getHcontent());		
-//		model.addAttribute("hotelList", hotelService.getHotelList());
-//		model.addAttribute("hcommentList", hotelService.getHcommentList());
-//		model.addAttribute("roomList", hotelService.getRoomList());
-//		return "/hotel/detail";	
-//		
-//	}
+
 
 	
 }

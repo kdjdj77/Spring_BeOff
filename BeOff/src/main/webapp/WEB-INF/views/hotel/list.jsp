@@ -75,6 +75,7 @@
                     <th>등록일</th>
                     <th>별점</th>
                     <th>상세보기</th>
+                    <th>호텔 사진</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,6 +88,7 @@
                     <td>${dto.priceList }</td>
                     <td>${dto.regDateTime}</td>
                     <td>${dto.avgstar }</td>
+                    <td><img style="width:300px; height:300px;"src="${pageContext.request.contextPath }/upload/${dto.files[0].file}" alt="..." /></td>
  					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>                    
                 </tr>            
            	 </c:forEach>  

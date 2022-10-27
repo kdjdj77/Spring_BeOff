@@ -38,6 +38,6 @@ public class Hotelfile {
 	@Column(nullable = false)
 	private String file;
 	
-	@Transient
-	private boolean isImage; // 이미지 여부
+//	@Transient
+//	private boolean isImage; // 이미지 여부
 }

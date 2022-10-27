@@ -21,7 +21,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
 	<div>
-		<form action="${pageContext.request.contextPath}/hotel/list" name="frm" id="frm"  method="post">
+		<form action="${pageContext.request.contextPath}/hotel/list"
+			name="frm" id="frm" method="post">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -47,8 +48,8 @@
 					</tr>
 				</thead>
 			</table>
-		<input type="hidden" name="inn" id="inn">
-		<input type="hidden" name="out" id="out">
+			<input type="hidden" name="inn" id="inn"> <input
+				type="hidden" name="out" id="out">
 		</form>
 	</div>
 	<table class="table table-bordered">
@@ -70,13 +71,15 @@
 			</tr>
 		</tbody>
 	</table>
-	<table class="table table-bordered">
+	<table class="table table-bordered" id="table">
 		<thead>
 			<tr>
 				<th>#</th>
 				<th>방 이름</th>
 				<th>방 가격</th>
 				<th>침대 갯수</th>
+				<th>방 사진</th>
+				<th>예약</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -86,7 +89,10 @@
 					<td>${i.roomname }</td>
 					<td>${i.price }</td>
 					<td>${i.bed }</td>
-					<td>${i.files[0].file }</td>
+					<td><img style="width: 300px; height: 300px;"
+						src="${pageContext.request.contextPath }/upload/${i.files[0].file}"
+						alt="..." /></td>
+					<td><button>예약하기</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -103,18 +109,25 @@
 		<tbody>
 			<c:forEach var="co" items="${hotel.hcomments }">
 				<tr>
-					<td>${co.user }</td>
 					<td>${co.user.username }</td>
 					<td>${co.regDateTime }</td>
 					<td>${co.content }</td>
 					<td>${co.star }</td>
+					<td>
+						<button>수정</button>
+						<button>삭제</button>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+
+	<div>
+
+		<button>등록</button>
+	</div>
+
 </body>
-
-
 <script>
 	$(function() {
 		//input을 datepicker로 선언
@@ -162,13 +175,12 @@
 	});
 </script>
 <script>
+	let inn = document.querySelector("#inn");
+	let out = document.querySelector("#out");
+	let in1 = document.querySelector("#start");
+	let out1 = document.querySelector("#end");
 
-let inn = document.querySelector("#inn");
-let out = document.querySelector("#out");
-let in1 = document.querySelector("#start");
-let out1 = document.querySelector("#end");
-
-let btn = document.getElementById("#sub");
+	let btn = document.getElementById("#sub");
 
 	function count(type) {
 		let resultElement = document.getElementById('result');
@@ -183,16 +195,25 @@ let btn = document.getElementById("#sub");
 		}
 		resultElement.innerText = number;
 	}
-	function hsubmit(){
+	function hsubmit() {
 
-		if (in1.value === "") {alert('체크인 날짜를 선택해주세요'); return;}
-		if (out1.value === "") {alert('체크아웃 날짜를 선택해주세요'); return;}
-		if (in1.value > out1.value){alert('체크인 날짜는 체크아웃 날짜 이전이어야 합니다') }
+		if (in1.value === "") {
+			alert('체크인 날짜를 선택해주세요');
+			return;
+		}
+		if (out1.value === "") {
+			alert('체크아웃 날짜를 선택해주세요');
+			return;
+		}
+		if (in1.value > out1.value) {
+			alert('체크인 날짜는 체크아웃 날짜 이전이어야 합니다')
+		}
 		inn.value = in1.value.toString();
 		out.value = out1.value.toString();
 
 		frm.submit();
 	}
+	function
 </script>
 
 

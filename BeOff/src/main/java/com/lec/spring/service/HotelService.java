@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
@@ -12,11 +14,17 @@ import org.springframework.stereotype.Service;
 
 
 import com.lec.spring.domain.Region;
+import com.lec.spring.domain.User;
 import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
+import com.lec.spring.domain.hotel.HqryCommentList;
+import com.lec.spring.domain.hotel.HqryResult;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.domain.qna.FileDTO;
+import com.lec.spring.domain.qna.Qcomment;
 import com.lec.spring.domain.qna.Qna;
+import com.lec.spring.domain.qna.QqryCommentList;
+import com.lec.spring.domain.qna.QqryResult;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
@@ -27,6 +35,7 @@ import com.lec.spring.repository.hotel.RoomticketRepository;
 
 @Service
 public class HotelService {
+	
 	@Autowired
 	private HotelRepository hotelRepository;
 	@Autowired
@@ -137,7 +146,58 @@ public class HotelService {
 		return h;
 	}
 
-
+	// 특정 호텔(id)의 댓글 목록들
+	public HqryCommentList getCommentList(Long id) {
+		
+		HqryCommentList list = new HqryCommentList();
+		List<Hcomment> comments = hcommentRepository.findByHotel(id, Sort.by(Order.desc("id")));
+		System.out.println("--------------------------------");
+		System.out.println(comments);
+		System.out.println("--------------------------------");
+		list.setCount(comments.size());
+		list.setList(comments);		
+		list.setStatus("OK");
+		return list;
+	}
+	
+//	// 특정 글(hotelId)에 특정 사용자(UserId)가 댓글 작성
+//	public HqryResult write(Hotel hotel, Long userId, String content, Long star) {
+//		User user = userRepository.findById(userId).orElse(null);
+//		
+//		Hcomment comment = Hcomment.builder()
+//				.user(user)
+//				.content(content)
+//				.star(star)
+//				.hotel(hotel)
+//				.build()
+//				;
+//		hcommentRepository.save(comment); // INSERT
+//		HqryResult result = HqryResult.builder()
+//				.count(1)
+//				.status("OK")
+//				.build()
+//				;
+//		return result;
+//	}
+//	
+	// 특정 댓글(id) 삭제
+	public HqryResult delete(Long id) {
+		Hcomment comment = hcommentRepository.findById(id).orElse(null);
+		
+		int count = 0;
+		String status = "FAIL";
+		if (comment != null) {
+			hcommentRepository.delete(comment);
+			count = 1;
+			status = "OK";
+		}
+		HqryResult result = HqryResult.builder()
+				.count(count)
+				.status(status)
+				.build()
+				;
+		return result;
+	}
 	
 
 
