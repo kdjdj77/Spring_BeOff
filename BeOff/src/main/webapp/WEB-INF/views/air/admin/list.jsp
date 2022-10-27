@@ -66,11 +66,11 @@
 								<tr style="border-top:1px solid #000;">
 									<td>${r.region}</td>
 									<td class="d-flex">
-										<button onclick="updateOpen('region${r.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
-										<form action="delregion" method="post">
+										<form style="visibility:hidden;" action="delregion" method="post">
 											<input type="hidden" name="delregion" value="${r.id}">
 											<button class="btn btn-sm btn-outline-dark">삭제</button>
 										</form>
+										<button onclick="updateOpen('region${r.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
 									</td>
 								</tr>
 								<form action="updateregion" method="post">
@@ -101,11 +101,11 @@
 								<tr style="border-top:1px solid #000;">
 									<td>${t.time}</td>
 									<td class="d-flex">
-										<button onclick="updateOpen('time${t.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
-										<form action="deltime" method="post">
+										<form style="visibility:hidden;" action="deltime" method="post">
 											<input type="hidden" name="deltime" value="${t.id}">
 											<button class="btn btn-sm btn-outline-dark">삭제</button>
 										</form>
+										<button onclick="updateOpen('time${t.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
 									</td>
 								</tr>
 								<form action="updatetime" method="post">
@@ -138,11 +138,11 @@
 									<td>${n.name}</td>
 									<td>${n.price}￦</td>
 									<td class="d-flex">
-										<button onclick="updateOpen('name${n.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
-										<form action="delname" method="post">
+										<form style="visibility:hidden;" action="delname" method="post">
 											<input type="hidden" name="delname" value="${n.id}">
 											<button class="btn btn-sm btn-outline-dark">삭제</button>
 										</form>
+										<button onclick="updateOpen('name${n.id}')" type="button" class="btn btn-sm btn-outline-dark">수정</button>
 									</td>
 								</tr>
 								<form action="updatename" method="post">

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
+import com.lec.spring.util.U;
 
 @Controller
 @RequestMapping("/user")
@@ -70,6 +71,12 @@ public class UserController {
 		int cnt = userService.register(user);
 		model.addAttribute("result", cnt);
 		return page;
+	}
+	
+	@GetMapping("/userinfo")
+	public String userinfo(Model model) {
+		model.addAttribute("user", U.getLoggedUser());
+		return "/user/userinfo";
 	}
 	
 	@RequestMapping("/rejectAuth")

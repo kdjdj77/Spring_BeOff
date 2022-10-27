@@ -63,7 +63,7 @@
 						<label for="${t.id}" class="fs-5">${t.time}</label>
 						<c:choose>
 							<c:when test="${existList.contains(t)}">
-								<input class="mt-1" type="checkbox" name="etimelist" id="${t.id}" value="${t.time}" checked>
+								<input class="mt-1" type="checkbox" name="etimelist" id="${t.id}" value="${t.time}" onClick="return false;" checked>
 							</c:when>
 							<c:otherwise>
 								<input class="mt-1" type="checkbox" name="etimelist" id="${t.id}" value="${t.time}">
