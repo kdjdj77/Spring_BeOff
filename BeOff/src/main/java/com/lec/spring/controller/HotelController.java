@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lec.spring.domain.Region;
 import com.lec.spring.domain.hotel.Hotel;
@@ -34,12 +35,8 @@ public class HotelController {
 	// /hotel/list
 	@GetMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("regionList", hotelService.getRegionList());
-//		model.addAttribute("hotelname", hotelService.getHname());		
-//		model.addAttribute("hotelcontent", hotelService.getHcontent());		
+		model.addAttribute("regionList", hotelService.getRegionList());	
 		model.addAttribute("hotelList", hotelService.getHotelList());
-		model.addAttribute("hcommentList", hotelService.getHcommentList());
-		model.addAttribute("roomList", hotelService.getRoomList());
 		return "/hotel/list";	
 		
 	}
@@ -50,13 +47,9 @@ public class HotelController {
 	public String searchList(String hotelregion,String inn,String out, Model model) {
 		String in1 = inn.replaceAll("-","");
 		String out1 = out.replaceAll("-","");
-		System.out.println("-------------------------------------------");
-		System.out.println(inn);
-		System.out.println(out);
-		System.out.println("-------------------------------------------");
 		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
 		model.addAttribute("hotelList",list);
-		model.addAttribute("roomList", hotelService.getRoomList());
+		model.addAttribute("hotel",hotelService.getHotelList());
 		model.addAttribute("regionList", hotelService.getRegionList());
 			
 		return "/hotel/list";
@@ -64,21 +57,51 @@ public class HotelController {
 	
 	
 	
-	
-	
-	
-	// /hotel/list
+	// /hotel/detail
+	// 필요한 정보
+	// 클릭한 숙소 ID name content -- 
+	// 클릭한 숙소의 방 정보  room (image , name, price , bed)
+	// 클릭한 숙소의 후기 정보  hcomment(user, reg, star,  content) --
 	@GetMapping("/detail")
-	public String detail(Model model) {
+	public String detail(String id, Model model) {
+		model.addAttribute("hotel",hotelService.getHotelById(id));
 		model.addAttribute("regionList", hotelService.getRegionList());
-//		model.addAttribute("hotelname", hotelService.getHname());		
-//		model.addAttribute("hotelcontent", hotelService.getHcontent());		
-		model.addAttribute("hotelList", hotelService.getHotelList());
-		model.addAttribute("hcommentList", hotelService.getHcommentList());
-		model.addAttribute("roomList", hotelService.getRoomList());
-		return "/hotel/detail";	
 		
+		return "/hotel/detail"; 
 	}
+	
+	@PostMapping("/detail")
+	public String searchList1(String hotelregion,String inn,String out, Model model) {
+		String in1 = inn.replaceAll("-","");
+		String out1 = out.replaceAll("-","");
+		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
+		model.addAttribute("hotelList",list);
+		model.addAttribute("hotel",hotelService.getHotelList());
+		model.addAttribute("regionList", hotelService.getRegionList());;
+			
+		return "/hotel/list";
+	}
+	
+	
+	// /hotel/reserv
+	// 필요한 정보
+	// 로그인된 유저 ID
+	// 룸티켓..?
+	
+	
+	
+	
+	
+	@GetMapping("/reserv")
+	public String reserv(String hotelid,String roomid, Model model) {
+		model.addAttribute("hotel", hotelService.getHotelById(hotelid));
+		model.addAttribute("room", hotelService.getRoomById(roomid));
+		model.addAttribute("user", hotelService.getUserData());
+		
+		
+		return "hotel/reserv";
+	}
+
 
 	
 }

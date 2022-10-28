@@ -1,6 +1,7 @@
 package com.lec.spring.domain.hotel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -71,6 +73,19 @@ public class Hotel extends BaseEntity{
 	@ToString.Exclude
 	@Builder.Default
 	private List<Hcomment> hcomments = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+	@ToString.Exclude
+	@Builder.Default  // 아래와 같이 초깃값 있으면 @Builder.Default 처리  (builder 에서 제공안함)
+	private List<Hotelfile> files = new ArrayList<>();  // NPE 방지
+
+	public void addFiles(Hotelfile... files) {  // xxxToMany 의 경우 만들어두면 편리
+		if(files != null) {
+			Collections.addAll(this.files, files);
+		}
+	}
+	@Transient
+	private boolean isImage;
 
 
 }

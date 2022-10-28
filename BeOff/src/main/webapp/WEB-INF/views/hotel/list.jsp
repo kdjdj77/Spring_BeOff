@@ -30,6 +30,9 @@
 					<th>체크인 날짜</th>
 					<th>체크아웃 날짜</th>
 					<th>인원</th>
+					<th>
+						<button type="button" onclick="location.href='../hotel/admin/list'">관리자 모드</button>
+					</th>
 				</tr>
 				<tr>
 					<td>
@@ -47,14 +50,19 @@
 						<input type='button' onclick='count("plus")' value='+' />
 					</td>
 					<td>
-						<button type="button" id="sub" name="sub">숙소 검색</button>
+					<button type=button onclick="hsubmit()">숙소 검색</button>
 					</td>
+					
 				</tr>
 			</thead>
 		</table>
 		<input type="hidden" name="inn" id="inn">
 		<input type="hidden" name="out" id="out">
 	</form>
+
+
+	
+
 </div>
 	<table class="table table-bordered">
             <thead>
@@ -63,44 +71,30 @@
                     <th>호텔 지역</th>
                     <th>호텔 이름</th>
                     <th>호텔 정보</th>
+                    <th>가격</th>
                     <th>등록일</th>
                     <th>별점</th>
+                    <th>상세보기</th>
+                    <th>호텔 사진</th>
                 </tr>
             </thead>
             <tbody>
-            <c:forEach var="dto" items="${hotelList }" varStatus="status">
+          	  <c:forEach var="dto" items="${hotelList }" varStatus="status">
                 <tr>
                 	<td>${dto.id }</td>
                 	<td>${dto.region.region }</td>
                     <td>${dto.hotelname }</td>
                     <td>${dto.content }</td>
+                    <td>${dto.priceList }</td>
                     <td>${dto.regDateTime}</td>
- 					<td>${dto.avgstar }</td>
- 					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>
+                    <td>${dto.avgstar }</td>
+                    <td><img style="width:300px; height:300px;"src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}" alt="..." /></td>
+ 					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>                    
                 </tr>            
-            </c:forEach>           
+           	 </c:forEach>  
             </tbody>
         </table>
-        <table class="table table-bordered">
-        	<thead>
-        		<tr>
-        			<th>#</th>
-        			<th>방이름</th>
-        			<th>가격</th>
-        			<th>침대갯수</th>
-        		</tr>
-        	</thead>
-        	<tbody>
-        		<c:forEach var ="dto1" items="${roomList }">	
-        			<tr>
-        				<td>${dto1.id }</td>
-        				<td>${dto1.roomname }</td>
-        				<td>${dto1.price }</td>
-        				<td>${dto1.bed }</td>
-        			</tr>
-        		</c:forEach>
-        	</tbody>
-        </table>
+ 
 </body>
 
 <script>
@@ -151,6 +145,13 @@
 </script>
 <script>
 
+let inn = document.querySelector("#inn");
+let out = document.querySelector("#out");
+let in1 = document.querySelector("#start");
+let out1 = document.querySelector("#end");
+
+let btn = document.getElementById("#sub");
+
 	function count(type) {
 		let resultElement = document.getElementById('result');
 		let number = resultElement.innerText;
@@ -164,18 +165,16 @@
 		}
 		resultElement.innerText = number;
 	}
-	
-	let btn = document.getElementById("sub");
-	btn.addEventListener("click",function onsubmit(){
-		let inn = document.getElementById("inn");
-		let out = document.getElementById("out");
-		let in1 = document.getElementById("start");
-		let out1 = document.getElementById("end");
+	function hsubmit(){
+
+		if (in1.value === "") {alert('체크인 날짜를 선택해주세요'); return;}
+		if (out1.value === "") {alert('체크아웃 날짜를 선택해주세요'); return;}
+		if (in1.value > out1.value){alert('체크인 날짜는 체크아웃 날짜 이전이어야 합니다') }
 		inn.value = in1.value.toString();
 		out.value = out1.value.toString();
+
 		frm.submit();
-	} );
-	
+	}
 </script>
 
 </html>
