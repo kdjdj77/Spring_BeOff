@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.User;
 
@@ -39,6 +40,7 @@ public class Hcomment extends BaseEntity{
 	private User user;
 	@ManyToOne
 	@ToString.Exclude
+	@JsonIgnore
 	private Hotel hotel;
 }
 

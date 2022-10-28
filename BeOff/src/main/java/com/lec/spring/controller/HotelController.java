@@ -92,9 +92,15 @@ public class HotelController {
 	
 	
 	
-	
-	
-	
+	@GetMapping("/reserv")
+	public String reserv(String hotelid,String roomid, Model model) {
+		model.addAttribute("hotel", hotelService.getHotelById(hotelid));
+		model.addAttribute("room", hotelService.getRoomById(roomid));
+		model.addAttribute("user", hotelService.getUserData());
+		
+		
+		return "hotel/reserv";
+	}
 
 
 	

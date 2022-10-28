@@ -3,26 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+	<script>
+		const conPath = "${pageContext.request.contextPath }";
+		const logged_id = ${userdetails.user.id };
+	</script>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="${pageContext.request.contextPath }/js/comment.js"></script>
+
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta charset="UTF-8">
-<title>list</title>
+<title>detail</title>
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 <body>
 	<div>
-		<form action="${pageContext.request.contextPath}/hotel/list"
-			name="frm" id="frm" method="post">
+		<form action="${pageContext.request.contextPath}/hotel/list" name="frm" id="frm" method="post">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -48,8 +48,8 @@
 					</tr>
 				</thead>
 			</table>
-			<input type="hidden" name="inn" id="inn"> <input
-				type="hidden" name="out" id="out">
+			<input type="hidden" name="inn" id="inn"> 
+			<input type="hidden" name="out" id="out">
 		</form>
 	</div>
 	<table class="table table-bordered">
@@ -92,11 +92,12 @@
 					<td><img style="width: 300px; height: 300px;"
 						src="${pageContext.request.contextPath }/upload/${i.files[0].file}"
 						alt="..." /></td>
-					<td><button>예약하기</button></td>
+					<td><button onclick="location.href='../hotel/reserv?hotelid=${hotel.id}&&roomid=${i.id}'">예약하기</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -121,11 +122,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
 
-	<div>
+	<jsp:include page="hcomment.jsp"></jsp:include>
 
-		<button>등록</button>
-	</div>
 
 </body>
 <script>
@@ -213,8 +213,6 @@
 
 		frm.submit();
 	}
-	function
 </script>
-
 
 </html>

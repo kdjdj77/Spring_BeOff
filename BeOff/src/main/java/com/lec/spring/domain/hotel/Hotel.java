@@ -84,6 +84,8 @@ public class Hotel extends BaseEntity{
 			Collections.addAll(this.files, files);
 		}
 	}
+	@Transient
+	private boolean isImage;
 
 
 }

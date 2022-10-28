@@ -32,6 +32,7 @@ import com.lec.spring.repository.hotel.HotelRepository;
 import com.lec.spring.repository.hotel.RoomRepository;
 import com.lec.spring.repository.hotel.RoomfileRepository;
 import com.lec.spring.repository.hotel.RoomticketRepository;
+import com.lec.spring.util.U;
 
 @Service
 public class HotelService {
@@ -146,20 +147,27 @@ public class HotelService {
 		return h;
 	}
 
-	// 특정 호텔(id)의 댓글 목록들
-	public HqryCommentList getCommentList(Long id) {
+	public Room getRoomById(String id) {
+		Long lId = Long.parseLong(id);
+		Room r = roomRepository.findById(lId).get();
 		
-		HqryCommentList list = new HqryCommentList();
-		List<Hcomment> comments = hcommentRepository.findByHotel(id, Sort.by(Order.desc("id")));
-		System.out.println("--------------------------------");
-		System.out.println(comments);
-		System.out.println("--------------------------------");
-		list.setCount(comments.size());
-		list.setList(comments);		
-		list.setStatus("OK");
-		return list;
+		
+		return r;
 	}
-	
+	// 특정 호텔(id)의 댓글 목록들
+//	public HqryCommentList getCommentList(Long id) {
+//		
+//		HqryCommentList list = new HqryCommentList();
+//		List<Hcomment> comments = hcommentRepository.findByHotel(id, Sort.by(Order.desc("id")));
+//		System.out.println("--------------------------------");
+//		System.out.println(comments);
+//		System.out.println("--------------------------------");
+//		list.setCount(comments.size());
+//		list.setList(comments);		
+//		list.setStatus("OK");
+//		return list;
+//	}
+//	
 //	// 특정 글(hotelId)에 특정 사용자(UserId)가 댓글 작성
 //	public HqryResult write(Hotel hotel, Long userId, String content, Long star) {
 //		User user = userRepository.findById(userId).orElse(null);
@@ -180,27 +188,30 @@ public class HotelService {
 //		return result;
 //	}
 //	
-	// 특정 댓글(id) 삭제
-	public HqryResult delete(Long id) {
-		Hcomment comment = hcommentRepository.findById(id).orElse(null);
+//	// 특정 댓글(id) 삭제
+//	public HqryResult delete(Long id) {
+//		Hcomment comment = hcommentRepository.findById(id).orElse(null);
+//		
+//		int count = 0;
+//		String status = "FAIL";
+//		if (comment != null) {
+//			hcommentRepository.delete(comment);
+//			count = 1;
+//			status = "OK";
+//		}
+//		HqryResult result = HqryResult.builder()
+//				.count(count)
+//				.status(status)
+//				.build()
+//				;
+//		return result;
+//	}
+	
+
+
+	public User getUserData() {
 		
-		int count = 0;
-		String status = "FAIL";
-		if (comment != null) {
-			hcommentRepository.delete(comment);
-			count = 1;
-			status = "OK";
-		}
-		HqryResult result = HqryResult.builder()
-				.count(count)
-				.status(status)
-				.build()
-				;
-		return result;
-	}
-	
-
-
-	
+		return U.getLoggedUser();
+	} 
 	
 }
