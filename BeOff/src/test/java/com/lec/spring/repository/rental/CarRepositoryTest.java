@@ -11,6 +11,7 @@ import com.lec.spring.domain.User;
 import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Carfile;
 import com.lec.spring.domain.rental.Rental;
+import com.lec.spring.domain.rental.Rentalticket;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 
@@ -31,16 +32,21 @@ class CarRepositoryTest {
 	
 	@Autowired
 	private RegionRepository regionRepository;
+	
+	@Autowired
+	private RentalticketRepository rentalticketRepository;
 
 	@Test
 	void test() {
 		User adminRental = userRepository.findByUsername("ADMINRENTAL");
+		
+		User user1 = userRepository.findByUsername("USER1");
 
 	    Region korea = regionRepository.findByRegion("한국");
 	    Region japan = regionRepository.findByRegion("일본");
 	    Region usa = regionRepository.findByRegion("미국");
 	    
-// 렌트카 업체 입력
+	    // 렌트카 업체 입력
 	    
 	    Rental r1 = Rental.builder().rentalname("SK렌터카").content("차량관리는 프로가 하니까").user(adminRental).region(korea).avgstar(0).build();
 	    Rental r2 = Rental.builder().rentalname("렌트킹").content("3만원 할인쿠폰 지급").user(adminRental).region(korea).avgstar(0).build();
@@ -204,10 +210,23 @@ class CarRepositoryTest {
 	    
 	    carRepository.findAll().forEach(System.out::println);
 	    
-	    Carfile cf1 = Carfile.builder().file("car1.jpg").source("car1.jpg").car_id(c1.getId()).build();
-	    Carfile cf2 = Carfile.builder().file("car2.jpg").source("car2.jpg").car_id(c2.getId()).build();
-	    Carfile cf3 = Carfile.builder().file("car3.jpg").source("car3.jpg").car_id(c3.getId()).build();
-	    Carfile cf4 = Carfile.builder().file("car4.jpg").source("car4.jpg").car_id(c4.getId()).build();
+//	    Carfile cf1 = Carfile.builder().file("car1.jpg").source("car1.jpg").car_id(c1.getId()).build();
+//	    Carfile cf2 = Carfile.builder().file("car2.jpg").source("car2.jpg").car_id(c2.getId()).build();
+//	    Carfile cf3 = Carfile.builder().file("car3.jpg").source("car3.jpg").car_id(c3.getId()).build();
+//	    Carfile cf4 = Carfile.builder().file("car4.jpg").source("car4.jpg").car_id(c4.getId()).build();
+	    
+	    Rentalticket t1 = Rentalticket.builder().user(user1).car(c5).date(20221212L).build();
+	    Rentalticket t2 = Rentalticket.builder().user(user1).car(c6).date(20221212L).build();
+	    Rentalticket t3 = Rentalticket.builder().user(user1).car(c7).date(20221212L).build();
+	    Rentalticket t4 = Rentalticket.builder().user(user1).car(c8).date(20221212L).build();
+	    Rentalticket t5 = Rentalticket.builder().user(user1).car(c9).date(20221212L).build();
+	    
+	    t1 = rentalticketRepository.save(t1);
+	    t2 = rentalticketRepository.save(t2);
+	    t3 = rentalticketRepository.save(t3);
+	    t4 = rentalticketRepository.save(t4);
+	    t5 = rentalticketRepository.save(t5);
+    
 	}
 
 }
