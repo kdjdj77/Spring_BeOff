@@ -37,13 +37,25 @@
                             <div class="mb-3">Name : ${user.name}</div>
                             <div class="mb-3">Phone : ${user.phonenum}</div>
                             <div class="mb-3">Email : ${user.email}</div>
+                            <p><br></p>
                             
-                            <div class="d-flex justify-content-between">
-                            	<div width="30%">
-                            		<form action="adminhreq" method="post">
+                            <div style="width:1000px;" class="d-flex justify-content-between fs-5">
+                            	<div class="border">
+                            		<form action="adminreq" method="post">
+                            			<div class="fs-4">숙소 등록권한 요청</div>
                             			<input type="hidden" id="hreq" name="auth" value="ROLE_ADMIN_HOTEL">
                             			<input type="hidden" name="userId" value="${user.id}">
-                            			<input type="text" name="content" placeholder="요청 사유를 적어주세요">
+                            			<div><textarea maxlength="200" class="form-control" name="content" style="width:450px; height:200px; resize:none; font-size:1.3rem;" placeholder="요청 사유를 적어주세요" required></textarea></div>
+                            			<button class="btn btn-primary">요청하기</button>
+                            		</form>
+                            	</div>
+                            	<div class="border">
+                            		<form action="adminreq" method="post">
+                            			<div class="fs-4">렌트카 등록권한 요청</div>
+                            			<input type="hidden" id="hreq" name="auth" value="ROLE_ADMIN_RENTAL">
+                            			<input type="hidden" name="userId" value="${user.id}">
+										<div><textarea maxlength="200" class="form-control" name="content" style="width:450px; height:200px; resize:none; font-size:1.3rem;" placeholder="요청 사유를 적어주세요" required></textarea></div>
+                            			<button class="btn btn-primary">요청하기</button>
                             		</form>
                             	</div>
                             </div>
@@ -57,25 +69,28 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-plane m-auto text-primary"></i></div>
-                            <h3>나의 비행기 예매</h3>
-                            <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
-                        </div>
+                    	<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+	                        <a href="#" style="text-decoration:none; color:black;">
+	                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-plane m-auto text-primary"></i></div>
+	                            <h3>나의 비행기 예매</h3>
+	                        </a>
+	                    </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-car m-auto text-primary"></i></div>
-                            <h3>나의 렌트카 예약</h3>
-                            <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-                        </div>
+                    	<a href="#" style="text-decoration:none; color:black;">
+	                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+	                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-car m-auto text-primary"></i></div>
+	                            <h3>나의 렌트카 예약</h3>
+	                        </div>
+                        </a>
                     </div>
                     <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-square-h m-auto text-primary"></i></div>
-                            <h3>나의 호텔 예약</h3>
-                            <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-                        </div>
+	                    <a href="#" style="text-decoration:none; color:black;">
+	                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+	                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-square-h m-auto text-primary"></i></div>
+	                            <h3>나의 호텔 예약</h3>
+	                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

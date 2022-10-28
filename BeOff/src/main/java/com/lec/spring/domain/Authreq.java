@@ -24,10 +24,8 @@ public class Authreq {
 	private Long id;
 	
 	@ManyToOne
-	@ToString.Exclude
 	private User user;
 	@ManyToOne
-	@ToString.Exclude
 	private Authority authority;
 	
 	@Column

@@ -84,6 +84,36 @@ public class UserController {
 		return "common/rejectAuth";
 	}
 	
+	@PostMapping("/adminreq")
+	public String adminReq(
+			String auth, String userId, 
+			String content, Model model) {
+		
+		userService.registerAuthReq(auth, userId, content);
+		return "redirect:userinfo";
+	}
+	
+	@GetMapping("/admin/authcheck")
+	public String authcheck(Model model) {
+		
+		model.addAttribute("list", userService.getAllAuthreq());
+		return "/user/admin/authcheck";
+	}
+	
+	@PostMapping("/admin/authaccept")
+	public String authaccept(String authreqId, String userId, String authId) {
+		
+		userService.acceptAuth(authreqId, userId, authId);
+		return "redirect:authcheck";
+	}
+	
+	@PostMapping("/admin/authrefuse")
+	public String authaccept(String authreqId) {
+		
+		userService.refuseAuth(authreqId);
+		return "redirect:authcheck";
+	}
+	
 	// 이 컨트롤러 클래스의 handler 에서  폼 데이터 를 바인딩할때 검증하는 Validator 객체 지정
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
