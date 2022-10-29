@@ -116,34 +116,6 @@ public class AdminHotelController {
 		return "hotel/admin/hotelUpdateOk";
 	}
 	
-//	@PostMapping("/roomUpdateOk") // 룸 업데이트 완료
-//	public String roomUpdateOk(
-//			String id, String roomname, Double price, Long bed, Model model,
-//			@RequestParam Map<String, MultipartFile> files
-//			) {
-//		int result = adminHotelService.updateRoom(id, roomname, price, bed, files);
-//		model.addAttribute(result);
-//		
-//		return "hotel/admin/roomUpdateOk";
-//	}
-	
-	
-	// 파일 업데이트 테스트중
-//	@PostMapping("/roomUpdateOk") // 룸 업데이트 완료
-//	public String roomUpdateOk(
-//			@RequestParam Map<String, MultipartFile> files,
-//			String id, String roomname, 
-//			Double price, Long bed, Model model) {
-//		
-//		int result = adminHotelService.updateRoom(id, roomname, price, bed, files);
-//		model.addAttribute(result);
-//		
-//		return "hotel/admin/roomUpdateOk";
-//	}
-
-	
-	
-	// 파일 업데이트 2차 테스트중 - 지금 파일 DB로 등록까지는 되는데 기존에 있던 파일 물리적, DB 삭제해야함
 	@PostMapping("/roomUpdateOk") // 룸 업데이트 완료
 	public String roomUpdateOk(
 			@RequestParam Map<String, MultipartFile> files,
@@ -155,8 +127,6 @@ public class AdminHotelController {
 		
 		return "hotel/admin/roomUpdateOk";
 	}
-	
-	
 	
 	@GetMapping("/delete") // 호텔 삭제 완료
 	public String hotelDeleteOk(String id, Model model) {

@@ -63,8 +63,8 @@
 					            <!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-outline-dark mt-auto" href="update?id=${r.id }">수정안됨</a>
-										<a class="btn btn-outline-dark mt-auto" href="roomDelete?id=${r.id }">삭제안됨</a>
+										<a class="btn btn-outline-dark mt-auto" href="update?id=${r.hotel.id }">수정</a>
+										<a class="btn btn-outline-dark mt-auto" href="list">목록</a>
 									</div>
 								</div>
 					           </div>

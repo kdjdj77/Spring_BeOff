@@ -53,8 +53,6 @@ public class AdminHotelService {
 	private HotelRepository hotelRepository;
 	@Autowired
 	private RoomRepository roomRepository;
-	
-	// 파일첨부 테스트
 	@Autowired
 	private RoomfileRepository roomfileRepository;
 	
@@ -286,26 +284,6 @@ public class AdminHotelService {
 	}
 	
 	// 방 업데이트
-//	@Transactional
-//	public int updateRoom(String id, String roomname, Double price, Long bed, Map<String, MultipartFile> files) {
-//		
-//		int result = 0;
-//		
-//		Long lId = Long.parseLong(id);
-//		Room r = roomRepository.findById(lId).get();
-//
-//		r.setRoomname(roomname);
-//		r.setPrice(price);
-//		r.setBed(bed);
-//		
-//		roomRepository.save(r);
-//		
-//		result = 1;
-//		
-//		return result;
-//	}
-	
-	// 방 업데이트 2차테스트 중
 	public int updateRoom(
 			String id, String roomname, Double price, Long bed, 
 			Map<String, MultipartFile> files) {
@@ -316,23 +294,22 @@ public class AdminHotelService {
 		Room r = roomRepository.findById(lId).orElse(null);
 
 		r.setRoomname(roomname);
-		r.setPrice(price + 1);
+		r.setPrice(price);
 		r.setBed(bed);
 		
 		roomRepository.save(r);
 		List<Roomfile> delfile = roomfileRepository.findByRoom(r.getId());
 		
-		String x = files.get("files").getOriginalFilename();
-		
-		if (!x.equals("")) {
-			for(Roomfile i : delfile) {
-				delFile(i);
-				roomfileRepository.deleteById(i.getId());
+		String x = files.get("files").getOriginalFilename(); // 수정된 파일의 이름이 들어옴
+		System.out.println("여기 x 값 "+x); 
+		if (!x.equals("")) { // 비어있지 않으니까 들어옴.
+			for(Roomfile i : delfile) { // 해당하는 룸의 파일을 돌면서
+				delFile(i); // 물리적 삭제
+				roomfileRepository.deleteById(i.getId()); // db 삭제
 			}
 		}
 
 		addFiles(files, r.getId());
-
 		result = 1;
 		
 		return result;

@@ -49,7 +49,7 @@
 				<div class="card h-100">
 				<!-- <input type="hidden" name="hotelId" value="${hotel.id }"> -->
 					<!-- Product image-->
-					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/room/room3.jpg" alt="..." />
+					<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}" alt="..." />
 					<!-- Product details-->
 					<div class="card-body p-4">
 						<div class="text-center">
@@ -58,9 +58,9 @@
 							<!-- Product reviews-->
 							<div
 								class="d-flex justify-content-center small text-warning mb-2">
-								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
+								<c:forEach var="i" begin="1" end="${hotel.avgstar+0.5}">
+									<div class="bi-star-fill"></div>
+								</c:forEach>
 							</div>
 							<!-- Product Content-->
 							<div>${hotel.content }</div>

@@ -40,7 +40,7 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
-                                <h3 class="display-6 fw-bolder text-white mb-2 ">HOTEL - Update Page</h3>
+                                <h3 class="display-6 fw-bolder text-white mb-2 ">HOTEL - ${hotel.hotelname}</h3>
                                 <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
                             </div>
                         </div>
@@ -72,8 +72,8 @@
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Content</h3>
                                 <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="content" value="${hotel.content }" name="content" required>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <button class="btn btn-outline-dark">수정완료</button>
-                                    <a class="btn btn-outline-dark" href="delete">삭제</a>
+                                	<button class="btn btn-outline-dark text-white mb-2">수정완료</button>
+                                	<a class="btn btn-outline-dark text-white mb-2" href="delete ">삭제</a>
                                 </div>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start"></div>
                             </div>
@@ -90,7 +90,7 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
-                                <h3 class="display-6 fw-bolder text-black mb-2 ">ROOM - Update Page</h3>
+                                <h3 class="display-6 fw-bolder text-black mb-2 ">${hotel.hotelname }`s <br> ROOM INFO UPDATE</h3>
                                 <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
                             </div>
                         </div>
