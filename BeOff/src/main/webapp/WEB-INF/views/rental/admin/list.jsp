@@ -30,18 +30,13 @@
           <div class="card-body">
             <div class="text-center mt-1">
               <h4 class="card-title">${r.rentalname }</h4>
+              <h6>${r.content }</h6>
             </div>
-
+			
             <div class="d-flex flex-row">
-              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
-                차 등록
-              </button>
-              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
-                수정
-              </button>
-              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
-                삭제
-              </button>
+              <a class="btn btn-secondary btn-lg" href="cars/list?id=${r.id }">차 목록</a>
+              <a class="btn btn-secondary btn-lg" href="rentalUpdate?id=${r.id }">업체 수정</a>
+              <a class="btn btn-secondary btn-lg" href="rentalDelete?id=${r.id }">업체 삭제</a>
             </div>
           </div>
         </div>

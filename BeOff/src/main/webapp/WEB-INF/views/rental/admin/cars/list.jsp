@@ -20,35 +20,37 @@
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
-<c:forEach var="c" items="${carList}"> 
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-        <div class="card text-black">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img1.webp"
-            class="card-img-top" alt="iPhone" />
-          <div class="card-body">
-            <div class="text-center mt-1">
-              <h4 class="card-title">${c.carname }</h4>
-            </div>
 
-            <div class="d-flex flex-row">
-              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
-                차 등록
-              </button>
-              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
-                수정
-              </button>
-              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
-                삭제
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</c:forEach>
+	<c:forEach var="c" items="${r.cars}"> 
+<%-- 	<input type="hidden" name="rentalId" value="${c.id }"> --%>
+	  <div class="container py-5">
+	    <div class="row">
+	      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+	        <div class="card text-black">
+	          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img1.webp"
+	            class="card-img-top" alt="iPhone" />
+	          <div class="card-body">
+	            <div class="text-center mt-1">
+	              <h4 class="card-title">${c.carname }</h4>
+	            </div>
+	
+	            <div class="d-flex flex-row">
+	              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
+	                차 등록
+	              </button>
+	              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
+	                수정
+	              </button>
+	              <button type="button" class="btn btn-secondary flex-fill me-1" data-mdb-ripple-color="dark">
+	                삭제
+	              </button>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</c:forEach>
 
 	<div class="container">
 			<div class="row">

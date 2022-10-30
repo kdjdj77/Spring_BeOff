@@ -60,6 +60,4 @@ public class Rental extends BaseEntity{
 	@Builder.Default 
 	private List<Car> cars = new ArrayList<>();
 	
-	@Transient
-	private String priceList;
 }

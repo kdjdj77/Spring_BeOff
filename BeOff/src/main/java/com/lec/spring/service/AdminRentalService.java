@@ -70,14 +70,6 @@ public class AdminRentalService {
 			for(Car c : r.getCars()) {
 				adList.add(c.getPrice());
 			}
-			for(Float ad : adList) {
-				if(r.getPriceList() != null) {
-					r.setPriceList(r.getPriceList() + " , " + Float.toString(ad));
-				} else {
-					r.setPriceList(Float.toString(ad));
-				}
-			}
-			System.out.println(r.getPriceList());
 		}
 		return rental;
 	}
@@ -94,5 +86,29 @@ public class AdminRentalService {
 		Long rId = Long.parseLong(id);
 		Rental r = rentalRepository.findById(rId).get();
 		return r;
+	}
+
+	public int registerRental(String rentalname, String content) {
+		Rental r = new Rental();
+		r.setRentalname(rentalname);
+		r.setContent(content);
+		rentalRepository.saveAndFlush(r);
+		return 1;
+	}
+
+	public int updateRental(String id, String rentalname, String content) {
+		int result = 0;
+		
+		Long rId = Long.parseLong(id);
+		
+		Rental r = rentalRepository.findById(rId).get();
+		
+		r.setRentalname(rentalname);
+		r.setContent(content);
+		rentalRepository.save(r);
+		
+		result = 1;
+		
+		return result;
 	}
 }
