@@ -65,18 +65,16 @@
                             </div>
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <p>Subtotal</p>
-                                    <p><span class="fas fa-dollar-sign"></span>33.00</p>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <p>VAT<span>(20%)</span></p>
-                                    <p><span class="fas fa-dollar-sign"></span>2.80</p>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="fw-bold">Total</p>
-                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span>35.80</p>
+                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
                                 </div>
-                                <div class="btn btn-secondary mt-2">Pay<span class="fas fa-dollar-sign px-1"></span>35.80
+                                <div class="btn btn-secondary mt-2">무통장입금<span class="fas fa-dollar-sign px-1"></span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column dis">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                </div>
+                                <div class="btn btn-warning mt-2">카카오페이<span class="fas fa-dollar-sign px-1"></span>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +89,7 @@
           <div class="box-inner-1 pb-3 mb-3 ">
                 <div class="d-flex justify-content-between mb-3 userdetails">
                     <p class="fw-bold">${car.carname }</p>
-                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>33.00+</p>
+                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
                 </div>
                 <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                     data-bs-interval="2000">
