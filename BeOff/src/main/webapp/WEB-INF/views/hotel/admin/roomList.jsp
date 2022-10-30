@@ -65,6 +65,7 @@
 									<div class="text-center">
 										<a class="btn btn-outline-dark mt-auto" href="update?id=${r.hotel.id }">수정</a>
 										<a class="btn btn-outline-dark mt-auto" href="list">목록</a>
+										<a class="btn btn-outline-dark mt-auto" href="reserve?id=${r.id }">예약</a>
 									</div>
 								</div>
 					           </div>

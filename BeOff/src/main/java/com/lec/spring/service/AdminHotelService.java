@@ -356,10 +356,16 @@ public class AdminHotelService {
 		
 		Room r = roomRepository.findById(lId).get();
 		roomRepository.delete(r);
-		delFile(r.getFiles().get(0));
+		delFile(r.getFiles().get(1));
 		System.out.println("서비스에서 id "+id);
 		result = 1;
 		
 		return result;
 	}
+
+	public Room reserve(String id) {
+		Room r = roomRepository.findById(Long.parseLong(id)).orElse(null);
+		return r;	
+	}
+
 }
