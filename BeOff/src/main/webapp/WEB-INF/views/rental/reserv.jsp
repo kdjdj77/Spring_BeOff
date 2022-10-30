@@ -43,22 +43,13 @@
                         <input class="form-control" type="email" value="${user.email }" readonly>
                     </div>
                     <div>
-                        <p class="dis fw-bold mb-2">Card details</p>
-                        <div class="d-flex align-items-center justify-content-between card-atm border rounded">
-                            <div class="fab fa-cc-visa ps-3"></div>
-                            <input type="text" class="form-control" placeholder="Card Details">
-                            <div class="d-flex w-50">
-                                <input type="text" class="form-control px-0" placeholder="MM/YY">
-                                <input type="password" maxlength=3 class="form-control px-0" placeholder="CVV">
-                            </div>
-                        </div>
                         
                         <div class="address">
                             
                             <div class=" my-3">
-                                <p class="dis fw-bold mb-2">VAT Number</p>
+                                <p class="dis fw-bold mb-2">예약날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="GB012345B9">
+                                    <input class="form-control" type="text" value="2022/12/12" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
@@ -74,10 +65,11 @@
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                 </div>
-                                <div class="btn btn-warning mt-2">카카오페이<span class="fas fa-dollar-sign px-1"></span>
+                                <input type="hidden" name="id" value="${car.id }">
+                                <input class="btn btn-warning btn-xl text-uppercase" type="button" onclick="requestPay('${car.carname}', '${car.price}')" value="카카오페이">
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </form>
             </div>
@@ -101,6 +93,11 @@
                         </div>
                     </div>
                 </div>
+                <br>
+                <div>
+                    <p class="fw-bold">Refund Policy</p>
+                    <p class="dis mb-3">You can't refund if you complete payment.</p>
+                </div>
         </div>
       </div>
     </div>
@@ -114,5 +111,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script src="${pageContext.request.contextPath }/js/rentalReserve.js"></script>
+	
 </body>
 </html>
