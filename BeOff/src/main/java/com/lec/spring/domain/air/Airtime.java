@@ -23,7 +23,7 @@ public class Airtime {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length=4, nullable=false, unique=true)
-	private Long time;
+	@Column(length=5, nullable=false, unique=true)
+	private String time;
 
 }
