@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.User;
 
@@ -31,6 +34,7 @@ public class Hcomment extends BaseEntity{
 	@Column(nullable = false)
 	private String content; //댓글 내용
 	@Column(nullable = false)
+	@ColumnDefault(value = "3")
 	private Long star;
 	
 
@@ -39,6 +43,7 @@ public class Hcomment extends BaseEntity{
 	private User user;
 	@ManyToOne
 	@ToString.Exclude
+	@JsonIgnore
 	private Hotel hotel;
 }
 

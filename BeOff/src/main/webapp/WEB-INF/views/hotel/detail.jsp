@@ -1,109 +1,123 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+<%-- 로그인한 사용자 정보 Authentication 객체의 필요한 property 들을 변수에 담아 사용 가능  --%>
+<sec:authentication property="name" var="username" />
+<sec:authentication property="authorities" var="authorities" />
+<sec:authentication property="principal" var="userdetails" />
+
+
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="/resources/css/style.css" />
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
-<script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<meta charset="UTF-8">
-<title>list</title>
+
+	<script>
+		const conPath = "${pageContext.request.contextPath }";
+		const logged_id = ${userdetails.user.id };
+	</script>
+<script src="${pageContext.request.contextPath }/js/comment.js"></script>
+<title>detail</title>
 </head>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 <body>
-<div>
-	<form action="${pageContext.request.contextPath}/hotel/list" name="frm" id="frm">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>목적지</th>
-					<th>체크인 날짜</th>
-					<th>체크아웃 날짜</th>
-					<th>인원</th>
-				</tr>
-				<tr>
-					<td>
-						<select name="hotelregion" id="region">
-							<c:forEach var="region" items="${regionList}">    
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<div>
+		<form action="${pageContext.request.contextPath}/hotel/list"
+			name="frm" id="frm" method="post">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>목적지</th>
+						<th>체크인 날짜</th>
+						<th>체크아웃 날짜</th>
+						<th>인원</th>
+					</tr>
+					<tr>
+						<td><select name="hotelregion" id="region">
+								<c:forEach var="region" items="${regionList}">    
 								<option value="${region }">${region }</option>
-							</c:forEach>
-						</select>
-					</td>
-					<td><input type="text" id="start" name="in"></td>
-					<td><input type="text" id="end" name="out"></td>
-					<td>
-						<input type='button' onclick='count("minus")' value='-' />
-							<span id='result'>0</span>
-						<input type='button' onclick='count("plus")' value='+' />
-					</td>
-					<td>
-						<button type="submit" onclick="onsubmit()">숙소 검색</button>
-					</td>
-				</tr>
-			</thead>
-		</table>
-	</form>
-</div>
+								</c:forEach>
+						</select></td>
+						<td><input type="text" id="start" name="in1"></td>
+						<td><input type="text" id="end" name="out1"></td>
+						<td><input type='button' onclick='count("minus")' value='-' />
+							<span id='result'>0</span> <input type='button'
+							onclick='count("plus")' value='+' /></td>
+						<td>
+							<button type="button" onclick="hsubmit()">숙소 검색</button>
+						</td>
+					</tr>
+				</thead>
+			</table>
+			<input type="hidden" name="inn" id="inn"> <input
+				type="hidden" name="out" id="out">
+		</form>
+	</div>
 	<table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>호텔 지역</th>
-                    <th>호텔 이름</th>
-                    <th>호텔 정보</th>
-                    <th>등록일</th>
-                    <th>별점</th>
-                </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="dto" items="${hotelList }" varStatus="status">
-                <tr>
-                	<td>${dto.id }</td>
-                	<td>${dto.region.region }</td>
-                    <td>${dto.hotelname }</td>
-                    <td>${dto.content }</td>
-                    <td>${dto.regDateTime}</td>
- 					<td>${dto.avgstar }</td>
- 					<td>${dto }</td>
- 					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>
-                </tr>            
-            </c:forEach>           
-            </tbody>
-        </table>
-        <table class="table table-bordered">
-        	<thead>
-        		<tr>
-        			<th>#</th>
-        			<th>방이름</th>
-        			<th>가격</th>
-        			<th>침대갯수</th>
-        		</tr>
-        	</thead>
-        	<tbody>
-        		<c:forEach var ="dto1" items="${roomList }">	
-        			<tr>
-        				<td>${dto1.id }</td>
-        				<td>${dto1.roomname }</td>
-        				<td>${dto1.price }</td>
-        				<td>${dto1.bed }</td>
-        			</tr>
-        		</c:forEach>
-        	</tbody>
-        </table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>호텔 이름</th>
+				<th>호텔 정보</th>
+				<th>별점 평균</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				<td>${hotel.id }</td>
+				<td>${hotel.hotelname }</td>
+				<td>${hotel.content }</td>
+				<td>${hotel.avgstar }</td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered" id="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>방 이름</th>
+				<th>방 가격</th>
+				<th>침대 갯수</th>
+				<th>방 사진</th>
+				<th>예약</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="i" items="${hotel.rooms }">
+				<tr>
+					<td>${i.id }</td>
+					<td>${i.roomname }</td>
+					<td>${i.price }</td>
+					<td>${i.bed }</td>
+					<td><img style="width: 300px; height: 300px;"
+						src="${pageContext.request.contextPath }/upload/${i.files[0].file}"
+						alt="..." /></td>
+					<td><button
+							onclick="location.href='../hotel/reserv?hotelid=${hotel.id}&&roomid=${i.id}'">예약하기</button></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
+	
+    <input type="hidden" name="id" value="${hotel.id }">
+
+	<jsp:include page="hcomment.jsp"/>
+
+
 </body>
-
-
 <script>
 	$(function() {
 		//input을 datepicker로 선언
@@ -148,8 +162,15 @@
 
 		//초기값을 오늘
 		$('#datepicker').datepicker('setDate', 'today');
-
 	});
+</script>
+<script>
+	let inn = document.querySelector("#inn");
+	let out = document.querySelector("#out");
+	let in1 = document.querySelector("#start");
+	let out1 = document.querySelector("#end");
+
+	let btn = document.getElementById("#sub");
 
 	function count(type) {
 		let resultElement = document.getElementById('result');
@@ -164,14 +185,24 @@
 		}
 		resultElement.innerText = number;
 	}
-	function onsubmit(){
-		let start = document.querySeletor("#start");
-		let end = document.querySeletor("#end");
-		if(start.value == "null"){alert('체크인 날짜를 선택해주세요'); return;}
-		if(end.value == "null"){console.log('체크아웃 날짜를 선택해주세요'); return;}
-		if(start.value > end.value){alert('체크아웃 날짜는 체크인 날짜 이후로 선택해주세요'); return;}
+	function hsubmit() {
+
+		if (in1.value === "") {
+			alert('체크인 날짜를 선택해주세요');
+			return;
+		}
+		if (out1.value === "") {
+			alert('체크아웃 날짜를 선택해주세요');
+			return;
+		}
+		if (in1.value > out1.value) {
+			alert('체크인 날짜는 체크아웃 날짜 이전이어야 합니다')
+		}
+		inn.value = in1.value.toString();
+		out.value = out1.value.toString();
+
 		frm.submit();
 	}
 </script>
 
-</html>
+		</html>

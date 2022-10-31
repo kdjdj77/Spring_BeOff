@@ -1,15 +1,16 @@
 $(function() {
 	// 현재 글의 id값
-	const id = $("input[name='id']").val().trim();
-	loadComment(id);
+	const id = $("input[name='id']").val();
+	console.log(id);
+	loadHcomment(id);
 	
 	// 댓글 작성 버튼 누르면 댓글 등록 하기.  
     // 1. 어느글에 대한 댓글인지? --> 위에 id 변수에 담겨있다
     // 2. 어느 사용자가 작성한 댓글인지? --> logged_uid 값
     // 3. 댓글 내용은 무엇인지?  --> 아래 content
-    $("#btn_comment").click(function(){
+    $("#btn_hcomment").click(function(){
 		// 입력한 값
-        const content = $("#input_comment").val().trim();
+        const content = $("#input_hcomment").val();
 
         // 검증
         if(!content){
@@ -19,12 +20,13 @@ $(function() {
 		
 		// 전달할 parameter 준비
 		const data = {
-			"write_id":id,
+			"hotel_id":id,
 			"user_id":logged_id,
 			"content":content,
+			"star":star
 		};
 		$.ajax({
-			url:conPath + "/comment/write",
+			url:conPath + "/hcomment/write",
 			type:"POST",
 			data:data,
 			cache:false,
@@ -36,8 +38,8 @@ $(function() {
                         return;
                     }
                     
-                    loadComment(id); // 댓글 목록 다시 업데이트
-                    $("#input_comment").val('');
+                    loadHcomment(id); // 댓글 목록 다시 업데이트
+                    $("#input_hcomment").val('');
                 }
             }
 		});
@@ -45,10 +47,10 @@ $(function() {
 	});
 })
 
-// 특정 글(write_id)의 댓글 목록 읽어오기
-function loadComment(write_id) {
+// 특정 글(hotel_id)의 댓글 목록 읽어오기
+function loadHcomment(hotel_id) {
 	$.ajax({
-		url: conPath + "/comment/list?id=" + write_id,
+		url: conPath + "/hcomment/list?id=" + hotel_id,
 		type: "GET",
 		cache: false,
 		success: function(data, status) {
@@ -58,38 +60,61 @@ function loadComment(write_id) {
 					alert(data.status);
 					return;
 				}
-				buildComment(data); // 댓글 목록 렌더링
+				buildHcomment(data); // 댓글 목록 렌더링
 				addDelete(); //댓글 목록 불러온 뒤 삭제에 대한 이벤트리스너 등록
 			}
 		},
 	});	
 }
 
-function buildComment(result) {
+function buildHcomment(result) {
 	$("#cmt_cnt").text(result.count);
 	
 	const out = [];
 	
-	result.data.forEach(comment => {
-		let id = comment.id;
-        let content = comment.content.trim();
-        let regdate = comment.regdate;
-
-        let user_id = parseInt(comment.user.id);
-        let username = comment.user.username;
-        let name = comment.user.name;
+	result.data.forEach(hcomment => {
+		let id = hcomment.id;
+        let content = hcomment.content;
+        let star = hcomment.star;
+        let regdate = hcomment.regdate;
+        let user_id = parseInt(hcomment.user.id);
+        let username = hcomment.user.username;
+        let name = hcomment.user.name;
         
         // 삭제버튼 여부 : 작성자 본인의 댓글인 경우에만 보이기
         const delBtn = (logged_id !== user_id) ? '' : `
-        	<i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip"
-            data-cmtdel-id="${id}" title="삭제"></i>`;
+        	<i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip" data-cmtdel-id="${id}" title="삭제"></i>`;
 		const row = `
 	        <tr>
-	        <td><span><strong>${username}</strong><br><small class="text-secondary">(${name})</small></span></td>
 	        <td>
-	            <span>${content}</span>${delBtn}            
+	        	<span>
+	        		<strong>
+	        			${username}
+	        		</strong>
+	        		<br>
+	        		<small class="text-secondary">
+	        			(${name})
+	        		</small>
+	        	</span>
 	        </td>
-	        <td><span><small class="text-secondary">${regdate}</small></span></td>
+	        <td>
+	            <span>
+	          		  ${content}
+	            </span>
+	           		 ${delBtn}            
+	        </td>
+	        <td>
+	        	<span>
+	        		${star}
+	        	</span>
+	        </td>
+	        	<td>
+	        		<span>
+	        			<small class="text-secondary">
+	        				${regdate}
+	        			</small>
+	        		</span>
+	        	</td>
 	        </tr>`;
 		out.push(row);
 	});
@@ -99,18 +124,18 @@ function buildComment(result) {
 // 댓글삭제버튼이 눌렸을때 해당 댓글 삭제하는 이벤트리스너를 삭제버튼에 등록
 function addDelete() {
 	// 현재 글의 id
-	const id = $("input[name='id']").val().trim();
+	const id = $("input[name='id']").val();
 	
 	$("[data-cmtdel-id]").click(function() {
 		if (!confirm("댓글을 삭제하시겠습니까?")) return;
 		
 		// 삭제할 댓글의 id
-		const comment_id = $(this).attr("data-cmtdel-id");
+		const hcomment_id = $(this).attr("data-cmtdel-id");
 		$.ajax({
-			url: conPath + "/comment/delete",
+			url: conPath + "/hcomment/delete",
 			type: "POST",
 			cache: false,
-			data: {"id": comment_id},
+			data: {"id": hcomment_id},
 			success: function(data, status) {
 				if (status == "success") {
 					if (data.status !== "OK") {
@@ -119,7 +144,7 @@ function addDelete() {
 					}
 					
 					// 삭제후에는 다시 목록 불러오기
-					loadComment(id);
+					loadHcomment(id);
 				}
 			},
 		});
