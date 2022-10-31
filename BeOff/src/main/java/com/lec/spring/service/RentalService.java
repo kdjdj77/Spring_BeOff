@@ -87,12 +87,12 @@ public class RentalService {
 	public List<Rental> getRentalRList(String rRegion, String sDate, String eDate) {
 		Region region = regionRepository.findByRegion(rRegion);
 		return rentalRepository.findByRegion(region).stream()
-				.filter(rental -> {
-					return rental.getCars().stream()
-						.anyMatch(car -> car.enabled(sDate, eDate));
-				})
+				.filter(rental -> rental.getCars().stream()
+						.anyMatch(car -> car.enabled(sDate, eDate))
+				)
 				.collect(Collectors.toList());
 	}
+
 	
 	// 특정 업체 디테일
 	

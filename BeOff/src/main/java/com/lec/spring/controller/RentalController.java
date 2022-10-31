@@ -91,5 +91,12 @@ out1: 2022-10-28
 		
 		return "rental/reserv";
 	}
+	@PostMapping("/cars/reserveList")
+	public String reserveList(String rentalId, Model model) {
+		Car r = rentalService.getCarById(rentalId);
+		model.addAttribute("r", r);
+
+		return "rental/reserveList";
+	}
 
 }

@@ -29,7 +29,7 @@
                     <p class="fw-bold">Payment Details</p>
                     <p class="dis mb-3">Complete your purchase by providing your payment details</p>
                 </div>
-                <form action="">
+                <form action="reserveList" name="reserveList" methode="post">
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Name</p>
                         <input class="form-control" type="name" value="${user.name } " readonly>
@@ -43,43 +43,34 @@
                         <input class="form-control" type="email" value="${user.email }" readonly>
                     </div>
                     <div>
-                        <p class="dis fw-bold mb-2">Card details</p>
-                        <div class="d-flex align-items-center justify-content-between card-atm border rounded">
-                            <div class="fab fa-cc-visa ps-3"></div>
-                            <input type="text" class="form-control" placeholder="Card Details">
-                            <div class="d-flex w-50">
-                                <input type="text" class="form-control px-0" placeholder="MM/YY">
-                                <input type="password" maxlength=3 class="form-control px-0" placeholder="CVV">
-                            </div>
-                        </div>
                         
                         <div class="address">
                             
                             <div class=" my-3">
-                                <p class="dis fw-bold mb-2">VAT Number</p>
+                                <p class="dis fw-bold mb-2">예약날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="GB012345B9">
+                                    <input class="form-control" type="text" value="2022/12/12" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
                             </div>
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <p>Subtotal</p>
-                                    <p><span class="fas fa-dollar-sign"></span>33.00</p>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <p>VAT<span>(20%)</span></p>
-                                    <p><span class="fas fa-dollar-sign"></span>2.80</p>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="fw-bold">Total</p>
-                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span>35.80</p>
+                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
                                 </div>
-                                <div class="btn btn-secondary mt-2">Pay<span class="fas fa-dollar-sign px-1"></span>35.80
+                                <input type="hidden" name="id" value="${car.id }">
+                                <input class="btn btn-secondary btn-xl text-uppercase" type="button" value="무통장입금">
+                                
+                            </div>
+                            <div class="d-flex flex-column dis">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                </div>
+                                <input type="hidden" name="id" value="${car.id }">
+                                <input class="btn btn-warning btn-xl text-uppercase" type="button" onclick="requestPay('${car.carname}', '${car.price}')" value="카카오페이">
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </form>
             </div>
@@ -91,7 +82,7 @@
           <div class="box-inner-1 pb-3 mb-3 ">
                 <div class="d-flex justify-content-between mb-3 userdetails">
                     <p class="fw-bold">${car.carname }</p>
-                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>33.00+</p>
+                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
                 </div>
                 <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                     data-bs-interval="2000">
@@ -102,6 +93,11 @@
                                 class="d-block w-100">
                         </div>
                     </div>
+                </div>
+                <br>
+                <div>
+                    <p class="fw-bold">Refund Policy</p>
+                    <p class="dis mb-3">You can't refund if you complete payment.</p>
                 </div>
         </div>
       </div>
@@ -116,5 +112,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script src="${pageContext.request.contextPath }/js/rentalReserve.js"></script>
+	
 </body>
 </html>
