@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,5 +33,7 @@ public class Carfile {
 	@Column(nullable = false)
 	private String source;
 	
-
+	@Transient
+	private boolean isImage; // 이미지 여부
+	
 }
