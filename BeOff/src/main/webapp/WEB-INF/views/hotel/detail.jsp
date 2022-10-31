@@ -105,7 +105,7 @@
 						src="${pageContext.request.contextPath }/upload/${i.files[0].file}"
 						alt="..." /></td>
 					<td><button
-							onclick="location.href='../hotel/reserv?hotelid=${hotel.id}&&roomid=${i.id}'">예약하기</button></td>
+							onclick="location.href='../hotel/reserve?id=${i.id}'">예약하기</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
