@@ -105,7 +105,6 @@ function buildHcomment(result) {
 	        </td>
 	        <td>
 	        	<span>
-	        		<div class="bi-star-fill"></div>
 	        		${star}
 	        	</span>
 	        </td>
