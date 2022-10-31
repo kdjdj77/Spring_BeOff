@@ -56,5 +56,4 @@ public class Room {
 	private Double price;
 	@Column(nullable=false)
 	private Long bed;
-
 }

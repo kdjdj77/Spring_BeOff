@@ -42,11 +42,11 @@ class RoomRepositoryTest {
 
 		// 호텔 입력
 
-		Hotel h1 = Hotel.builder().hotelname("시그니엘(서울)").content("국내 최고 호텔입니다").user(adminhotel).region(korea).avgstar(0).build();
-		Hotel h2 = Hotel.builder().hotelname("포시즌스").content("널찍한 객실 공간에 고급스러움을 느낄 수 있습니다").user(adminhotel).region(korea).avgstar(0).build();
-		Hotel h3 = Hotel.builder().hotelname("파라다이스시티").content("조식이 맛있습니다").user(adminhotel).region(korea).avgstar(0).build();
-		Hotel h4 = Hotel.builder().hotelname("롯데호텔").content("위치와 전망이 좋습니다").user(adminhotel).region(korea).avgstar(0).build();
-		Hotel h5 = Hotel.builder().hotelname("JW 메리어트").content("품격 있는 숙박을 원한다면 JW 메리어트를 선택하세요").user(adminhotel).region(korea).avgstar(0).build();
+		Hotel h1 = Hotel.builder().hotelname("시그니엘(서울)").content("국내 최고 호텔입니다").user(adminhotel).region(korea).avgstar(4.5f).build();
+		Hotel h2 = Hotel.builder().hotelname("포시즌스").content("널찍한 객실 공간에 고급스러움을 느낄 수 있습니다").user(adminhotel).region(korea).avgstar(3.7f).build();
+		Hotel h3 = Hotel.builder().hotelname("파라다이스시티").content("조식이 맛있습니다").user(adminhotel).region(korea).avgstar(5f).build();
+		Hotel h4 = Hotel.builder().hotelname("롯데호텔").content("위치와 전망이 좋습니다").user(adminhotel).region(korea).avgstar(3f).build();
+		Hotel h5 = Hotel.builder().hotelname("JW 메리어트").content("품격 있는 숙박을 원한다면 JW 메리어트를 선택하세요").user(adminhotel).region(korea).avgstar(3.5f).build();
 		Hotel h6 = Hotel.builder().hotelname("반얀트리").content("고급진 객실 객실이 있습니다.").user(adminhotel).region(korea).avgstar(0).build();
 		Hotel h7 = Hotel.builder().hotelname("앰배서더").content("세련된 호텔입니다").user(adminhotel).region(korea).avgstar(0).build();
 		Hotel h8 = Hotel.builder().hotelname("더 리츠칼튼").content("공항에서 거리가 가까워요").user(adminhotel).region(japan).avgstar(0).build();

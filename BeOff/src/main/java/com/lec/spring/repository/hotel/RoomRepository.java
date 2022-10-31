@@ -11,12 +11,4 @@ import com.lec.spring.domain.hotel.Room;
 public interface RoomRepository extends JpaRepository<Room, Long>{
 
 	List<Room> findAll();
-
-
-
-
-	
-
-
-
 }

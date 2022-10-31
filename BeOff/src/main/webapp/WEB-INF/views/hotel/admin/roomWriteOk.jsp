@@ -12,7 +12,7 @@
 	<c:otherwise>
 		<script>
 			alert("등록 성공");
-			location.href = "list";
+			location.href = "roomList?id=${id}";
 		</script>
 	</c:otherwise>
 </c:choose>
