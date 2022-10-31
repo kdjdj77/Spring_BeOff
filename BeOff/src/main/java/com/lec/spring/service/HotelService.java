@@ -13,6 +13,7 @@ import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
+import com.lec.spring.domain.hotel.Roomticket;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
@@ -195,11 +196,31 @@ public class HotelService {
 //		return result;
 //	}
 	
-
+	public Room reserve(String id) {
+		Room r = roomRepository.findById(Long.parseLong(id)).orElse(null);
+		return r;	
+	}
 
 	public User getUserData() {
 		
 		return U.getLoggedUser();
+	}
+
+	public List<Roomticket> registerRoomticket(Room r, String checkin, String checkout) {
+		String s = checkin.replaceAll("-", "");
+		String e = checkout.replaceAll("-", "");
+		
+		Long sDate = Long.parseLong(s);
+		Long eDate = Long.parseLong(e);
+		
+		for(Long i = sDate; i < eDate; i++) {
+			Roomticket rt = new Roomticket();
+			rt.setUser(U.getLoggedUser());
+			rt.setRoom(r);
+			rt.setDate(i);
+			roomticketRepository.saveAndFlush(rt);
+		}
+		return roomticketRepository.findByUser(U.getLoggedUser());
 	} 
 	
 }

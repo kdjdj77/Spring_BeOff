@@ -11,7 +11,6 @@ $(function() {
     $("#btn_hcomment").click(function(){
 		// 입력한 값
         const content = $("#input_hcomment").val();
-
         // 검증
         if(!content){
             alert("댓글 입력을 하세요");
@@ -46,7 +45,6 @@ $(function() {
 
 	});
 })
-
 // 특정 글(hotel_id)의 댓글 목록 읽어오기
 function loadHcomment(hotel_id) {
 	$.ajax({
@@ -105,8 +103,8 @@ function buildHcomment(result) {
 	        </td>
 	        <td>
 	        	<span>
-	        		${star}
-	        	</span>
+					★${star}
+	        	<span>
 	        </td>
 	        	<td>
 	        		<span>

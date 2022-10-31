@@ -366,9 +366,9 @@ public class AdminHotelService {
 		return result;
 	}
 
-	public Room reserve(String id) {
-		Room r = roomRepository.findById(Long.parseLong(id)).orElse(null);
-		return r;	
-	}
+//	public Room reserve(String id) {
+//		Room r = roomRepository.findById(Long.parseLong(id)).orElse(null);
+//		return r;	
+//	}
 
 }
