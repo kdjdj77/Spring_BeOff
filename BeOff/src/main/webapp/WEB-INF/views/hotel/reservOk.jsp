@@ -22,6 +22,13 @@
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
+<c:forEach var="i" items="${list }">
+<span>${i.room.hotel.hotelname }</span>
+<span>${i.room.roomname }</span>
+<span>${i.room.price }</span>
+<span>${i.date }</span>
+
+</c:forEach>
 <div class="event-schedule-area-two bg-color pad100">
     <div class="container">
         <div class="row">

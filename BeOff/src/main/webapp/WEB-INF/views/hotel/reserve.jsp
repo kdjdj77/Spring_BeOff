@@ -118,9 +118,17 @@
                         <div class="address">
                             
                             <div class=" my-3">
-                                <p class="dis fw-bold mb-2">예약날짜</p>
+                                <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="1166611" readonly>
+                                    <input class="form-control" type="text" name="checkin" value="2022-12-12" readonly>
+                                    <span class="fas fa-check"></span>
+
+                                </div>
+                            </div>
+                            <div class=" my-3">
+                                <p class="dis fw-bold mb-2">체크아웃</p>
+                                <div class="inputWithcheck">
+                                    <input class="form-control" type="text" name="checkout" value="2022-12-15" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
