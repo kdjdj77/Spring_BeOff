@@ -23,7 +23,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="position:fixed; width:100vw; top:0;">
     <div class="container-fluid">
       <a class="navbar-brand" href="javascript:void(0)">Security</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -82,25 +82,5 @@
       </div>
     </div>
   </nav>
-
-  <div class="container-fluid mt-3">
-  	<!-- 로그인 하지 않았을때 보여주는 화면 -->
-	<sec:authorize access="isAnonymous()">
-         <div TODO="" class="alert alert-warning alert-dismissible">
-             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-             로그인하지 않은 상태입니다 <br>
-         </div>          
-	</sec:authorize>
-    <!-- 로그인 했을때 보여주는 화면 -->  
-    <sec:authorize access="isAuthenticated()">         
-         <div TODO="" class="alert alert-info alert-dismissible">
-             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-             ${userdetails.user}<br>  
-             ${authorities}<br>              
-             로그인 하셨습니다 <br>
-         </div>  		
-  	</sec:authorize> 
-           
-	</div>
 </body>
 </html>
