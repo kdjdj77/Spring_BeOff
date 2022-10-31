@@ -14,4 +14,5 @@ public interface HcommentRepository extends JpaRepository<Hcomment, Long> {
 	List<Hcomment> findByHotel(Hotel hotelId, Sort sort);
 
 
+
 }

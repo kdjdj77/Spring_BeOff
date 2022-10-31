@@ -1,7 +1,7 @@
 $(function() {
 	// 현재 글의 id값
 	const id = $("input[name='id']").val();
-	
+	console.log(id);
 	loadHcomment(id);
 	
 	// 댓글 작성 버튼 누르면 댓글 등록 하기.  
@@ -77,22 +77,44 @@ function buildHcomment(result) {
         let content = hcomment.content;
         let star = hcomment.star;
         let regdate = hcomment.regdate;
-
         let user_id = parseInt(hcomment.user.id);
         let username = hcomment.user.username;
         let name = hcomment.user.name;
         
         // 삭제버튼 여부 : 작성자 본인의 댓글인 경우에만 보이기
         const delBtn = (logged_id !== user_id) ? '' : `
-        	<i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip"
-            data-cmtdel-id="${id}" title="삭제"></i>`;
+        	<i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip" data-cmtdel-id="${id}" title="삭제"></i>`;
 		const row = `
 	        <tr>
-	        <td><span><strong>${username}</strong><br><small class="text-secondary">(${name})</small></span></td>
 	        <td>
-	            <span>${star}</span><span>${content}</span>${delBtn}            
+	        	<span>
+	        		<strong>
+	        			${username}
+	        		</strong>
+	        		<br>
+	        		<small class="text-secondary">
+	        			(${name})
+	        		</small>
+	        	</span>
 	        </td>
-	        <td><span><small class="text-secondary">${regdate}</small></span></td>
+	        <td>
+	            <span>
+	          		  ${content}
+	            </span>
+	           		 ${delBtn}            
+	        </td>
+	        <td>
+	        	<span>
+	        		${star}
+	        	</span>
+	        </td>
+	        	<td>
+	        		<span>
+	        			<small class="text-secondary">
+	        				${regdate}
+	        			</small>
+	        		</span>
+	        	</td>
 	        </tr>`;
 		out.push(row);
 	});
