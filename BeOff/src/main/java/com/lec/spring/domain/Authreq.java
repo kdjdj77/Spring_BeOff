@@ -1,5 +1,6 @@
 package com.lec.spring.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +24,10 @@ public class Authreq {
 	private Long id;
 	
 	@ManyToOne
-	@ToString.Exclude
 	private User user;
 	@ManyToOne
-	@ToString.Exclude
 	private Authority authority;
+	
+	@Column
+	private String content;
 }

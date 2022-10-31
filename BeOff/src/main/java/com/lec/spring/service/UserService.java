@@ -8,14 +8,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.lec.spring.domain.Authority;
+import com.lec.spring.domain.Authreq;
 import com.lec.spring.domain.User;
 import com.lec.spring.repository.AuthorityRepository;
+import com.lec.spring.repository.AuthreqRepository;
 import com.lec.spring.repository.UserRepository;
 
 @Service
 public class UserService {
 	private UserRepository userRepository;
 	private AuthorityRepository authorityRepository;
+	@Autowired
+	private AuthreqRepository authreqRepository;
 	
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
@@ -60,5 +64,29 @@ public class UserService {
 		user.addAuthority(auth);
 		userRepository.save(user);
 		return 1;
+	}
+	public void registerAuthReq(String auth, String userId, String content) {
+		User u = userRepository.findById(Long.parseLong(userId)).orElse(null);
+		Authority au = authorityRepository.findByName(auth);
+		Authreq ar = new Authreq();
+		ar.setUser(u);
+		ar.setContent(content);
+		ar.setAuthority(au);
+		authreqRepository.save(ar);
+	}
+	public List<Authreq> getAllAuthreq() {
+		List<Authreq> list = authreqRepository.findAll();
+		return list;
+	}
+	public void acceptAuth(String authreqId, String userId, String authId) {
+		User user = userRepository.findById(Long.parseLong(userId)).orElse(null);
+		Authority auth = authorityRepository.findById(Long.parseLong(authId)).orElse(null);
+		user.addAuthority(auth);
+		Authreq a = authreqRepository.findById(Long.parseLong(authreqId)).orElse(null);
+		authreqRepository.delete(a);
+	}
+	public void refuseAuth(String authreqId) {
+		Authreq a = authreqRepository.findById(Long.parseLong(authreqId)).orElse(null);
+		authreqRepository.delete(a);
 	}
 }
