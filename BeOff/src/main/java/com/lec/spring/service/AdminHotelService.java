@@ -35,6 +35,7 @@ import com.lec.spring.repository.hotel.AdminHotelRepository;
 import com.lec.spring.repository.hotel.HotelRepository;
 import com.lec.spring.repository.hotel.RoomRepository;
 import com.lec.spring.repository.hotel.RoomfileRepository;
+import com.lec.spring.repository.hotel.RoomticketRepository;
 import com.lec.spring.util.U;
 import org.springframework.util.StringUtils;
 
@@ -46,7 +47,7 @@ public class AdminHotelService {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private AuthorityRepository authorityRepository;
+	private RoomticketRepository roomticketRepository;
 	@Autowired
 	private RegionRepository regionRepository;
 	@Autowired
@@ -72,7 +73,9 @@ public class AdminHotelService {
 		h.setHotelname(hotelname);
 		h.setRegion(regionRepository.findByRegion(region));
 		h.setContent(content);
+		
 		hotelRepository.saveAndFlush(h);
+		
 		return 1;
 	}
 	
@@ -80,20 +83,20 @@ public class AdminHotelService {
 	public int registerRoom(
 			String id, String roomname, Double price, Long bed, Map<String, MultipartFile> files
 			) {
-	Room r = new Room();
-	
-	Long hotelId = Long.parseLong(id);
-	
-	Hotel h = adminHotelRepository.findById(hotelId).get();
-	r.setHotel(h);
-	r.setRoomname(roomname);
-	r.setPrice(price);
-	r.setBed(bed);
-	roomRepository.saveAndFlush(r);
-	
-	addFiles(files, r.getId());
-	
-	return 1;
+		Room r = new Room();
+		
+		Long hotelId = Long.parseLong(id);
+		
+		Hotel h = adminHotelRepository.findById(hotelId).get();
+		r.setHotel(h);
+		r.setRoomname(roomname);
+		r.setPrice(price);
+		r.setBed(bed);
+		roomRepository.saveAndFlush(r);
+		
+		addFiles(files, r.getId());
+		
+		return 1;
 	}
 	
 	// 특정 글(id) 에 첨부파일 추가

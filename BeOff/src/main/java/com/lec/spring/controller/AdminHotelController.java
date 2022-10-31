@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lec.spring.domain.User;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.service.AdminHotelService;
@@ -64,11 +63,8 @@ public class AdminHotelController {
 	// hotel/admin/roomWrite : 룸 등록 : 선택한 호텔의 룸
 	@GetMapping("/roomWrite")
 	public String roomWrite(String id, Model model) {
-		
 		System.out.println("id : "+ id);
-		
 		model.addAttribute("id", id);
-		
 		return "/hotel/admin/roomWrite";
 	}
 	
@@ -78,6 +74,9 @@ public class AdminHotelController {
 		int result = 0;
 		result = adminHotelService.registerHotel(username, hotelname, region, content);
 		model.addAttribute("result", result);
+		
+		System.out.println();
+		
 		return "/hotel/admin/hotelWriteOk";
 	}
 	
@@ -89,6 +88,7 @@ public class AdminHotelController {
 			, Model model) {
 		
 		model.addAttribute("result", adminHotelService.registerRoom(id, roomname, price, bed, files));
+		model.addAttribute("id", id);
 		
 		return "/hotel/admin/roomWriteOk";
 	}
@@ -156,6 +156,9 @@ public class AdminHotelController {
 	public String getReserve(String id, Model model) {
 		Room r = adminHotelService.reserve(id);
 		model.addAttribute("r", r);
+		
+		System.out.println("getRegDate "+ r.getHotel().getRegDate());
+		System.out.println("getRegDateTime "+ r.getHotel().getRegDateTime());
 		
 		return "hotel/admin/getReserve";
 	}

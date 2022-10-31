@@ -34,8 +34,8 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
-                                <h3 class="display-6 fw-bolder text-black mb-2 ">ROOM - List</h3>
-                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                                <h3 class="display-6 fw-bolder text-black mb-2 ">${roomList.hotelname }`s <br> ROOM - List</h3>
+                                <p class="lead fw-normal text-muted mb-5">This is the room information of ${roomList.hotelname }`s If you need to edit, list please click the appropriate button</p>
                             </div>
                         </div>
                     </div>

@@ -49,7 +49,14 @@
 				<div class="card h-100">
 				<!-- <input type="hidden" name="hotelId" value="${hotel.id }"> -->
 					<!-- Product image-->
-					<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}" alt="..." />
+					<c:choose>
+						<c:when test = "${empty hotel.rooms[0].files[0].file}">
+							<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/face02.png" alt="..." />	
+						</c:when>
+						<c:otherwise>
+							<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}" alt="..." />
+						</c:otherwise>
+					</c:choose>
 					<!-- Product details-->
 					<div class="card-body p-4">
 						<div class="text-center">

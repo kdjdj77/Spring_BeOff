@@ -22,6 +22,7 @@ function requestPay(name, price) {
     }, function (rsp) {
         if (rsp.success) {
             console.log(rsp);
+            console.log(today);
             var msg = '결제가 완료되었습니다.\n';
        		msg += '고유ID : ' + rsp.imp_uid+"\n";
        		msg += '상점 거래ID : ' + rsp.merchant_uid+"\n";
