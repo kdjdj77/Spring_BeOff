@@ -1,11 +1,15 @@
-package com.lec.spring.domain.qna;
+package com.lec.spring.domain.hotel;
+
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import javax.persistence.Transient;
+
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,19 +22,22 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@Entity(name = "db_qfile")
-public class FileDTO {
+@Entity(name="db_hotelfile")
+public class Hotelfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "write_id")
-	private Long write;     // 어느글의 첨부파일? (FK)
+
+	@Column(name="hotel_id")
+	private Long hotel;
+
+
+	@Column(nullable = false)
+	private String source;  
+	@Column(nullable = false)
+	private String file;
 	
-	@Column(nullable = false)
-	private String source;   // 원본 파일 명
-	@Column(nullable = false)
-	private String file;     // 저장된 파일 명 (rename 된 파일명)
-	@Transient
-	private boolean isImage; // 이미지 여부
+//	@Transient
+//	private boolean isImage; // 이미지 여부
 }
