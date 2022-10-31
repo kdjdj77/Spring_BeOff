@@ -26,5 +26,5 @@ public class Airname {
 	@Column(length=40, nullable=false)
 	private String name;	
 	@Column(nullable=false)
-	private float price;
+	private Double price;
 }

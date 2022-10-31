@@ -28,7 +28,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.qna.FileDTO;
+import com.lec.spring.domain.qna.Qnafile;
 import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.qna.QfileRepository;
@@ -100,7 +100,7 @@ public class BoardService {
 			System.out.println();
 			
 			// 물리적 파일 업로드
-			FileDTO file = upload(e.getValue());
+			Qnafile file = upload(e.getValue());
 			
 			// 성공하면 DB에도 저장
 			if(file != null) {
@@ -112,8 +112,8 @@ public class BoardService {
 	} // end addFiles()
 	
 	// 물리적으로 파일 저장. 중복된 이름 처리
-	private FileDTO upload(MultipartFile multipartFile) {
-		FileDTO attachment = null;
+	private Qnafile upload(MultipartFile multipartFile) {
+		Qnafile attachment = null;
 
 		// 담긴 파일이 없으면 pass~
 		String originalFilename = multipartFile.getOriginalFilename();
@@ -164,7 +164,7 @@ public class BoardService {
             //throw new FileStorageException("Could not store file : " + multipartFile.getOriginalFilename());
         }	
 		
-        attachment = FileDTO.builder()
+        attachment = Qnafile.builder()
         		.file(fileName)      // 저장된 이름
         		.source(sourceName)  // 원본이름
         		.build()
@@ -188,7 +188,7 @@ public class BoardService {
 			writeRepository.saveAndFlush(write);  // UPDATE
 			
 			// 첨부파일 정보 가져오기
-			List<FileDTO> fileList = fileRepository.findByWrite(write.getId());
+			List<Qnafile> fileList = fileRepository.findByWrite(write.getId());
 			// 이미지 파일 여부 세팅
 			setImage(fileList);
 			write.setFiles(fileList);
@@ -201,11 +201,11 @@ public class BoardService {
 
 	
 	// [이미지 파일 여부 세팅]
-	public void setImage(List<FileDTO> fileList) {
+	public void setImage(List<Qnafile> fileList) {
 		// upload 실제 물리적인 경로
 		String realPath = context.getRealPath(uploadDir);
 		
-		for(FileDTO fileDto : fileList) {
+		for(Qnafile fileDto : fileList) {
 			BufferedImage imgData = null;
 			File f = new File(realPath, fileDto.getFile());  // 첨부파일에 대한 File 객체
 			try {
@@ -312,7 +312,7 @@ public class BoardService {
 			
 			// 삭제할 첨부파일들 삭제
 			for(Long fileId : delfile) {
-				FileDTO file = fileRepository.findById(fileId).orElse(null);
+				Qnafile file = fileRepository.findById(fileId).orElse(null);
 				if(file != null) {
 					delFile(file);  // 물리적으로 삭제
 					fileRepository.delete(file);  // DB 에서 삭제
@@ -335,9 +335,9 @@ public class BoardService {
 		if(write != null) {
 			
 			// 물리적으로 저장된 첨부파일 삭제하기
-			List<FileDTO> fileList = fileRepository.findByWrite(id);
+			List<Qnafile> fileList = fileRepository.findByWrite(id);
 			if(fileList != null && fileList.size() > 0) {
-				for(FileDTO file : fileList) {
+				for(Qnafile file : fileList) {
 					delFile(file);
 				}
 			}
@@ -352,7 +352,7 @@ public class BoardService {
 	
 	
 	// 특정 첨부파일(id)을 물리적으로 삭제
-	private void delFile(FileDTO file) {
+	private void delFile(Qnafile file) {
 		String saveDirectory = context.getRealPath(uploadDir);
 		File f = new File(saveDirectory, file.getFile()); // 물리적으로 저장된 파일들이 삭제 대상
 		System.out.println("삭제시도--> " + f.getAbsolutePath());
