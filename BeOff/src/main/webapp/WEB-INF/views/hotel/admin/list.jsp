@@ -43,13 +43,20 @@
 		<li class="nav-item"><a class="btn btn-outline-dark" href="hotelWrite">호텔 등록</a></li>
 	</ul>
 	<br>
-		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
 			<c:forEach var="hotel" items="${hotelList }">
 			<div class="col mb-5">
 				<div class="card h-100">
 				<!-- <input type="hidden" name="hotelId" value="${hotel.id }"> -->
 					<!-- Product image-->
-					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/room/room3.jpg" alt="..." />
+					<c:choose>
+						<c:when test = "${empty hotel.rooms[0].files[0].file}">
+							<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/face02.png" alt="..." />	
+						</c:when>
+						<c:otherwise>
+							<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}" alt="..." />
+						</c:otherwise>
+					</c:choose>
 					<!-- Product details-->
 					<div class="card-body p-4">
 						<div class="text-center">
@@ -58,9 +65,9 @@
 							<!-- Product reviews-->
 							<div
 								class="d-flex justify-content-center small text-warning mb-2">
-								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
+								<c:forEach var="i" begin="1" end="${hotel.avgstar+0.5}">
+									<div class="bi-star-fill"></div>
+								</c:forEach>
 							</div>
 							<!-- Product Content-->
 							<div>${hotel.content }</div>
@@ -73,8 +80,9 @@
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 						<div class="text-center">
 							<a class="btn btn-outline-dark mt-auto" href="roomWrite?id=${hotel.id }">방등록</a>
-							<a class="btn btn-outline-dark mt-auto" href="update">수정</a>
-							<a class="btn btn-outline-dark mt-auto" href="delete">삭제</a>
+							<a class="btn btn-outline-dark mt-auto" href="roomList?id=${hotel.id }">방목록</a>
+							<a class="btn btn-outline-dark mt-auto" href="update?id=${hotel.id }">수정</a>
+							<a class="btn btn-outline-dark mt-auto" href="delete?id=${hotel.id }">삭제</a>
 						</div>
 					</div>
 				</div>

@@ -3,28 +3,16 @@ package com.lec.spring.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
-
 import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
-import com.lec.spring.domain.hotel.HqryCommentList;
-import com.lec.spring.domain.hotel.HqryResult;
 import com.lec.spring.domain.hotel.Room;
-import com.lec.spring.domain.qna.FileDTO;
-import com.lec.spring.domain.qna.Qcomment;
-import com.lec.spring.domain.qna.Qna;
-import com.lec.spring.domain.qna.QqryCommentList;
-import com.lec.spring.domain.qna.QqryResult;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;

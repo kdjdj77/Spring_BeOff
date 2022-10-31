@@ -23,14 +23,17 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
    
     <body class="d-flex flex-column h-100">
     <%-- 인증 헤더 --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-   <form name="frm" action="RoomWriteOk" method="post" enctype="Multipart/form-data">         
+   <form name="frm" action="roomWriteOk" method="post" enctype="Multipart/form-data">         
             <!-- Room Header-->
             <header class="bg-write py-5">
+            <div>
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
                     <div class="row gx-5 justify-content-center">
@@ -51,13 +54,35 @@
                                 <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="bed" placeholder="침대갯수를 입력하세요" name="bed" required>
                     			<input type="hidden" name="id" value="${id }">
                     			
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+					            <%-- 상단에 jQuery 추가하기--%>
+					            <h3 class="display-7 fw-bolder text-black mb-2 ">Room Image</h3>
+								<div class="container mt-3 mb-3 border rounded">
+									<div class="mb-3 mt-3">
+										<div id="files">
+										
+										</div>
+										<button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
+									</div>
+								</div>
+								<script>
+								<%-- 주의! jsp 파일 안에서 Template Literal 사용하면 ${} 는 EL 구문으로 인식되어 서버단에서 먼저 처리된다
+								     응답에 출력해야 하는 경우 \${ }  처럼 escaping 해야 한다 --%>
+								var i = 0;
+								$("#btnAdd").click(function(){
+									$("#files").append(`
+												<div class="input-group mb-2">
+												<input class="form-control col-xs-3" type="file" name="upfile\${i}"/>
+												</div>`);
+									i++;
+									$("#btnAdd").hide();
+								});
+								</script>
+								<%-- ---------------------- --%>
                                     <button class="btn btn-outline-dark">등록</button>
                                     <a class="btn btn-outline-dark" href="list">목록</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
                     </div>
                 </div>
             </header>

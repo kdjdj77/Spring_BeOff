@@ -41,6 +41,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			// ↓ /board/write/** /board/update/** /board/delete/** 주소로 들어오는 요청은 '인증' 뿐 아니라 ROLE_MEMBER 나 ROLE_ADMIN 권한을 갖고 있어야 한다 ('인가')
 			.antMatchers("/board/write/**", "/board/update/**", "/board/delete/**").access("hasRole('ROLE_MEMBER') or hasRole('ROLE_ADMIN')")
 			
+			//비행기 관련 페이지 권한
+			.antMatchers("/air/onewayReserv", "/air/roundReserv").access("hasRole('ROLE_MEMBER')")
+			.antMatchers("/air/admin/**").access("hasRole('ROLE_ADMIN_AIR')")
+			
+			//숙소 관련 페이지 권한
+			.antMatchers("/hotel/reserv", "/hcomment/write").access("hasRole('ROLE_MEMBER')")
+			.antMatchers("/hotel/admin/**").access("hasRole('ROLE_ADMIN_HOTEL')")
+			
+			//렌트카 관련 페이지 권한
+			.antMatchers("/rental/cars/reserv").access("hasRole('ROLE_MEMBER')")
+			.antMatchers("/rental/admin/**").access("hasRole('ROLE_ADMIN_RENTAL')")
+			
 			// ↓ 그 밖의 다른 요청은 모두 permit! (위 주소들만 아니면 누구나 접근 가능!)
 			.anyRequest().permitAll()
 			 

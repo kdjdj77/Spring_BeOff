@@ -28,7 +28,7 @@
     <body class="d-flex flex-column h-100">
     <%-- 인증 헤더 --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    <form name="frm" action="HotelWriteOk" method="post" enctype="Multipart/form-data">
+    <form name="frm" action="hotelWriteOk" method="post" enctype="Multipart/form-data">
         <main class="flex-shrink-0">
             <!-- Hotel Header-->
             <header class="bg-dark py-5">
@@ -38,11 +38,12 @@
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
                                 <h3 class="display-6 fw-bolder text-white mb-2 ">HOTEL</h3>
-                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                                <p class="lead fw-normal text-muted mb-5">This is the hotel registration page. Please enter the required information and register.</p>
                             </div>
                         </div>
                     </div>
                         <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+                        
                     	<div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
                             	<h3 class="display-7 fw-bolder text-white mb-2 ">Username</h3>
@@ -57,6 +58,7 @@
                                 		<option value="${r }">${r }</option>
                                 	</c:forEach>
                                 </select>
+                                <br><br>
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Content</h3>
                                 <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="content" placeholder="호텔설명을 입력하세요" name="content" required>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
