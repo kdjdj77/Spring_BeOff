@@ -195,7 +195,10 @@ public class HotelService {
 //		return result;
 //	}
 	
-
+	public Room reserve(String id) {
+		Room r = roomRepository.findById(Long.parseLong(id)).orElse(null);
+		return r;	
+	}
 
 	public User getUserData() {
 		
