@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.User;
@@ -41,4 +42,8 @@ public class Airticket extends BaseEntity{
 	@Column(nullable=false)
 	private String seat;
 	
+	@Transient
+	Double price;
+	@Transient
+	String ids;
 }
