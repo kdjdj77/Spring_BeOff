@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.qna.Roomfile;
+import com.lec.spring.domain.qna.Qnafile;
 import com.lec.spring.domain.qna.Qcomment;
 import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.repository.qna.QCommentRepository;
@@ -221,42 +221,42 @@ class RepositoryTest {
 		commentRepository.findAll().forEach(System.out::println);
 
 		// 첨부파일 
-		Roomfile file1 = Roomfile.builder()
+		Qnafile file1 = Qnafile.builder()
 				.file("face01.png")
 				.source("face01.png")
 				.write(w1.getId())
 				.build();
-		Roomfile file2 = Roomfile.builder()
+		Qnafile file2 = Qnafile.builder()
 				.file("face02.png")
 				.source("face02.png")
 				.write(w1.getId())
 				.build();
-		Roomfile file3 = Roomfile.builder()
+		Qnafile file3 = Qnafile.builder()
 				.file("face03.png")
 				.source("face03.png")
 				.write(w2.getId())
 				.build();
-		Roomfile file4 = Roomfile.builder()
+		Qnafile file4 = Qnafile.builder()
 				.file("face04.png")
 				.source("face04.png")
 				.write(w2.getId())
 				.build();
-		Roomfile file5 = Roomfile.builder()
+		Qnafile file5 = Qnafile.builder()
 				.file("face05.png")
 				.source("face05.png")
 				.write(w3.getId())
 				.build();
-		Roomfile file6 = Roomfile.builder()
+		Qnafile file6 = Qnafile.builder()
 				.file("face06.png")
 				.source("face06.png")
 				.write(w3.getId())
 				.build();
-		Roomfile file7 = Roomfile.builder()
+		Qnafile file7 = Qnafile.builder()
 				.file("face07.png")
 				.source("face07.png")
 				.write(w4.getId())
 				.build();
-		Roomfile file8 = Roomfile.builder()
+		Qnafile file8 = Qnafile.builder()
 				.file("face08.png")
 				.source("face08.png")
 				.write(w4.getId())
