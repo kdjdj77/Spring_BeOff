@@ -27,70 +27,49 @@
 								<h1 class="text-black mb-4">업체 수정</h1>
 
 								<div class="card" style="border-radius: 15px;">
+								<input type="hidden" name="id" value="${rental.id }">
 									<div class="card-body">
 
 										<div class="row align-items-center pt-4 pb-3">
 											<div class="col-md-3 ps-5">
-
 												<h6 class="mb-0">업체명</h6>
-
 											</div>
 											<div class="col-md-9 pe-5">
-
 												<input type="text" class="form-control form-control-lg"
 													id="rentalname" name="rentalname" value="${rental.rentalname }" readonly="readonly"/>
-
 											</div>
 										</div>
-
-
 										<hr class="mx-n3">
-
 										<div class="row align-items-center py-3">
 											<div class="col-md-3 ps-5">
-
 												<h6 class="mb-0">업체 사진</h6>
-
 											</div>
 											<div class="col-md-9 pe-5">
-
 												<input class="form-control form-control-lg" id="formFileLg"
 													type="file" />
-
 											</div>
 										</div>
-
 										<hr class="mx-n3">
-
 										<div class="row align-items-center py-3">
 											<div class="col-md-3 ps-5">
-
 												<h6 class="mb-0">업체설명</h6>
-
 											</div>
 											<div class="col-md-9 pe-5">
-
 												<textarea class="form-control" rows="3" id="content"
 													name="content">${rental.content }</textarea>
-
 											</div>
 										</div>
-
 										<hr class="mx-n3">
-
 										<div class="px-5 py-4">
 											<button class="btn btn-secondary btn-lg">수정</button>
 											<a class="btn btn-secondary btn-lg" href="list">업체 리스트</a>
 										</div>
-
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div>
-
 
 			</div>
 		</main>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<sec:authentication property="name" var="username"/>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +34,23 @@
 										<div class="row align-items-center pt-4 pb-3">
 											<div class="col-md-3 ps-5">
 
+												<h6 class="mb-0">작성자</h6>
+
+											</div>
+											<div class="col-md-9 pe-5">
+
+												<input type="text" class="form-control form-control-lg"
+													id="username" name="username" value="${username }"
+													readonly/>
+
+											</div>
+										</div>
+
+										<hr class="mx-n3">
+
+										<div class="row align-items-center pt-4 pb-3">
+											<div class="col-md-3 ps-5">
+
 												<h6 class="mb-0">업체명</h6>
 
 											</div>
@@ -40,6 +59,25 @@
 												<input type="text" class="form-control form-control-lg"
 													id="rentalname" name="rentalname" placeholder="업체명을 입력하세요"
 													required="required" />
+
+											</div>
+										</div>
+
+										<hr class="mx-n3">
+
+										<div class="row align-items-center pt-4 pb-3">
+											<div class="col-md-3 ps-5">
+
+												<h6 class="mb-0">국가</h6>
+
+											</div>
+											<div class="col-md-9 pe-5">
+
+												<select name="region" id="region">
+													<c:forEach var="region" items="${regionList}">    
+                        						<option value="${region }">${region }</option>
+													</c:forEach>
+												</select>
 
 											</div>
 										</div>
