@@ -29,7 +29,7 @@
                     <p class="fw-bold">Payment Details</p>
                     <p class="dis mb-3">Complete your purchase by providing your payment details</p>
                 </div>
-                <form action="">
+                <form action="reserveList" name="reserveList" methode="post">
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Name</p>
                         <input class="form-control" type="name" value="${user.name } " readonly>
@@ -59,8 +59,9 @@
                                     <p class="fw-bold">Total</p>
                                     <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
                                 </div>
-                                <div class="btn btn-secondary mt-2">무통장입금<span class="fas fa-dollar-sign px-1"></span>
-                                </div>
+                                <input type="hidden" name="id" value="${car.id }">
+                                <input class="btn btn-secondary btn-xl text-uppercase" type="button" value="무통장입금">
+                                
                             </div>
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">

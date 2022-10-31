@@ -92,6 +92,7 @@ public class RentalService {
 				)
 				.collect(Collectors.toList());
 	}
+
 	
 	// 특정 업체 디테일
 	
