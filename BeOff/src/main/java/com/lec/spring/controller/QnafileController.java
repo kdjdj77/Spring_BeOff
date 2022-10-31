@@ -20,7 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lec.spring.domain.qna.Roomfile;
+import com.lec.spring.domain.qna.Qnafile;
 import com.lec.spring.repository.qna.QfileRepository;
 
 // 파일 다운로드를 위한 컨트롤러
@@ -54,7 +54,7 @@ public class QnafileController {
 	public ResponseEntity<Object> download(Long id){
 		if(id == null) return new ResponseEntity<Object>(null, HttpStatus.BAD_REQUEST);  // 400
 		
-		Roomfile file = fileRepository.findById(id).orElse(null);
+		Qnafile file = fileRepository.findById(id).orElse(null);
 		if(file == null) return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);  // 404
 		
 		String sourceName = file.getSource();   // 원본 이름

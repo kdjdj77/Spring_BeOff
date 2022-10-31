@@ -58,9 +58,9 @@ public class Qna extends BaseEntity{
 	@OneToMany(mappedBy = "write", cascade = CascadeType.ALL)
 	@ToString.Exclude
 	@Builder.Default  // 아래와 같이 초깃값 있으면 @Builder.Default 처리  (builder 에서 제공안함)
-	private List<Roomfile> files = new ArrayList<>();  // NPE 방지
+	private List<Qnafile> files = new ArrayList<>();  // NPE 방지
 	
-	public void addFiles(Roomfile... files) {  // xxxToMany 의 경우 만들어두면 편리
+	public void addFiles(Qnafile... files) {  // xxxToMany 의 경우 만들어두면 편리
 		if(files != null) {
 			Collections.addAll(this.files, files);
 		}

@@ -9,6 +9,7 @@
         <meta name="author" content="" />
         <title>Landing Page - Start Bootstrap Theme</title>
         <script src="https://kit.fontawesome.com/51772bd9bd.js" crossorigin="anonymous"></script>
+        
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
