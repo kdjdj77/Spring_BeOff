@@ -1,7 +1,6 @@
 $(function() {
 	// 현재 글의 id값
 	const id = $("input[name='id']").val().trim();
-	
 	loadComment(id);
 	
 	// 댓글 작성 버튼 누르면 댓글 등록 하기.  
@@ -74,7 +73,6 @@ function buildComment(result) {
 	result.data.forEach(comment => {
 		let id = comment.id;
         let content = comment.content.trim();
-        let star = comment.star;
         let regdate = comment.regdate;
 
         let user_id = parseInt(comment.user.id);

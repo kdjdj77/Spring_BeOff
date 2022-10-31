@@ -11,38 +11,27 @@
 <sec:authentication property="principal" var="userdetails" />
 
 
-
-		<c:set var="dto" value="${list[0]}" />
-		<!DOCTYPE html>
-		<html lang="ko">
-
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-	const conPath = "${pageContext.request.contextPath }";
-	const logged_id = $
-	{
-		userdetails.user.id
-	};
-</script>
-<script src="${pageContext.request.contextPath }/js/comment.js"></script>
-<title>조회 - ${dto.subject}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<meta charset="UTF-8">
+
+	<script>
+		const conPath = "${pageContext.request.contextPath }";
+		const logged_id = ${userdetails.user.id };
+	</script>
+<script src="${pageContext.request.contextPath }/js/comment.js"></script>
 <title>detail</title>
 </head>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div>
 		<form action="${pageContext.request.contextPath}/hotel/list"
 			name="frm" id="frm" method="post">
@@ -122,33 +111,10 @@
 		</tbody>
 	</table>
 
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>내용</th>
-				<th>별점</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="co" items="${hotel.hcomments }">
-				<tr>
-					<td>${co.user.username }</td>
-					<td>${co.regDateTime }</td>
-					<td>${co.content }</td>
-					<td>${co.star }</td>
-					<td>
-						<button>수정</button>
-						<button>삭제</button>
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	
+    <input type="hidden" name="id" value="${hotel.id }">
 
-
-	<jsp:include page="hcomment.jsp"></jsp:include>
+	<jsp:include page="hcomment.jsp"/>
 
 
 </body>

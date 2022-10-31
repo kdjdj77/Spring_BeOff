@@ -22,6 +22,13 @@
 	        <div class="input-group my-2">
 	            <input type="text" class="form-control" id="input_hcomment">
 	            <button type="button" class="btn btn-outline-primary" id="btn_hcomment">작성</button>
+	        	<p class="star_rating">
+					 <a href="#" class="on">★</a>
+    				 <a href="#" class="on">★</a>
+					 <a href="#" class="on">★</a>
+					 <a href="#">★</a>
+				 	 <a href="#">★</a>
+				</p>
 	        </div>
 	    </sec:authorize>
         <table class="table table-hover mt-3" id="cmt_table">
@@ -40,3 +47,14 @@
     </div>
 </div>
 <!-- 댓글 -->
+<script>
+$( ".star_rating a" ).click(function() {
+
+    $(this).parent().children("a").removeClass("on");
+
+    $(this).addClass("on").prevAll("a").addClass("on");
+
+    return false;
+
+});
+</script>
