@@ -78,7 +78,8 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<h3>${rental.rentalname }</h3>
-					<select name="rentalregion" id="region">   
+					<select onchange="sizeOption()" name="sizeOption" id="sizeOption">   
+                        <option value="all">전체</option>
                         <option value="small">소형</option>
                         <option value="middle">중형</option>
                         <option value="large">대형</option>
@@ -179,5 +180,27 @@
 		 out.value = out1.value.toString(); */
 		frm.submit();
 	});
+	
+	function sizeOption() {
+		var selectList = document.getElementById("sizeOption")
+		
+		if(selectList.options[selectList.selectedIndex].value == "all") {
+			
+		}
+		if(selectList.options[selectList.selectedIndex].value == "small") {
+			
+		}
+		if(selectList.options[selectList.selectedIndex].value == "middle") {
+			
+		}
+		if(selectList.options[selectList.selectedIndex].value == "large") {
+			
+		}
+		if(selectList.options[selectList.selectedIndex].value == "suv") {
+			
+		}
+	}
+	
+	
 </script>
 </html>

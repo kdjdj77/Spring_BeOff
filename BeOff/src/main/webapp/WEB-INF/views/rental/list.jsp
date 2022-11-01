@@ -60,7 +60,7 @@
 									<td><input type="text" class=""
 										id="end" name="out1" value="${eDate}"  ></td>
 									<td><button type="button"
-											class="btn btn-outline-secondary" id="sub" name ="sub">검색</button></td>
+											class="btn btn-outline-secondary" id="sub" name ="sub" onclick="hsubmit()">검색</button></td>
 								</tr>
 							</thead>
 						</table>
@@ -153,15 +153,40 @@
    });
 </script>
 <script>
-let btn = document.getElementById("sub");
-btn.addEventListener("click",function onsubmit(){
-/*    let inn = document.getElementById("inn");
-   let out = document.getElementById("out"); */
-   let in1 = document.getElementById("start");
-   let out1 = document.getElementById("end");
-/*    inn.value = in1.value.toString();
-   out.value = out1.value.toString(); */
-   frm.submit();
-} );
+
+	let btn = document.getElementById("sub");
+/* 	let inn = document.querySelector("#inn");
+	let out = document.querySelector("#out"); */
+	let in1 = document.querySelector("#start");
+	let out1 = document.querySelector("#end");
+
+	btn.addEventListener("click", function onsubmit() {
+/* 		let inn = document.getElementById("inn");
+		let out = document.getElementById("out"); */
+		let in1 = document.getElementById("start");
+		let out1 = document.getElementById("end");
+		/*    inn.value = in1.value.toString();
+		 out.value = out1.value.toString(); */
+		frm.submit();
+	});
+
+	function hsubmit() {
+
+		if (in1.value === "") {
+			alert('대여날짜를 선택해주세요');
+			return;
+		}
+		if (out1.value === "") {
+			alert('반납 날짜를 선택해주세요');
+			return;
+		}
+		if (in1.value > out1.value) {
+			alert('대여날짜는 반납날짜 이전이어야 합니다')
+		}
+/* 		inn.value = in1.value.toString();
+		out.value = out1.value.toString(); */
+
+		frm.submit();
+	}
 </script>
 </html>
