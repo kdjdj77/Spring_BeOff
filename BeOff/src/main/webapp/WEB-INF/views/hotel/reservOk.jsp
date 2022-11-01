@@ -22,6 +22,14 @@
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
+<c:forEach var="i" items="${list }">
+<span>${i.room.hotel.hotelname }</span>
+<span>${i.room.roomname }</span>
+<span>${i.room.price }</span>
+<span>${i.date }</span>
+<span>${i.regDateTime }</span>
+</c:forEach>
+
 <div class="event-schedule-area-two bg-color pad100">
     <div class="container">
         <div class="row">
@@ -48,28 +56,35 @@
                                         <th scope="col">호텔이름</th>
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
+                                        <th scope="col">며칠?</th>
                                         <th scope="col">취소</th>
                                         <th class="text-center" scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach var="list" items="${list }">
                                     <tr class="inner-box">
-                                        <th scope="row"><h3> </h3></th>
+                                        <th scope="row"><h5>${list.regDateTime }</h5></th>
                                         <td>
                                             <div class="event-wrap">
-                                                <h3>${room.hotel.hotelname }</h3>
+                                                <h5>${list.room.hotel.hotelname }</h5>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="event-wrap">
-                                                <h3>${room.roomname }</h3>
+                                                <h5>${list.room.roomname }</h5>
                                                 <div class="meta">
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="r-no">
-                                                <h3>${room.price } won</h3>
+                                                <h5>${list.room.price } won</h5>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="r-no">
+                                                <h5>${list.date }</h5>
                                             </div>
                                         </td>
                                         <td>
@@ -77,7 +92,7 @@
                                                 <a class="btn btn-secondary" href="#">예약취소</a>
                                             </div>
                                         </td>
-                                    
+                                </c:forEach>    
                                 </tbody>
                             </table>
                         </div>
@@ -92,7 +107,7 @@
         <!-- /row end-->
     </div>
 </div>
-   
+<div>${list }</div>   
 
    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

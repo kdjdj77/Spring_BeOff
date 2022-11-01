@@ -20,7 +20,6 @@ import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.domain.hotel.Roomticket;
-import com.lec.spring.domain.qna.Qna;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
@@ -262,8 +261,42 @@ public class HotelService {
 		return U.getLoggedUser();
 	}
 
-	
 
+	public void registerRoomticket(Room r, String checkin, String checkout) {
+		String s = checkin.replaceAll("-", "");
+		String e = checkout.replaceAll("-", "");
+		
+		Long sDate = Long.parseLong(s);
+		Long eDate = Long.parseLong(e);
+		
+		for(Long i = sDate; i < eDate; i++) {
+			Roomticket rt = new Roomticket();
+			rt.setUser(U.getLoggedUser());
+			rt.setRoom(r);
+			rt.setDate(i);
+			roomticketRepository.saveAndFlush(rt);
+		}
+	}
+
+	public List<Roomticket> getRoomTickets() {
+//		Roomticket rt = new Roomticket();
+//		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
+//		int cnt=0;
+//		for(Roomticket rtk : list) {
+//			if(!rtk.getRegDateTime().equals(list.get(cnt).getRegDateTime())) {
+//				rtk = list.get(cnt);
+//			}else {
+//				rtk.setDate(list.get(cnt).getDate());
+//				rtk.setId(list.get(cnt).getId());
+//				rtk.setRegDate(list.get(cnt).getRegDate());
+//				rtk.setRoom(list.get(cnt).getRoom());
+//				roomticketRepository.saveAndFlush(rtk);
+//			}
+//			cnt++;
+//		}
+		
+		return roomticketRepository.findByUser(U.getLoggedUser());
+	} 
 
 	
 }

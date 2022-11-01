@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lec.spring.domain.Region;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.service.HotelService;
@@ -102,16 +100,17 @@ public class HotelController {
 		return "hotel/reserve";
 	}
 	@PostMapping("/reservOk")
-	public String getReserve(String id, Model model) {
+	public String getReserve(String id, String checkin, String checkout, Model model) {
 		
 		Room r = hotelService.reserve(id);
-		model.addAttribute("r", r);
-		model.addAttribute("room", hotelService.getRoomById(id));
-		System.out.println("getRegDate "+ r.getHotel().getRegDate());
-		System.out.println("getRegDateTime "+ r.getHotel().getRegDateTime());
 		
+		hotelService.registerRoomticket(r, checkin, checkout);	
+		return "redirect:/hotel/tickets";
+	}
+	@GetMapping("/tickets")
+	public String getTickets(Model model) {
+		model.addAttribute("list",hotelService.getRoomTickets());	
 		return "hotel/reservOk";
 	}
-
 	
 }
