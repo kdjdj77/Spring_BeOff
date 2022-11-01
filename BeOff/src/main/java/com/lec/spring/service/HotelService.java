@@ -206,7 +206,7 @@ public class HotelService {
 		return U.getLoggedUser();
 	}
 
-	public List<Roomticket> registerRoomticket(Room r, String checkin, String checkout) {
+	public void registerRoomticket(Room r, String checkin, String checkout) {
 		String s = checkin.replaceAll("-", "");
 		String e = checkout.replaceAll("-", "");
 		
@@ -220,6 +220,25 @@ public class HotelService {
 			rt.setDate(i);
 			roomticketRepository.saveAndFlush(rt);
 		}
+	}
+
+	public List<Roomticket> getRoomTickets() {
+//		Roomticket rt = new Roomticket();
+//		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
+//		int cnt=0;
+//		for(Roomticket rtk : list) {
+//			if(!rtk.getRegDateTime().equals(list.get(cnt).getRegDateTime())) {
+//				rtk = list.get(cnt);
+//			}else {
+//				rtk.setDate(list.get(cnt).getDate());
+//				rtk.setId(list.get(cnt).getId());
+//				rtk.setRegDate(list.get(cnt).getRegDate());
+//				rtk.setRoom(list.get(cnt).getRoom());
+//				roomticketRepository.saveAndFlush(rtk);
+//			}
+//			cnt++;
+//		}
+		
 		return roomticketRepository.findByUser(U.getLoggedUser());
 	} 
 	
