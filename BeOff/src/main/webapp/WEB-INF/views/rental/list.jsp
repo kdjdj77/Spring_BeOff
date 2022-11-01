@@ -76,7 +76,7 @@
 		<input type="hidden" name="rentalId" value="${dto.id }">
 		<input type="hidden" name="sDate" value="${sDate }">
 		<input type="hidden" name="eDate" value="${eDate }">
-		
+		<input type="hidden" name="sizeOption" value="all">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-1"></div>

@@ -78,15 +78,17 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<h3>${rental.rentalname }</h3>
-					<form>
-					<input type="hidden">
-					<select onchange="sizeOption()" name="sizeOption" id="sizeOption">   
-                        <option value="all">전체</option>
-                        <option value="small">소형</option>
-                        <option value="middle">중형</option>
-                        <option value="large">대형</option>
-                        <option value="suv">SUV</option>
-					</select>
+					<form action="list" method="post">
+						<input type="hidden" name="sDate" value="${sDate}">
+						<input type="hidden" name="eDate" value="${eDate}">
+						<input type="hidden" name="rentalId" value="${rentalId}">
+						<select onchange="submit()" name="sizeOption" id="sizeOption">   
+	                        <option value="all">전체</option>
+	                        <option value="small">소형</option>
+	                        <option value="middle">중형</option>
+	                        <option value="large">대형</option>
+	                        <option value="suv">SUV</option>
+						</select>
 					</form>
 				</div>
 				<div class="col-lg-2"></div>
@@ -94,7 +96,7 @@
 		</div><br>
 
 			<div class="container">
-		<c:forEach var="i" items="${rental.cars }">
+		<c:forEach var="i" items="${carList}">
 		<form action="reserv" method="POST">
 				<div class="card" style="width: 18rem;">
 					<img src="/upload/g80.jpg" class="card-img-top" alt="...">
@@ -183,27 +185,5 @@
 		 out.value = out1.value.toString(); */
 		frm.submit();
 	});
-	
-	function sizeOption() {
-		var selectList = document.getElementById("sizeOption")
-		
-		if(selectList.options[selectList.selectedIndex].value == "all") {
-			
-		}
-		if(selectList.options[selectList.selectedIndex].value == "small") {
-			
-		}
-		if(selectList.options[selectList.selectedIndex].value == "middle") {
-			
-		}
-		if(selectList.options[selectList.selectedIndex].value == "large") {
-			
-		}
-		if(selectList.options[selectList.selectedIndex].value == "suv") {
-			
-		}
-	}
-	
-	
 </script>
 </html>
