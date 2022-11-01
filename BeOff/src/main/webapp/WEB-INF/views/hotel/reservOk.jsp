@@ -79,12 +79,14 @@
                                         </td>
                                         <td>
                                             <div class="r-no">
-                                                <h5>${list.room.price } won</h5>
+                                                <h5>${list.price } won</h5>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="r-no">
-                                                <h5>${list.date }</h5>
+                                            	<c:forEach var="i" items="${list.date }">
+                                                	<h5>${i }</h5>
+                                                </c:forEach>
                                             </div>
                                         </td>
                                         <td>
