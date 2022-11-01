@@ -206,7 +206,7 @@ public class HotelService {
 		return U.getLoggedUser();
 	}
 
-	public List<Roomticket> registerRoomticket(Room r, String checkin, String checkout) {
+	public void registerRoomticket(Room r, String checkin, String checkout) {
 		String s = checkin.replaceAll("-", "");
 		String e = checkout.replaceAll("-", "");
 		
@@ -220,6 +220,9 @@ public class HotelService {
 			rt.setDate(i);
 			roomticketRepository.saveAndFlush(rt);
 		}
+	}
+
+	public List<Roomticket> getRoomTickets() {
 		return roomticketRepository.findByUser(U.getLoggedUser());
 	} 
 	

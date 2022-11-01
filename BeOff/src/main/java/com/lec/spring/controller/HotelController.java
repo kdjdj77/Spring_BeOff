@@ -103,14 +103,14 @@ public class HotelController {
 	public String getReserve(String id, String checkin, String checkout, Model model) {
 		
 		Room r = hotelService.reserve(id);
-//		model.addAttribute("r", r);
-//		model.addAttribute("room", hotelService.getRoomById(id));
 		
-		model.addAttribute("list",hotelService.registerRoomticket(r, checkin, checkout)); 
-		
-		
+		hotelService.registerRoomticket(r, checkin, checkout);	
+		return "redirect:/hotel/tickets";
+	}
+	@GetMapping("/tickets")
+	public String getTickets(Model model) {
+		model.addAttribute("list",hotelService.getRoomTickets());	
 		return "hotel/reservOk";
 	}
-
 	
 }
