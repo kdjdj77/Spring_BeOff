@@ -114,13 +114,21 @@
                         <p class="dis fw-bold mb-2">Email</p>
                         <input class="form-control" type="email" value="${r.hotel.user.email }" readonly>
                     </div>
-                    <div>
+                    
                         <div class="address">
                             
                             <div class=" my-3">
-                                <p class="dis fw-bold mb-2">예약날짜</p>
+                                <p class="dis fw-bold mb-2">체크인 날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="1166611" readonly>
+                                    <input class="form-control" type="text" value="${room }" readonly>
+                                    <span class="fas fa-check"></span>
+
+                                </div>
+                            </div>
+                            <div class=" my-3">
+                                <p class="dis fw-bold mb-2">체크아웃 날짜</p>
+                                <div class="inputWithcheck">
+                                    <input class="form-control" type="text" value="${room }" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>

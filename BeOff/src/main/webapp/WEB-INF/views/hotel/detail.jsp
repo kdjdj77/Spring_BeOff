@@ -16,22 +16,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-	<script>
-		const conPath = "${pageContext.request.contextPath }";
-		const logged_id = ${userdetails.user.id };
-	</script>
+<script>
+	const conPath = "${pageContext.request.contextPath }";
+	const logged_id = ${userdetails.user.id};
+</script>
 <script src="${pageContext.request.contextPath }/js/comment.js"></script>
 <title>detail</title>
 </head>
 
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div>
 		<form action="${pageContext.request.contextPath}/hotel/list"
 			name="frm" id="frm" method="post">
@@ -79,10 +83,12 @@
 				<td>${hotel.id }</td>
 				<td>${hotel.hotelname }</td>
 				<td>${hotel.content }</td>
-				<td>${hotel.avgstar }</td>
+				<td><label><span id="star_cnt"></span> 점</label></td>
 			</tr>
 		</tbody>
 	</table>
+	
+    
 	<table class="table table-bordered" id="table">
 		<thead>
 			<tr>
@@ -111,10 +117,10 @@
 		</tbody>
 	</table>
 
-	
-    <input type="hidden" name="id" value="${hotel.id }">
 
-	<jsp:include page="hcomment.jsp"/>
+	<input type="hidden" name="id" value="${hotel.id }">
+
+	<jsp:include page="hcomment.jsp" />
 
 
 </body>
@@ -205,4 +211,4 @@
 	}
 </script>
 
-		</html>
+</html>
