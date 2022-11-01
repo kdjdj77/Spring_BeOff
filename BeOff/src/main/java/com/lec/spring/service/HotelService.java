@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.domain.hotel.Roomticket;
@@ -21,6 +27,7 @@ import com.lec.spring.repository.hotel.HotelRepository;
 import com.lec.spring.repository.hotel.RoomRepository;
 import com.lec.spring.repository.hotel.RoomfileRepository;
 import com.lec.spring.repository.hotel.RoomticketRepository;
+import com.lec.spring.util.C;
 import com.lec.spring.util.U;
 
 @Service
@@ -55,7 +62,44 @@ public class HotelService {
 		return RList;
 	}
 		
-	
+	public List<Hotel> list(Integer page, Model model){
+		if(page == null) page = 1;
+		if(page < 1) page = 1;
+		
+		HttpSession session = U.getSession();
+		Integer writePages = (Integer)session.getAttribute("writePages");
+		if(writePages == null) writePages = C.WRITE_PAGES;
+		Integer pageRows = (Integer)session.getAttribute("pageRows");
+		if(pageRows == null) pageRows = C.PAGE_ROWS;   // session 에 없으면 기본값으로
+		session.setAttribute("page", page);
+		
+		Page<Hotel> pageWrites = hotelRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));	
+
+		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
+		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
+		if(page > totalPage) page = totalPage;   // 페이지 보정
+
+		// [페이징] 에 표시할 '시작페이지' 와 '마지막페이지' 계산
+		int startPage = ((int)((page - 1) / writePages) * writePages) + 1;
+		int endPage = startPage + writePages - 1;
+		if (endPage >= totalPage) endPage = totalPage;
+		
+		model.addAttribute("cnt", cnt);  // 전체 글 개수
+		model.addAttribute("page", page); // 현재 페이지
+		model.addAttribute("totalPage", totalPage);  // 총 '페이지' 수
+		model.addAttribute("pageRows", pageRows);  // 한 '페이지' 에 표시할 글 개수
+		
+		// [페이징]
+		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
+		model.addAttribute("writePages", writePages); // [페이징] 에 표시할 숫자 개수
+		model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
+		model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
+		
+		List<Hotel> list = pageWrites.getContent();	
+		model.addAttribute("list", list);
+		
+		return list;
+	}
 	//호텔 리스트 + 룸 가격
 	public List<Hotel> getHotelList() {
 		List<Double> pList = new ArrayList<Double>();
@@ -143,6 +187,17 @@ public class HotelService {
 		
 		return r;
 	}
+	
+//	public List<String> getTicketList(Long id, Long date) {
+//		List<String> list = new ArrayList<String>();
+//		Room r  = roomRepository.findById(id).get();
+//		List<Roomticket> tickets = roomticketRepository.findByHotelAndDate(r,date);
+//		for(Roomticket t : tickets) {
+//			list.add(t.getDate());
+//		}
+//		return list;
+//	}
+
 	// 특정 호텔(id)의 댓글 목록들
 //	public HqryCommentList getCommentList(Long id) {
 //		
@@ -206,6 +261,7 @@ public class HotelService {
 		return U.getLoggedUser();
 	}
 
+
 	public void registerRoomticket(Room r, String checkin, String checkout) {
 		String s = checkin.replaceAll("-", "");
 		String e = checkout.replaceAll("-", "");
@@ -241,5 +297,6 @@ public class HotelService {
 		
 		return roomticketRepository.findByUser(U.getLoggedUser());
 	} 
+
 	
 }

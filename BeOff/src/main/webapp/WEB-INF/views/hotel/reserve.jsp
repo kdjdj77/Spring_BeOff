@@ -48,10 +48,11 @@
                         <p class="dis fw-bold mb-2">Email</p>
                         <input class="form-control" type="email" value="${r.hotel.user.email }" readonly>
                     </div>
-                    <div>
+                    
                         <div class="address">
                             
                             <div class=" my-3">
+
                                 <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
                                     <input class="form-control" type="text" name="checkin" value="2022-12-12" readonly>
@@ -63,6 +64,7 @@
                                 <p class="dis fw-bold mb-2">체크아웃</p>
                                 <div class="inputWithcheck">
                                     <input class="form-control" type="text" name="checkout" value="2022-12-15" readonly>
+
                                     <span class="fas fa-check"></span>
 
                                 </div>

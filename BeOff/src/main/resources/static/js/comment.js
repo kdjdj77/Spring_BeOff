@@ -1,24 +1,54 @@
+
 $(function() {
 	// 현재 글의 id값
-	const id = $("input[name='id']").val();
-	console.log(id);
+	let id = $("input[name='id']").val();
 	loadHcomment(id);
 	
+	//별점
+	(function () {
+    let starEls = document.querySelectorAll('#star span.star');
+    loop(starEls, function (el, index) {
+        el.addEventListener('click', function () {
+            rating(index + 1);
+        });
+    });
+
+    function loop(list, func) {
+        Array.prototype.forEach.call(list, func);
+    }
+
+    function rating(score) {
+        loop(starEls, function (el, index) {
+            if (index < score) {
+                el.classList.add('on');
+            } else {
+                el.classList.remove('on');
+            }
+        });
+
+        star = score;
+        }
+})();
 	// 댓글 작성 버튼 누르면 댓글 등록 하기.  
     // 1. 어느글에 대한 댓글인지? --> 위에 id 변수에 담겨있다
     // 2. 어느 사용자가 작성한 댓글인지? --> logged_uid 값
     // 3. 댓글 내용은 무엇인지?  --> 아래 content
     $("#btn_hcomment").click(function(){
 		// 입력한 값
-        const content = $("#input_hcomment").val();
+        let content = $("#input_hcomment").val();
         // 검증
         if(!content){
             alert("댓글 입력을 하세요");
             return;
         }
+        if(!star === "null"){
+			alert("별점등록해주세요")
+			return;
+}
+        
 		
 		// 전달할 parameter 준비
-		const data = {
+		let data = {
 			"hotel_id":id,
 			"user_id":logged_id,
 			"content":content,
@@ -67,7 +97,12 @@ function loadHcomment(hotel_id) {
 
 function buildHcomment(result) {
 	$("#cmt_cnt").text(result.count);
-	
+	let sum = 0 ;
+	for(i=0; i < result.count; i++){
+		sum += result.data[i].star;
+	}
+	const sums = (sum/result.count).toFixed(1);
+	$('#star_cnt').text(sums);
 	const out = [];
 	
 	result.data.forEach(hcomment => {
@@ -80,9 +115,9 @@ function buildHcomment(result) {
         let name = hcomment.user.name;
         
         // 삭제버튼 여부 : 작성자 본인의 댓글인 경우에만 보이기
-        const delBtn = (logged_id !== user_id) ? '' : `
+        let delBtn = (logged_id !== user_id) ? '' : `
         	<i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip" data-cmtdel-id="${id}" title="삭제"></i>`;
-		const row = `
+		let row = `
 	        <tr>
 	        <td>
 	        	<span>
@@ -103,8 +138,8 @@ function buildHcomment(result) {
 	        </td>
 	        <td>
 	        	<span>
-					★${star}
-	        	<span>
+	        		★${star}
+	        	</span>
 	        </td>
 	        	<td>
 	        		<span>

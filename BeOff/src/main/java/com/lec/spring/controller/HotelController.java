@@ -33,9 +33,10 @@ public class HotelController {
 	
 	// /hotel/list
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Integer page, Model model) {
 		model.addAttribute("regionList", hotelService.getRegionList());	
 		model.addAttribute("hotelList", hotelService.getHotelList());
+		hotelService.list(page, model);
 		return "/hotel/list";	
 		
 	}
@@ -62,10 +63,9 @@ public class HotelController {
 	// 클릭한 숙소의 방 정보  room (image , name, price , bed)
 	// 클릭한 숙소의 후기 정보  hcomment(user, reg, star,  content) --
 	@GetMapping("/detail")
-	public String detail(String id, Model model) {
+	public String detail(String id, Model model,String inn,String out) {
 		model.addAttribute("hotel",hotelService.getHotelById(id));
 		model.addAttribute("regionList", hotelService.getRegionList());
-		
 		return "/hotel/detail"; 
 	}
 	
@@ -84,7 +84,7 @@ public class HotelController {
 	
 	// /hotel/reserv
 	// 필요한 정보
-	// 로그인된 유저 ID
+	// 로그인된 유저 ID 
 	// 룸티켓..?
 	
 	
