@@ -78,6 +78,8 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<h3>${rental.rentalname }</h3>
+					<form>
+					<input type="hidden">
 					<select onchange="sizeOption()" name="sizeOption" id="sizeOption">   
                         <option value="all">전체</option>
                         <option value="small">소형</option>
@@ -85,6 +87,7 @@
                         <option value="large">대형</option>
                         <option value="suv">SUV</option>
 					</select>
+					</form>
 				</div>
 				<div class="col-lg-2"></div>
 			</div>
