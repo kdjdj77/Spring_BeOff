@@ -15,6 +15,9 @@
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="${pageContext.request.contextPath }/js/list.js"></script>
 <meta charset="UTF-8">
 <title>list</title>
 </head>
@@ -65,7 +68,16 @@
         <div class="mb-3 mt-3 clearfix">
             <span class="float-start me-2">총 ${cnt }개</span>
             <span class="float-start">page ${page }/${totalPage }</span>
-           
+          	<span class="float-end">
+            	<form name="frmPageRows">
+            		<input type="hidden" name="page" value="${page }">
+	                <select class="form-select" name="pageRows">
+	                    <option value="5" ${pageRows==5 ? 'selected' : '' }>5</option>
+	                    <option value="10" ${pageRows==10 ? 'selected' : '' }>10</option>
+	                    <option value="20" ${pageRows==20 ? 'selected' : '' }>20</option>
+	                </select>
+                </form>
+            </span>
         </div>          
         <!-- 페이징 헤더 -->        
 

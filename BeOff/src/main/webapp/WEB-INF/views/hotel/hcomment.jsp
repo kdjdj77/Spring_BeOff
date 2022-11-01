@@ -16,9 +16,7 @@
 
 <div class="container my-3 border rounded">
     <div class="mb-3 mt-3">
-        <label>댓글: <span id="cmt_cnt"></span> 개</label>
-        <label>별점평균 : ★<span id="star_cnt"></span> 점</label>
-        
+        <label>댓글 : <span id="cmt_cnt"></span></label>
 		<%--  ROLE_MEMBER 가진 사용자만 댓글 작성 가능 --%>
   		<sec:authorize access="hasAnyRole('ADMIN_HOTEL')">
 	        <div class="input-group my-2">
@@ -32,7 +30,6 @@
 					  <span class="star">★</span>
 					  <span class="star">★</span>
                  </div>
-                 
 	        </div>
 	    </sec:authorize>
         <table class="table table-hover mt-3" id="cmt_table">

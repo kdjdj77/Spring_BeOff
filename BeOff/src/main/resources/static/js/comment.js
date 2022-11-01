@@ -102,7 +102,9 @@ function buildHcomment(result) {
 		sum += result.data[i].star;
 	}
 	const sums = (sum/result.count).toFixed(1);
+	console.log(sums);
 	$('#star_cnt').text(sums);
+	
 	const out = [];
 	
 	result.data.forEach(hcomment => {

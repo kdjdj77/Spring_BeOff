@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.service.HotelService;
+import com.lec.spring.util.U;
 
 
 
@@ -33,10 +34,10 @@ public class HotelController {
 	
 	// /hotel/list
 	@GetMapping("/list")
-	public String list(Integer page, Model model) {
+	public String list(Model model) {
 		model.addAttribute("regionList", hotelService.getRegionList());	
 		model.addAttribute("hotelList", hotelService.getHotelList());
-		hotelService.list(page, model);
+//		hotelService.list(page, model);
 		return "/hotel/list";	
 		
 	}
@@ -112,5 +113,9 @@ public class HotelController {
 		model.addAttribute("list",hotelService.getRoomTickets());	
 		return "hotel/reservOk";
 	}
-	
+	@PostMapping("/pageRows")
+	public String pageRows(Integer page, Integer pageRows) {
+		U.getSession().setAttribute("pageRows", pageRows);
+		return "redirect:/hotel/list?page=" + page;
+	}
 }

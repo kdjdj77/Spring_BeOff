@@ -61,45 +61,51 @@ public class HotelService {
 		}
 		return RList;
 	}
-		
-	public List<Hotel> list(Integer page, Model model){
-		if(page == null) page = 1;
-		if(page < 1) page = 1;
-		
-		HttpSession session = U.getSession();
-		Integer writePages = (Integer)session.getAttribute("writePages");
-		if(writePages == null) writePages = C.WRITE_PAGES;
-		Integer pageRows = (Integer)session.getAttribute("pageRows");
-		if(pageRows == null) pageRows = C.PAGE_ROWS;   // session 에 없으면 기본값으로
-		session.setAttribute("page", page);
-		
-		Page<Hotel> pageWrites = hotelRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));	
-
-		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
-		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
-		if(page > totalPage) page = totalPage;   // 페이지 보정
-
-		// [페이징] 에 표시할 '시작페이지' 와 '마지막페이지' 계산
-		int startPage = ((int)((page - 1) / writePages) * writePages) + 1;
-		int endPage = startPage + writePages - 1;
-		if (endPage >= totalPage) endPage = totalPage;
-		
-		model.addAttribute("cnt", cnt);  // 전체 글 개수
-		model.addAttribute("page", page); // 현재 페이지
-		model.addAttribute("totalPage", totalPage);  // 총 '페이지' 수
-		model.addAttribute("pageRows", pageRows);  // 한 '페이지' 에 표시할 글 개수
-		
-		// [페이징]
-		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
-		model.addAttribute("writePages", writePages); // [페이징] 에 표시할 숫자 개수
-		model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
-		model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
-		
-		List<Hotel> list = pageWrites.getContent();	
-		model.addAttribute("list", list);
-		
-		return list;
-	}
+//		
+//	public List<Hotel> list(Integer page, Model model){
+//		if(page == null) page = 1;
+//		if(page < 1) page = 1;
+//		
+//		HttpSession session = U.getSession();
+//		Integer writePages = (Integer)session.getAttribute("writePages");
+//		if(writePages == null) writePages = C.WRITE_PAGES;
+//		Integer pageRows = (Integer)session.getAttribute("pageRows");
+//		if(pageRows == null) pageRows = C.PAGE_ROWS;   // session 에 없으면 기본값으로
+//		session.setAttribute("page", page);
+//		
+//		Page<Hotel> pageWrites = hotelRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));	
+//
+//		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
+//		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
+//		if(page > totalPage) page = totalPage;   // 페이지 보정
+//
+//		// [페이징] 에 표시할 '시작페이지' 와 '마지막페이지' 계산
+//		int startPage = ((int)((page - 1) / writePages) * writePages) + 1;
+//		int endPage = startPage + writePages - 1;
+//		if (endPage >= totalPage) endPage = totalPage;
+//		
+//		model.addAttribute("cnt", cnt);  // 전체 글 개수
+//		model.addAttribute("page", page); // 현재 페이지
+//		model.addAttribute("totalPage", totalPage);  // 총 페이지 수
+//		model.addAttribute("pageRows", pageRows);  // 한 페이지 에 표시할 글 개수
+//		System.out.println("-----------------------------");
+//		System.out.println("한 '페이지' 에 표시할 글 개수" + pageRows);
+//		System.out.println("전체 글 개수" + cnt);
+//		System.out.println(" 총 '페이지' 수" + totalPage);
+//		System.out.println(" 목록 url" + U.getRequest().getRequestURI());
+//		System.out.println(" [페이징] 에 표시할 숫자 개수" + writePages);
+//		System.out.println("-----------------------------");
+//		// [페이징]
+//		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
+//		model.addAttribute("writePages", writePages); // 페이징 에 표시할 숫자 개수
+//		model.addAttribute("startPage", startPage);  // 페이징 에 표시할 시작 페이지
+//		model.addAttribute("endPage", endPage);   // 페이징 에 표시할 마지막 페이지
+//		
+//		List<Hotel> list = pageWrites.getContent();	
+//		model.addAttribute("list", list);
+//		
+//		return list;
+//	}
 	//호텔 리스트 + 룸 가격
 	public List<Hotel> getHotelList() {
 		List<Double> pList = new ArrayList<Double>();
