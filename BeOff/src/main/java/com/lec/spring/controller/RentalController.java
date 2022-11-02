@@ -95,12 +95,28 @@ out1: 2022-10-28
 		
 		return "rental/reserv";
 	}
-	@PostMapping("/cars/reserveList")
+	
+
+	@GetMapping("/cars/reserveList")
 	public String reserveList(String rentalId, Model model) {
-		Car r = rentalService.getCarById(rentalId);
-		model.addAttribute("r", r);
+//		Car r = rentalService.getCarById(rentalId);
+//		model.addAttribute("r", r);
 
 		return "rental/reserveList";
 	}
+	
+//	@PostMapping("/reservOk")
+//	   public String getReserve(String id, String checkin, String checkout, Model model) {
+//	      
+//	      Room r = hotelService.reserve(id);
+//	      
+//	      hotelService.registerRoomticket(r, checkin, checkout);   
+//	      return "redirect:/hotel/tickets";
+//	   }
+//	   @GetMapping("/tickets")
+//	   public String getTickets(Model model) {
+//	      model.addAttribute("list",hotelService.getRoomTickets());   
+//	      return "hotel/reservOk";
+//	   }
 
 }

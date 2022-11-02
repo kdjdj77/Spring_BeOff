@@ -47,9 +47,17 @@
                         <div class="address">
                             
                             <div class=" my-3">
-                                <p class="dis fw-bold mb-2">예약날짜</p>
+                                <p class="dis fw-bold mb-2">대여날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="2022/12/12" readonly>
+                                    <input class="form-control" type="text" value="2022/12/23" readonly>
+                                    <span class="fas fa-check"></span>
+
+                                </div>
+                            </div>
+                            <div class=" my-3">
+                                <p class="dis fw-bold mb-2">반납날짜</p>
+                                <div class="inputWithcheck">
+                                    <input class="form-control" type="text" value="2022/12/25" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
