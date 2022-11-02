@@ -86,7 +86,7 @@
 						<div class="card-body">
 							<h6>서비스지역</h6>
 							<h4>${dto.region.region }</h4>
-							<h5 class="card-title">${dto.rentalname }[${dto.avgstar }]</h5>
+							<h5 class="card-title">${dto.rentalname }</h5>
 							<p class="card-text">${dto.content }</p>
 							<button class="btn btn-outline-secondary">자세히 알아보기</button>
 						</div>
