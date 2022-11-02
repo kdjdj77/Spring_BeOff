@@ -66,7 +66,25 @@ public class RentalService {
 	
 	// 업체 리스트 
 	public List<Rental> getRentalList() {
-	    return rentalRepository.findAll(Sort.by(Order.asc("id")));
+		return rentalRepository.findAll(Sort.by(Order.asc("id")));
+	}
+	
+	
+	// 자동차 리스트 
+	public List<Car> getCarList(String sDate, String eDate, String rentalId, String sizeOption) {
+		Long id = Long.parseLong(rentalId);
+		Rental r = rentalRepository.findById(id).orElse(null);
+		if (sizeOption.equals("all")) {
+			return carRepository.findByRental(r).stream().filter(car -> car.enabled(sDate.replace("-", ""), eDate.replace("-", ""))).collect(Collectors.toList());
+		} else if (sizeOption.equals("small")) {
+			return carRepository.findByRentalAndCartype(r, "소형").stream().filter(car -> car.enabled(sDate.replace("-", ""), eDate.replace("-", ""))).collect(Collectors.toList());
+		} else if (sizeOption.equals("middle")) {
+			return carRepository.findByRentalAndCartype(r, "중형").stream().filter(car -> car.enabled(sDate.replace("-", ""), eDate.replace("-", ""))).collect(Collectors.toList());
+		} else if (sizeOption.equals("large")) {
+			return carRepository.findByRentalAndCartype(r, "대형").stream().filter(car -> car.enabled(sDate.replace("-", ""), eDate.replace("-", ""))).collect(Collectors.toList());
+		} else {
+			return carRepository.findByRentalAndCartype(r, "SUV").stream().filter(car -> car.enabled(sDate.replace("-", ""), eDate.replace("-", ""))).collect(Collectors.toList());
+		}
 	}
 
 	public Rental getRentalById(String rentalId) {
