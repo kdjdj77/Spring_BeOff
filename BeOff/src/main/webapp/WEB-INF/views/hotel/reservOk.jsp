@@ -16,19 +16,16 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta charset="UTF-8">
-<title>rental list</title>
+<title>hotel ticket</title>
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<%
+			String checkin = request.getParameter("checkin");
+			String checkout = request.getParameter("checkout");
+		%>
 
-<c:forEach var="i" items="${list }">
-<span>${i.room.hotel.hotelname }</span>
-<span>${i.room.roomname }</span>
-<span>${i.room.price }</span>
-<span>${i.date }</span>
-<span>${i.regDateTime }</span>
-</c:forEach>
 
 <div class="event-schedule-area-two bg-color pad100">
     <div class="container">
@@ -57,7 +54,7 @@
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
                                         <th scope="col">며칠?</th>
-                                        <th scope="col">취소</th>
+                                        <th scope="col">체크인날짜</th>
                                         <th class="text-center" scope="col"></th>
                                     </tr>
                                 </thead>
@@ -97,7 +94,8 @@
                             </table>
                         </div>
                     </div>
-                    
+                    <div>${checkin }</div>
+                    <div>${checkout }</div>
                 <div class="primary-btn text-center">
                     <a href="#" class="btn btn-secondary">돌아가기</a>
                 </div>
@@ -107,7 +105,6 @@
         <!-- /row end-->
     </div>
 </div>
-<div>${list }</div>   
 
    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

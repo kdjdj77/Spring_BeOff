@@ -15,9 +15,6 @@
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
- <script src="${pageContext.request.contextPath }/js/list.js"></script>
 <meta charset="UTF-8">
 <title>list</title>
 </head>
@@ -45,8 +42,8 @@
 							</c:forEach>
 						</select>
 					</td>
-					<td><input type="text" id="start" name="in1"></td>
-					<td><input type="text" id="end" name="out1"></td>
+					<td><input type="text" id="start" name="in1" value="${checkin }"></td>
+					<td><input type="text" id="end" name="out1" value="${checkout }"></td>
 					<td>
 						<input type='button' onclick='count("minus")' value='-' />
 							<span id='result'>0</span>
@@ -59,27 +56,12 @@
 				</tr>
 			</thead>
 		</table>
-		<input type="hidden" name="inn" id="inn">
-		<input type="hidden" name="out" id="out">
+		<input type="hidden" name="inn" id="inn" value="${checkin }">
+		<input type="hidden" name="out" id="out" value="${checkout }">
+		<input type="hidden" name="region" id="region" value="${region }">
 	</form>
 
 
-        <!-- 페이징 헤더 -->
-        <div class="mb-3 mt-3 clearfix">
-            <span class="float-start me-2">총 ${cnt }개</span>
-            <span class="float-start">page ${page }/${totalPage }</span>
-          	<span class="float-end">
-            	<form name="frmPageRows">
-            		<input type="hidden" name="page" value="${page }">
-	                <select class="form-select" name="pageRows">
-	                    <option value="5" ${pageRows==5 ? 'selected' : '' }>5</option>
-	                    <option value="10" ${pageRows==10 ? 'selected' : '' }>10</option>
-	                    <option value="20" ${pageRows==20 ? 'selected' : '' }>20</option>
-	                </select>
-                </form>
-            </span>
-        </div>          
-        <!-- 페이징 헤더 -->        
 
 
 </div>
@@ -108,52 +90,13 @@
                     <td>${dto.regDateTime}</td>
                     <td>${dto.avgstar }</td>
                     <td><img style="width:300px; height:300px;"src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}" alt="..." /></td>
- 					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}">자세히보기</a></td>                    
+ 					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}&region=${hregion }&checkin=${checkin}&checkout=${checkout}">자세히보기</a></td>                    
                 </tr>            
            	 </c:forEach>  
             </tbody>
         </table>
  
 </body>
-<div class="container mt-1">
-        <ul class="pagination justify-content-center">
-            <%-- << 표시 여부 --%>   
-            <c:if test="${page > 1 }">
-            <li class="page-item"><a class="page-link" href="${url }" title="처음"><i class='fas fa-angle-double-left'></i></a></li>
-            </c:if>     
-        
-            <%-- < 표시 여부 --%>
-            <c:if test="${startPage > 1 }">
-            <li class="page-item"><a class="page-link" href="${url }?page=${startPage - 1 }"><i class='fas fa-angle-left'></i></a></li>
-            </c:if>
-            
-            <%-- 페이징 안의 '숫자' 표시 --%> 
-            <c:if test="${totalPage > 1 }">
-                <c:forEach var="k" begin="${startPage }" end="${endPage }">
-                <c:choose>
-                    <c:when test="${k != page }">
-                        <li class="page-item"><a class="page-link" href="${url }?page=${k }">${k }</a></li>        			
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">${k }</a></li>
-                    </c:otherwise>
-                </c:choose>
-                </c:forEach>    
-            </c:if>
-                        
-            <%-- > 표시 여부 --%>
-            <c:if test="${totalPage > endPage }">
-            <li class="page-item"><a class="page-link" href="${url }?page=${endPage + 1 }"><i class='fas fa-angle-right'></i></a></li>
-            </c:if>
-            
-            <%-- >> 표시 여부 --%>
-            <c:if test="${page < totalPage }">
-            <li class="page-item"><a class="page-link" href="${url }?page=${totalPage }"><i class='fas fa-angle-double-right'></i></a></li>
-            </c:if>
-            
-        </ul>
-    </div>
-    <!-- pagination -->    
 
 <script>
 	$(function() {

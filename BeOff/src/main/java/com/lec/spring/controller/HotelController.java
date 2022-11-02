@@ -3,6 +3,8 @@ package com.lec.spring.controller;
 
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +54,9 @@ public class HotelController {
 		model.addAttribute("hotelList",list);
 		model.addAttribute("hotel",hotelService.getHotelList());
 		model.addAttribute("regionList", hotelService.getRegionList());
+		model.addAttribute("checkin", inn);
+		model.addAttribute("checkout", out);
+		model.addAttribute("hregion", hotelregion);
 			
 		return "/hotel/list";
 	}
@@ -67,6 +72,8 @@ public class HotelController {
 	public String detail(String id, Model model,String inn,String out) {
 		model.addAttribute("hotel",hotelService.getHotelById(id));
 		model.addAttribute("regionList", hotelService.getRegionList());
+		model.addAttribute("checkin", inn);
+		model.addAttribute("checkout", out);
 		return "/hotel/detail"; 
 	}
 	
@@ -78,6 +85,8 @@ public class HotelController {
 		model.addAttribute("hotelList",list);
 		model.addAttribute("hotel",hotelService.getHotelList());
 		model.addAttribute("regionList", hotelService.getRegionList());;
+		model.addAttribute("checkin", inn);
+		model.addAttribute("checkout", out);
 			
 		return "/hotel/list";
 	}
@@ -93,24 +102,29 @@ public class HotelController {
 	
 	
 	@GetMapping("/reserve")
-	public String reserv(String id, Model model) {
+	public String reserv(String id, Model model,String inn,String out) {
 		Room r = hotelService.reserve(id);
+		
 		model.addAttribute("r", r);
 		model.addAttribute("room", hotelService.getRoomById(id));
-		
+		model.addAttribute("checkin", inn);
+		model.addAttribute("checkout", out);
 		return "hotel/reserve";
 	}
 	@PostMapping("/reservOk")
 	public String getReserve(String id, String checkin, String checkout, Model model) {
 		
 		Room r = hotelService.reserve(id);
-		
 		hotelService.registerRoomticket(r, checkin, checkout);	
-		return "redirect:/hotel/tickets";
+		return "redirect:/hotel/tickets?checkin="+checkin+"&checkout="+checkout ;
 	}
 	@GetMapping("/tickets")
-	public String getTickets(Model model) {
+	public String getTickets(Model model, String checkin, String checkout) {
 		model.addAttribute("list",hotelService.getRoomTickets());	
+
+		model.addAttribute("checkin", checkin);
+		model.addAttribute("checkout", checkout);
+		
 		return "hotel/reservOk";
 	}
 	@PostMapping("/pageRows")
