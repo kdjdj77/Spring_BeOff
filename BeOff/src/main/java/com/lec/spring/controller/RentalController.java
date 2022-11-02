@@ -62,14 +62,18 @@ out1: 2022-10-28
 	@PostMapping("/cars/list") // /rental/cars/list
 	public String carsList(String rentalId, Model model,
 			@RequestParam("sDate") String sDate, 
-			@RequestParam("eDate") String eDate) {
+			@RequestParam("eDate") String eDate,
+			String sizeOption) {
 		Rental rental = rentalService.getRentalById(rentalId);
 		List<Car> cars = rental.getCars().stream().filter(car -> car.enabled(sDate.replace("-", ""), eDate.replace("-", ""))).collect(Collectors.toList());
 		rental.setCars(cars);
 		
+		model.addAttribute("rentalId", rentalId);
+		model.addAttribute("sDate", sDate);
+		model.addAttribute("eDate", eDate);
 		model.addAttribute("rental", rental);
 		model.addAttribute("regionList", rentalService.getRegionList());
-		model.addAttribute("rentalList", rentalService.getRentalList());
+		model.addAttribute("carList", rentalService.getCarList(sDate, eDate, rentalId, sizeOption));
 //		model.addAttribute("carNameList", rentalService.getCarNameList());
 		return "rental/cars/list";
 		
