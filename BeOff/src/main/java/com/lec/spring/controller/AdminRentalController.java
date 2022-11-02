@@ -1,13 +1,18 @@
 package com.lec.spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;import com.lec.spring.domain.rental.Rental;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.lec.spring.domain.rental.Rental;
 import com.lec.spring.service.AdminRentalService;
 
 @Controller
@@ -21,6 +26,7 @@ public class AdminRentalController {
 		System.out.println(getClass().getName() + "() 생성");
 	}
 	
+	// Rental
 	// rental/admin/list : 본인이 등록한 렌트업체 조회
 	@GetMapping("/list") 
 	public String rentalList(Model model) {
@@ -29,15 +35,6 @@ public class AdminRentalController {
 		model.addAttribute("rentalList", list);
 		
 		return "/rental/admin/list";
-	}
-	
-	// rental/admin/cars/list 선택한 업체에 해당하는 렌트카 조회
-	@GetMapping("/cars/list") 
-	public String carsList(String id, Model model) {
-		Rental r = adminRentalService.getRentalById(id);
-		model.addAttribute("r", r);
-		
-		return "/rental/admin/cars/list";
 	}
 	
 	// 업체 등록
@@ -69,7 +66,7 @@ public class AdminRentalController {
 	
 	@PostMapping("/rentalUpdateOk")
 	public String rentalUpdateOk(String id, String rentalname, String content, Model md) {
-		int result = adminRentalService.updateRental(id, rentalname, content);
+		int result = adminRentalService.rentalUpdate(id, rentalname, content);
 		md.addAttribute(result);
 		
 		return "rental/admin/rentalUpdateOk";
@@ -85,20 +82,53 @@ public class AdminRentalController {
 		return "rental/admin/rentalDeleteOk";
 	}
 	
+	// Car
+	// rental/admin/cars/list 선택한 업체에 해당하는 렌트카 조회
+	@GetMapping("/cars/list") 
+	public String carsList(String id, Model model) {
+		Rental r = adminRentalService.getRentalById(id);
+		model.addAttribute("r", r);
+		
+		return "/rental/admin/cars/list";
+	}
+	
+	// 렌트카 등록
 	@GetMapping("/cars/carWrite") 
 	public String carWrite(String id, Model md) {
-		
+		System.out.println("id : "+ id);
 		md.addAttribute("id", id);
 		
 		return "/rental/admin/cars/carWrite";
 	}
 	
-//	@GetMapping("/cars/detail") 
-//	public String carsDetail() {
-//		
-//		return "/rental/admin/cars/detail";
-//	}
-//	
+	@PostMapping("/cars/carWriteOk")
+	public String carWriteOk(@RequestParam Map<String, MultipartFile> files
+			, String id, String carname, Float price, String cartype, String fuel, String fueleff, Model md) {
+		
+		md.addAttribute("result", adminRentalService.registerCar(id, carname, price, cartype, fuel, fueleff, files));
+		md.addAttribute("id", id);
+		
+		return "rental/admin/cars/carWriteOk";
+	}
+	
+	@GetMapping("/cars/carUpdate") 
+	public String carUpdate(String id, Model md) {
+		Rental r = adminRentalService.getRentalById(id);
+		
+		md.addAttribute("rental", r);
+		
+		return "/rental/admin/cars/carUpdate";
+	}
+	
+	@PostMapping("/cars/carUpdateOk") 
+	public String carsUpdateOk(@RequestParam Map<String, MultipartFile> files,
+			String id, String carname, Float price, String cartype, String fuel, String fueleff, Model md) {
+			
+		int result = adminRentalService.carUpdate(id, carname, price, cartype, fuel, fueleff, files);
+		md.addAttribute(result);
+		return "/rental/admin/cars/carUpdateOk";
+	}
+	
 	
 //	@GetMapping("/cars/update") 
 //	public String carsUpdate() {

@@ -20,17 +20,8 @@
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-10"></div>
-			<div class="col-lg-2">
-				<a class="btn btn-secondary btn-lg" href="carWrite">차등록</a>
-			</div>
-		</div>
-	</div>
 
 	<c:forEach var="c" items="${r.cars}"> 
-<%-- 	<input type="hidden" name="rentalId" value="${c.id }"> --%>
 		<div class="container py-5">
 			<div class="row">
 				<div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -45,8 +36,8 @@
 
 							<div class="d-flex flex-row">
 								<a class="btn btn-secondary btn-lg"
-									href="rentalUpdate?id=${c.id }">수정</a>
-								<a class="btn btn-secondary btn-lg"
+									href="rentalUpdate?id=${c.id }">수정</a> <a
+									class="btn btn-secondary btn-lg"
 									href="rentalUpdate?id=${c.id }">삭제</a>
 							</div>
 						</div>
@@ -55,6 +46,15 @@
 			</div>
 		</div>
 	</c:forEach>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10"></div>
+			<div class="col-lg-2">
+				<a class="btn btn-secondary btn-lg" href="carWrite?id=${r.id }">차등록</a>
+			</div>
+		</div>
+	</div>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
