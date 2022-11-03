@@ -111,6 +111,9 @@
 					</ul>
 					<div class="card-body" >
 						<input type="hidden" name="carId" value="${i.id }">
+						<input type="hidden" name="sDate" value="${sDate}">
+						<input type="hidden" name="eDate" value="${eDate}">
+						
 						<button class="btn btn-outline-secondary">예약하기</button>
 					</div>
 					</div>

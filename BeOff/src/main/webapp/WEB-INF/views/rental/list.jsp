@@ -160,16 +160,6 @@
 	let in1 = document.querySelector("#start");
 	let out1 = document.querySelector("#end");
 
-	btn.addEventListener("click", function onsubmit() {
-/* 		let inn = document.getElementById("inn");
-		let out = document.getElementById("out"); */
-		let in1 = document.getElementById("start");
-		let out1 = document.getElementById("end");
-		/*    inn.value = in1.value.toString();
-		 out.value = out1.value.toString(); */
-		frm.submit();
-	});
-
 	function hsubmit() {
 
 		if (in1.value === "") {
@@ -185,7 +175,7 @@
 		}
 /* 		inn.value = in1.value.toString();
 		out.value = out1.value.toString(); */
-
+		console.log("sdffs")
 		frm.submit();
 	}
 </script>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lec.spring.domain.User;
 import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Rental;
 import com.lec.spring.service.RentalService;
@@ -88,21 +89,36 @@ out1: 2022-10-28
 	}
 	
 	@PostMapping("/cars/reserv") // /rental/reserv
-	public String reserv(String carId, Model model) {
+	public String reserv(String carId, String sDate, String eDate, Model model) {
 		model.addAttribute("car", rentalService.getCarById(carId));
 		model.addAttribute("user", rentalService.getUserData());
-		
+		model.addAttribute("sDate", sDate);
+		model.addAttribute("eDate", eDate);
 		
 		return "rental/reserv";
 	}
 	
 
-	@GetMapping("/cars/reserveList")
-	public String reserveList(String rentalId, Model model) {
-//		Car r = rentalService.getCarById(rentalId);
-//		model.addAttribute("r", r);
-
+	@PostMapping("/cars/reservate")
+	public String reserveList(Long carId, String sDate, String eDate, Model model) {
+		User user = rentalService.getUserData();
+		rentalService.reservateCar(user, carId, 
+				Long.valueOf(sDate.replace("-", "")), Long.valueOf(eDate.replace("-", "")));
+		
+		model.addAttribute("rentals", rentalService.mapByUser(user));
+		model.addAttribute("user", user);
+		
 		return "rental/reserveList";
+	}
+	
+	@GetMapping("/cars/reserveList")
+	public String reservateList(Model model) {
+		User user = rentalService.getUserData();
+		model.addAttribute("rentals", rentalService.mapByUser(user));
+		model.addAttribute("user", user);
+		
+		return "rental/reserveList";
+			
 	}
 	
 //	@PostMapping("/reservOk")

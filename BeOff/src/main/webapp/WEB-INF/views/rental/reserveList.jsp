@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,23 +54,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach var="i" items="${rentals}"> 
                                     <tr class="inner-box">
-                                        <th scope="row"><h3>April 29</h3></th>
+                                        <th scope="row">
+                                        	<h3>${i.value}</h3>
+                                       	</th>
                                         <td>
                                             <div class="event-wrap">
-                                                <h3>롯데렌터카</h3>
+                                                <h3>${i.key.rental.rentalname}</h3>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="event-wrap">
-                                                <h3>소나타</h3>
+                                                <h3>${i.key.carname}</h3>
                                                 <div class="meta">
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="r-no">
-                                                <h3>50000 won</h3>
+                                                <h3>${i.key.price}</h3>
                                             </div>
                                         </td>
                                         <td>
@@ -77,6 +81,10 @@
                                                 <a class="btn btn-secondary" href="#">예약취소</a>
                                             </div>
                                         </td>
+
+				
+
+	</c:forEach>
                                     
                                 </tbody>
                             </table>

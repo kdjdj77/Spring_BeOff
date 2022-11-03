@@ -1,9 +1,12 @@
 package com.lec.spring.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 import javax.annotation.PostConstruct;
 
@@ -21,6 +24,7 @@ import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Rental;
+import com.lec.spring.domain.rental.Rentalticket;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.rental.CarRepository;
@@ -109,6 +113,28 @@ public class RentalService {
 						.anyMatch(car -> car.enabled(sDate, eDate))
 				)
 				.collect(Collectors.toList());
+	}
+
+	public void reservateCar(User userData, Long carId, Long sDate, Long eDate) {
+		LongStream.range(sDate, eDate + 1).forEach(date -> {
+			Rentalticket carTicket = new Rentalticket();
+			carTicket.setUser(userData);
+			carTicket.setCar(carRepository.findById(carId).get());
+			carTicket.setDate(date);
+			carTicket.setRegDate(LocalDateTime.now());
+			rentalticketRepository.save(carTicket);
+		});
+	}
+
+	public Map<Car, String> mapByUser(User user) {
+		 return rentalticketRepository.findByUser(user).stream()
+				.collect(Collectors.groupingBy(Rentalticket::getCar, 
+						Collectors.mapping(ticket -> parseToDateForamt(ticket.getDate().toString()), 
+								Collectors.joining(", "))));
+	}
+	
+	private String parseToDateForamt(String yyyyMMdd) {
+		return yyyyMMdd.substring(0, 4) + "-" + yyyyMMdd.substring(4, 6) + "-" + yyyyMMdd.subSequence(6, 8);
 	}
 
 	
