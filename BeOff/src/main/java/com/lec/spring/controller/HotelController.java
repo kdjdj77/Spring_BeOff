@@ -36,11 +36,11 @@ public class HotelController {
 	
 	// /hotel/list
 	@GetMapping("/list")
-	public String list(Model model) {
+	public void list(Integer page, Model model) {
 		model.addAttribute("regionList", hotelService.getRegionList());	
-		model.addAttribute("hotelList", hotelService.getHotelList());
-//		hotelService.list(page, model);
-		return "/hotel/list";	
+//		model.addAttribute("hotelList", hotelService.getHotelList());
+		hotelService.list(page, model);
+			
 		
 	}
 	
@@ -51,8 +51,7 @@ public class HotelController {
 		String in1 = inn.replaceAll("-","");
 		String out1 = out.replaceAll("-","");
 		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
-		model.addAttribute("hotelList",list);
-		model.addAttribute("hotel",hotelService.getHotelList());
+		model.addAttribute("list",list);
 		model.addAttribute("regionList", hotelService.getRegionList());
 		model.addAttribute("checkin", inn);
 		model.addAttribute("checkout", out);
@@ -83,7 +82,6 @@ public class HotelController {
 		String out1 = out.replaceAll("-","");
 		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
 		model.addAttribute("hotelList",list);
-		model.addAttribute("hotel",hotelService.getHotelList());
 		model.addAttribute("regionList", hotelService.getRegionList());;
 		model.addAttribute("checkin", inn);
 		model.addAttribute("checkout", out);

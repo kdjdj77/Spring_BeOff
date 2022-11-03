@@ -95,13 +95,12 @@
 				<tr>
 					<td>${i.id }</td>
 					<td>${i.roomname }</td>
-					<td>${i.price }</td>
+					<td>${i.price }원</td>
 					<td>${i.bed }</td>
 					<td><img style="width: 300px; height: 300px;"
 						src="${pageContext.request.contextPath }/upload/${i.files[0].file}"
 						alt="..." /></td>
-					<td><button
-							onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button></td>
+					<td><button onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>

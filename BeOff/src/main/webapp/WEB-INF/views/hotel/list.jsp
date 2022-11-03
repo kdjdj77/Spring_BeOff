@@ -15,11 +15,31 @@
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/list.js"></script>
 <meta charset="UTF-8">
 <title>list</title>
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <body>
+<!-- 페이징 헤더 -->
+<!-- 
+        <div class="mb-3 mt-3 clearfix">
+            <span class="float-end">
+            	<form name="frmPageRows">
+            		<input type="hidden" name="page" value="${page }">
+	                <select class="form-select" name="pageRows">
+	                    <option value="5" ${pageRows==5 ? 'selected' : '' }>5</option>
+	                    <option value="10" ${pageRows==10 ? 'selected' : '' }>10</option>
+	                    <option value="15" ${pageRows==15 ? 'selected' : '' }>15</option>
+	                    <option value="20" ${pageRows==20 ? 'selected' : '' }>20</option>
+	                </select>
+                </form>
+            </span>
+        </div> 
+         -->         
+        <!-- 페이징 헤더 -->      
 <div>
 	
 	<form action="${pageContext.request.contextPath}/hotel/list" name="frm" id="frm" method="post">
@@ -72,23 +92,19 @@
                     <th>호텔 지역</th>
                     <th>호텔 이름</th>
                     <th>호텔 정보</th>
-                    <th>가격</th>
                     <th>등록일</th>
-                    <th>별점</th>
                     <th>상세보기</th>
                     <th>호텔 사진</th>
                 </tr>
             </thead>
             <tbody>
-          	  <c:forEach var="dto" items="${hotelList }" varStatus="status">
+          	  <c:forEach var="dto" items="${list }" varStatus="status">
                 <tr>
                 	<td>${dto.id }</td>
                 	<td>${dto.region.region }</td>
                     <td>${dto.hotelname }</td>
                     <td>${dto.content }</td>
-                    <td>${dto.priceList }</td>
                     <td>${dto.regDateTime}</td>
-                    <td>${dto.avgstar }</td>
                     <td><img style="width:300px; height:300px;"src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}" alt="..." /></td>
  					<td><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}&region=${hregion }&checkin=${checkin}&checkout=${checkout}">자세히보기</a></td>                    
                 </tr>            
@@ -97,6 +113,46 @@
         </table>
  
 </body>
+<!-- pagination -->
+    <div class="container mt-1">
+        <ul class="pagination justify-content-center">
+            <%-- << 표시 여부 --%>   
+            <c:if test="${page > 1 }">
+            <li class="page-item"><a class="page-link" href="${url }" title="처음"><i class='fas fa-angle-double-left'></i></a></li>
+            </c:if>     
+        
+            <%-- < 표시 여부 --%>
+            <c:if test="${startPage > 1 }">
+            <li class="page-item"><a class="page-link" href="${url }?page=${startPage - 1 }"><i class='fas fa-angle-left'></i></a></li>
+            </c:if>
+            
+            <%-- 페이징 안의 '숫자' 표시 --%> 
+            <c:if test="${totalPage > 1 }">
+                <c:forEach var="k" begin="${startPage }" end="${endPage }">
+                <c:choose>
+                    <c:when test="${k != page }">
+                        <li class="page-item"><a class="page-link" href="${url }?page=${k }">${k }</a></li>        			
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">${k }</a></li>
+                    </c:otherwise>
+                </c:choose>
+                </c:forEach>    
+            </c:if>
+                        
+            <%-- > 표시 여부 --%>
+            <c:if test="${totalPage > endPage }">
+            <li class="page-item"><a class="page-link" href="${url }?page=${endPage + 1 }"><i class='fas fa-angle-right'></i></a></li>
+            </c:if>
+            
+            <%-- >> 표시 여부 --%>
+            <c:if test="${page < totalPage }">
+            <li class="page-item"><a class="page-link" href="${url }?page=${totalPage }"><i class='fas fa-angle-double-right'></i></a></li>
+            </c:if>
+            
+        </ul>
+    </div>
+    <!-- pagination -->    
 
 <script>
 	$(function() {
@@ -116,7 +172,7 @@
 							,
 							showOn : "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
 							,
-							buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+							buttonImage : "${pageContext.request.contextPath }/img/aircalender.png" //버튼 이미지 경로
 							,
 							buttonImageOnly : true //버튼 이미지만 깔끔하게 보이게함
 							,
