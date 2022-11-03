@@ -30,7 +30,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
 	<div id="main" style="position:relative; margin-top:-35px; background-color:black;">
-		<table>
+		<table style="position:absolute; z-index:2;">
 			<tr>
 				<td>
 					<a href="${pageContext.request.contextPath }/air/basic">
