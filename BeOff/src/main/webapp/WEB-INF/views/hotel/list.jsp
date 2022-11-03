@@ -7,16 +7,12 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/list.js"></script>
 <meta charset="UTF-8">
 <title>list</title>
@@ -49,7 +45,6 @@
 					<th>목적지</th>
 					<th>체크인 날짜</th>
 					<th>체크아웃 날짜</th>
-					<th>인원</th>
 					<th>
 						<button type="button" onclick="location.href='../hotel/admin/list'">관리자 모드</button>
 					</th>
@@ -60,21 +55,26 @@
 							<c:forEach var="region" items="${regionList}">    
 								<option value="${region }">${region }</option>
 							</c:forEach>
+							
 						</select>
 					</td>
 					<td><input type="text" id="start" name="in1" value="${checkin }"></td>
+					
 					<td><input type="text" id="end" name="out1" value="${checkout }"></td>
+					<!--  
 					<td>
 						<input type='button' onclick='count("minus")' value='-' />
 							<span id='result'>0</span>
 						<input type='button' onclick='count("plus")' value='+' />
 					</td>
+					-->
 					<td>
 					<button type=button onclick="hsubmit()">숙소 검색</button>
 					</td>
 					
 				</tr>
 			</thead>
+			
 		</table>
 		<input type="hidden" name="inn" id="inn" value="${checkin }">
 		<input type="hidden" name="out" id="out" value="${checkout }">
@@ -93,8 +93,8 @@
                     <th>호텔 이름</th>
                     <th>호텔 정보</th>
                     <th>등록일</th>
-                    <th>상세보기</th>
                     <th>호텔 사진</th>
+                    <th>상세보기</th>
                 </tr>
             </thead>
             <tbody>
@@ -172,7 +172,7 @@
 							,
 							showOn : "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
 							,
-							buttonImage : "${pageContext.request.contextPath }/img/aircalender.png" //버튼 이미지 경로
+							buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
 							,
 							buttonImageOnly : true //버튼 이미지만 깔끔하게 보이게함
 							,

@@ -139,8 +139,11 @@ function buildHcomment(result) {
 	           		 ${delBtn}            
 	        </td>
 	        <td>
+	        	<span id="starrr">
+	        		★
+	        	</span>
 	        	<span>
-	        		★${star}
+	        	${star}
 	        	</span>
 	        </td>
 	        	<td>

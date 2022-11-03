@@ -69,5 +69,7 @@
 .star.on {
   color: orange;
 }
+#starrr{
+color:#FFB400;}
 </style>
 
