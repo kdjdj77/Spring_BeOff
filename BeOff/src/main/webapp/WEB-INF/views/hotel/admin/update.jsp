@@ -41,11 +41,11 @@
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
                                 <h3 class="display-6 fw-bolder text-white mb-2 ">HOTEL - ${hotel.hotelname}</h3>
-                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                                <p class="lead fw-normal text-muted mb-5">Do you want to edit your hotel information? Please enter the information below</p>
                             </div>
                         </div>
                     </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+                        <%--<div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div> --%>
                     	<div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
                             <input type="hidden" name="id" value="${hotel.id }">
@@ -69,6 +69,7 @@
                                 		</c:choose> 
                                 	</c:forEach>
                                 </select>
+                                <br><br>
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Content</h3>
                                 <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="content" value="${hotel.content }" name="content" required>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
@@ -91,7 +92,7 @@
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
                                 <h3 class="display-6 fw-bolder text-black mb-2 ">${hotel.hotelname }`s <br> ROOM INFO UPDATE</h3>
-                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                                <p class="lead fw-normal text-muted mb-5">Want to edit room information? Please enter the information below</p>
                             </div>
                         </div>
                     </div>

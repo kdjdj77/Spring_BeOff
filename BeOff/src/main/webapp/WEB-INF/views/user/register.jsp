@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <title>회원가입</title>
 </head>
@@ -41,9 +42,17 @@
                     <label for="re-password">비밀번호 확인</label>   <%-- binding 을 위해 hyphen 사용 자제 --%>
                     <input type="password" class="form-control" id="re_password" name="re_password" placeholder="비밀번호 확인" required>
                 </div>
+                <div class="form-group mt-3">
+                    <label for="email">이메일</label>
+                	<input type="email" id="email" name="email" class="form-control" pattern="[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}" placeholder="예) id@domain.com" required/>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="phonenum">휴대폰번호</label>
+                	<input type="number" id="phonenum" name="phonenum" class="form-control" pattern="^(010|011|016|017|018|019)[0-9]{3,4}[0-9]{4}$" placeholder="예) 01012341234" required/>
+                </div>
                 <button type="submit" class="w-100 btn btn-lg btn-primary mt-3">등록</button>
             </form>
         </div>
-    </div>
+	</div>
 </body>
 </html>

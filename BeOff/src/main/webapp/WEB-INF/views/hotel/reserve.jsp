@@ -54,7 +54,7 @@
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" name="checkin" value="2022-12-12" readonly>
+                                    <input class="form-control" type="text" name="checkin" value="2022-12-23" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
@@ -62,7 +62,7 @@
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">체크아웃</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" name="checkout" value="2022-12-15" readonly>
+                                    <input class="form-control" type="text" name="checkout" value="2022-12-25" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>

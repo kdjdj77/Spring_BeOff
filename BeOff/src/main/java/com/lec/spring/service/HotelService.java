@@ -227,14 +227,13 @@ public class HotelService {
 		Roomticket rt = new Roomticket();
 		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
 		List<TicketDTO> tickets = new ArrayList<TicketDTO>();
+		
 		TicketDTO tk = new TicketDTO();
-		int cnt=0;
 		for(Roomticket rtk : list) {
 			if(!rt.getRegDateTime().equals(rtk.getRegDateTime())) {
 				tickets.add(tk);
 				rt = rtk;
 				tk.setRoom(rt.getRoom());
-				tk.addDate(rt.getDate());
 				tk.setPrice(rt.getRoom().getPrice());
 				tk.setRegDate(rt.getRegDate());
 			}else {
@@ -242,9 +241,30 @@ public class HotelService {
 				tk.setPrice(tk.getPrice()+rtk.getRoom().getPrice());
 			}
 		}
-		
 		return tickets;
 //		return roomticketRepository.findByUser(U.getLoggedUser());
 	} 
+	
+//	public List<Roomticket> getRoomTickets() {
+//		User user = U.getLoggedUser();
+//		List<Roomticket> tickets = roomticketRepository.findByUserOrderByIdDesc(user);
+//		List<Roomticket> t = new ArrayList<Roomticket>();
+//		Roomticket a = new Roomticket();
+//		
+//		for(Roomticket i : tickets) {
+//			if (!a.getRegDateTime().equals(i.getRegDateTime())){
+//				t.add(a);
+//				a.setRoom(i.getRoom());
+//				a.getRoom().setPrice(i.getRoom().getPrice());
+//				a.setRegDate(i.getRegDate());
+//			} else {
+//				a.setDate(i.getDate());
+//				a.getRoom().setPrice(i.getRoom().getPrice()+i.getRoom().getPrice());
+//			}
+//		}
+//		t.add(a);
+//		
+//		return t;
+//	}	
 	
 }

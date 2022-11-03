@@ -14,6 +14,7 @@ import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.AuthreqRepository;
 import com.lec.spring.repository.UserRepository;
 
+
 @Service
 public class UserService {
 	private UserRepository userRepository;
@@ -89,4 +90,5 @@ public class UserService {
 		Authreq a = authreqRepository.findById(Long.parseLong(authreqId)).orElse(null);
 		authreqRepository.delete(a);
 	}
+
 }
