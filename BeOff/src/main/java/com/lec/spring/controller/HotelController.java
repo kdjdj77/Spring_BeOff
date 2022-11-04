@@ -60,13 +60,9 @@ public class HotelController {
 		return "/hotel/list";
 	}
 	
-	
-	
+
 	// /hotel/detail
-	// 필요한 정보
-	// 클릭한 숙소 ID name content -- 
-	// 클릭한 숙소의 방 정보  room (image , name, price , bed)
-	// 클릭한 숙소의 후기 정보  hcomment(user, reg, star,  content) --
+	
 	@GetMapping("/detail")
 	public String detail(String id, Model model,String inn,String out) {
 		model.addAttribute("hotel",hotelService.getHotelById(id));
@@ -88,15 +84,6 @@ public class HotelController {
 			
 		return "/hotel/list";
 	}
-	
-	
-	// /hotel/reserv
-	// 필요한 정보
-	// 로그인된 유저 ID 
-	// 룸티켓..?
-	
-	
-	
 	
 	
 	@GetMapping("/reserve")
