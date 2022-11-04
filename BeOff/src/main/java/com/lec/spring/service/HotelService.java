@@ -61,7 +61,7 @@ public class HotelService {
 		}
 		return RList;
 	}
-		
+	
 	public List<Hotel> list(Integer page, Model model){
 		if(page == null) page = 1;
 		if(page < 1) page = 1;
@@ -86,29 +86,18 @@ public class HotelService {
 		
 		model.addAttribute("cnt", cnt);  // 전체 글 개수
 		model.addAttribute("page", page); // 현재 페이지
-		model.addAttribute("totalPage", totalPage);  // 총 '페이지' 수
-		model.addAttribute("pageRows", pageRows);  // 한 '페이지' 에 표시할 글 개수
+		model.addAttribute("totalPage", totalPage);  // 총 페이지 수
+		model.addAttribute("pageRows", pageRows);  // 한 페이지 에 표시할 글 개수
 		
 		// [페이징]
 		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
-		model.addAttribute("writePages", writePages); // [페이징] 에 표시할 숫자 개수
-		model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
-		model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
-		
-		List<Hotel> list = pageWrites.getContent();	
-		model.addAttribute("list", list);
-		
-		return list;
-	}
-	//호텔 리스트 + 룸 가격
-	public List<Hotel> getHotelList() {
-		List<Double> pList = new ArrayList<Double>();
-		List<Hotel> h = null;
+		model.addAttribute("writePages", writePages); // 페이징 에 표시할 숫자 개수
+		model.addAttribute("startPage", startPage);  // 페이징 에 표시할 시작 페이지
+		model.addAttribute("endPage", endPage);   // 페이징 에 표시할 마지막 페이지
 
-	
-		h = hotelRepository.findAll(Sort.by(Order.asc("id")));
-		
-		for(Hotel i : h) {
+		List<Double> pList = new ArrayList<Double>();
+		List<Hotel> list = pageWrites.getContent();	
+		for(Hotel i : list) {
 			pList.clear();
 
 			for(Room j : i.getRooms()) {
@@ -126,9 +115,10 @@ public class HotelService {
 				i.setPriceList(Double.toString(b)+"원  ~ " + Double.toString(a)+"원");
 			}
 		}
-		return h;
+		model.addAttribute("list", list);
+		
+		return list;
 	}
-	
 	// 숙소 검색
 	public List<Hotel> getSearchHotels(String hotelregion, String checkinDate, String checkoutDate) {
 		Region region = regionRepository.findByRegion(hotelregion);
@@ -139,6 +129,7 @@ public class HotelService {
 		int roomcnt;
 		int ticketcnt;
 		List<Long> dateList = new ArrayList<Long>() ; 
+		
 		for(Long i = s; i < e ; i++) {
 			dateList.add(i);
 		}
@@ -165,6 +156,7 @@ public class HotelService {
 			list.remove(h);
 			
 		}
+		
 		return list;
 	}
 
@@ -188,68 +180,6 @@ public class HotelService {
 		return r;
 	}
 	
-//	public List<String> getTicketList(Long id, Long date) {
-//		List<String> list = new ArrayList<String>();
-//		Room r  = roomRepository.findById(id).get();
-//		List<Roomticket> tickets = roomticketRepository.findByHotelAndDate(r,date);
-//		for(Roomticket t : tickets) {
-//			list.add(t.getDate());
-//		}
-//		return list;
-//	}
-
-	// 특정 호텔(id)의 댓글 목록들
-//	public HqryCommentList getCommentList(Long id) {
-//		
-//		HqryCommentList list = new HqryCommentList();
-//		List<Hcomment> comments = hcommentRepository.findByHotel(id, Sort.by(Order.desc("id")));
-//		System.out.println("--------------------------------");
-//		System.out.println(comments);
-//		System.out.println("--------------------------------");
-//		list.setCount(comments.size());
-//		list.setList(comments);		
-//		list.setStatus("OK");
-//		return list;
-//	}
-//	
-//	// 특정 글(hotelId)에 특정 사용자(UserId)가 댓글 작성
-//	public HqryResult write(Hotel hotel, Long userId, String content, Long star) {
-//		User user = userRepository.findById(userId).orElse(null);
-//		
-//		Hcomment comment = Hcomment.builder()
-//				.user(user)
-//				.content(content)
-//				.star(star)
-//				.hotel(hotel)
-//				.build()
-//				;
-//		hcommentRepository.save(comment); // INSERT
-//		HqryResult result = HqryResult.builder()
-//				.count(1)
-//				.status("OK")
-//				.build()
-//				;
-//		return result;
-//	}
-//	
-//	// 특정 댓글(id) 삭제
-//	public HqryResult delete(Long id) {
-//		Hcomment comment = hcommentRepository.findById(id).orElse(null);
-//		
-//		int count = 0;
-//		String status = "FAIL";
-//		if (comment != null) {
-//			hcommentRepository.delete(comment);
-//			count = 1;
-//			status = "OK";
-//		}
-//		HqryResult result = HqryResult.builder()
-//				.count(count)
-//				.status(status)
-//				.build()
-//				;
-//		return result;
-//	}
 	
 	public Room reserve(String id) {
 		Room r = roomRepository.findById(Long.parseLong(id)).orElse(null);
@@ -279,21 +209,21 @@ public class HotelService {
 	}
 
 	public List<Roomticket> getRoomTickets() {
-//		Roomticket rt = new Roomticket();
-//		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
-//		int cnt=0;
-//		for(Roomticket rtk : list) {
-//			if(!rtk.getRegDateTime().equals(list.get(cnt).getRegDateTime())) {
-//				rtk = list.get(cnt);
-//			}else {
-//				rtk.setDate(list.get(cnt).getDate());
-//				rtk.setId(list.get(cnt).getId());
-//				rtk.setRegDate(list.get(cnt).getRegDate());
-//				rtk.setRoom(list.get(cnt).getRoom());
-//				roomticketRepository.saveAndFlush(rtk);
-//			}
-//			cnt++;
-//		}
+		Roomticket rt = new Roomticket();
+		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
+		int cnt=0;
+		for(Roomticket rtk : list) {
+			if(!rtk.getRegDateTime().equals(list.get(cnt).getRegDateTime())) {
+				rtk = list.get(cnt);
+			}else {
+				rtk.setDate(list.get(cnt).getDate());
+				rtk.setId(list.get(cnt).getId());
+				rtk.setRegDate(list.get(cnt).getRegDate());
+				rtk.setRoom(list.get(cnt).getRoom());
+				roomticketRepository.saveAndFlush(rtk);
+			}
+			cnt++;
+		}
 		
 		return roomticketRepository.findByUser(U.getLoggedUser());
 	} 

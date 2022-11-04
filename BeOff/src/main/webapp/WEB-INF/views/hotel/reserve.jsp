@@ -23,7 +23,14 @@
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
-
+<%
+			String checkin = request.getParameter("checkin");
+			String checkout = request.getParameter("checkout");
+			Long checkin1 = Long.parseLong(checkin.replaceAll("-",""));
+			Long checkout1 = Long.parseLong(checkout.replaceAll("-",""));
+			String price = request.getParameter("price");		
+			Long price1 = Math.round(Double.parseDouble(price));
+		%>
 <main>
   <div class="container py-4">
     <div class="row align-items-md-stretch">
@@ -55,7 +62,7 @@
 
                                 <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" name="checkin" value="2022-12-12" readonly>
+                                    <input class="form-control" type="text" name="checkin" value="<%=checkin %>" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
@@ -63,7 +70,7 @@
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">체크아웃</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" name="checkout" value="2022-12-15" readonly>
+                                    <input class="form-control" type="text" name="checkout" value="<%=checkout %>" readonly>
 
                                     <span class="fas fa-check"></span>
 
@@ -72,7 +79,7 @@
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="fw-bold">Total</p>
-                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${r.price } won</p>
+                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span><%=(checkout1-checkin1)*price1 %> won</p>
                                 </div>
                                 <input class="btn btn-secondary" type="button" value="무통장입금">
                             </div>
@@ -80,7 +87,7 @@
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                             </div>
                                 <input type="hidden" name="id" value="${r.id }">
-               					<input class="btn btn-warning btn-xl text-uppercase" type="button" onclick="requestPay('${room.hotel.hotelname}', '${room.price}')" value="카카오페이">
+               					<input class="btn btn-warning btn-xl text-uppercase" type="button" onclick="requestPay('${room.hotel.hotelname}', '<%=(checkout1-checkin1)*price1 %>')" value="카카오페이">
                             </div>
                         </div>
                 	</form>
@@ -125,4 +132,5 @@ crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="${pageContext.request.contextPath }/js/rev.js"></script>
+
 </html>
