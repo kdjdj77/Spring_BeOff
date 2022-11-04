@@ -44,8 +44,8 @@ public class TicketDTO {
 	private Double price;
 	private LocalDateTime regDate;
 	
-	public void addDate(Long... date) { 
-			Collections.addAll(this.date, date);
+	public void addDate(Long date1) { 
+			this.date.add(date1);
 	}
 	@JsonIgnore
 	public String getRegDateTime() {

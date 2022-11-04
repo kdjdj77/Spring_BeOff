@@ -230,19 +230,22 @@ public class HotelService {
 		
 		TicketDTO tk = new TicketDTO();
 		for(Roomticket rtk : list) {
-			if(!rt.getRegDateTime().equals(rtk.getRegDateTime())) {
+			if(!rt.getRegDateTime().equals(rtk.getRegDateTime()) ||
+					rt.getRoom().getId() != rtk.getRoom().getId()) {
 				tickets.add(tk);
 				rt = rtk;
+				tk = new TicketDTO(); 
+				tk.addDate(rt.getDate());
 				tk.setRoom(rt.getRoom());
 				tk.setPrice(rt.getRoom().getPrice());
 				tk.setRegDate(rt.getRegDate());
 			}else {
 				tk.addDate(rtk.getDate());
-				tk.setPrice(tk.getPrice()+rtk.getRoom().getPrice());
+				tk.setPrice(tk.getPrice() + rtk.getRoom().getPrice());
 			}
 		}
+		tickets.add(tk);
 		return tickets;
-//		return roomticketRepository.findByUser(U.getLoggedUser());
 	} 
 	
 //	public List<Roomticket> getRoomTickets() {

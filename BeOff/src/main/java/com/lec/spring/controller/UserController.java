@@ -1,12 +1,9 @@
 package com.lec.spring.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lec.spring.domain.User;
@@ -24,8 +24,6 @@ import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
 
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 @RequestMapping("/user")
@@ -63,6 +61,8 @@ public class UserController {
 		if (result.hasErrors()) {
 			redirectAttrs.addFlashAttribute("username", user.getUsername());
 			redirectAttrs.addFlashAttribute("name", user.getName());
+			redirectAttrs.addFlashAttribute("email", user.getEmail());
+			redirectAttrs.addFlashAttribute("phonenum", user.getPhonenum());
 			List<FieldError> errList = result.getFieldErrors();
 			for(FieldError err : errList) {
 				redirectAttrs.addFlashAttribute("error", err.getCode());
@@ -126,4 +126,13 @@ public class UserController {
 		binder.setValidator(new UserValidator());
 	}
 	
+	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+
+		userService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+		
+		return Integer.toString(randomNumber);
+	}
 }

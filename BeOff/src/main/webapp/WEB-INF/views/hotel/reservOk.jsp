@@ -62,7 +62,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="list" items="${list }">
+                                <c:forEach var="list" items="${list }" begin="1">
                                     <tr class="inner-box">
                                         <th scope="row"><h5>${list.regDateTime }</h5></th>
                                         <td>
