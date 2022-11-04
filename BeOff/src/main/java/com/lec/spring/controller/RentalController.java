@@ -108,16 +108,26 @@ out1: 2022-10-28
 		model.addAttribute("rentals", rentalService.mapByUser(user));
 		model.addAttribute("user", user);
 		
-		return "rental/reserveList";
+		return "redirect:/rental/tickets";
 	}
 	
-	@GetMapping("/cars/reserveList")
+//	@GetMapping("/cars/reserveList")
+//	public String reservateList(Model model) {
+//		User user = rentalService.getUserData();
+//		model.addAttribute("rentals", rentalService.mapByUser(user));
+//		model.addAttribute("user", user);
+//		
+//		return "rental/reserveList";
+//			
+//	}
+	
+	@GetMapping("/tickets")
 	public String reservateList(Model model) {
 		User user = rentalService.getUserData();
-		model.addAttribute("rentals", rentalService.mapByUser(user));
+		model.addAttribute("list", rentalService.getTickets(user));
 		model.addAttribute("user", user);
 		
-		return "rental/reserveList";
+		return "rental/tickets";
 			
 	}
 	

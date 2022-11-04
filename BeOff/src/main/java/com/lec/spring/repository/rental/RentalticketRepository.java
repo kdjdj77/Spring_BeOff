@@ -11,4 +11,5 @@ import com.lec.spring.domain.rental.Rentalticket;
 public interface RentalticketRepository extends JpaRepository<Rentalticket, Long> {
 	List<Rentalticket> findByCar_Rental(Rental rental);
 	List<Rentalticket> findByUser(User user);
+	List<Rentalticket> findByUserOrderByIdDesc(User user);
 }
