@@ -207,7 +207,7 @@ public class HotelService {
 			rt.setDate(i);
 			roomticketRepository.saveAndFlush(rt);
 		}
-	
+	}
 	public List<TicketDTO> getRoomTickets() {
 		Roomticket rt = new Roomticket();
 		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
