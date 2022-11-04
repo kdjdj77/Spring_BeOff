@@ -20,6 +20,7 @@ import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
 import com.lec.spring.domain.hotel.Roomticket;
+import com.lec.spring.domain.hotel.TicketDTO;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
@@ -206,26 +207,30 @@ public class HotelService {
 			rt.setDate(i);
 			roomticketRepository.saveAndFlush(rt);
 		}
-	}
-
-	public List<Roomticket> getRoomTickets() {
+	
+	public List<TicketDTO> getRoomTickets() {
 		Roomticket rt = new Roomticket();
 		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
-		int cnt=0;
+		List<TicketDTO> tickets = new ArrayList<TicketDTO>();
+    
+		TicketDTO tk = new TicketDTO();
 		for(Roomticket rtk : list) {
-			if(!rtk.getRegDateTime().equals(list.get(cnt).getRegDateTime())) {
-				rtk = list.get(cnt);
+			if(!rt.getRegDateTime().equals(rtk.getRegDateTime()) ||
+					rt.getRoom().getId() != rtk.getRoom().getId()) {
+				tickets.add(tk);
+				rt = rtk;
+				tk = new TicketDTO(); 
+				tk.addDate(rt.getDate());
+				tk.setRoom(rt.getRoom());
+				tk.setPrice(rt.getRoom().getPrice());
+				tk.setRegDate(rt.getRegDate());
 			}else {
-				rtk.setDate(list.get(cnt).getDate());
-				rtk.setId(list.get(cnt).getId());
-				rtk.setRegDate(list.get(cnt).getRegDate());
-				rtk.setRoom(list.get(cnt).getRoom());
-				roomticketRepository.saveAndFlush(rtk);
+				tk.addDate(rtk.getDate());
+				tk.setPrice(tk.getPrice() + rtk.getRoom().getPrice());
 			}
-			cnt++;
 		}
-		
-		return roomticketRepository.findByUser(U.getLoggedUser());
+		tickets.add(tk);
+		return tickets;
 	} 
 
 	
