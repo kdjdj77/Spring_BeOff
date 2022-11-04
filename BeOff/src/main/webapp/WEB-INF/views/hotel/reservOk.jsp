@@ -59,7 +59,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="list" items="${list }">
+                                <c:forEach var="list" items="${list }" begin="1">
                                     <tr class="inner-box">
                                         <th scope="row"><h5>${list.regDateTime }</h5></th>
                                         <td>
@@ -76,12 +76,14 @@
                                         </td>
                                         <td>
                                             <div class="r-no">
-                                                <h5>${list.room.price } won</h5>
+                                                <h5>${list.price } won</h5>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="r-no">
-                                                <h5>${list.date }</h5>
+                                            	<c:forEach var="i" items="${list.date }">
+                                                	<h5>${i }</h5>
+                                                </c:forEach>
                                             </div>
                                         </td>
                                         <td>

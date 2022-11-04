@@ -45,15 +45,15 @@
                 <form name="getReserve" action="reservOk" method="post">
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Name</p>
-                        <input class="form-control" type="name" value="${r.hotel.user.username } " readonly>
+                        <input class="form-control" type="name" value="${username } " readonly>
                     </div>
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Phone</p>
-                        <input class="form-control" type="phone" value="${r.hotel.user.phonenum }" readonly>
+                        <input class="form-control" type="phone" value="${userdetails.phonenum}" readonly>
                     </div>
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Email</p>
-                        <input class="form-control" type="email" value="${r.hotel.user.email }" readonly>
+                        <input class="form-control" type="email" value="${userdetails.email}" readonly>
                     </div>
                     
                         <div class="address">
@@ -62,6 +62,7 @@
 
                                 <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
+
                                     <input class="form-control" type="text" name="checkin" value="<%=checkin %>" readonly>
                                     <span class="fas fa-check"></span>
 
@@ -70,8 +71,8 @@
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">체크아웃</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" name="checkout" value="<%=checkout %>" readonly>
 
+                                    <input class="form-control" type="text" name="checkout" value="<%=checkout %>" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
