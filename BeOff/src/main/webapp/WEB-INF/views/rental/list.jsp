@@ -70,7 +70,34 @@
 				<div class="col-lg-1"></div>
 			</div>
 		</div><br>
-		
+
+
+		<%-- 	<form action="cars/list" method="POST">
+		<input type="hidden" name="rentalId" value="${dto.id }">
+		<input type="hidden" name="sDate" value="${sDate }">
+		<input type="hidden" name="eDate" value="${eDate }">
+		<input type="hidden" name="sizeOption" value="all">
+		<div class="row d-flex justify-content-start "
+			style="margin-left: 150px;">
+			<c:forEach var="dto" items="${rentalList }" varStatus="status">
+				<div class="card col-sm-3 ms-2 me-2 my-3"
+					style="width: 20rem; border: 1px solid #333333;">
+					<img style="height: 200px; width: 300px"
+						src="../upload/g80.jpg"
+						class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">${dto.region.region }/ ${dto.rentalname }</h5>
+						<p class="card-text">${dto.content }</p>
+					</div>
+					<div class="text-end">
+						<button class="btn btn-outline-secondary">자세히 알아보기</button>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+				</form> --%>
+
+
 		<c:forEach var="dto" items="${rentalList }" varStatus="status">
 		<form action="cars/list" method="POST">
 		<input type="hidden" name="rentalId" value="${dto.id }">
@@ -78,7 +105,7 @@
 		<input type="hidden" name="eDate" value="${eDate }">
 		<input type="hidden" name="sizeOption" value="all">
 		<div class="container">
-			<div class="row">
+			<div class="row d-flex">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
 					<div class="card mb-3">
