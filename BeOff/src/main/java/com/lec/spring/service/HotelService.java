@@ -148,16 +148,11 @@ public class HotelService {
 				}
 			}
 			if(roomcnt == ticketcnt) {
-				dellist.add(h);
-				
-			}
-		}
-		
+				dellist.add(h);			}
+		}		
 		for(Hotel h : dellist) {
 			list.remove(h);
-			
 		}
-		
 		return list;
 	}
 
