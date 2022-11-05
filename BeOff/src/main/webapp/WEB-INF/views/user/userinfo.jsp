@@ -9,7 +9,6 @@
         <meta name="author" content="" />
         <title>Landing Page - Start Bootstrap Theme</title>
         <script src="https://kit.fontawesome.com/51772bd9bd.js" crossorigin="anonymous"></script>
-        
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -23,43 +22,20 @@
         <%-- 인증 헤더 --%>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
         <!-- Masthead-->
-        <header class="masthead bg-black">
+        <header class="masthead bg-black" style="margin-top:-180px; padding-bottom:4rem;">
             <div class="container position-relative">
                 <div class="row justify-content-start">
                     <div class="col-xl-6">
                         <div class="font-weight-bold text-left text-white fs-2">
                             <h1 class="mb-5">
-                            	UserInfo 
+                            	${user.name} 
                             	<a href="#" class="fs-5 text-black btn btn-warning">수정</a>
                             	<a href="#" class="fs-5 text-black btn btn-danger">탈퇴</a>
                             </h1>
                             
                             <div class="mb-3">ID : ${user.username}</div>
-                            <div class="mb-3">Name : ${user.name}</div>
                             <div class="mb-3">Phone : ${user.phonenum}</div>
                             <div class="mb-3">Email : ${user.email}</div>
-                            <p><br></p>
-                            
-                            <div style="width:1000px;" class="d-flex justify-content-between fs-5">
-                            	<div class="border">
-                            		<form action="adminreq" method="post">
-                            			<div class="fs-4">숙소 등록권한 요청</div>
-                            			<input type="hidden" id="hreq" name="auth" value="ROLE_ADMIN_HOTEL">
-                            			<input type="hidden" name="userId" value="${user.id}">
-                            			<div><textarea maxlength="200" class="form-control" name="content" style="width:450px; height:200px; resize:none; font-size:1.3rem;" placeholder="요청 사유를 적어주세요" required></textarea></div>
-                            			<button class="btn btn-primary">요청하기</button>
-                            		</form>
-                            	</div>
-                            	<div class="border">
-                            		<form action="adminreq" method="post">
-                            			<div class="fs-4">렌트카 등록권한 요청</div>
-                            			<input type="hidden" id="hreq" name="auth" value="ROLE_ADMIN_RENTAL">
-                            			<input type="hidden" name="userId" value="${user.id}">
-										<div><textarea maxlength="200" class="form-control" name="content" style="width:450px; height:200px; resize:none; font-size:1.3rem;" placeholder="요청 사유를 적어주세요" required></textarea></div>
-                            			<button class="btn btn-primary">요청하기</button>
-                            		</form>
-                            	</div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -96,6 +72,30 @@
                 </div>
             </div>
         </section>
+        
+        <header style="height:500px; padding:3rem;" class="fs-5 masthead bg-black">
+	        <div class="container position-relative d-flex justify-content-around">
+	           	<div class="border">
+	           		<form action="adminreq" method="post">
+	           			<div class="fs-4 p-2" style="color:white;">숙소 등록권한 요청</div>
+	           			<input type="hidden" id="hreq" name="auth" value="ROLE_ADMIN_HOTEL">
+	           			<input type="hidden" name="userId" value="${user.id}">
+	           			<div><textarea maxlength="200" class="form-control" name="content" style="width:450px; height:200px; resize:none; font-size:1.3rem;" placeholder="요청 사유를 적어주세요" required></textarea></div>
+	           			<div class="w-100 d-flex justify-content-end py-2"><button class="btn btn-primary">요청하기</button></div>
+	           		</form>
+	           	</div>
+	           	<div class="border">
+	           		<form action="adminreq" method="post">
+	           			<div class="fs-4 p-2" style="color:white;">렌트카 등록권한 요청</div>
+	           			<input type="hidden" id="hreq" name="auth" value="ROLE_ADMIN_RENTAL">
+	           			<input type="hidden" name="userId" value="${user.id}">
+						<div><textarea maxlength="200" class="form-control" name="content" style="width:450px; height:200px; resize:none; font-size:1.3rem;" placeholder="요청 사유를 적어주세요" required></textarea></div>
+	           			<div class="w-100 d-flex justify-content-end py-2"><button class="btn btn-primary">요청하기</button></div>
+	           		</form>
+	           	</div>
+           	</div>
+		</header>
+        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>

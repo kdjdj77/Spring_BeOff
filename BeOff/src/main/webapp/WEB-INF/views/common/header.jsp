@@ -15,52 +15,54 @@
 <html>
 
 <head>
-  <title>NavBar</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<title>NavBar</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://kit.fontawesome.com/51772bd9bd.js" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+	<style>
+	 	a {text-decoration: none; color:white;}
+		a:hover {color:white;}
+		.nav-item:hover {border-bottom:3px solid crimson;}
+		.nav-item {
+			height:40px;
+			-webkit-box-sizing: border-box;
+		   	-moz-box-sizing: border-box;
+		   	box-sizing: border-box;
+		}	
+		.navbar-brand {font-family: 'Dancing Script', cursive;}
+	 </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="position:fixed; width:100vw; top:0;">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="position:fixed; height:56px; width:100%; top:0; z-index:999;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="javascript:void(0)">Security</a>
+      <a class="navbar-brand m-0 p-0 fs-4" href="${pageContext.request.contextPath }/home">BeOff</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="mynavbar">
+      <div class="collapse navbar-collapse ms-5" id="mynavbar">
         <ul class="navbar-nav me-auto">
-          <!-- 누구에게나 보이는 메뉴 -->
-          <sec:authorize access="isAnonymous()">
-	          <li class="nav-item" TODO="">
-	            <a class="nav-link" href="javascript:void(0)">Anonymous</a>
-	          </li>
+          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/air/basic">비행기</a></li>
+          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/hotel/list">숙소</a></li>          
+          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/rental/list">렌트카</a></li>
+           
+          <sec:authorize access="hasRole('ADMIN_AIR')">
+	          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/air/admin/list">관리자(비행기)</a></li>
           </sec:authorize>
-         
-          <!-- 로그인한 사람에게만 보이는 메뉴 -->
-          <sec:authorize access="isAuthenticated()">
-	          <li class="nav-item" TODO="">
-	            <a class="nav-link" href="javascript:void(0)">Authenticated</a>
-	          </li>          
+          <sec:authorize access="hasRole('ADMIN_AIR')">
+	          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/user/admin/authcheck">관리자(권한관리)</a></li>
           </sec:authorize>
-         
-          <!-- 로그인한 사람중 ROLE_MEMBER 나 ROLE_ADMIN 권한 있는 사람에게만 보이는 메뉴 -->
-          <sec:authorize access="hasAnyRole('ADMIN', 'MEMBER')">
-	          <li class="nav-item" TODO="">
-	            <a class="nav-link" href="javascript:void(0)">Member</a>
-	          </li>
+           <sec:authorize access="hasRole('ADMIN_HOTEL')">
+	          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/hotel/admin/list">관리자(숙소)</a></li>
           </sec:authorize>
-            
-         
-          <!-- 로그인한 사람중 ROLE_ADMIN 권한 있는 사람에게만 보이는 메뉴 -->
-          <sec:authorize access="hasRole('ADMIN')">
-	          <li class="nav-item" TODO="">
-	            <a class="nav-link" href="javascript:void(0)">Admin</a>
-	          </li>
+           <sec:authorize access="hasRole('ADMIN_RENTAL')">
+	          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/rental/admin/list">관리자(렌트카)</a></li>
           </sec:authorize>
-          
-         
         </ul>
        
          <!-- 로그인 안했을때는 로그인 form 보여주기 -->
@@ -73,7 +75,10 @@
 	         <form action="${pageContext.request.contextPath}/user/logout" method="POST" TODO="">
 	           <!--TODO : 로그아웃후 다시 돌아오기 -->
 	           <span class="d-flex">
-	             <span class="text-light p-2"><span TODO="">${username }(${userdetails.user.name })</span> 님 환영합니다</span>
+	             <span class="text-light p-2">
+	             	<span>${userdetails.user.name }</span> 님 
+	             	<a href="${pageContext.request.contextPath}/user/userinfo"><i class="fs-5 fa-solid fa-gear mx-1"></i></a>
+	             </span>
 	             <span><button class="btn btn-danger" type="submit">Logout</button></span>
 	           </span>
 	         </form>       		

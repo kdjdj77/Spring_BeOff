@@ -57,9 +57,9 @@
 				타임테이블 
 				<button class="btn btn-outline-dark">등록</button>
 			</span><br><br>
-			<div class="d-flex">
+			<div>
 				<c:forEach var="t" items="${timeList}">
-					<div class="border mx-4 p-2">
+					<div class="border m-4 p-2" style="float:left;">
 						<label for="${t.id}" class="fs-5">${t.time}</label>
 						<c:choose>
 							<c:when test="${existList.contains(t)}">

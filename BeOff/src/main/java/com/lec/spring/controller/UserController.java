@@ -67,10 +67,19 @@ public class UserController {
 		}
 		
 		// 에러가 없다면 회원등록 진행
-		String page = "/user/registerOk";
 		int cnt = userService.register(user);
+		
+		// api로그인이라면 바로 로그인까지 실행
+		if (user.getProvider().equals("api")) {
+			model.addAttribute("username", user.getUsername());
+			System.out.println("////////////////////////////");
+			System.out.println(user.getUsername());
+			System.out.println("////////////////////////////");
+			return "/user/apiLogin";
+		}
+		
 		model.addAttribute("result", cnt);
-		return page;
+		return "/user/registerOk";
 	}
 	
 	@GetMapping("/userinfo")
@@ -112,6 +121,27 @@ public class UserController {
 		
 		userService.refuseAuth(authreqId);
 		return "redirect:authcheck";
+	}
+	
+	@PostMapping("/apiLogin")
+	public String apiLogin(
+			String id, String name, 
+			String phonenum, String email, Model model) {
+		model.addAttribute("username", id);
+		
+		if (userService.isExist(id)) return "/user/apiLogin";
+		
+		model.addAttribute("name", name);
+		if (phonenum != null) model.addAttribute("phonenum", phonenum);
+		else model.addAttribute("phonenum", "000-0000-0000");
+		if (email != null) model.addAttribute("email", email);
+		else model.addAttribute("email", "test@test.com");
+		return "/user/apiRegister";
+	}
+	
+	@GetMapping("/naverOK")
+	public String naverOk() {
+		return "/common/naverOK";
 	}
 	
 	// 이 컨트롤러 클래스의 handler 에서  폼 데이터 를 바인딩할때 검증하는 Validator 객체 지정

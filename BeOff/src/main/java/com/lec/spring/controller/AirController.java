@@ -215,6 +215,8 @@ public class AirController {
 	}
 	@PostMapping("/admin/aircrudtime")
 	public String aircrudtime(String departregion, String arriveregion, String aircomp, Model model) {
+		if (departregion.equals("null") || arriveregion.equals("null") || aircomp.equals("null")) 
+			return "redirect:/air/admin/aircrud";
 		Region s = airService.getRegionById(departregion);
 		Region e = airService.getRegionById(arriveregion);
 		Airname n = airService.getNameById(aircomp);

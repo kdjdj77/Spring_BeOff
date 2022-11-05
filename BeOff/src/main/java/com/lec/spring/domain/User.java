@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,6 +43,9 @@ public class User extends BaseEntity{
 	private String phonenum;
 	@Column(nullable = false)
 	private String email;
+	@Transient
+	private String provider;
+	
 	@Transient // DB에 반영 안함 javax.persistence
 	@ToString.Exclude
 	private String re_password; // 바인딩 전용

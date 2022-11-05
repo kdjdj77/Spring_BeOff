@@ -45,6 +45,7 @@
             </sec:authorize>
 		</h2>
 		<hr>
+		<p><br><br><br><br><br></p>
 		<form name="frm" id="frm" action="settime" method="post">
 			<table width="100%">
 				<thead>
@@ -54,7 +55,7 @@
 	                    <th width="17%">가는날</th>
 	                    <th width="17%">오는날</th>
 	                    <th width="17%">편도/왕복</th>
-	                    <th width="17%">인원</th>
+	                    <th width="17%">&nbsp;&nbsp;인원</th>
 	                </tr>
 				</thead>
 				<tbody>
@@ -91,6 +92,7 @@
 						</td>
 						
 						<td>
+							&nbsp;&nbsp;
 							<button type="button" class="minus btn btn-sm btn-outline-dark">-</button>
 							<span id="num">1</span>
 							<input type="hidden" name="num_person" id="in6" value="1"></input>
@@ -99,9 +101,10 @@
 					</tr>
 				</tbody>
 			</table>
-			<p></p>
-			<div class="px-5 d-flex justify-content-end">
-				<button type="button" class="btn btn-outline-dark" onclick="mysubmit()">비행기 예매 시작</button>
+			<p><br></p>
+			<div class="px-5 d-flex justify-content-center">
+				<button type="button" class="btn btn-outline-dark" style="width:200px; height:50px;" onclick="mysubmit()">비행기 예매 시작</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 		</form>
 	</div>
