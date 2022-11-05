@@ -49,7 +49,7 @@
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">대여날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="2022/12/23" readonly>
+                                    <input class="form-control" type="text" value="zz" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>

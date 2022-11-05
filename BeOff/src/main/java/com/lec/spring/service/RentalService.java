@@ -111,6 +111,10 @@ public class RentalService {
 				.collect(Collectors.toList());
 	}
 
+//	public void registerCarticket(Car c, String sDate, String eDate) {
+//		
+//	}
+
 	
 	// 특정 업체 디테일
 	

@@ -26,8 +26,9 @@
 			<div class="row">
 				<div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
 					<div class="card text-black">
-						<img style="width: 406px; height: 200px;" src="/upload/car1.jpg"
-							alt="..." class="card-img-top" />
+						<img class="card-img-top"
+							src="${pageContext.request.contextPath }/upload/${r.cars[0].files[0].file}"
+							alt="..." />
 						<div class="card-body">
 							<div class="text-center mt-1">
 								<h4 class="card-title">${r.rentalname }[${r.region.region }]</h4>

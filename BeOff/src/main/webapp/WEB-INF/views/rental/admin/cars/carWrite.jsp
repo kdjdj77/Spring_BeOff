@@ -26,27 +26,20 @@
 
 				<div class="p-5 mb-4 bg-light rounded-3">
 					<div class="container h-100">
-						<div
-							class="row d-flex justify-content-center align-items-center h-100">
+						<div class="row d-flex justify-content-center align-items-center h-100">
 							<div class="col-xl-9">
-
 								<h1 class="text-black mb-4">렌트카 등록</h1>
 								<input type="hidden" name="id" value="${id }">
 								<div class="card" style="border-radius: 15px;">
 									<div class="card-body">
-
 										<div class="row align-items-center pt-4 pb-3">
 											<div class="col-md-3 ps-5">
-
 												<h6 class="mb-0">자동차명</h6>
-
 											</div>
 											<div class="col-md-9 pe-5">
-
 												<input type="text" class="form-control form-control-lg"
 													id="carname" name="carname" placeholder="자동차명을 입력하세요"
 													required="required" />
-
 											</div>
 										</div>
 
@@ -108,10 +101,10 @@
 											<div class="col-md-9 pe-5">
 
 												<select name="cartype" id="cartype">  
-													<option value="small">소형</option>
-													<option value="middle">중형</option>
+													<option value="소형">소형</option>
+													<option value="중형">중형</option>
 													<option value="suv">suv</option>
-													<option value="large">대형</option>
+													<option value="대형">대형</option>
 												</select>
 
 											</div>
