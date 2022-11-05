@@ -14,32 +14,32 @@
 <title>car admin update</title>
 </head>
 <body>
-		<main>
-			<div class="container py-4">
+	<main>
+		<div class="container py-4">
 
-				<div class="p-5 mb-4 bg-light rounded-3">
-					<div class="container h-100">
-						<div
-							class="row d-flex justify-content-center align-items-center h-100">
-							<div class="col-xl-9">
+			<div class="p-5 mb-4 bg-light rounded-3">
+				<div class="container h-100">
+					<div
+						class="row d-flex justify-content-center align-items-center h-100">
+						<div class="col-xl-9">
 
-								<h1 class="text-black mb-4">렌트카 수정</h1>
-								
-								<form name="frm" action="carUpdateOk" method="POST" enctype="Multipart/form-data">
-									<div class="row align-items-center py-3">
-											<div class="col-md-3 ps-5">
-												<h6 class="mb-0">렌트카 이미지</h6>
-											</div>
-											<div class="col-md-9 pe-5">
-												<c:forEach var="file" items="${c.files }">
-								         		<img style="height: 150px; width:230px" id="preview${c.id}" src="${pageContext.request.contextPath }/upload/${file.file}"/>
-								    			</c:forEach>
-								    			 <input type="file" name="files" id="car${c.id}" onchange="readURL(this, 'preview${c.id}');">
-								    </div>
+							<h1 class="text-black mb-4">렌트카 수정</h1>
+							
+							<form name="frm" action="carUpdateOk" method="POST" enctype="Multipart/form-data">
+								<div class="row align-items-center py-3">
+									<div class="col-md-3 ps-5">
+										<h6 class="mb-0">렌트카 이미지</h6>
+									</div>
+									<div class="col-md-9 pe-5">
+										<c:forEach var="file" items="${car.files }">
+						         			<img style="height: 150px; width:230px" id="preview${car.id}" src="${pageContext.request.contextPath }/upload/${file.file}"/>
+						    			</c:forEach>
+						    			<input type="file" name="files" id="car${car.id}" onchange="readURL(this, 'preview${car.id}');">
+						    		</div>
 									<script>
 										function readURL(input, pre) {
 											if (input.files && input.files[0]) {
-												var reader = new FileReader();
+												let reader = new FileReader();
 												reader.onload = function(e) {
 													document.getElementById(pre).src = e.target.result;
 												};
@@ -49,11 +49,9 @@
 											}
 										}
 									</script>
-									</div>
-								</form>
-								
+								</div>
 								<div class="card" style="border-radius: 15px;">
-								<input type="hidden" name="id" value="${rental.cars }">
+									<input type="hidden" name="id" value="${car.id}">
 									<div class="card-body">
 
 										<div class="row align-items-center pt-4 pb-3">
@@ -62,7 +60,7 @@
 											</div>
 											<div class="col-md-9 pe-5">
 												<input type="text" class="form-control form-control-lg"
-													id="carname" name="carname" value="${c.carname }" readonly="readonly"/>
+													id="carname" name="carname" value="${car.carname }" readonly="readonly"/>
 											</div>
 										</div>
 										<hr class="mx-n3">
@@ -82,7 +80,7 @@
 											</div>
 											<div class="col-md-9 pe-5">
 												<textarea class="form-control" rows="3" id="content"
-													name="content">${rental.content }</textarea>
+													name="content">${car.rental.content }</textarea>
 											</div>
 										</div>
 										<hr class="mx-n3">
@@ -92,20 +90,19 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							
+							</form>
 						</div>
 					</div>
 				</div>
-
 			</div>
-		</main>
-	</form>
 
-
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-		crossorigin="anonymous"></script>
+		</div>
+	</main>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+	crossorigin="anonymous">
+</script>
 </body>
 </html>
