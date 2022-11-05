@@ -35,7 +35,7 @@ window.addEventListener('load', function () {
 				return;
 			}
 		} else {
-			console.log("callback 처리에 실패하였습니다.");
+			//console.log("callback 처리에 실패하였습니다.");
 		}
 
 	});

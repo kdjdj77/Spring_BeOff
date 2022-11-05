@@ -27,7 +27,7 @@
 			if (status) {
 				const naverForm = document.getElementById("frm");
 				const userN = naverLogin.user.name;
-				const userId = naverLogin.user.id;
+				const userId = "naver" + naverLogin.user.id;
 				const email = naverLogin.user.email;
 				const phonenum = naverLogin.user.mobile;
 				

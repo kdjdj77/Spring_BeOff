@@ -14,7 +14,7 @@
 
 <body style="margin-bottom: 200px">
 
-    <div class="container mt-3 text-center" style="width:40%;">
+    <div class="container mt-3 text-center" style="width:500px;">
         <form action="${pageContext.request.contextPath }/user/login" method="POST">
             <h1 class="h3 mb-3 fw-normal">로그인 하세요</h1>
 	        <div class="row mt-5">

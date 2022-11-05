@@ -13,8 +13,7 @@
 </head>
 <body>
 	<div id="apis">
-		<form id="kakao_L" action="apiLogin" method="POST">
-		
+		<form id="kakaoform" action="apiLogin" method="POST">
 		</form>
 		<div onclick="kakaoLogin();">
 	      <a href="javascript:void(0)" style="background-color: #fef01b" class="border border-2 w-100 btn btn-lg my-1">
@@ -39,11 +38,11 @@
 </body>
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="${pageContext.request.contextPath}/js/kakaoLogin.js"></script>
+<script src="${pageContext.request.contextPath}/js/loginKakao.js"></script>
 <!-- 구글 스크립트 -->
 <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-<script src="${pageContext.request.contextPath}/js/googleLogin.js"></script>
+<script src="${pageContext.request.contextPath}/js/loginGoogle.js"></script>
 <!-- 네이버 스크립트 -->
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<script src="${pageContext.request.contextPath}/js/naverLogin.js"></script>
+<script src="${pageContext.request.contextPath}/js/loginNaver.js"></script>
 </html>
