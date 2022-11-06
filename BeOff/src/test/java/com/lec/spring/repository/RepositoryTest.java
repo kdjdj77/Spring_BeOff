@@ -79,6 +79,27 @@ class RepositoryTest {
 				.phonenum("01022222222")
 				.email("222@gmail.com")
 				.build();
+		User user3 = User.builder()
+				.username("USER3")
+				.password(passwordEncoder.encode("1234"))
+				.name("회원3")
+				.phonenum("01076767676")
+				.email("asdf@gmail.com")
+				.build();
+		User user4 = User.builder()
+				.username("USER4")
+				.password(passwordEncoder.encode("1234"))
+				.name("회원4")
+				.phonenum("01078787878")
+				.email("qwer@gmail.com")
+				.build();
+		User user5 = User.builder()
+				.username("USER5")
+				.password(passwordEncoder.encode("1234"))
+				.name("회원5")
+				.phonenum("01079797979")
+				.email("zxcv@gmail.com")
+				.build();
 		User adminqna = User.builder()
 				.username("ADMINQNA")
 				.password(passwordEncoder.encode("1234"))
@@ -116,6 +137,10 @@ class RepositoryTest {
 				.build();
 
 		user1.addAuthority(auth_member);
+		user2.addAuthority(auth_member);
+		user3.addAuthority(auth_member);
+		user4.addAuthority(auth_member);
+		user5.addAuthority(auth_member);
 		adminqna.addAuthority(auth_member, auth_admin_qna);
 		adminair.addAuthority(auth_member, auth_admin_air);
 		adminhotel.addAuthority(auth_member, auth_admin_hotel);
@@ -124,6 +149,9 @@ class RepositoryTest {
 		
 		user1 = userRepository.save(user1);
 		user2 = userRepository.save(user2);
+		user3 = userRepository.save(user3);
+		user4 = userRepository.save(user4);
+		user5 = userRepository.save(user5);
 		adminqna = userRepository.save(adminqna);
 		adminair = userRepository.save(adminair);
 		adminhotel = userRepository.save(adminhotel);
