@@ -273,4 +273,29 @@ public class AirService {
 		return 1;
 	}
 
+	public List<Airticket> getMyTickets() {
+		User user = U.getLoggedUser();
+		List<Airticket> tickets = airticketRepository.findByUserOrderByIdDesc(user);
+		List<Airticket> t = new ArrayList<Airticket>();
+		Airticket a = new Airticket();
+		
+		for(Airticket i : tickets) {
+			if (!a.getRegDateTime().equals(i.getRegDateTime()) || 
+					a.getAirplane().getId() != i.getAirplane().getId() ||
+					a.getDate() - i.getDate() != 0L) {
+				t.add(a);
+				a = i;
+				a.setPrice(i.getAirplane().getName().getPrice());
+				a.setIds(i.getId().toString());
+			} else {
+				a.setPrice(a.getPrice() + i.getAirplane().getName().getPrice());
+				a.setSeat(a.getSeat() + ", " + i.getSeat());
+				a.setIds(a.getIds() + ", " + i.getId());
+			}
+		}
+		t.add(a);
+		
+		return t;
+	}
+
 } // end Service

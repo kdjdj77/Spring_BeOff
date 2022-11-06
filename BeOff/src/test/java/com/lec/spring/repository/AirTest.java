@@ -89,21 +89,47 @@ public class AirTest {
 				A = airplaneRepository.saveAndFlush(A);
 				B = airplaneRepository.saveAndFlush(B);
 				
-				String[] seatArr = {"E04", "E05", "E06"};
-				for (String i : seatArr) {
-					Airticket AT1 = Airticket.builder()
-							.user(user1).airplane(A).seat(i).date(20221212L).build();
-					Airticket AT2 = Airticket.builder()
-							.user(user1).airplane(A).seat(i).date(20221213L).build();
-					Airticket AT3 = Airticket.builder()
-							.user(user1).airplane(B).seat(i).date(20221212L).build();
-					Airticket AT4 = Airticket.builder()
-							.user(user1).airplane(B).seat(i).date(20221213L).build();
-					AT1 = airticketRepository.saveAndFlush(AT1);
-					AT2 = airticketRepository.saveAndFlush(AT2);
-					AT3 = airticketRepository.saveAndFlush(AT3);
-					AT4 = airticketRepository.saveAndFlush(AT4);
-				}
+
+				Airticket AT1 = Airticket.builder()
+						.user(user1).airplane(A).seat("E04").date(20221212L).build();
+				Airticket AT2 = Airticket.builder()
+						.user(user1).airplane(A).seat("E05").date(20221212L).build();
+				Airticket AT3 = Airticket.builder()
+						.user(user1).airplane(A).seat("E06").date(20221212L).build();
+				Airticket AT4 = Airticket.builder()
+						.user(user1).airplane(B).seat("E04").date(20221213L).build();
+				Airticket AT5 = Airticket.builder()
+						.user(user1).airplane(B).seat("E05").date(20221213L).build();
+				Airticket AT6 = Airticket.builder()
+						.user(user1).airplane(B).seat("E06").date(20221213L).build();
+				
+				Airticket AT7 = Airticket.builder()
+						.user(user1).airplane(B).seat("E04").date(20221212L).build();
+				Airticket AT8 = Airticket.builder()
+						.user(user1).airplane(B).seat("E05").date(20221212L).build();
+				Airticket AT9 = Airticket.builder()
+						.user(user1).airplane(B).seat("E06").date(20221212L).build();
+				Airticket AT10 = Airticket.builder()
+						.user(user1).airplane(A).seat("E04").date(20221213L).build();
+				Airticket AT11 = Airticket.builder()
+						.user(user1).airplane(A).seat("E05").date(20221213L).build();
+				Airticket AT12 = Airticket.builder()
+						.user(user1).airplane(A).seat("E06").date(20221213L).build();
+
+				
+				AT1 = airticketRepository.saveAndFlush(AT1);
+				AT2 = airticketRepository.saveAndFlush(AT2);
+				AT3 = airticketRepository.saveAndFlush(AT3);
+				AT4 = airticketRepository.saveAndFlush(AT4);
+				AT5 = airticketRepository.saveAndFlush(AT5);
+				AT6 = airticketRepository.saveAndFlush(AT6);
+				AT7 = airticketRepository.saveAndFlush(AT7);
+				AT8 = airticketRepository.saveAndFlush(AT8);
+				AT9 = airticketRepository.saveAndFlush(AT9);
+				AT10 = airticketRepository.saveAndFlush(AT10);
+				AT11 = airticketRepository.saveAndFlush(AT11);
+				AT12 = airticketRepository.saveAndFlush(AT12);
+				
 			}
 		}
 	}

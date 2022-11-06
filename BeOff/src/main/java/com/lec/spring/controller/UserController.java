@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+
 
 @Controller
 @RequestMapping("/user")
@@ -57,6 +61,8 @@ public class UserController {
 		if (result.hasErrors()) {
 			redirectAttrs.addFlashAttribute("username", user.getUsername());
 			redirectAttrs.addFlashAttribute("name", user.getName());
+			redirectAttrs.addFlashAttribute("email", user.getEmail());
+			redirectAttrs.addFlashAttribute("phonenum", user.getPhonenum());
 			List<FieldError> errList = result.getFieldErrors();
 			for(FieldError err : errList) {
 				redirectAttrs.addFlashAttribute("error", err.getCode());
@@ -67,10 +73,19 @@ public class UserController {
 		}
 		
 		// 에러가 없다면 회원등록 진행
-		String page = "/user/registerOk";
 		int cnt = userService.register(user);
+		
+		// api로그인이라면 바로 로그인까지 실행
+		if (user.getProvider().equals("api")) {
+			model.addAttribute("username", user.getUsername());
+			System.out.println("////////////////////////////");
+			System.out.println(user.getUsername());
+			System.out.println("////////////////////////////");
+			return "/user/apiLogin";
+		}
+		
 		model.addAttribute("result", cnt);
-		return page;
+		return "/user/registerOk";
 	}
 	
 	@GetMapping("/userinfo")
@@ -114,9 +129,40 @@ public class UserController {
 		return "redirect:authcheck";
 	}
 	
+	@PostMapping("/apiLogin")
+	public String apiLogin(
+			String id, String name, 
+			String phonenum, String email, Model model) {
+		model.addAttribute("username", id);
+		
+		if (userService.isExist(id)) return "/user/apiLogin";
+		
+		model.addAttribute("name", name);
+		if (phonenum != null) model.addAttribute("phonenum", phonenum);
+		else model.addAttribute("phonenum", "000-0000-0000");
+		if (email != null) model.addAttribute("email", email);
+		else model.addAttribute("email", "test@test.com");
+		return "/user/apiRegister";
+	}
+	
+	@GetMapping("/naverOK")
+	public String naverOk() {
+		return "/common/naverOK";
+	}
+	
 	// 이 컨트롤러 클래스의 handler 에서  폼 데이터 를 바인딩할때 검증하는 Validator 객체 지정
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new UserValidator());
+	}
+	
+	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+
+		userService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+		
+		return Integer.toString(randomNumber);
 	}
 }

@@ -5,14 +5,14 @@
 <c:choose>
 	<c:when test="${result == 0 }">
 		<script>
-			alert("수정 실패");
+			alert("삭제 실패");
 			history.back();
 		</script>
 	</c:when>
 	<c:otherwise>
 		<script>
-			alert("수정 성공");
-			location.href = "list?id=${id}"; <%-- 수정 성공하면 상세페이지 이동 --%>
+			alert("삭제 성공");
+			location.href = "list";
 		</script>
 	</c:otherwise>
 </c:choose>

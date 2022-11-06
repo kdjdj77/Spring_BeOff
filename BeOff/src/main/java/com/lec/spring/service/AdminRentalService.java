@@ -157,6 +157,7 @@ public class AdminRentalService {
 	}
 
 	// car 등록
+	@Transactional
 	public int registerCar(String id, String carname, Float price, String cartype, String fuel, String fueleff,
 			Map<String, MultipartFile> files) {
 		Car c = new Car();
@@ -281,6 +282,7 @@ public class AdminRentalService {
 		} // end for
 	}
 
+	@Transactional
 	public int carUpdate(String id, String carname, Float price, String cartype, String fuel, String fueleff,
 			Map<String, MultipartFile> files) {
 
@@ -312,6 +314,7 @@ public class AdminRentalService {
 		return result;
 	}
 
+	@Transactional
 	private void fe(Carfile i) {
 		String saveDirectory = context.getRealPath(uploadDir);
 		File f = new File(saveDirectory, i.getFile());
@@ -329,10 +332,23 @@ public class AdminRentalService {
 
 	}
 
+	@Transactional
 	public Car getCarById(String id) {
 		Long lid = Long.parseLong(id);
 		Car c = carRepository.findById(lid).orElse(null);
 		return c;
 	}
 
+	@Transactional
+	public int carDelete(String id) {
+		int result = 0;
+		
+		Long cId = Long.parseLong(id);
+		
+		Car c = carRepository.findById(cId).get();
+		carRepository.delete(c);
+		result = 1;
+		
+		return result;
+	}
 }

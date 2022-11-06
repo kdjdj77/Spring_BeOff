@@ -34,7 +34,6 @@ public class Hcomment extends BaseEntity{
 	@Column(nullable = false)
 	private String content; //댓글 내용
 	@Column(nullable = false)
-	@ColumnDefault(value = "3")
 	private Long star;
 	
 

@@ -114,9 +114,10 @@ public class AdminRentalController {
 	
 	@GetMapping("/cars/carUpdate") 
 	public String carUpdate(String id, Model md) {
-		//Rental r = adminRentalService.getRentalById(id);
+		Rental r = adminRentalService.getRentalById(id);
 		Car c = adminRentalService.getCarById(id);
 		md.addAttribute("car", c);
+		md.addAttribute("rental", r);
 		
 		return "/rental/admin/cars/carUpdate";
 	}
@@ -127,16 +128,16 @@ public class AdminRentalController {
 			
 		int result = adminRentalService.carUpdate(id, carname, price, cartype, fuel, fueleff, files);
 		md.addAttribute(result);
-		return "/rental/admin/cars/carUpdateOk";
+		md.addAttribute(id);
+		return "rental/admin/cars/carUpdateOk";
 	}
 	
-	
-	
-	
-//	@GetMapping("/cars/update") 
-//	public String carsUpdate() {
-//		
-//		return "/rental/admin/cars/update";
-//	}
+	@GetMapping("/cars/carDeleteOk")
+	public String carDeleteOk(String id, Model md) {
+		int result = adminRentalService.carDelete(id);
+		md.addAttribute(result);
+		
+		return "rental/admin/cars/carDeleteOk";
+	}
 
 }
