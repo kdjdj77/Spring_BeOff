@@ -49,7 +49,7 @@
                                         <th scope="col">예약업체</th>
                                         <th scope="col">렌트카</th>
                                         <th scope="col">가격</th>
-                                        <th scope="col">취소</th>
+                                        <th scope="col">비고</th>
                                         <th class="text-center" scope="col"></th>
                                     </tr>
                                 </thead>
