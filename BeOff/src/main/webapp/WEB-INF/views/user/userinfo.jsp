@@ -40,14 +40,14 @@
                 <div class="row">
                     <div class="col-lg-4">
                     	<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-	                        <a href="#" style="text-decoration:none; color:black;">
+	                        <a href="${pageContext.request.contextPath }/air/tickets" style="text-decoration:none; color:black;">
 	                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-plane m-auto text-primary"></i></div>
 	                            <h3>나의 비행기 예매</h3>
 	                        </a>
 	                    </div>
                     </div>
                     <div class="col-lg-4">
-                    	<a href="#" style="text-decoration:none; color:black;">
+                    	<a href="${pageContext.request.contextPath }/rental/tickets" style="text-decoration:none; color:black;">
 	                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
 	                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-car m-auto text-primary"></i></div>
 	                            <h3>나의 렌트카 예약</h3>
@@ -55,7 +55,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4">
-	                    <a href="#" style="text-decoration:none; color:black;">
+	                    <a href="${pageContext.request.contextPath }/hotel/tickets" style="text-decoration:none; color:black;">
 	                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
 	                            <div class="features-icons-icon d-flex"><i class="fa-solid fa-square-h m-auto text-primary"></i></div>
 	                            <h3>나의 호텔 예약</h3>

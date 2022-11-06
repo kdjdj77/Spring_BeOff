@@ -66,7 +66,7 @@
             <c:forEach var="dto" items="${list }">
                 <tr>
                     <td>${dto.id }</td>
-                    <td><a href="detail?id=${dto.id }">${dto.subject }</a></td>
+                    <td><a style="color:black;" href="detail?id=${dto.id }">${dto.subject }</a></td>
                     <td>${dto.user.username }</td>
                     <td>${dto.viewCnt }</td>
                     <td>${dto.regDateTime}</td>
