@@ -40,3 +40,5 @@ select * from db_roomfile;
 select * from db_roomticket;
 select * from db_hcomment dh ;
 select * from db_hotelfile;
+
+select * from db_rentalticket;

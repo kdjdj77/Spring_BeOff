@@ -24,8 +24,8 @@ public class Carfile {
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
-	private Long car_id;
+	@Column(name="car_id")
+	private Long car;
 	
 	@Column(nullable = false)
 	private String file;
