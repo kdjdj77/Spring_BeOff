@@ -60,33 +60,53 @@
 											</div>
 											<div class="col-md-9 pe-5">
 												<input type="text" class="form-control form-control-lg"
-													id="carname" name="carname" value="${car.carname }" readonly="readonly"/>
+													id="carname" name="carname" value="${car.carname }"/>
 											</div>
 										</div>
 										<hr class="mx-n3">
 										<div class="row align-items-center py-3">
 											<div class="col-md-3 ps-5">
-												<h6 class="mb-0">렌트카 이미지</h6>
+												<h6 class="mb-0">가격</h6>
 											</div>
 											<div class="col-md-9 pe-5">
-												<input class="form-control form-control-lg" id="formFileLg"
-													type="file" />
+												<input type="text" class="form-control form-control-lg"
+													id="price" name="price" value="${car.price }"/>
 											</div>
 										</div>
 										<hr class="mx-n3">
 										<div class="row align-items-center py-3">
 											<div class="col-md-3 ps-5">
-												<h6 class="mb-0">업체설명</h6>
+												<h6 class="mb-0">타입</h6>
 											</div>
 											<div class="col-md-9 pe-5">
-												<textarea class="form-control" rows="3" id="content"
-													name="content">${car.rental.content }</textarea>
+												<input type="text" class="form-control form-control-lg"
+													id="price" name="price" value="${car.cartype }"/>
+											</div>
+										</div>
+										<hr class="mx-n3">
+										<div class="row align-items-center py-3">
+											<div class="col-md-3 ps-5">
+												<h6 class="mb-0">연료</h6>
+											</div>
+											<div class="col-md-9 pe-5">
+												<input type="text" class="form-control form-control-lg"
+													id="price" name="price" value="${car.fuel }"/>
+											</div>
+										</div>
+										<hr class="mx-n3">
+										<div class="row align-items-center py-3">
+											<div class="col-md-3 ps-5">
+												<h6 class="mb-0">연비</h6>
+											</div>
+											<div class="col-md-9 pe-5">
+												<input type="text" class="form-control form-control-lg"
+													id="price" name="price" value="${car.fueleff }"/>
 											</div>
 										</div>
 										<hr class="mx-n3">
 										<div class="px-5 py-4">
-											<button class="btn btn-secondary btn-lg">수정</button>
-											<a class="btn btn-secondary btn-lg" href="list">업체 리스트</a>
+											<button class="btn btn-secondary btn-lg">수정완료</button>
+											<a class="btn btn-secondary btn-lg" href="list?id=${rental.id }">렌트카 목록</a>
 										</div>
 									</div>
 								</div>
