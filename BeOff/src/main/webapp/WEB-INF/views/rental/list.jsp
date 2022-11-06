@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,9 +27,11 @@
 			<div class="row">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-6"></div>
+				<sec:authorize access="hasAnyRole('ADMIN_RENTAL')">
 				<div class="col-lg-2">
-					<button type="button" class="btn btn-secondary">관리자모드</button>
+            		<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/rental/admin/list">관리자모드</a>
 				</div>
+            </sec:authorize>
 				<div class="col-lg-2"></div>
 			</div>
 		</div>
@@ -60,7 +63,7 @@
 									<td><input type="text" class=""
 										id="end" name="out1" value="${eDate}"  ></td>
 									<td><button type="button"
-											class="btn btn-outline-secondary" id="sub" name ="sub">검색</button></td>
+											class="btn btn-outline-secondary" id="sub" name ="sub" onclick="hsubmit()">검색</button></td>
 								</tr>
 							</thead>
 						</table>
@@ -70,23 +73,52 @@
 				<div class="col-lg-1"></div>
 			</div>
 		</div><br>
-		
+
+
+		<%-- 	<form action="cars/list" method="POST">
+		<input type="hidden" name="rentalId" value="${dto.id }">
+		<input type="hidden" name="sDate" value="${sDate }">
+		<input type="hidden" name="eDate" value="${eDate }">
+		<input type="hidden" name="sizeOption" value="all">
+		<div class="row d-flex justify-content-start "
+			style="margin-left: 150px;">
+			<c:forEach var="dto" items="${rentalList }" varStatus="status">
+				<div class="card col-sm-3 ms-2 me-2 my-3"
+					style="width: 20rem; border: 1px solid #333333;">
+					<img style="height: 200px; width: 300px"
+						src="../upload/g80.jpg"
+						class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">${dto.region.region }/ ${dto.rentalname }</h5>
+						<p class="card-text">${dto.content }</p>
+					</div>
+					<div class="text-end">
+						<button class="btn btn-outline-secondary">자세히 알아보기</button>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+				</form> --%>
+
+
 		<c:forEach var="dto" items="${rentalList }" varStatus="status">
 		<form action="cars/list" method="POST">
 		<input type="hidden" name="rentalId" value="${dto.id }">
 		<input type="hidden" name="sDate" value="${sDate }">
 		<input type="hidden" name="eDate" value="${eDate }">
-		
+		<input type="hidden" name="sizeOption" value="all">
 		<div class="container">
-			<div class="row">
+			<div class="row d-flex">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
-					<div class="card mb-3">
-						<img src="../upload/g80.jpg" class="card-img-top" alt="...">
+					<div class="card-columns">
+						<img style="height: 200px; width:300px" class="card-img-top"
+							src="${pageContext.request.contextPath }/upload/${dto.cars[0].files[0].file}"
+							alt="..." />
 						<div class="card-body">
 							<h6>서비스지역</h6>
 							<h4>${dto.region.region }</h4>
-							<h5 class="card-title">${dto.rentalname }[${dto.avgstar }]</h5>
+							<h5 class="card-title">${dto.rentalname }</h5>
 							<p class="card-text">${dto.content }</p>
 							<button class="btn btn-outline-secondary">자세히 알아보기</button>
 						</div>
@@ -153,15 +185,30 @@
    });
 </script>
 <script>
-let btn = document.getElementById("sub");
-btn.addEventListener("click",function onsubmit(){
-/*    let inn = document.getElementById("inn");
-   let out = document.getElementById("out"); */
-   let in1 = document.getElementById("start");
-   let out1 = document.getElementById("end");
-/*    inn.value = in1.value.toString();
-   out.value = out1.value.toString(); */
-   frm.submit();
-} );
+
+	let btn = document.getElementById("sub");
+/* 	let inn = document.querySelector("#inn");
+	let out = document.querySelector("#out"); */
+	let in1 = document.querySelector("#start");
+	let out1 = document.querySelector("#end");
+
+	function hsubmit() {
+
+		if (in1.value === "") {
+			alert('대여날짜를 선택해주세요');
+			return;
+		}
+		if (out1.value === "") {
+			alert('반납 날짜를 선택해주세요');
+			return;
+		}
+		if (in1.value > out1.value) {
+			alert('대여날짜는 반납날짜 이전이어야 합니다')
+		}
+/* 		inn.value = in1.value.toString();
+		out.value = out1.value.toString(); */
+		console.log("sdffs")
+		frm.submit();
+	}
 </script>
 </html>
