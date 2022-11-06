@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/air/admin/**").access("hasRole('ROLE_ADMIN_AIR')")
 			
 			//숙소 관련 페이지 권한
-			.antMatchers("/hotel/reserv", "/hcomment/write").access("hasRole('ROLE_MEMBER')")
+			.antMatchers("/hotel/reserv", "/hcomment/write", "/hotel/detail**").access("hasRole('ROLE_MEMBER')")
 			.antMatchers("/hotel/admin/**").access("hasRole('ROLE_ADMIN_HOTEL')")
 			
 			//렌트카 관련 페이지 권한

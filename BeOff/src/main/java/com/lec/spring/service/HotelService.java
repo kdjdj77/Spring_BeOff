@@ -4,15 +4,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.hotel.Hcomment;
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
+import com.lec.spring.domain.hotel.Roomticket;
+import com.lec.spring.domain.hotel.TicketDTO;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.hotel.HcommentRepository;
@@ -20,6 +28,7 @@ import com.lec.spring.repository.hotel.HotelRepository;
 import com.lec.spring.repository.hotel.RoomRepository;
 import com.lec.spring.repository.hotel.RoomfileRepository;
 import com.lec.spring.repository.hotel.RoomticketRepository;
+import com.lec.spring.util.C;
 import com.lec.spring.util.U;
 
 @Service
@@ -53,17 +62,43 @@ public class HotelService {
 		}
 		return RList;
 	}
-		
 	
-	//호텔 리스트 + 룸 가격
-	public List<Hotel> getHotelList() {
-		List<Double> pList = new ArrayList<Double>();
-		List<Hotel> h = null;
+	public List<Hotel> list(Integer page, Model model){
+		if(page == null) page = 1;
+		if(page < 1) page = 1;
+		
+		HttpSession session = U.getSession();
+		Integer writePages = (Integer)session.getAttribute("writePages");
+		if(writePages == null) writePages = C.WRITE_PAGES;
+		Integer pageRows = (Integer)session.getAttribute("pageRows");
+		if(pageRows == null) pageRows = C.PAGE_ROWS;   // session 에 없으면 기본값으로
+		session.setAttribute("page", page);
+		
+		Page<Hotel> pageWrites = hotelRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));	
 
-	
-		h = hotelRepository.findAll(Sort.by(Order.asc("id")));
+		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
+		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
+		if(page > totalPage) page = totalPage;   // 페이지 보정
+
+		// [페이징] 에 표시할 '시작페이지' 와 '마지막페이지' 계산
+		int startPage = ((int)((page - 1) / writePages) * writePages) + 1;
+		int endPage = startPage + writePages - 1;
+		if (endPage >= totalPage) endPage = totalPage;
 		
-		for(Hotel i : h) {
+		model.addAttribute("cnt", cnt);  // 전체 글 개수
+		model.addAttribute("page", page); // 현재 페이지
+		model.addAttribute("totalPage", totalPage);  // 총 페이지 수
+		model.addAttribute("pageRows", pageRows);  // 한 페이지 에 표시할 글 개수
+		
+		// [페이징]
+		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
+		model.addAttribute("writePages", writePages); // 페이징 에 표시할 숫자 개수
+		model.addAttribute("startPage", startPage);  // 페이징 에 표시할 시작 페이지
+		model.addAttribute("endPage", endPage);   // 페이징 에 표시할 마지막 페이지
+
+		List<Double> pList = new ArrayList<Double>();
+		List<Hotel> list = pageWrites.getContent();	
+		for(Hotel i : list) {
 			pList.clear();
 
 			for(Room j : i.getRooms()) {
@@ -81,9 +116,10 @@ public class HotelService {
 				i.setPriceList(Double.toString(b)+"원  ~ " + Double.toString(a)+"원");
 			}
 		}
-		return h;
+		model.addAttribute("list", list);
+		
+		return list;
 	}
-	
 	// 숙소 검색
 	public List<Hotel> getSearchHotels(String hotelregion, String checkinDate, String checkoutDate) {
 		Region region = regionRepository.findByRegion(hotelregion);
@@ -94,6 +130,7 @@ public class HotelService {
 		int roomcnt;
 		int ticketcnt;
 		List<Long> dateList = new ArrayList<Long>() ; 
+		
 		for(Long i = s; i < e ; i++) {
 			dateList.add(i);
 		}
@@ -111,14 +148,10 @@ public class HotelService {
 				}
 			}
 			if(roomcnt == ticketcnt) {
-				dellist.add(h);
-				
-			}
-		}
-		
+				dellist.add(h);			}
+		}		
 		for(Hotel h : dellist) {
 			list.remove(h);
-			
 		}
 		return list;
 	}
@@ -142,64 +175,58 @@ public class HotelService {
 		
 		return r;
 	}
-	// 특정 호텔(id)의 댓글 목록들
-//	public HqryCommentList getCommentList(Long id) {
-//		
-//		HqryCommentList list = new HqryCommentList();
-//		List<Hcomment> comments = hcommentRepository.findByHotel(id, Sort.by(Order.desc("id")));
-//		System.out.println("--------------------------------");
-//		System.out.println(comments);
-//		System.out.println("--------------------------------");
-//		list.setCount(comments.size());
-//		list.setList(comments);		
-//		list.setStatus("OK");
-//		return list;
-//	}
-//	
-//	// 특정 글(hotelId)에 특정 사용자(UserId)가 댓글 작성
-//	public HqryResult write(Hotel hotel, Long userId, String content, Long star) {
-//		User user = userRepository.findById(userId).orElse(null);
-//		
-//		Hcomment comment = Hcomment.builder()
-//				.user(user)
-//				.content(content)
-//				.star(star)
-//				.hotel(hotel)
-//				.build()
-//				;
-//		hcommentRepository.save(comment); // INSERT
-//		HqryResult result = HqryResult.builder()
-//				.count(1)
-//				.status("OK")
-//				.build()
-//				;
-//		return result;
-//	}
-//	
-//	// 특정 댓글(id) 삭제
-//	public HqryResult delete(Long id) {
-//		Hcomment comment = hcommentRepository.findById(id).orElse(null);
-//		
-//		int count = 0;
-//		String status = "FAIL";
-//		if (comment != null) {
-//			hcommentRepository.delete(comment);
-//			count = 1;
-//			status = "OK";
-//		}
-//		HqryResult result = HqryResult.builder()
-//				.count(count)
-//				.status(status)
-//				.build()
-//				;
-//		return result;
-//	}
 	
-
+	
+	public Room reserve(String id) {
+		Room r = roomRepository.findById(Long.parseLong(id)).orElse(null);
+		return r;	
+	}
 
 	public User getUserData() {
 		
 		return U.getLoggedUser();
+	}
+
+
+	public void registerRoomticket(Room r, String checkin, String checkout) {
+		String s = checkin.replaceAll("-", "");
+		String e = checkout.replaceAll("-", "");
+		
+		Long sDate = Long.parseLong(s);
+		Long eDate = Long.parseLong(e);
+		
+		for(Long i = sDate; i < eDate; i++) {
+			Roomticket rt = new Roomticket();
+			rt.setUser(U.getLoggedUser());
+			rt.setRoom(r);
+			rt.setDate(i);
+			roomticketRepository.saveAndFlush(rt);
+		}
+	}
+	public List<TicketDTO> getRoomTickets() {
+		Roomticket rt = new Roomticket();
+		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
+		List<TicketDTO> tickets = new ArrayList<TicketDTO>();
+    
+		TicketDTO tk = new TicketDTO();
+		for(Roomticket rtk : list) {
+			if(!rt.getRegDateTime().equals(rtk.getRegDateTime()) ||
+					rt.getRoom().getId() != rtk.getRoom().getId()) {
+				tickets.add(tk);
+				rt = rtk;
+				tk = new TicketDTO(); 
+				tk.addDate(rt.getDate());
+				tk.setRoom(rt.getRoom());
+				tk.setPrice(rt.getRoom().getPrice());
+				tk.setRegDate(rt.getRegDate());
+			}else {
+				tk.addDate(rtk.getDate());
+				tk.setPrice(tk.getPrice() + rtk.getRoom().getPrice());
+			}
+		}
+		tickets.add(tk);
+		return tickets;
 	} 
+
 	
 }

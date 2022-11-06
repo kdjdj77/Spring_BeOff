@@ -35,6 +35,8 @@
 
 	<div class="container mt-3">
 		<h2>권한 수락</h2>
+		<hr>
+		<p><br><p>
 		<table style="width:100%; text-align:start; border-bottom:1px solid black;">
 			<tr style="border-bottom:1px solid black;">
 				<td style="border-right:1px solid black;" width="10%">유저</td>
@@ -47,7 +49,7 @@
 				<td style="border-right:1px solid black;">${i.user.name}</td>
 				<td style="border-right:1px solid black;">${i.authority.name}</td>
 				<td style="border-right:1px solid black;"><pre style="font-size:1.2rem; font-family:sans-serif; word-wrap: break-word;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-break:break-all;">${i.content}</pre></td>
-				<td class="d-flex justify-content-around mt-3">
+				<td class="d-flex justify-content-around mt-1">
 					<form action="authaccept" method="post">
 						<input type="hidden" name="authreqId" value="${i.id}">
 						<input type="hidden" name="userId" value="${i.user.id}">

@@ -28,8 +28,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.qna.Qnafile;
 import com.lec.spring.domain.qna.Qna;
+import com.lec.spring.domain.qna.Qnafile;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.qna.QfileRepository;
 import com.lec.spring.repository.qna.QnaRepository;

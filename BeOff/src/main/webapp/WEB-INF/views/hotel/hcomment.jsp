@@ -13,22 +13,23 @@
 <sec:authentication property="principal" var="userdetails"/>
 
 <!-- 댓글 -->
+
 <div class="container my-3 border rounded">
     <div class="mb-3 mt-3">
-        <label>댓글: <span id="cmt_cnt"></span> 개</label>
-        
+        <label>댓글 : <span id="cmt_cnt"></span></label>
 		<%--  ROLE_MEMBER 가진 사용자만 댓글 작성 가능 --%>
   		<sec:authorize access="hasAnyRole('ADMIN_HOTEL')">
 	        <div class="input-group my-2">
 	            <input type="text" class="form-control" id="input_hcomment">
 	            <button type="button" class="btn btn-outline-primary" id="btn_hcomment">작성</button>
-	        	<p class="star_rating">
-					 <a href="#" class="on">★</a>
-    				 <a href="#" class="on">★</a>
-					 <a href="#" class="on">★</a>
-					 <a href="#">★</a>
-				 	 <a href="#">★</a>
-				</p>
+				
+				<div class="star-container" id="star">
+			          <span class="star">★</span>
+					  <span class="star">★</span>
+					  <span class="star">★</span>
+					  <span class="star">★</span>
+					  <span class="star">★</span>
+                 </div>
 	        </div>
 	    </sec:authorize>
         <table class="table table-hover mt-3" id="cmt_table">
@@ -48,13 +49,27 @@
 </div>
 <!-- 댓글 -->
 <script>
-$( ".star_rating a" ).click(function() {
 
-    $(this).parent().children("a").removeClass("on");
-
-    $(this).addClass("on").prevAll("a").addClass("on");
-
-    return false;
-
-});
 </script>
+<style>
+#star {
+  display: flex;
+}
+
+.star {
+  font-size: 2rem;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.star:not(.on) {
+  color: #ccc;
+}
+
+.star.on {
+  color: orange;
+}
+#starrr{
+color:#FFB400;}
+</style>
+
