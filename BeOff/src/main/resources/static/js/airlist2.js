@@ -59,16 +59,18 @@ function buildAirList2(result) {
 		let strdate = date.substring(0, 4) + "." + date.substring(4, 6) + "." + date.substring(6, 8)
         
 		const row = 
-			`<tr style="border:1px solid black">
-		        <td><span>${name}<br>출발시각 ${time}<br>가격(1인) ${price}</span></td>
-		        <td><span>${strdate}<br>남은좌석 ${remain}<br>${depart} → ${arrive}</span>
+			`<tr style="border:1px solid black; font-size:1.5rem; background-color:	#e0ffff">
+		        <td><span>&nbsp;${name}<br>&nbsp;출발시각 ${time}<br>&nbsp;가격(1인) ${price}<br>&nbsp;</span></td>
+		        <td><span>&nbsp;${strdate}<br>&nbsp;남은좌석 ${remain}<br>&nbsp;${depart} → ${arrive}</span>
 		        <br>
 		        	<div width="100%" class="d-flex justify-content-end">
 		        		<input type="radio" name="air_id2" id="air_id2${id}" value="${id}" style="width:20px; height:20px;">
 		        		<label for="air_id2${id}">선택</label>
 		        	</div>
 		        </td>
-	        </tr>`;
+	        </tr>
+	        <tr><td></td><td></td><td></td></tr>
+	        `;
 		out.push(row);
 	});
 	$("#air_list2").html(out.join("\n"));

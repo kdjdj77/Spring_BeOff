@@ -31,9 +31,8 @@
 <body>
     <%-- 인증 헤더 --%>
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    <br><br><br>
     <div class="container"><h3>좌석예매 - 편도</h3></div>
-    <div class="container mt-3"style="display:flex; justify-content:center;">
+    <div class="container mt-3 d-flex justify-content-center">
         <div class="seat-wrapper">
 			<div style="width:485px; height:50px; text-align:center; background-color:white" class="mb-5 border">
 				<table width="100%">
@@ -44,7 +43,7 @@
 						</td>
 						<td>
 							<span>${date}</span><br>
-							<span>가격 ${airplane.name.price * num}</span>
+							<span>가격 ${airplane.name.price * num}￦</span>
 						</td>
 						<td>
 							<span>${airplane.depart.region} → ${airplane.arrive.region}</span><br>

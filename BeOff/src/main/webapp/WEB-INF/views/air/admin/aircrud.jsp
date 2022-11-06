@@ -30,20 +30,20 @@
 		input[type="number"]::-webkit-outer-spin-button,
 		input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}
 		td {padding-top:0.5rem;padding-bottom:0.5rem;}
-		select {height:32px; width:95%;}
+		select {height:50px; width:95%;}
 	</style>
 </head>
 
-<body style="margin-bottom: 200px">
+<body style="margin-bottom: 200px;">
 	<%-- 인증 헤더 --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-	<div class="container mt-3">
+	<div class="container mt-3" style="font-size:1.5rem;">
 		<h2>
 			항공기 관리
 			<a class="btn btn-outline-dark" href="list">목록</a>
 		</h2>
-		
+		<p><br><br></p>
 		<form action="aircrudtime" method="post">
 			<table width="100%">
 				<thead>
@@ -81,7 +81,7 @@
 							</select>
 						</td>
 						<td>
-							<button class="btn btn-outline-dark">검색</button>
+							<button class="btn btn-outline-dark" style="width:150px; height:50px; font-size:1.5rem;">검색</button>
 						</td>
 					</tr>
 				</tbody>

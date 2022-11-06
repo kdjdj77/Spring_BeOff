@@ -80,7 +80,7 @@
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="fw-bold">Total</p>
-                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span><%=(checkout1-checkin1)*price1 %> won</p>
+                                    <p class="fw-bold"><%=(checkout1-checkin1)*price1 %> won</p>
                                 </div>
                                 <input class="btn btn-secondary" type="button" value="무통장입금">
                             </div>
@@ -102,7 +102,7 @@
           <div class="box-inner-1 pb-3 mb-3 ">
              <div class="d-flex justify-content-between mb-3 userdetails">
                  <p class="fw-bold">${r.hotel.hotelname }</p>
-                 <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>${r.price } won</p>
+                 <p class="fw-lighter">${r.price } won</p>
              </div>
              <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                  data-bs-interval="2000">
