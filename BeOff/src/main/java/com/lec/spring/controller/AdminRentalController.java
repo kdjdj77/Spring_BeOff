@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Rental;
 import com.lec.spring.service.AdminRentalService;
 
@@ -113,9 +114,9 @@ public class AdminRentalController {
 	
 	@GetMapping("/cars/carUpdate") 
 	public String carUpdate(String id, Model md) {
-		Rental r = adminRentalService.getRentalById(id);
-		
-		md.addAttribute("rental", r);
+		//Rental r = adminRentalService.getRentalById(id);
+		Car c = adminRentalService.getCarById(id);
+		md.addAttribute("car", c);
 		
 		return "/rental/admin/cars/carUpdate";
 	}
@@ -128,6 +129,8 @@ public class AdminRentalController {
 		md.addAttribute(result);
 		return "/rental/admin/cars/carUpdateOk";
 	}
+	
+	
 	
 	
 //	@GetMapping("/cars/update") 

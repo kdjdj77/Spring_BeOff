@@ -117,6 +117,7 @@ public class RentalService {
 				.collect(Collectors.toList());
 	}
 
+
 	public void reservateCar(User userData, Long carId, Long sDate, Long eDate) {
 		LongStream.range(sDate, eDate + 1).forEach(date -> {
 			Rentalticket carTicket = new Rentalticket();

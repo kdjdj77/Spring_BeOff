@@ -98,7 +98,6 @@ out1: 2022-10-28
 		return "rental/reserv";
 	}
 	
-
 	@PostMapping("/cars/reservate")
 	public String reserveList(Long carId, String sDate, String eDate, Model model) {
 		User user = rentalService.getUserData();

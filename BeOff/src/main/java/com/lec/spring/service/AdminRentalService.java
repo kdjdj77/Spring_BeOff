@@ -329,4 +329,10 @@ public class AdminRentalService {
 
 	}
 
+	public Car getCarById(String id) {
+		Long lid = Long.parseLong(id);
+		Car c = carRepository.findById(lid).orElse(null);
+		return c;
+	}
+
 }
