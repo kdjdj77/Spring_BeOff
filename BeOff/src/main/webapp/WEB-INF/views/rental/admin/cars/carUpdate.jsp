@@ -79,8 +79,13 @@
 												<h6 class="mb-0">타입</h6>
 											</div>
 											<div class="col-md-9 pe-5">
-												<input type="text" class="form-control form-control-lg"
-													id="price" name="price" value="${car.cartype }"/>
+												<select id="cartype" name="cartype" style="font-size:1.3rem; height:40px; width:200px;">
+													<option value="${car.cartype }">${car.cartype }</option>
+													<c:if test="${!car.cartype.equals('소형') }"><option value="소형">소형</option></c:if>
+							                        <c:if test="${!car.cartype.equals('중형') }"><option value="중형">중형</option></c:if>
+							                        <c:if test="${!car.cartype.equals('대형') }"><option value="대형">대형</option></c:if>
+							                        <c:if test="${!car.cartype.equals('SUV') }"><option value="SUV">SUV</option></c:if>
+												</select>
 											</div>
 										</div>
 										<hr class="mx-n3">
@@ -90,7 +95,7 @@
 											</div>
 											<div class="col-md-9 pe-5">
 												<input type="text" class="form-control form-control-lg"
-													id="price" name="price" value="${car.fuel }"/>
+													id="fuel" name="fuel" value="${car.fuel }"/>
 											</div>
 										</div>
 										<hr class="mx-n3">
@@ -100,7 +105,7 @@
 											</div>
 											<div class="col-md-9 pe-5">
 												<input type="text" class="form-control form-control-lg"
-													id="price" name="price" value="${car.fueleff }"/>
+													id="fueleff" name="fueleff" value="${car.fueleff }"/>
 											</div>
 										</div>
 										<hr class="mx-n3">

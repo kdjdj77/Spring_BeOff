@@ -1,9 +1,13 @@
 package com.lec.spring.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 import javax.annotation.PostConstruct;
 
@@ -21,6 +25,8 @@ import com.lec.spring.domain.Region;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Rental;
+import com.lec.spring.domain.rental.Rentalticket;
+import com.lec.spring.domain.rental.TicketDTO;
 import com.lec.spring.repository.RegionRepository;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.rental.CarRepository;
@@ -111,9 +117,54 @@ public class RentalService {
 				.collect(Collectors.toList());
 	}
 
-//	public void registerCarticket(Car c, String sDate, String eDate) {
-//		
-//	}
+
+	public void reservateCar(User userData, Long carId, Long sDate, Long eDate) {
+		LongStream.range(sDate, eDate + 1).forEach(date -> {
+			Rentalticket carTicket = new Rentalticket();
+			carTicket.setUser(userData);
+			carTicket.setCar(carRepository.findById(carId).get());
+			carTicket.setDate(date);
+			carTicket.setRegDate(LocalDateTime.now());
+			rentalticketRepository.save(carTicket);
+		});
+	}
+	
+
+	public Map<Car, String> mapByUser(User user) {
+		 return rentalticketRepository.findByUser(user).stream()
+				.collect(Collectors.groupingBy(Rentalticket::getCar, 
+						Collectors.mapping(ticket -> parseToDateForamt(ticket.getDate().toString()), 
+								Collectors.joining(", "))));
+	}
+	
+	public List<TicketDTO> getTickets(User user) {
+		List<Rentalticket> allticket = rentalticketRepository.findByUserOrderByIdDesc(user);
+		List<TicketDTO> tlist = new ArrayList<TicketDTO>();
+		TicketDTO dto = new TicketDTO();
+		
+		
+		for (Rentalticket t : allticket) {
+			if (!dto.getRegDateTime().equals(t.getRegDateTime()) ||
+					dto.getCar().getId() != t.getCar().getId()) {
+				tlist.add(dto);
+				dto = new TicketDTO();
+				dto.setCar(t.getCar());
+				dto.setPrice(t.getCar().getPrice());
+				dto.addDate(t.getDate());
+				dto.setRegDate(t.getRegDate());
+			} else {
+				dto.addDate(t.getDate());
+				dto.setPrice(dto.getPrice() + t.getCar().getPrice());
+			}
+		}
+		tlist.add(dto);
+		
+		return tlist;
+	}
+	
+	private String parseToDateForamt(String yyyyMMdd) {
+		return yyyyMMdd.substring(0, 4) + "-" + yyyyMMdd.substring(4, 6) + "-" + yyyyMMdd.subSequence(6, 8);
+	}
 
 	
 	// 특정 업체 디테일

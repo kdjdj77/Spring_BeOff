@@ -128,6 +128,7 @@ public class AdminRentalController {
 			
 		int result = adminRentalService.carUpdate(id, carname, price, cartype, fuel, fueleff, files);
 		md.addAttribute(result);
+		md.addAttribute(id);
 		return "rental/admin/cars/carUpdateOk";
 	}
 	

@@ -29,7 +29,7 @@
                     <p class="fw-bold">Payment Details</p>
                     <p class="dis mb-3">Complete your purchase by providing your payment details</p>
                 </div>
-                <form action="reserveList" name="reserveList" methode="post">
+                <form action="reservate" name="reservate" method="post">
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Name</p>
                         <input class="form-control" type="name" value="${user.name } " readonly>
@@ -49,7 +49,7 @@
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">대여날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="zz" readonly>
+                                    <input class="form-control" type="text" name="sDate" value="${sDate}" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
@@ -57,7 +57,7 @@
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">반납날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="2022/12/25" readonly>
+                                    <input class="form-control" type="text" name="eDate" value="${eDate}" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
@@ -67,8 +67,8 @@
                                     <p class="fw-bold">Total</p>
                                     <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
                                 </div>
-                                <input type="hidden" name="id" value="${car.id }">
-                                <input class="btn btn-secondary btn-xl text-uppercase" type="button" value="무통장입금">
+                                <input type="hidden" name="carId" value="${car.id }">
+                                <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금" onclick="reserveOk()">
                                 
                             </div>
                             <div class="d-flex flex-column dis">
@@ -114,6 +114,14 @@
 
   </div>
 </main>
+	<script>
+	function reserveOk() {
+
+		alert('예약성공');
+		location.href = "tickets";	
+		
+	}
+	</script>
 
 
 	<script
