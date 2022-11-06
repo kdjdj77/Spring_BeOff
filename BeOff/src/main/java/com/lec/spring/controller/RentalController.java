@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lec.spring.domain.User;
 import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Rental;
 import com.lec.spring.service.RentalService;
@@ -88,8 +89,7 @@ out1: 2022-10-28
 	}
 	
 	@PostMapping("/cars/reserv") // /rental/reserv
-	public String reserv(String carId, @RequestParam("sDate") String sDate, 
-			@RequestParam("eDate") String eDate, Model model) {
+	public String reserv(String carId, String sDate, String eDate, Model model) {
 		model.addAttribute("car", rentalService.getCarById(carId));
 		model.addAttribute("user", rentalService.getUserData());
 		model.addAttribute("sDate", sDate);
@@ -98,15 +98,37 @@ out1: 2022-10-28
 		return "rental/reserv";
 	}
 	
-
-//	@PostMapping("/cars/reserveList")
-//	public String reserveList(String id, String sDate, String eDate ,Model model) {
-//		Car c = rentalService.getCarById(id);
+	@PostMapping("/cars/reservate")
+	public String reserveList(Long carId, String sDate, String eDate, Model model) {
+		User user = rentalService.getUserData();
+		rentalService.reservateCar(user, carId, 
+				Long.valueOf(sDate.replace("-", "")), Long.valueOf(eDate.replace("-", "")));
+		
+		model.addAttribute("rentals", rentalService.mapByUser(user));
+		model.addAttribute("user", user);
+		
+		return "redirect:/rental/tickets";
+	}
+	
+//	@GetMapping("/cars/reserveList")
+//	public String reservateList(Model model) {
+//		User user = rentalService.getUserData();
+//		model.addAttribute("rentals", rentalService.mapByUser(user));
+//		model.addAttribute("user", user);
 //		
-//		rentalService.registerCarticket(c, sDate, eDate);
-//
-//		return "redirect:/rental/tickets";
+//		return "rental/reserveList";
+//			
 //	}
+	
+	@GetMapping("/tickets")
+	public String reservateList(Model model) {
+		User user = rentalService.getUserData();
+		model.addAttribute("list", rentalService.getTickets(user));
+		model.addAttribute("user", user);
+		
+		return "rental/tickets";
+			
+	}
 	
 //	@PostMapping("/reservOk")
 //	   public String getReserve(String id, String checkin, String checkout, Model model) {
