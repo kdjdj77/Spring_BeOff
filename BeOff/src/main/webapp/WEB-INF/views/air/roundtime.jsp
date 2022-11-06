@@ -24,17 +24,20 @@
 	
 	<title>비행기 예매</title>
 	<style>
+		body {
+			overflow-x: hidden;
+		}
 		input[type=radio]{
 		    display: none;
 		}
 		input[type=radio]+label{
 		    display: inline-block;
 		    cursor: pointer;
-		    height: 24px;
-		    width: 50px;
+		    height: 40px;
+		    width: 70px;
 		    border: 1px solid #333;
 		    border-radius:3px;
-		    line-height: 24px;
+		    line-height: 38px;
 		    text-align: center;
 		}
 		input[type=radio]+label{
@@ -42,8 +45,12 @@
 		    color: #333;
 		}
 		input[type=radio]:checked+label{
-		    background-color: #333;
+		    background-color: #36f;
 		    color: #fff;
+		}
+		input[type=radio]+label:hover{
+		    background-color: #cff;
+		    color: #333;
 		}
 	</style>
 </head>
@@ -58,30 +65,32 @@
 		<form id="frm" action="roundReserv" method="post">
 		<table width="100%">
 			<tr>
-				<td>
+				<td style="font-size:1.3rem;">
 					<span>출발일자 : ${departdate}</span>
-					<span>${departregion} → ${arriveregion}</span>
-					<div>
-						<span>인원 : ${num_person}</span>
-						출발시각
+					<span class="ms-5">${departregion} → ${arriveregion}</span>
+					<span class="ms-5">인원 : ${num_person}</span>
+					<div style="margin-left:25%;">
+						<br>출발시각
 						<select name="time_sel">
 							<c:forEach var="t" items="${timeList}">
 								<option value = "${t}">${t}</option>
 							</c:forEach>
 						</select>
+						<p></p>
 					</div>
 				</td>
-				<td>
+				<td style="font-size:1.3rem;">
 					<span>출발일자 : ${departdate2}</span>
-					<span>${departregion2} → ${arriveregion2}</span>
-					<div>
-						<span>인원 : ${num_person2}</span>
-						출발시각
+					<span class="ms-5">${departregion2} → ${arriveregion2}</span>
+					<span class="ms-5">인원 : ${num_person2}</span>
+					<div style="margin-left:25%;">
+						<br>출발시각
 						<select name="time_sel2">
 							<c:forEach var="t" items="${timeList}">
 								<option value = "${t}">${t}</option>
 							</c:forEach>
 						</select>
+						<p></p>
 					</div>
 				</td>
 			</tr>
@@ -90,7 +99,7 @@
 					<div>
 						<label>개수: <span id="air_cnt"></span> 개</label>
 						
-						<table id="air_list" width="60%">
+						<table id="air_list" width="80%">
 							<!-- 비행기 리스트(input airplane_id 포함) -->
 						</table>
 						<input type="hidden" name="departdate" value="${departdate}">
@@ -102,7 +111,7 @@
 					<div>
 						<label>개수: <span id="air_cnt2"></span> 개</label>
 					
-						<table id="air_list2" width="60%">
+						<table id="air_list2" width="80%">
 							<!-- 비행기 리스트(input airplane_id 포함) -->
 						</table>
 						<input type="hidden" name="departdate2" value="${departdate2}">
@@ -114,7 +123,7 @@
 		</table>
 		</form>
 		<div class="container mt-3"style="width:100%;">
-	        <button type="button" onclick="frmsubmit()" style="position:absolute; left:35%; height:50px; width:100px;" class="btn btn-outline-dark mx-3">다음</button>
+	        <button type="button" onclick="frmsubmit()" style="position:absolute; left:40%; height:60px; width:130px; font-size:1.5rem;" class="btn btn-outline-dark mx-3">다음</button>
 	    </div>
 	</div>
 	<div id="notSend">
@@ -128,8 +137,17 @@
 <script>
 	const conPath = "${pageContext.request.contextPath }";
 	function frmsubmit() {
-		let frm = document.getElementById("frm");
-		frm.submit();
+		const frm = document.getElementById("frm");
+		const NodeList = document.getElementsByName('air_id');
+		const NodeList2 = document.getElementsByName('air_id2');
+		let check1 = false;
+		let check2 = false
+		  
+		NodeList.forEach(function(node) {if(node.checked) check1 = true;}) 
+		NodeList2.forEach(function(node) {if(node.checked) check2 = true;})
+		
+		if (check1 && check2) frm.submit();
+		else alert("비행편을 선택해주세요");
 	}
 </script>
 <script src="${pageContext.request.contextPath }/js/airlist.js"></script>
