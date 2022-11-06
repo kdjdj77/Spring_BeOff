@@ -32,7 +32,7 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Hotel List</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                    <p class="lead fw-normal text-white-50 mb-0">Welcome Shows the registered hotel list</p>
                 </div>
             </div>
         </header>
@@ -51,7 +51,7 @@
 					<!-- Product image-->
 					<c:choose>
 						<c:when test = "${empty hotel.rooms[0].files[0].file}">
-							<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/face02.png" alt="..." />	
+							<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/R.png" alt="..." />	
 						</c:when>
 						<c:otherwise>
 							<img style="width: 375px; height:200px;" class="card-img-top" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}" alt="..." />
@@ -71,7 +71,7 @@
 							</div>
 							<!-- Product Content-->
 							<div>${hotel.content }</div>
-							<div>${hotel.priceList }</div>
+							<%--<div>${hotel.priceList }</div> --%>
 							<br>
 							<div>${hotel.region.region } </div>
 						</div>

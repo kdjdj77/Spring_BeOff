@@ -51,9 +51,7 @@
 					            	<!-- Product reviews-->
 									<div
 										class="d-flex justify-content-center small text-warning mb-2">
-										<div class="bi-star-fill"></div>
-										<div class="bi-star-fill"></div>
-										<div class="bi-star-fill"></div>
+										<%-- <div class="bi-star-fill"></div>--%>
 									</div>
 					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="roomname" value="${r.roomname}" name="roomname" placeholder="Room Name을 입력하세요" readOnly>
 					                <input type="text" class="form-control display-5 fw-bolder text-black mb-1"  id="price" value="${r.price}" name="price" placeholder="가격을 입력하세요" readOnly>
@@ -65,7 +63,7 @@
 									<div class="text-center">
 										<a class="btn btn-outline-dark mt-auto" href="update?id=${r.hotel.id }">수정</a>
 										<a class="btn btn-outline-dark mt-auto" href="list">목록</a>
-										<a class="btn btn-outline-dark mt-auto" href="reserve?id=${r.id }">예약</a>
+										<%--<a class="btn btn-outline-dark mt-auto" href="reserve?id=${r.id }">예약</a> --%>
 									</div>
 								</div>
 					           </div>

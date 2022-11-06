@@ -128,6 +128,13 @@ public class AirController {
 		return "air/reservOk";
 	}
 	
+	@GetMapping("/tickets")
+	public String tickets(Model model) {
+		model.addAttribute("list", airService.getMyTickets());
+		
+		return "air/tickets";
+	}
+	
 	@GetMapping("/admin/list")
 	public String adminList(Model model) {		
 		model.addAttribute("regionList", airService.getRegions());
@@ -208,6 +215,8 @@ public class AirController {
 	}
 	@PostMapping("/admin/aircrudtime")
 	public String aircrudtime(String departregion, String arriveregion, String aircomp, Model model) {
+		if (departregion.equals("null") || arriveregion.equals("null") || aircomp.equals("null")) 
+			return "redirect:/air/admin/aircrud";
 		Region s = airService.getRegionById(departregion);
 		Region e = airService.getRegionById(arriveregion);
 		Airname n = airService.getNameById(aircomp);
@@ -236,7 +245,5 @@ public class AirController {
 
 		return "air/admin/updateOk";
 	}
-	
-	
 	
 } // end controller

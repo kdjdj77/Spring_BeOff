@@ -41,4 +41,5 @@ public class Roomticket extends BaseEntity{
 	@Column(nullable = false)
 	private Long date;
 
+
 }

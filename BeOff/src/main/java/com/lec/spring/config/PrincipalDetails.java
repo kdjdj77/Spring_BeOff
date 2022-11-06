@@ -83,6 +83,14 @@ public class PrincipalDetails implements UserDetails{
 	public String getUsername() {		
 		return user.getUsername();
 	}
+	
+	public String getEmail() {		
+		return user.getEmail();
+	}
+	
+	public String getPhonenum() {		
+		return user.getPhonenum();
+	}
 
 	// 계정이 만료된건 아닌지?
 	@Override
