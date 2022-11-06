@@ -26,25 +26,29 @@
 	</h1>
 	<div style="width:100vw; height:auto;">
 		<c:forEach var="r" items="${rentalList}"> 
-	  		<div class="container py-5" style="float:left; width:370px;">
+	  		<div class="container py-5" style="float:left; width:370px; height:500px;">
 				<div class="row">
 					<div>
 						<div class="card text-black">
 							<img class="card-img-top" style="width:320px; height:200px; object-fit:fill; float: left;"
 								src="${pageContext.request.contextPath }/upload/${r.cars[0].files[0].file}"
-								alt="..." />
+								alt="NO IMAGE" />
 							<div class="card-body">
 								<div class="text-center mt-1">
 									<h4 class="card-title">${r.rentalname }[${r.region.region }]</h4>
 									<h6>${r.content }</h6>
 								</div>
 	
-								<div class="d-flex flex-row">
-									<a class="btn btn-secondary btn-lg" href="cars/list?id=${r.id }">차
-										목록</a> <a class="btn btn-secondary btn-lg"
-										href="rentalUpdate?id=${r.id }">업체 수정</a> <a
-										class="btn btn-secondary btn-lg"
-										href="rentalDeleteOk?id=${r.id }">업체 삭제</a>
+								<div class="d-flex flex-row justify-content-around">
+									<a class="btn btn-secondary btn-lg" href="cars/list?id=${r.id }">
+										차목록
+									</a> 
+									<a class="btn btn-secondary btn-lg"href="rentalUpdate?id=${r.id }">
+										수정
+									</a>
+									<a class="btn btn-secondary btn-lg"href="rentalDeleteOk?id=${r.id }">
+										삭제
+									</a>
 								</div>
 							</div>
 						</div>
