@@ -53,8 +53,7 @@
                                         <th scope="col">호텔이름</th>
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
-                                        <th scope="col">며칠?</th>
-                                        <th scope="col">체크인날짜</th>
+                                        <th scope="col">체크인 ~ 체크아웃</th>
                                         <th class="text-center" scope="col"></th>
                                     </tr>
                                 </thead>

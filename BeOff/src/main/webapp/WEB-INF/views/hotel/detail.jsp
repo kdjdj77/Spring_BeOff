@@ -38,46 +38,98 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<%
 			String region = request.getParameter("region");
-			String checkin = request.getParameter("checkin");
-			String checkout = request.getParameter("checkout");
+			String checkin = request.getParameter("inn");
+			String checkout = request.getParameter("out");
 		%>
+		<!--  
+		<div>목적지 >> <%=region %></div>
+		<div>
+		<div>체크인 ~ 체크아웃 >> <%=checkin %> ~ <%=checkout %></div>
+		<div>검색 결과입니다.</div>
+		</div>
+	<div class="container  text-white  mb-5" style="border: 1px solid #333333; background-color:#0c75ed;">
+		<div class="row">
+				<div class="col-sm-4">목적지</div>
+				<div class="col-sm-4">체크인 날짜</div>
+				<div class="col-sm-4">체크아웃 날짜</div>
+		</div>
+		<hr>
+		<div class="row"> 
+				<div class="col-sm-4">
+				</div>
+				<div class="col-sm-4">
+				</div>
+				<div class="col-sm-4">
+				</div>
+		</div>
+	</div>
+	-->
+	<hr style="height:2px; background-color: black;">
+	<div class="w-75  container " >
+		<div style="float: left;">
+			<img style="height: 210px; width:400px" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}" class="card-img-top" alt="...">
+		</div>
+		<div style="margin-left:430px; ">
+			
+			<div><h3>${hotel.hotelname }</h3></div>
+			<br>
+			<div><%=region %> / ${hotel.content }</div>
+			<br>
+			<div>
+				<span>별점 평균 : </span>
+					<span style="color:#FFB400;">
+						<label><span id="star_cnt"></span>★</label>
+					</span>
+			</div>
+			<br>
+			<br>
+			<div>
+			<span>여행날짜 : </span>
+			<span><%=checkin %> ~ <%=checkout %> </span>
+			</div>
+		</div>
+	</div>
+	<hr style="height:2px; background-color: #e52813;">
 		
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>지역</th>
-				<th>체크인</th>
-				<th>체크아웃</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><%=region %></td>
-				<td><%=checkin %></td>
-				<td><%=checkout %></td>
-			</tr>
-		</tbody>
-	</table>	
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>호텔 이름</th>
-				<th>호텔 정보</th>
-				<th>별점 평균</th>
-			</tr>
-		</thead>
-		<tbody>
-
-			<tr>
-				<td>${hotel.id }</td>
-				<td>${hotel.hotelname }</td>
-				<td>${hotel.content }</td>
-				<td><label><span id="star_cnt"></span> 점</label></td>
-			</tr>
-		</tbody>
-	</table>
-	
+		<div class="justify-content-center text-center">객실 목록</div>
+		<!--  
+		<c:forEach var="i" items="${roomList }">
+	<div class="w-75  container">
+		<br>
+		<div>${i.roomname}</div>
+		<div>
+			<span>가격 : </span>
+			<span>${i.price }원</span>
+		</div>
+		<div>
+			<button onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button>
+		</div>
+		<div>
+			<img style="width: 200px; height: 150px;" src="${pageContext.request.contextPath }/upload/${i.files[0].file}" alt="..." />
+		</div>
+	</div>
+	<br>
+	<br>
+		</c:forEach>
+	-->
+	<c:forEach var="i" items="${roomList }">
+		<div class="w-75  container " >
+		<div>
+			<div>${i.roomname}</div>
+			<div>
+				<span>가격 : </span>
+				<span>${i.price }원</span>
+			</div>
+			<div>
+				<button onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button>
+			</div>
+		</div>
+		<br><br><br><br>
+		<div style="float: right;">
+			<img style="height: 200px; width:200px" src="${pageContext.request.contextPath }/upload/${i.files[0].file}" alt="..." />
+		</div>
+	</div>
+	</c:forEach>
     
 	<table class="table table-bordered" id="table">
 		<thead>
@@ -91,7 +143,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="i" items="${hotel.rooms }">
+			<c:forEach var="i" items="${roomList }">
 				<tr>
 					<td>${i.id }</td>
 					<td>${i.roomname }</td>
@@ -105,6 +157,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+
 
 	<input type="hidden" name="inn" id="inn" value="${checkin }">
 	<input type="hidden" name="out" id="out" value="${checkout }">

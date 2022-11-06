@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
@@ -34,11 +35,15 @@ public class HotelController {
 		System.out.println(getClass().getName() + "() 생성");
 	}
 	
+	
+	
 	// /hotel/list
 	@GetMapping("/list")
 	public void list(Integer page, Model model) {
 		model.addAttribute("regionList", hotelService.getRegionList());	
 //		model.addAttribute("hotelList", hotelService.getHotelList());
+
+		model.addAttribute("method", 0);
 		hotelService.list(page, model);
 			
 		
@@ -47,15 +52,16 @@ public class HotelController {
 	
 	
 	@PostMapping("/list")
-	public String searchList(String hotelregion,String inn,String out, Model model) {
+	public String searchList(@RequestParam("region") String hotelregion,String inn,String out, Model model) {
 		String in1 = inn.replaceAll("-","");
 		String out1 = out.replaceAll("-","");
 		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
 		model.addAttribute("list",list);
+		model.addAttribute("method", 1);
 		model.addAttribute("regionList", hotelService.getRegionList());
 		model.addAttribute("checkin", inn);
 		model.addAttribute("checkout", out);
-		model.addAttribute("hregion", hotelregion);
+		model.addAttribute("region", hotelregion);
 			
 		return "/hotel/list";
 	}
@@ -64,26 +70,29 @@ public class HotelController {
 	// /hotel/detail
 	
 	@GetMapping("/detail")
-	public String detail(String id, Model model,String inn,String out) {
+	public String detail(String id,String inn,String out,Model model) {
+		String in1 = inn.replaceAll("-","");
+		String out1 = out.replaceAll("-","");
 		model.addAttribute("hotel",hotelService.getHotelById(id));
+		model.addAttribute("roomList", hotelService.getSearchRooms(id, in1, out1));
 		model.addAttribute("regionList", hotelService.getRegionList());
 		model.addAttribute("checkin", inn);
 		model.addAttribute("checkout", out);
 		return "/hotel/detail"; 
 	}
 	
-	@PostMapping("/detail")
-	public String searchList1(String hotelregion,String inn,String out, Model model) {
-		String in1 = inn.replaceAll("-","");
-		String out1 = out.replaceAll("-","");
-		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
-		model.addAttribute("hotelList",list);
-		model.addAttribute("regionList", hotelService.getRegionList());;
-		model.addAttribute("checkin", inn);
-		model.addAttribute("checkout", out);
-			
-		return "/hotel/list";
-	}
+//	@PostMapping("/detail")
+//	public String searchList1(String hotelregion,String inn,String out, Model model) {
+//		String in1 = inn.replaceAll("-","");
+//		String out1 = out.replaceAll("-","");
+//		List<Hotel> list = hotelService.getSearchHotels(hotelregion,in1,out1);
+//		model.addAttribute("hotelList",list);
+//		model.addAttribute("regionList", hotelService.getRegionList());;
+//		model.addAttribute("checkin", inn);
+//		model.addAttribute("checkout", out);
+//			
+//		return "/hotel/list";
+//	}
 	
 	
 	@GetMapping("/reserve")
