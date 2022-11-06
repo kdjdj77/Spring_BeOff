@@ -90,7 +90,7 @@
                                 <input type="hidden" name="id" value="${r.id }">
                					<input class="btn btn-warning btn-xl text-uppercase" type="button" onclick="requestPay('${room.hotel.hotelname}', '<%=(checkout1-checkin1)*price1 %>')" value="카카오페이">
                             </div>
-                        </div>
+                      
                 	</form>
                </div>
             </div>
