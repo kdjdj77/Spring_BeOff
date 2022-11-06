@@ -51,7 +51,7 @@ public class Car {
 	@Column
 	private String fueleff;
 	
-	@OneToMany(mappedBy = "car_id", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
 	@ToString.Exclude
 	@Builder.Default 
 	private List<Carfile> files = new ArrayList<>();

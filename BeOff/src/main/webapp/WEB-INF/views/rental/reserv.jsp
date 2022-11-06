@@ -29,7 +29,7 @@
                     <p class="fw-bold">Payment Details</p>
                     <p class="dis mb-3">Complete your purchase by providing your payment details</p>
                 </div>
-                <form action="reserveList" name="reserveList" methode="post">
+                <form action="reservate" name="reservate" method="post">
                     <div class="mb-3">
                         <p class="dis fw-bold mb-2">Name</p>
                         <input class="form-control" type="name" value="${user.name } " readonly>
@@ -47,9 +47,17 @@
                         <div class="address">
                             
                             <div class=" my-3">
-                                <p class="dis fw-bold mb-2">예약날짜</p>
+                                <p class="dis fw-bold mb-2">대여날짜</p>
                                 <div class="inputWithcheck">
-                                    <input class="form-control" type="text" value="2022/12/12" readonly>
+                                    <input class="form-control" type="text" name="sDate" value="${sDate}" readonly>
+                                    <span class="fas fa-check"></span>
+
+                                </div>
+                            </div>
+                            <div class=" my-3">
+                                <p class="dis fw-bold mb-2">반납날짜</p>
+                                <div class="inputWithcheck">
+                                    <input class="form-control" type="text" name="eDate" value="${eDate}" readonly>
                                     <span class="fas fa-check"></span>
 
                                 </div>
@@ -57,10 +65,10 @@
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="fw-bold">Total</p>
-                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
+                                    <p class="fw-bold">${car.price } won</p>
                                 </div>
-                                <input type="hidden" name="id" value="${car.id }">
-                                <input class="btn btn-secondary btn-xl text-uppercase" type="button" value="무통장입금">
+                                <input type="hidden" name="carId" value="${car.id }">
+                                <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금" onclick="reserveOk()">
                                 
                             </div>
                             <div class="d-flex flex-column dis">
@@ -82,7 +90,7 @@
           <div class="box-inner-1 pb-3 mb-3 ">
                 <div class="d-flex justify-content-between mb-3 userdetails">
                     <p class="fw-bold">${car.carname }</p>
-                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
+                    <p class="fw-lighter">${car.price } won</p>
                 </div>
                 <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                     data-bs-interval="2000">
@@ -106,6 +114,14 @@
 
   </div>
 </main>
+	<script>
+	function reserveOk() {
+
+		alert('예약성공');
+		location.href = "tickets";	
+		
+	}
+	</script>
 
 
 	<script

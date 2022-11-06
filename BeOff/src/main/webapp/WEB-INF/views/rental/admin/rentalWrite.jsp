@@ -73,7 +73,7 @@
 											</div>
 											<div class="col-md-9 pe-5">
 
-												<select name="region" id="region">
+												<select name="region" id="region" style="font-size:1.3rem;width:200px; height:40px;">
 													<c:forEach var="region" items="${regionList}">    
                         						<option value="${region }">${region }</option>
 													</c:forEach>
@@ -85,21 +85,6 @@
 
 										<hr class="mx-n3">
 
-										<div class="row align-items-center py-3">
-											<div class="col-md-3 ps-5">
-
-												<h6 class="mb-0">업체 사진</h6>
-
-											</div>
-											<div class="col-md-9 pe-5">
-
-												<input class="form-control form-control-lg" id="formFileLg"
-													type="file" />
-
-											</div>
-										</div>
-
-										<hr class="mx-n3">
 
 										<div class="row align-items-center py-3">
 											<div class="col-md-3 ps-5">
