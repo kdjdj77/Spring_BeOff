@@ -83,7 +83,7 @@
                                         </td>
                                         <td>
                                             <div class="primary-btn">
-                                                <a class="btn btn-secondary" href="#">예약취소</a>
+                                                <a class="btn btn-secondary" href="#">예약완료</a>
                                             </div>
                                         </td>
 

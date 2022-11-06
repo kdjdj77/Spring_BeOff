@@ -127,6 +127,7 @@ public class RentalService {
 			rentalticketRepository.save(carTicket);
 		});
 	}
+	
 
 	public Map<Car, String> mapByUser(User user) {
 		 return rentalticketRepository.findByUser(user).stream()
