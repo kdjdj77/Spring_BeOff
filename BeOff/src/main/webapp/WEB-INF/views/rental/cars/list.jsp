@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,9 +27,11 @@
 			<div class="row">
 				<div class="col-lg-2"></div>
 				<div class="col-lg-6"></div>
+				<sec:authorize access="hasAnyRole('ADMIN_RENTAL')">
 				<div class="col-lg-2">
-					<button type="button" class="btn btn-secondary">관리자모드</button>
+            		<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/rental/admin/list">관리자모드</a>
 				</div>
+            </sec:authorize>
 				<div class="col-lg-2"></div>
 			</div>
 		</div>
@@ -56,11 +59,11 @@
 											</c:forEach>
 									</select></td>
 									<td><input type="text" class=""
-										id="start" name="in1"></td>
+										id="start" name="in1" value="${sDate }"></td>
 									<td><input type="text" class=""
-										id="end" name="out1"></td>
+										id="end" name="out1" value="${eDate }"></td>
 									<td><button type="button"
-											class="btn btn-outline-secondary" id="sub" name ="sub">검색</button></td>
+											class="btn btn-outline-secondary" id="sub" name ="sub" onclick="hsubmit()">검색</button></td>
 								</tr>
 							</thead>
 						</table>
@@ -78,19 +81,25 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<h3>${rental.rentalname }</h3>
-					<select name="rentalregion" id="region">   
-                        <option value="small">소형</option>
-                        <option value="middle">중형</option>
-                        <option value="large">대형</option>
-                        <option value="suv">SUV</option>
-					</select>
+					<form action="list" method="post">
+						<input type="hidden" name="sDate" value="${sDate}">
+						<input type="hidden" name="eDate" value="${eDate}">
+						<input type="hidden" name="rentalId" value="${rentalId}">
+						<select onchange="submit()" name="sizeOption" id="sizeOption">   
+	                        <option value="all">전체</option>
+	                        <option value="small">소형</option>
+	                        <option value="middle">중형</option>
+	                        <option value="large">대형</option>
+	                        <option value="suv">SUV</option>
+						</select>
+					</form>
 				</div>
 				<div class="col-lg-2"></div>
 			</div>
 		</div><br>
 
 			<div class="container">
-		<c:forEach var="i" items="${rental.cars }">
+		<c:forEach var="i" items="${carList}">
 		<form action="reserv" method="POST">
 				<div class="card" style="width: 18rem;">
 					<img src="/upload/g80.jpg" class="card-img-top" alt="...">
@@ -105,6 +114,9 @@
 					</ul>
 					<div class="card-body" >
 						<input type="hidden" name="carId" value="${i.id }">
+						<input type="hidden" name="sDate" value="${sDate}">
+						<input type="hidden" name="eDate" value="${eDate}">
+						
 						<button class="btn btn-outline-secondary">예약하기</button>
 					</div>
 					</div>
@@ -169,15 +181,40 @@
    });
 </script>
 <script>
+
 	let btn = document.getElementById("sub");
+/* 	let inn = document.querySelector("#inn");
+	let out = document.querySelector("#out"); */
+	let in1 = document.querySelector("#start");
+	let out1 = document.querySelector("#end");
+
 	btn.addEventListener("click", function onsubmit() {
-		/*    let inn = document.getElementById("inn");
-		 let out = document.getElementById("out"); */
+/* 		let inn = document.getElementById("inn");
+		let out = document.getElementById("out"); */
 		let in1 = document.getElementById("start");
 		let out1 = document.getElementById("end");
 		/*    inn.value = in1.value.toString();
 		 out.value = out1.value.toString(); */
 		frm.submit();
 	});
+
+	function hsubmit() {
+
+		if (in1.value === "") {
+			alert('대여날짜를 선택해주세요');
+			return;
+		}
+		if (out1.value === "") {
+			alert('반납 날짜를 선택해주세요');
+			return;
+		}
+		if (in1.value > out1.value) {
+			alert('대여날짜는 반납날짜 이전이어야 합니다')
+		}
+/* 		inn.value = in1.value.toString();
+		out.value = out1.value.toString(); */
+
+		frm.submit();
+	}
 </script>
 </html>

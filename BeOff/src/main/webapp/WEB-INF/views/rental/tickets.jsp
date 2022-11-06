@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
             <div class="col-lg-12">
                 <div class="section-title text-center">
                     <div class="title-text">
-                        <h2>예약내역</h2>
+                        <h2>${user.username }님의 예약내역</h2>
                     </div>
                     <br>
                 </div>
@@ -48,35 +49,47 @@
                                         <th scope="col">예약업체</th>
                                         <th scope="col">렌트카</th>
                                         <th scope="col">가격</th>
-                                        <th scope="col">취소</th>
+                                        <th scope="col">비고</th>
                                         <th class="text-center" scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach var="i" items="${list}" begin="1"> 
                                     <tr class="inner-box">
-                                        <th scope="row"><h3>April 29</h3></th>
+                                        <th scope="row">
+                                        	
+                                        	<h3>${i.dateRange}</h3>
+                                        	
+                                       	</th>
                                         <td>
                                             <div class="event-wrap">
-                                                <h3>롯데렌터카</h3>
+                                                <h3>${i.car.rental.rentalname}</h3>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="event-wrap">
-                                                <h3>소나타</h3>
+                                                <h3>${i.car.carname}</h3>
                                                 <div class="meta">
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="r-no">
-                                                <h3>50000 won</h3>
+                                                <h3>
+                                                	${i.price}<br>
+                                                	
+                                                </h3>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="primary-btn">
-                                                <a class="btn btn-secondary" href="#">예약취소</a>
+                                                <a class="btn btn-secondary" href="#">예약완료</a>
                                             </div>
                                         </td>
+
+				
+
+	</c:forEach>
                                     
                                 </tbody>
                             </table>
