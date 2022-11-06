@@ -81,8 +81,10 @@
 			<div class="row">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
-					<div class="card mb-3">
-						<img src="../upload/g80.jpg" class="card-img-top" alt="...">
+					<div class="card-columns">
+						<img style="height: 200px; width:300px" class="card-img-top"
+							src="${pageContext.request.contextPath }/upload/${dto.cars[0].files[0].file}"
+							alt="..." />
 						<div class="card-body">
 							<h6>서비스지역</h6>
 							<h4>${dto.region.region }</h4>

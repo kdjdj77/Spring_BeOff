@@ -88,19 +88,38 @@ out1: 2022-10-28
 	}
 	
 	@PostMapping("/cars/reserv") // /rental/reserv
-	public String reserv(String carId, Model model) {
+	public String reserv(String carId, @RequestParam("sDate") String sDate, 
+			@RequestParam("eDate") String eDate, Model model) {
 		model.addAttribute("car", rentalService.getCarById(carId));
 		model.addAttribute("user", rentalService.getUserData());
-		
+		model.addAttribute("sDate", sDate);
+		model.addAttribute("eDate", eDate);
 		
 		return "rental/reserv";
 	}
-	@PostMapping("/cars/reserveList")
-	public String reserveList(String rentalId, Model model) {
-		Car r = rentalService.getCarById(rentalId);
-		model.addAttribute("r", r);
+	
 
-		return "rental/reserveList";
-	}
+//	@PostMapping("/cars/reserveList")
+//	public String reserveList(String id, String sDate, String eDate ,Model model) {
+//		Car c = rentalService.getCarById(id);
+//		
+//		rentalService.registerCarticket(c, sDate, eDate);
+//
+//		return "redirect:/rental/tickets";
+//	}
+	
+//	@PostMapping("/reservOk")
+//	   public String getReserve(String id, String checkin, String checkout, Model model) {
+//	      
+//	      Room r = hotelService.reserve(id);
+//	      
+//	      hotelService.registerRoomticket(r, checkin, checkout);   
+//	      return "redirect:/hotel/tickets";
+//	   }
+//	   @GetMapping("/tickets")
+//	   public String getTickets(Model model) {
+//	      model.addAttribute("list",hotelService.getRoomTickets());   
+//	      return "hotel/reservOk";
+//	   }
 
 }
