@@ -36,14 +36,13 @@
 						<div class="card-body">
 							<div class="text-center mt-1">
 								<h4 class="card-title">${c.carname }</h4>
-								<h6>${c.price }</h6>
 							</div>
 
 							<div class="d-flex flex-row">
 								<a class="btn btn-secondary btn-lg"
 									href="carUpdate?id=${c.id }">수정</a> <a
 									class="btn btn-secondary btn-lg"
-									href="carDelete?id=${c.id }">삭제</a>
+									href="carDeleteOk?id=${c.id }">삭제</a>
 							</div>
 						</div>
 					</div>
