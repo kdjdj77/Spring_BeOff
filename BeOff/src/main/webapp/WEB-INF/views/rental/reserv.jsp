@@ -65,7 +65,7 @@
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="fw-bold">Total</p>
-                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
+                                    <p class="fw-bold">${car.price } won</p>
                                 </div>
                                 <input type="hidden" name="carId" value="${car.id }">
                                 <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금" onclick="reserveOk()">
@@ -90,7 +90,7 @@
           <div class="box-inner-1 pb-3 mb-3 ">
                 <div class="d-flex justify-content-between mb-3 userdetails">
                     <p class="fw-bold">${car.carname }</p>
-                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
+                    <p class="fw-lighter">${car.price } won</p>
                 </div>
                 <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                     data-bs-interval="2000">

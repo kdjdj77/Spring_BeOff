@@ -351,19 +351,4 @@ public class AdminRentalService {
 		
 		return result;
 	}
-	
-//	// 업체 삭제
-//	@Transactional
-//	public int rentalDelete(String id) {
-//		int result = 0;
-//
-//		Long rId = Long.parseLong(id);
-//
-//		Rental r = rentalRepository.findById(rId).get();
-//		rentalRepository.delete(r);
-//		result = 1;
-//
-//		return result;
-//	}
-
 }
