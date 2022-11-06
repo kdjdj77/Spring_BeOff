@@ -29,7 +29,7 @@
             <div class="col-lg-12">
                 <div class="section-title text-center">
                     <div class="title-text">
-                        <h2>예약내역</h2>
+                        <h2>${user.username }님의 예약내역</h2>
                     </div>
                     <br>
                 </div>

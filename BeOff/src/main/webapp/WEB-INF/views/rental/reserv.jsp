@@ -68,7 +68,7 @@
                                     <p class="fw-bold"><span class="fas fa-dollar-sign"></span>${car.price } won</p>
                                 </div>
                                 <input type="hidden" name="carId" value="${car.id }">
-                                <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금">
+                                <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금" onclick="reserveOk()">
                                 
                             </div>
                             <div class="d-flex flex-column dis">
@@ -114,6 +114,14 @@
 
   </div>
 </main>
+	<script>
+	function reserveOk() {
+
+		alert('예약성공');
+		location.href = "tickets";	
+		
+	}
+	</script>
 
 
 	<script
