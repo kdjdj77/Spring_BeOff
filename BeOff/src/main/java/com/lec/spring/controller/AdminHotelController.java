@@ -145,21 +145,21 @@ public class AdminHotelController {
 		return "hotel/admin/deleteOk";
 	}
 	
-	@GetMapping("reserve")
-	public String reserve(String id, Model model) {
-		Room r = adminHotelService.reserve(id);
-		model.addAttribute("r", r);
-		return "hotel/admin/reserve";
-	}
-	
-	@PostMapping("getReserve")
-	public String getReserve(String id, Model model) {
-		Room r = adminHotelService.reserve(id);
-		model.addAttribute("r", r);
-		
-		System.out.println("getRegDate "+ r.getHotel().getRegDate());
-		System.out.println("getRegDateTime "+ r.getHotel().getRegDateTime());
-		
-		return "hotel/admin/getReserve";
-	}
+//	@GetMapping("reserve")
+//	public String reserve(String id, Model model) {
+//		Room r = adminHotelService.reserve(id);
+//		model.addAttribute("r", r);
+//		return "hotel/admin/reserve";
+//	}
+//	
+//	@PostMapping("getReserve")
+//	public String getReserve(String id, Model model) {
+//		Room r = adminHotelService.reserve(id);
+//		model.addAttribute("r", r);
+//		
+//		System.out.println("getRegDate "+ r.getHotel().getRegDate());
+//		System.out.println("getRegDateTime "+ r.getHotel().getRegDateTime());
+//		
+//		return "hotel/admin/getReserve";
+//	}
 }

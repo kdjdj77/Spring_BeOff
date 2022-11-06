@@ -45,6 +45,14 @@ public class User extends BaseEntity{
 	@ToString.Exclude
 	private String re_password; // 바인딩 전용
 	
+	@Transient
+	@ToString.Exclude
+	private String phone2;
+	
+	@Transient
+	@ToString.Exclude
+	private String random;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@ToString.Exclude
 	@Builder.Default

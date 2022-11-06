@@ -23,7 +23,8 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="position:fixed; width:100vw; top:0; z-index:1000;">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="position:fixed; width:100vw; z-index:1000; top:0;">
+
     <div class="container-fluid">
       <a class="navbar-brand" href="javascript:void(0)">Security</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">

@@ -24,10 +24,21 @@ public class UserValidator implements Validator{
 		System.out.println("validate()");
 		User user = (User)target;
 		String username = user.getUsername();
+		String phonenum = user.getPhonenum();
 		if (username == null || username.trim().isEmpty()) {
 			// rejectValue(field, errorcode)
 			errors.rejectValue("username", "username은 필수입니다");
 		}
+		
+		if (!(phonenum.length() == 11)) {
+			errors.rejectValue("phonenum", "휴대폰번호는 반드시 11자리로 입력해주세요");
+		}
+		
+//		if (phonenum.length() == 11){
+//			if(user.getPhone2() == null) {
+//				errors.rejectValue("phonenum", "인증번호를 받아주세요");
+//			}		
+//		}
 		
 		// ValidationUtils 사용
 		// 단순히 빈 폼 데이터를 처리할때는 아래 와 같이 사용 가능
