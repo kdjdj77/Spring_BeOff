@@ -182,6 +182,8 @@
 
       //초기값을 오늘
       $('#datepicker').datepicker('setDate', 'today');
+      $("#start").datepicker('setDate', 'today');
+		$("#end").datepicker('setDate', 'today');
    });
 </script>
 <script>
@@ -205,8 +207,8 @@
 		if (in1.value > out1.value) {
 			alert('대여날짜는 반납날짜 이전이어야 합니다')
 		}
-/* 		inn.value = in1.value.toString();
-		out.value = out1.value.toString(); */
+		in1.value = in1.value.toString();
+		out1.value = out1.value.toString();
 		console.log("sdffs")
 		frm.submit();
 	}
