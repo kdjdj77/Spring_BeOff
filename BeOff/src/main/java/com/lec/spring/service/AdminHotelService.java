@@ -47,8 +47,6 @@ public class AdminHotelService {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private RoomticketRepository roomticketRepository;
-	@Autowired
 	private RegionRepository regionRepository;
 	@Autowired
 	private HotelRepository hotelRepository;
@@ -359,7 +357,7 @@ public class AdminHotelService {
 		
 		Room r = roomRepository.findById(lId).get();
 		roomRepository.delete(r);
-		delFile(r.getFiles().get(1));
+		delFile(r.getFiles().get(0));
 		System.out.println("서비스에서 id "+id);
 		result = 1;
 		
