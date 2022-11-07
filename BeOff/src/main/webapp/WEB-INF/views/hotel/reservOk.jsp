@@ -53,18 +53,20 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+                                    	<th>#</th>
                                         <th class="text-center" scope="col">예약날짜</th>
                                         <th scope="col">호텔이름</th>
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
-                                        <th scope="col">예약일자</th>
-                                        <th scope="col">체크인날짜</th>
+                                        <th scope="col">체크인 ~ 체크아웃</th>
+
                                         <th class="text-center" scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach var="list" items="${list }" begin="1">
                                     <tr class="inner-box">
+                                    	<td>${list }</td>
                                         <th scope="row"><h5>${list.regDateTime }</h5></th>
                                         <td>
                                             <div class="event-wrap">

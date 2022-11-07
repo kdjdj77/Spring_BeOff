@@ -30,7 +30,7 @@ public class HcommentService {
 	public HqryCommentList list(Hotel hotelId) {
 		HqryCommentList list = new HqryCommentList();
 		List<Hcomment> hcomments = null;
-		hcomments = hcommentRepository.findByHotel(hotelId, Sort.by(Order.desc("hotelId")));
+		hcomments = hcommentRepository.findByHotel(hotelId, Sort.by(Order.desc("regDate")));
 		list.setCount(hcomments.size());
 		list.setList(hcomments);
 		list.setStatus("OK");
