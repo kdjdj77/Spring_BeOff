@@ -10,13 +10,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <title>로그인</title>
+    <style>
+    	h1 {
+     		font-family: 'Dancing Script', cursive;
+    	}
+    </style>
 </head>
 
 <body style="margin-bottom: 200px">
+	<%-- 인증 헤더 --%>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <div class="container mt-3 text-center" style="width:500px;">
         <form action="${pageContext.request.contextPath }/user/login" method="POST">
-            <h1 class="h3 mb-3 fw-normal">로그인 하세요</h1>
+            <h1 class="h3 mb-3 fw-normal">BeOff</h1>
 	        <div class="row mt-5">
 	            <div class="col-12 text-danger">
 	                ${errorMessage }<%-- ← 에러메세지 --%>

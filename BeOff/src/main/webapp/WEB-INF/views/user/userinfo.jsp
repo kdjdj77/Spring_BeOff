@@ -22,8 +22,8 @@
                         <div class="font-weight-bold text-left text-white fs-2">
                             <h1 class="mb-5">
                             	${user.name} 
-                            	<a href="#" class="fs-5 text-black btn btn-warning">수정</a>
-                            	<a href="#" class="fs-5 text-black btn btn-danger">탈퇴</a>
+                            	<a href="update" class="fs-5 text-black btn btn-warning">수정</a>
+                            	<button class="fs-5 text-black btn btn-danger" onclick="del()">탈퇴</button>
                             </h1>
                             
                             <div class="mb-3">ID : ${user.username}</div>
@@ -92,4 +92,10 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
+   	<script>
+   		function del() {
+    		if (confirm('정말로 탈퇴하시겠습니까?')) location.href("deleteOk");
+    		else return;
+    	}
+   	</script>
 </html>
