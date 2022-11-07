@@ -143,8 +143,8 @@ public class UserController {
 		if (userService.isExist(id)) return "/user/apiLogin";
 		
 		model.addAttribute("name", name);
-		if (phonenum != null) model.addAttribute("phonenum", phonenum);
-		else model.addAttribute("phonenum", "000-0000-0000");
+		if (phonenum != null) model.addAttribute("phonenum", phonenum.replaceAll("-", ""));
+		else model.addAttribute("phonenum", "00000000000");
 		if (email != null) model.addAttribute("email", email);
 		else model.addAttribute("email", "test@test.com");
 		return "/user/apiRegister";

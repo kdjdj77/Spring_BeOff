@@ -47,9 +47,6 @@ class RepositoryTest {
 		Authority auth_admin_rental = Authority.builder()
 				.name("ROLE_ADMIN_RENTAL")
 				.build();
-		Authority auth_admin_shop = Authority.builder()
-				.name("ROLE_ADMIN_SHOP")
-				.build();
 		Authority auth_admin_qna = Authority.builder()
 				.name("ROLE_ADMIN_QNA")
 				.build();
@@ -59,7 +56,6 @@ class RepositoryTest {
 		auth_admin_air = authorityRepository.saveAndFlush(auth_admin_air);
 		auth_admin_hotel = authorityRepository.saveAndFlush(auth_admin_hotel);
 		auth_admin_rental = authorityRepository.saveAndFlush(auth_admin_rental);
-		auth_admin_shop = authorityRepository.saveAndFlush(auth_admin_shop);
 		
 		authorityRepository.findAll().forEach(System.out::println);
 
@@ -128,12 +124,12 @@ class RepositoryTest {
 				.phonenum("01066666666")
 				.email("666@gmail.com")
 				.build();
-		User adminshop = User.builder()
-				.username("ADMINSHOP")
+		User master = User.builder()
+				.username("MASTER")
 				.password(passwordEncoder.encode("1234"))
-				.name("관리자4")
-				.phonenum("01077777777")
-				.email("777@gmail.com")
+				.name("master")
+				.phonenum("01234567890")
+				.email("master@gmail.com")
 				.build();
 
 		user1.addAuthority(auth_member);
@@ -145,7 +141,7 @@ class RepositoryTest {
 		adminair.addAuthority(auth_member, auth_admin_air);
 		adminhotel.addAuthority(auth_member, auth_admin_hotel);
 		adminrental.addAuthority(auth_member, auth_admin_rental);
-		adminshop.addAuthority(auth_member, auth_admin_shop);
+		master.addAuthority(auth_member, auth_admin_rental, auth_admin_hotel, auth_admin_air, auth_admin_qna);
 		
 		user1 = userRepository.save(user1);
 		user2 = userRepository.save(user2);
@@ -156,7 +152,7 @@ class RepositoryTest {
 		adminair = userRepository.save(adminair);
 		adminhotel = userRepository.save(adminhotel);
 		adminrental = userRepository.save(adminrental);
-		adminshop = userRepository.save(adminshop);
+		master = userRepository.save(master);
 		
 		userRepository.findAll().forEach(System.out::println);
 

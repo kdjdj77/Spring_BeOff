@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
-    <title>비행기 예매</title>
+    <title>BeOff</title>
     <style>
     	.seat {width:44px; height:30px;}
     	.none {background-color:dimgray;}

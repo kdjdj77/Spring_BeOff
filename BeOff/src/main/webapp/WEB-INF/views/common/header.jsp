@@ -35,6 +35,8 @@
 		   	box-sizing: border-box;
 		}	
 		.navbar-brand {font-family: 'Dancing Script', cursive;}
+		.bb {color:white;}
+		.bb:hover {color:lightgreen;}
 	 </style>
 </head>
 
@@ -65,7 +67,11 @@
 	          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/rental/admin/list">관리자(렌트카)</a></li>
           </sec:authorize>
         </ul>
-       
+       	<sec:authorize access="isAuthenticated()">
+	       	<a href="${pageContext.request.contextPath }/air/tickets" class="bb fs-5 me-3"><i class="fas fa-plane-departure"></i></a>
+	       	<a href="${pageContext.request.contextPath }/hotel/tickets" class="bb fs-5 me-3"><i class="fa-solid fa-bed"></i></a>
+	       	<a href="${pageContext.request.contextPath }/rental/tickets" class="bb fs-5 me-4"><i class="fa-solid fa-car-side"></i></a>
+       	</sec:authorize>
          <!-- 로그인 안했을때는 로그인 form 보여주기 -->
          <sec:authorize access="isAnonymous()">
          	<a class="btn btn-primary" type="submit" href="${pageContext.request.contextPath}/user/login">Login</a>       		
@@ -86,6 +92,9 @@
 	             		</sec:authorize>
 	             		<sec:authorize access="hasRole('ADMIN_HOTEL')">
 	             			<i class="fa-solid fa-square-h m-auto text-primary"></i>
+	             		</sec:authorize>
+	             		<sec:authorize access="hasRole('ADMIN_QNA')">
+	             			<i class="fa-solid fa-circle-question text-primary"></i>
 	             		</sec:authorize>
 	             		${userdetails.user.name }
 	             	</span> 님 

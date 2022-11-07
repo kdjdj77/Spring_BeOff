@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-	<title>Home</title>
+	<title>BeOff</title>
 	<style>
 		body {overflow-x: hidden; overflow-y: hidden;}
 		table, tr, td {padding : 0; margin : 0;}
