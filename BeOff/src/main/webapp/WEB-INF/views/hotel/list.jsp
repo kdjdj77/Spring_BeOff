@@ -19,29 +19,13 @@
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
-	<!-- 페이징 헤더 -->
-	<!--
-        <div class="mb-3 mt-3 clearfix">
-            <span class="float-end">
-            	<form name="frmPageRows">
-            		<input type="hidden" name="page" value="${page }">
-	                <select class="form-select" name="pageRows">
-	                    <option value="4" ${pageRows==4 ? 'selected' : '' }>4</option>
-	                    <option value="10" ${pageRows==10 ? 'selected' : '' }>10</option>
-	                    <option value="15" ${pageRows==15 ? 'selected' : '' }>15</option>
-	                    <option value="20" ${pageRows==20 ? 'selected' : '' }>20</option>
-	                </select>
-                </form>
-            </span>
-        </div> 
-        -->
-	<div class="container  text-white  mb-5" style="width:850px; height:70px;  border: 1px solid #333333; background-color:#0c75ed;">
+	<div class="container  text-white  mb-5" style="width:850px; height:70px;  border: 1px solid #333333; background-color:#4186c3;">
 
 		<form action="${pageContext.request.contextPath}/hotel/list"
 			name="frm" id="frm" method="post">
 			<div>
 				<div>
-					<div class="row">
+					<div class="row mt-2" style="color:solid white;">
 						<div class="col-sm-2">목적지</div>
 						<div class="col-sm-4">체크인 날짜</div>
 						<div class="col-sm-4">체크아웃 날짜</div>
@@ -69,7 +53,7 @@
 						<input type="text" id="end" name="out1" style="border: 1px solid #333333;" value="${checkout }">
 						</div>
 						<div class="col-sm-1 text-center ms-3">
-							<button type="button" style="width:80px; border: 1px solid #333333" onclick="hsubmit()">검색 <i class="fa-solid fa-arrow-right"></i></button>
+							<button type="button" class="bbttnn" onclick="hsubmit()">검색 <i class="fa-solid fa-arrow-right"></i></button>
 						</div>
 
 					</div>
@@ -235,4 +219,17 @@
 <script>
  	
 </script>
+<style>
+.bbttnn{
+	width:80px; 
+	border: 1px solid #333333;
+	border-radius : 2px;
+	background-color : white;
+	color : black;
+}
+.bbttnn:hover{
+	background-color : #0c3cfc; 
+	color : white;
+}
+</style>
 </html>

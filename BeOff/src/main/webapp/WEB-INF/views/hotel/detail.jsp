@@ -41,33 +41,13 @@
 			String checkin = request.getParameter("inn");
 			String checkout = request.getParameter("out");
 		%>
-		<!--  
-		<div>목적지 >> <%=region %></div>
-		<div>
-		<div>체크인 ~ 체크아웃 >> <%=checkin %> ~ <%=checkout %></div>
-		<div>검색 결과입니다.</div>
-		</div>
-	<div class="container  text-white  mb-5" style="border: 1px solid #333333; background-color:#0c75ed;">
-		<div class="row">
-				<div class="col-sm-4">목적지</div>
-				<div class="col-sm-4">체크인 날짜</div>
-				<div class="col-sm-4">체크아웃 날짜</div>
-		</div>
-		<hr>
-		<div class="row"> 
-				<div class="col-sm-4">
-				</div>
-				<div class="col-sm-4">
-				</div>
-				<div class="col-sm-4">
-				</div>
-		</div>
-	</div>
-	-->
-	<hr style="height:2px; background-color: black;">
-	<div class="w-75  container " >
+
+	<hr style="height:2px; background-color: #e52813;">
+		<div class="justify-content-center text-center">호텔 정보</div>
+	<hr style="height:2px; background-color: #e52813;">
+	<div class="w-75  container" style="border-top:1px solid gray; border-bottom:1px solid gray;">
 		<div style="float: left;">
-			<img style="height: 210px; width:400px" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}" class="card-img-top" alt="...">
+			<img style="height: 210px; width:410px" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}"  alt="...">
 		</div>
 		<div style="margin-left:430px; ">
 			
@@ -90,73 +70,34 @@
 		</div>
 	</div>
 	<hr style="height:2px; background-color: #e52813;">
-		
 		<div class="justify-content-center text-center">객실 목록</div>
-		<!--  
-		<c:forEach var="i" items="${roomList }">
-	<div class="w-75  container">
+	<hr style="height:2px; background-color: #e52813;">
 		<br>
-		<div>${i.roomname}</div>
-		<div>
-			<span>가격 : </span>
-			<span>${i.price }원</span>
-		</div>
-		<div>
-			<button onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button>
-		</div>
-		<div>
-			<img style="width: 200px; height: 150px;" src="${pageContext.request.contextPath }/upload/${i.files[0].file}" alt="..." />
-		</div>
-	</div>
-	<br>
-	<br>
-		</c:forEach>
-	-->
 	<c:forEach var="i" items="${roomList }">
-		<div class="w-75  container " >
+		<div class="w-50  container" >
+		<div style="border:1px solid gray;">
 		<div>
-			<div>${i.roomname}</div>
-			<div>
+			<img style="height: 210px; width:300px; float: left;" src="${pageContext.request.contextPath }/upload/${i.files[0].file}"  class="mt-1 ms-1" alt="..." />
+		</div>
+		<div  style="margin-left:315px; ">
+			<p style="margin-top:10px; " class="text-center">${i.roomname}</p>
+			<hr>
+			<div class="text-center">
 				<span>가격 : </span>
 				<span>${i.price }원</span>
-			</div>
-			<div>
-				<button onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button>
-			</div>
-		</div>
-		<br><br><br><br>
-		<div style="float: right;">
-			<img style="height: 200px; width:200px" src="${pageContext.request.contextPath }/upload/${i.files[0].file}" alt="..." />
-		</div>
-	</div>
+				<br>
+				<br>
+				<span>침대 갯수 : </span>
+				<span>${i.bed }개</span>
+			</div><br>
+			<div style="margin-top:20px; margin-bottom:5px;">
+				<button class="hover1" type="button" onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약</button>
+			</div></div></div></div><br>
 	</c:forEach>
-    
-	<table class="table table-bordered" id="table">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>방 이름</th>
-				<th>방 가격</th>
-				<th>침대 갯수</th>
-				<th>방 사진</th>
-				<th>예약</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="i" items="${roomList }">
-				<tr>
-					<td>${i.id }</td>
-					<td>${i.roomname }</td>
-					<td>${i.price }원</td>
-					<td>${i.bed }</td>
-					<td><img style="width: 300px; height: 300px;"
-						src="${pageContext.request.contextPath }/upload/${i.files[0].file}"
-						alt="..." /></td>
-					<td><button onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+    	<hr style="height:2px; background-color: #e52813;">
+		<div class="justify-content-center text-center">후기 목록</div>
+	<hr style="height:2px; background-color: #e52813;">
+	
 
 
 	<input type="hidden" name="inn" id="inn" value="${checkin }">
@@ -167,4 +108,18 @@
 
 
 </body>
+<style>
+.hover1{
+	border-radius : 5px;
+	width:410px;
+	border:1px solid black;
+	background-color:#f70260;
+	color:white;
+    }
+.hover1:hover{
+	background-color:#141414;
+}
+
+ 
+</style>
 </html>
