@@ -56,7 +56,7 @@
 			<div><%=region %> / ${hotel.content }</div>
 			<br>
 			<div>
-				<span>별점 평균 : </span>
+				<span>별점 : </span>
 					<span style="color:#FFB400;">
 						<label><span id="star_cnt"></span>★</label>
 					</span>
@@ -75,13 +75,14 @@
 		<br>
 	<c:forEach var="i" items="${roomList }">
 		<div class="w-50  container" >
-		<div style="border:1px solid gray;">
+		<div style="border:2px solid gray;">
 		<div>
 			<img style="height: 210px; width:300px; float: left;" src="${pageContext.request.contextPath }/upload/${i.files[0].file}"  class="mt-1 ms-1" alt="..." />
 		</div>
 		<div  style="margin-left:315px; ">
 			<p style="margin-top:10px; " class="text-center">${i.roomname}</p>
-			<hr>
+			
+	<hr style="height:2px; background-color: #e52813;">
 			<div class="text-center">
 				<span>가격 : </span>
 				<span>${i.price }원</span>

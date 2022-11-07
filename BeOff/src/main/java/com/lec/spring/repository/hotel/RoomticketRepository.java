@@ -21,4 +21,5 @@ public interface RoomticketRepository extends JpaRepository<Roomticket, Long> {
 
 	List<Roomticket> findByRoom(Room r);
 
+	
 }

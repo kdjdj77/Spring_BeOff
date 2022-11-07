@@ -73,6 +73,7 @@
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Content</h3>
                                 <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="content" value="${hotel.content }" name="content" required>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                	
                                 	<button class="btn btn-outline-dark text-white mb-2">수정완료</button>
                                 	<a class="btn btn-outline-dark text-white mb-2" href="delete?id=${hotel.id}">삭제</a>
                                 </div>

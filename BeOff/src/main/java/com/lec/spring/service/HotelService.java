@@ -269,6 +269,19 @@ public class HotelService {
 		}
 		tickets.add(tk);
 		return tickets;
+	}
+
+	public int deleteTicket(List<Long> date, String id) {
+		Room room = roomRepository.findById(Long.parseLong(id)).orElse(null);
+		List<Roomticket> list = new ArrayList<>();
+		for(Long d : date) {
+			list.add(roomticketRepository.findByDateAndRoom(d, room).get(0));
+			}
+		for(Roomticket t : list) {
+			roomticketRepository.delete(t);
+		}
+		
+		return 1;
 	} 
 
 	
