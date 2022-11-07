@@ -38,73 +38,68 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<%
 			String region = request.getParameter("region");
-			String checkin = request.getParameter("checkin");
-			String checkout = request.getParameter("checkout");
+			String checkin = request.getParameter("inn");
+			String checkout = request.getParameter("out");
 		%>
-		
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>지역</th>
-				<th>체크인</th>
-				<th>체크아웃</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><%=region %></td>
-				<td><%=checkin %></td>
-				<td><%=checkout %></td>
-			</tr>
-		</tbody>
-	</table>	
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>호텔 이름</th>
-				<th>호텔 정보</th>
-				<th>별점 평균</th>
-			</tr>
-		</thead>
-		<tbody>
 
-			<tr>
-				<td>${hotel.id }</td>
-				<td>${hotel.hotelname }</td>
-				<td>${hotel.content }</td>
-				<td><label><span id="star_cnt"></span> 점</label></td>
-			</tr>
-		</tbody>
-	</table>
+	<hr style="height:2px; background-color: #e52813;">
+		<div class="justify-content-center text-center">호텔 정보</div>
+	<hr style="height:2px; background-color: #e52813;">
+	<div class="w-75  container" style="border-top:1px solid gray; border-bottom:1px solid gray;">
+		<div style="float: left;">
+			<img style="height: 210px; width:410px" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}"  alt="...">
+		</div>
+		<div style="margin-left:430px; ">
+			
+			<div><h3>${hotel.hotelname }</h3></div>
+			<br>
+			<div><%=region %> / ${hotel.content }</div>
+			<br>
+			<div>
+				<span>별점 : </span>
+					<span style="color:#FFB400;">
+						<label><span id="star_cnt"></span>★</label>
+					</span>
+			</div>
+			<br>
+			<br>
+			<div>
+			<span>여행날짜 : </span>
+			<span><%=checkin %> ~ <%=checkout %> </span>
+			</div>
+		</div>
+	</div>
+	<hr style="height:2px; background-color: #e52813;">
+		<div class="justify-content-center text-center">객실 목록</div>
+	<hr style="height:2px; background-color: #e52813;">
+		<br>
+	<c:forEach var="i" items="${roomList }">
+		<div class="w-50  container" >
+		<div style="border:2px solid gray;">
+		<div>
+			<img style="height: 210px; width:300px; float: left;" src="${pageContext.request.contextPath }/upload/${i.files[0].file}"  class="mt-1 ms-1" alt="..." />
+		</div>
+		<div  style="margin-left:315px; ">
+			<p style="margin-top:10px; " class="text-center">${i.roomname}</p>
+			
+	<hr style="height:2px; background-color: #e52813;">
+			<div class="text-center">
+				<span>가격 : </span>
+				<span>${i.price }원</span>
+				<br>
+				<br>
+				<span>침대 갯수 : </span>
+				<span>${i.bed }개</span>
+			</div><br>
+			<div style="margin-top:20px; margin-bottom:5px;">
+				<button class="hover1" type="button" onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약</button>
+			</div></div></div></div><br>
+	</c:forEach>
+    	<hr style="height:2px; background-color: #e52813;">
+		<div class="justify-content-center text-center">후기 목록</div>
+	<hr style="height:2px; background-color: #e52813;">
 	
-    
-	<table class="table table-bordered" id="table">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>방 이름</th>
-				<th>방 가격</th>
-				<th>침대 갯수</th>
-				<th>방 사진</th>
-				<th>예약</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="i" items="${hotel.rooms }">
-				<tr>
-					<td>${i.id }</td>
-					<td>${i.roomname }</td>
-					<td>${i.price }원</td>
-					<td>${i.bed }</td>
-					<td><img style="width: 300px; height: 300px;"
-						src="${pageContext.request.contextPath }/upload/${i.files[0].file}"
-						alt="..." /></td>
-					<td><button onclick="location.href='../hotel/reserve?id=${i.id}&checkin=<%=checkin %>&checkout=<%=checkout %>&price=${i.price}'">예약하기</button></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+
 
 	<input type="hidden" name="inn" id="inn" value="${checkin }">
 	<input type="hidden" name="out" id="out" value="${checkout }">
@@ -114,4 +109,18 @@
 
 
 </body>
+<style>
+.hover1{
+	border-radius : 5px;
+	width:410px;
+	border:1px solid black;
+	background-color:#f70260;
+	color:white;
+    }
+.hover1:hover{
+	background-color:#141414;
+}
+
+ 
+</style>
 </html>

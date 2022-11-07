@@ -18,7 +18,7 @@
     <div class="mb-3 mt-3">
         <label>댓글 : <span id="cmt_cnt"></span></label>
 		<%--  ROLE_MEMBER 가진 사용자만 댓글 작성 가능 --%>
-  		<sec:authorize access="hasAnyRole('ADMIN_HOTEL')">
+  		<sec:authorize access="hasAnyRole('ADMIN_HOTEL','ROLE_MEMBER')">
 	        <div class="input-group my-2">
 	            <input type="text" class="form-control" id="input_hcomment">
 	            <button type="button" class="btn btn-outline-primary" id="btn_hcomment">작성</button>
