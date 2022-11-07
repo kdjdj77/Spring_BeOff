@@ -1,6 +1,6 @@
 show tables;
 
-drop table db_user_authorities;
+drop table db_user;
 drop table db_qfile;
 drop table db_qcomment;
 drop table db_qna;
@@ -8,10 +8,16 @@ drop table db_user;
 drop table db_authority;
 drop table db_hotelfile;
 drop table db_hotel;
-drop table db_hcomment ;
+drop table db_hcomment;
 drop table db_room ;
 drop table db_roomticket;
-drop table db_roomfile ;
+drop table db_roomfile;
+
+drop table db_itemticket;
+drop table db_itemfile;
+drop table db_icomment;
+drop table db_itemcart;
+drop table db_item;
 
 drop table db_airticket;
 drop table db_airplane;

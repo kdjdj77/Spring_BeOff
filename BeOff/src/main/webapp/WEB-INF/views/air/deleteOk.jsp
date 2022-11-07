@@ -5,16 +5,14 @@
 <c:choose>
 	<c:when test="${result == 0 }">
 		<script>
-			alert("수정 실패");
+			alert("예매취소 실패");
 			history.back();
 		</script>
 	</c:when>
 	<c:otherwise>
-	<input type="hidden" id="id" value="${id }">
 		<script>
-			alert("수정 성공");
-			const id = document.getElementById("id").value;
-			location.href="${pageContext.request.contextPath }/rental/admin/cars/list?id=" + id;
+			alert("예매취소 성공");
+			location.href = "tickets";
 		</script>
 	</c:otherwise>
 </c:choose>

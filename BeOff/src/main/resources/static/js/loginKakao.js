@@ -17,7 +17,7 @@ function kakaoLogin() {
         	console.log(response);
         	
         	const userN = response.properties.nickname
-        	const userId = "kakao" + response.id;
+        	const userId = "kakao" + response.id + "beoff";
         	const email = response.kakao_account.email;
         	
         	console.log(userN);

@@ -10,11 +10,9 @@
 		</script>
 	</c:when>
 	<c:otherwise>
-	<input type="hidden" id="id" value="${id }">
 		<script>
 			alert("수정 성공");
-			const id = document.getElementById("id").value;
-			location.href="${pageContext.request.contextPath }/rental/admin/cars/list?id=" + id;
+			location.href = "userinfo"; <%-- 수정 성공하면 상세페이지 이동 --%>
 		</script>
 	</c:otherwise>
 </c:choose>

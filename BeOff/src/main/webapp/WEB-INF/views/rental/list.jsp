@@ -100,19 +100,19 @@
 		</div>
 				</form> --%>
 
-
+	<div style="width:100vw; height:auto;">
 		<c:forEach var="dto" items="${rentalList }" varStatus="status">
 		<form action="cars/list" method="POST">
 		<input type="hidden" name="rentalId" value="${dto.id }">
 		<input type="hidden" name="sDate" value="${sDate }">
 		<input type="hidden" name="eDate" value="${eDate }">
 		<input type="hidden" name="sizeOption" value="all">
-		<div class="container">
-			<div class="row d-flex">
+		<div class="container" style="float:left; width:370px; height:500px;">
+			<div class="row">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
 					<div class="card-columns">
-						<img style="height: 200px; width:300px" class="card-img-top"
+						<img style="width:320px; height:200px; object-fit:fill; float: left;" class="card-img-top"
 							src="${pageContext.request.contextPath }/upload/${dto.cars[0].files[0].file}"
 							alt="..." />
 						<div class="card-body">
@@ -129,6 +129,7 @@
 		</div>
 		</form>
 		</c:forEach>
+		</div>
 	</main>
 
 	<footer> </footer>
@@ -182,6 +183,8 @@
 
       //초기값을 오늘
       $('#datepicker').datepicker('setDate', 'today');
+      $("#start").datepicker('setDate', 'today');
+		$("#end").datepicker('setDate', 'today');
    });
 </script>
 <script>
@@ -205,8 +208,8 @@
 		if (in1.value > out1.value) {
 			alert('대여날짜는 반납날짜 이전이어야 합니다')
 		}
-/* 		inn.value = in1.value.toString();
-		out.value = out1.value.toString(); */
+		in1.value = in1.value.toString();
+		out1.value = out1.value.toString();
 		console.log("sdffs")
 		frm.submit();
 	}

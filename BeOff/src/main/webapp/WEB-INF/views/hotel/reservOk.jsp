@@ -82,9 +82,9 @@
                                                 <h5>${list.price } won</h5>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td>                                        	
                                             <c:forEach var="i" items="${list.date }" begin="0" varStatus="s" end="${listSize }" step="1">
-                                                	<c:if test="${s.last }"><span>${s.current} ~ ${s.current+s.index}</span></c:if>
+                                                	<c:if test="${s.last }"><span>${s.current} ~ ${s.current+s.index + 1}</span></c:if>
                                             </c:forEach>
                                         </td>
                                         <td>
@@ -93,7 +93,7 @@
                                         	<c:forEach var="j" items="${list.date }">
                                         		<input type="hidden" name="date" value="${j}"></input>
                                         	</c:forEach>
-                                        	<button class="bb">예약취소</button>
+                                        	<button class="bbbb">예약취소</button>
                                         	</form>
                                         </td>                                        
                                         </tr>
@@ -118,14 +118,14 @@
       crossorigin="anonymous"></script>
 </body>
 <style>
-.bb{
+.bbbb{
 	border-radius:5px;
 	background-color : secondary;
-	
+	color:black;
 }
-.bb:hover{
+.bbbb:hover{
 	background-color: black;
-	color:white
+	color:white;
 }
 </style>
 </html>
