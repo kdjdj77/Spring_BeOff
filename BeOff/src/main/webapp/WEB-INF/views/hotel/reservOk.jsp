@@ -93,7 +93,7 @@
                                         	<c:forEach var="j" items="${list.date }">
                                         		<input type="hidden" name="date" value="${j}"></input>
                                         	</c:forEach>
-                                        	<button>예약취소</button>
+                                        	<button class="bb">예약취소</button>
                                         	</form>
                                         </td>                                        
                                         </tr>
@@ -117,4 +117,15 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"></script>
 </body>
+<style>
+.bb{
+	border-radius:5px;
+	background-color : secondary;
+	
+}
+.bb:hover{
+	background-color: black;
+	color:white
+}
+</style>
 </html>
