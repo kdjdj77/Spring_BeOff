@@ -2,6 +2,7 @@ package com.lec.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder encoder() {
 		System.out.println("PasswordEncoder bean 생성");
 		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
 	}
 
 	@Override
@@ -40,6 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			
 			// ↓ /board/write/** /board/update/** /board/delete/** 주소로 들어오는 요청은 '인증' 뿐 아니라 ROLE_MEMBER 나 ROLE_ADMIN 권한을 갖고 있어야 한다 ('인가')
 			.antMatchers("/board/write/**", "/board/update/**", "/board/delete/**").access("hasRole('ROLE_MEMBER') or hasRole('ROLE_ADMIN')")
+			
+			// 회원정보 관리 관련 페이지 권한
+			.antMatchers("/user/userinfo", "/user/update").access("hasRole('ROLE_MEMBER')")
 			
 			//비행기 관련 페이지 권한
 			.antMatchers("/air/onewayReserv", "/air/roundReserv").access("hasRole('ROLE_MEMBER')")

@@ -22,7 +22,7 @@
 	<script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
-	<title>비행기 예매</title>
+	<title>BeOff</title>
 	<style>
 		body {
 			overflow-x: hidden;
