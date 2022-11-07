@@ -28,19 +28,19 @@
 					<div class="image"><a href="${pageContext.request.contextPath }/air/basic">
 							<img style="width:33vw; height:95vh;" src="https://static.hubzum.zumst.com/hubzum/2017/11/21/09/e02886c80fca4fa9bbfb11953e8c4aa7_780x0c.jpg">
 					</a></div>
-					<div class="text">비행기 예매</div>
+					<div class="text"><a href="${pageContext.request.contextPath }/air/basic">비행기 예매</a></div>
 				</td>
 				<td class="wrapper">
 					<div class="image"><a href="${pageContext.request.contextPath }/hotel/list">
 						<img style="width:34vw; height:95vh;" src="https://www.ambatel.com/RES/PRODUCT/202108/15_PC_20210831172247.jpg">
 					</a></div>
-					<div class="text">숙소 예약</div>
+					<div class="text"><a href="${pageContext.request.contextPath }/hotel/list">숙소 예약</a></div>
 				</td>
 				<td class="wrapper">
 					<div class="image"><a href="${pageContext.request.contextPath }/rental/list">
 						<img style="width:33vw; height:95vh;" src="https://img.etnews.com/photonews/1902/1154496_20190205151009_114_0001.jpg">
 					</a></div>
-					<div class="text">렌트카 예약</div>
+					<div class="text"><a href="${pageContext.request.contextPath }/rental/list">렌트카 예약</a></div>
 				</td>
 			</tr>
 		</table>
