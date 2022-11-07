@@ -19,29 +19,13 @@
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
-	<!-- 페이징 헤더 -->
-	<!-- 
-        <div class="mb-3 mt-3 clearfix">
-            <span class="float-end">
-            	<form name="frmPageRows">
-            		<input type="hidden" name="page" value="${page }">
-	                <select class="form-select" name="pageRows">
-	                    <option value="5" ${pageRows==5 ? 'selected' : '' }>5</option>
-	                    <option value="10" ${pageRows==10 ? 'selected' : '' }>10</option>
-	                    <option value="15" ${pageRows==15 ? 'selected' : '' }>15</option>
-	                    <option value="20" ${pageRows==20 ? 'selected' : '' }>20</option>
-	                </select>
-                </form>
-            </span>
-        </div> 
-        -->
-	<div class="container  text-white  mb-5" style="width:850px; height:70px;  border: 1px solid #333333; background-color:#0c75ed;">
+	<div class="container  text-white  mb-5" style="width:850px; height:70px;  border: 1px solid #333333; background-color:#4186c3;">
 
 		<form action="${pageContext.request.contextPath}/hotel/list"
 			name="frm" id="frm" method="post">
 			<div>
 				<div>
-					<div class="row">
+					<div class="row mt-2" style="color:solid white;">
 						<div class="col-sm-2">목적지</div>
 						<div class="col-sm-4">체크인 날짜</div>
 						<div class="col-sm-4">체크아웃 날짜</div>
@@ -55,90 +39,55 @@
 					</div>
 					<div class="row"> 
 						<div class="col-sm-2">
-							<select name="hotelregion" id="region">
-							<c:forEach var="region" items="${regionList}">    
-								<option value="${region }">${region }</option>
-							</c:forEach>
-
-						</select></div>
-						<div class="col-sm-4"><input type="text" id="start" name="in1" style="border: 1px solid #333333;"
-							value="${checkin }"></div>
-
-						<div class="col-sm-4"><input type="text" id="end" name="out1" style="border: 1px solid #333333;"
-							value="${checkout }"></div>
-						<!--  
-					<td>
-						<input type='button' onclick='count("minus")' value='-' />
-							<span id='result'>0</span>
-						<input type='button' onclick='count("plus")' value='+' />
-					</td>
-					-->
+							<select name="region" id="regi" >
+								<option value="null" selected>선택</option>
+								<c:forEach var="region" items="${regionList}">    
+									<option>${region }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-sm-4">
+						<input type="text" id="start" name="in1" style="border: 1px solid #333333;" value="${checkin }">
+						</div>
+						<div class="col-sm-4">
+						<input type="text" id="end" name="out1" style="border: 1px solid #333333;" value="${checkout }">
+						</div>
 						<div class="col-sm-1 text-center ms-3">
-							<button type="button" style="width:80px; border: 1px solid #333333" onclick="hsubmit()">검색 <i class="fa-solid fa-arrow-right"></i></button>
+							<button type="button" class="bbttnn" onclick="hsubmit()">검색 <i class="fa-solid fa-arrow-right"></i></button>
 						</div>
 
 					</div>
 				</div>
-
 			</div>
-			
-			
-			
 			
 			<input type="hidden" name="inn" id="inn" value="${checkin }">
 			<input type="hidden" name="out" id="out" value="${checkout }">
-			<input type="hidden" name="region" id="region" value="${region }">
 		</form>
-
-
-
-
-	</div>
-	<!--
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>호텔 지역</th>
-				<th>호텔 이름</th>
-				<th>호텔 정보</th>
-				<th>등록일</th>
-				<th>호텔 사진</th>
-				<th>상세보기</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="dto" items="${list }" varStatus="status">
-				<tr>
-					<td>${dto.id }</td>
-					<td>${dto.region.region }</td>
-					<td>${dto.hotelname }</td>
-					<td>${dto.content }</td>
-					<td>${dto.regDateTime}</td>
-					<td><img style="width: 300px; height: 300px;"
-						src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}"
-						alt="..." /></td>
-					<td><a
-						href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}&region=${hregion }&checkin=${checkin}&checkout=${checkout}">자세히보기</a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-  -->
+</div>
   <div class="row d-flex justify-content-start " style="margin-left:150px;">
 	<c:forEach var="dto" items="${list }" varStatus="status">
 		<div class="card col-sm-3 ms-1 me-1 my-2" style="width: 20rem; border: 1px solid #333333;">
-			<img style="height: 200px; width:300px" src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}" class="card-img-top" alt="...">
+			<img style="height: 220px; width:300px" src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">${dto.region.region } / ${dto.hotelname }</h5>
 				<p class="card-text">${dto.content }</p>
 				<p>${dto.priceList }</p>
 			</div>
-			<div class="text-end"><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}&region=${hregion }&checkin=${checkin}&checkout=${checkout}" class="btn btn-primary">자세히보기 <i class="fa-solid fa-arrow-right"></i></a></div>
+			<c:choose>
+				<c:when test="${method == 1}">
+			<div class="text-end"><a href="${pageContext.request.contextPath}/hotel/detail?id=${dto.id}&region=${region }&inn=${checkin}&out=${checkout}" class="btn btn-primary">자세히보기 <i class="fa-solid fa-arrow-right"></i></a></div>
+				</c:when>
+				<c:otherwise>
+					<div></div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</c:forEach>  
 </div>
 </body>
+<br>
+<br>
+
 <!-- pagination -->
 <div class="container mt-1">
 	<ul class="pagination justify-content-center">
@@ -229,10 +178,10 @@
 							minDate : 0 //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 							,
 							maxDate : "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
-						});
+						})
 
 		//초기값을 오늘
-		$('#datepicker').datepicker('setDate', 'today');
+		
 	});
 </script>
 <script>
@@ -241,21 +190,14 @@
 	let in1 = document.querySelector("#start");
 	let out1 = document.querySelector("#end");
 	let btn = document.getElementById("#sub");
-	function count(type) {
-		let resultElement = document.getElementById('result');
-		let number = resultElement.innerText;
-		if (type === 'plus') {
-			number = parseInt(number) + 1;
-		} else if (type === 'minus') {
-			number = parseInt(number) - 1;
-			if (number < 0) {
-				return false;
-			}
-		}
-		resultElement.innerText = number;
-	}
+	let	regi = document.querySelector("#regi");
+
 	function hsubmit() {
 
+		if (regi.value == "null") {
+			alert('목적지를 선택해주세요'); 
+			return;
+		}
 		if (in1.value === "") {
 			alert('체크인 날짜를 선택해주세요');
 			return;
@@ -264,8 +206,9 @@
 			alert('체크아웃 날짜를 선택해주세요');
 			return;
 		}
-		if (in1.value > out1.value) {
+		if (in1.value >= out1.value) {
 			alert('체크인 날짜는 체크아웃 날짜 이전이어야 합니다')
+			return;
 		}
 		inn.value = in1.value.toString();
 		out.value = out1.value.toString();
@@ -273,5 +216,20 @@
 		frm.submit();
 	}
 </script>
-
+<script>
+ 	
+</script>
+<style>
+.bbttnn{
+	width:80px; 
+	border: 1px solid #333333;
+	border-radius : 2px;
+	background-color : white;
+	color : black;
+}
+.bbttnn:hover{
+	background-color : #0c3cfc; 
+	color : white;
+}
+</style>
 </html>

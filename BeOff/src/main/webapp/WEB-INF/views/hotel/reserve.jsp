@@ -30,7 +30,7 @@
 			Long checkout1 = Long.parseLong(checkout.replaceAll("-",""));
 			String price = request.getParameter("price");		
 			Long price1 = Math.round(Double.parseDouble(price));
-		%>
+%>
 <main>
   <div class="container py-4">
     <div class="row align-items-md-stretch">
@@ -39,8 +39,7 @@
           <div class="box-2">
             <div class="box-inner-2">
                 <div>
-                    <p class="fw-bold">Payment Details</p>
-                    <p class="dis mb-3">Complete your purchase by providing your payment details</p>
+                    <p class="fw-bold text-center">예약 정보</p>
                 </div>
                 <form name="getReserve" action="reservOk" method="post">
                     <div class="mb-3">
@@ -55,26 +54,19 @@
                         <p class="dis fw-bold mb-2">Email</p>
                         <input class="form-control" type="email" value="${userdetails.email}" readonly>
                     </div>
-                    
-                        <div class="address">
-                            
+                    	<div class="address">
                             <div class=" my-3">
-
                                 <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
-
                                     <input class="form-control" type="text" name="checkin" value="<%=checkin %>" readonly>
                                     <span class="fas fa-check"></span>
-
                                 </div>
                             </div>
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">체크아웃</p>
                                 <div class="inputWithcheck">
-
                                     <input class="form-control" type="text" name="checkout" value="<%=checkout %>" readonly>
                                     <span class="fas fa-check"></span>
-
                                 </div>
                             </div>
                             <div class="d-flex flex-column dis">
@@ -82,7 +74,7 @@
                                     <p class="fw-bold">Total</p>
                                     <p class="fw-bold"><%=(checkout1-checkin1)*price1 %> won</p>
                                 </div>
-                                <input class="btn btn-secondary" type="button" value="무통장입금">
+                                <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금" onclick="reserveOk()">
                             </div>
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -90,7 +82,6 @@
                                 <input type="hidden" name="id" value="${r.id }">
                					<input class="btn btn-warning btn-xl text-uppercase" type="button" onclick="requestPay('${room.hotel.hotelname}', '<%=(checkout1-checkin1)*price1 %>')" value="카카오페이">
                             </div>
-                        </div>
                 	</form>
                </div>
             </div>
@@ -101,30 +92,30 @@
         <div class="h-100 p-5 text-bg-dark rounded-3">
           <div class="box-inner-1 pb-3 mb-3 ">
              <div class="d-flex justify-content-between mb-3 userdetails">
-                 <p class="fw-bold">${r.hotel.hotelname }</p>
-                 <p class="fw-lighter">${r.price } won</p>
+                 <p class="fw-bold ">${r.hotel.hotelname } / ${r.roomname } - ${r.price }원</p>
              </div>
              <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                  data-bs-interval="2000">
                  
                  <div class="carousel-inner">
                      <div class="carousel-item active">
-                         <img class="d-block w-100" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="..." />    
+                         <img class="d-block w-100 " style="height:500px;" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="..." />    
                      </div>
                  </div>
-                 <br>
-                 <div>
-                    <p class="fw-bold">Payment Details</p>
-                    <p class="dis mb-3">Complete your purchase by providing your payment details</p>
-                </div>
              </div>
         </div>
       </div>
     </div>
   </div>
 </main>
+<script>
+	function reserveOk() {
 
-
+		alert('예약성공');
+		location.href = "tickets";	
+		
+	}
+</script>
 <script
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

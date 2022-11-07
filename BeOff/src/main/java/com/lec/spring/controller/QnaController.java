@@ -34,9 +34,16 @@ public class QnaController {
 	// /board/list
 	@GetMapping("/list")
 //	public void list(Model model) {
-	public void list(Integer page, Model model) {
+	public void glist(Integer page, Model model) {
 //		model.addAttribute("list", boardService.list());
-		boardService.list(page, model);
+		boardService.list(page, "", model);
+	}
+	
+	@PostMapping("/list")
+	public String plist(Integer page, String search, Model model) {
+		boardService.list(page, search, model);
+		model.addAttribute("search", search);
+		return "board/list";
 	}
 	
 	// /board/write

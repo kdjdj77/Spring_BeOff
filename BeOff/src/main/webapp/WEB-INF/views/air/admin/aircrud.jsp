@@ -25,7 +25,7 @@
     <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	
-	<title>비행기 예매</title>
+	<title>BeOff</title>
 	<style>
 		input[type="number"]::-webkit-outer-spin-button,
 		input[type="number"]::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}

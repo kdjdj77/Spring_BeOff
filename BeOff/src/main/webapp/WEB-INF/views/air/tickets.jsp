@@ -25,7 +25,7 @@
     <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	
-	<title>비행기 예매목록</title>
+	<title>BeOff</title>
 </head>
 
 <body style="margin-bottom: 200px">
@@ -53,10 +53,9 @@
 						<br>
 					</td>
 					<td rowspan="2" style="width:10%; text-align:center;">
-						<form action="#" method="post" style="width:100%; height:100%;">
-							<input type="hidden" name="ticketIds" value="${i.id}">
+						<form action="delticket" method="post" style="width:100%; height:100%;">
 							<input type="hidden" name="ids" value="${i.ids}">
-							<button type="button" class="btn btn-danger" style="width:100%; height:100%;">취소</button>
+							<button class="btn btn-danger" style="width:100%; height:100%;">취소</button>
 						</form>
 					</td>
 				</tr>
