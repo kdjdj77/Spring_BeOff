@@ -67,7 +67,7 @@
   <div class="row d-flex justify-content-start " style="margin-left:150px;">
 	<c:forEach var="dto" items="${list }" varStatus="status">
 		<div class="card col-sm-3 ms-1 me-1 my-2" style="width: 20rem; border: 1px solid #333333;">
-			<img style="height: 200px; width:300px" src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}" class="card-img-top" alt="...">
+			<img style="height: 220px; width:300px" src="${pageContext.request.contextPath }/upload/${dto.rooms[0].files[0].file}" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">${dto.region.region } / ${dto.hotelname }</h5>
 				<p class="card-text">${dto.content }</p>

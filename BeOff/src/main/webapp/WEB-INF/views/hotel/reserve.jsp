@@ -54,6 +54,7 @@
                         <p class="dis fw-bold mb-2">Email</p>
                         <input class="form-control" type="email" value="${userdetails.email}" readonly>
                     </div>
+                    	<div class="address">
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
@@ -98,7 +99,7 @@
                  
                  <div class="carousel-inner">
                      <div class="carousel-item active">
-                         <img class="d-block w-100" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="..." />    
+                         <img class="d-block w-100 " style="height:500px;" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="..." />    
                      </div>
                  </div>
              </div>

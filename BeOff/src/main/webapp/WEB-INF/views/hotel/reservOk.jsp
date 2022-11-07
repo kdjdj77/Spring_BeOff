@@ -53,20 +53,17 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                    	<th>#</th>
-                                        <th class="text-center" scope="col">예약날짜</th>
+                                        <th class="col" >예약날짜</th>
                                         <th scope="col">호텔이름</th>
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
                                         <th scope="col">체크인 ~ 체크아웃</th>
 
-                                        <th class="text-center" scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach var="list" items="${list }" begin="1">
                                     <tr class="inner-box">
-                                    	<td>${list }</td>
                                         <th scope="row"><h5>${list.regDateTime }</h5></th>
                                         <td>
                                             <div class="event-wrap">
@@ -90,18 +87,13 @@
                                                 	<c:if test="${s.last }"><span>${s.current} ~ ${s.current+s.index}</span></c:if>
                                             </c:forEach>
                                         </td>
-                                        <td>
-                                            <div class="primary-btn">
-                                                <a class="btn btn-secondary" href="#">예약취소</a>
-                                            </div>
-                                        </td>
                                 </c:forEach>    
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 <div class="primary-btn text-center">
-                   <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="돌아가기" onclick="back()">
+                   <input class="btn btn-secondary btn-xl text-uppercase" type="button" value="처음으로" onclick="location.href='../hotel/list'">
                 </div>
             </div>
             <!-- /col end-->
@@ -114,10 +106,5 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"></script>
-      <script>
-      	function back(){
-      		history.back();
-      	}
-      </script>
 </body>
 </html>
