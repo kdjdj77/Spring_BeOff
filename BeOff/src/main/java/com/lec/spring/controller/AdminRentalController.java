@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lec.spring.domain.rental.Car;
 import com.lec.spring.domain.rental.Rental;
 import com.lec.spring.service.AdminRentalService;
+import com.lec.spring.service.RentalService;
 
 @Controller
 @RequestMapping("/rental/admin")
@@ -114,10 +115,8 @@ public class AdminRentalController {
 	
 	@GetMapping("/cars/carUpdate") 
 	public String carUpdate(String id, Model md) {
-		Rental r = adminRentalService.getRentalById(id);
 		Car c = adminRentalService.getCarById(id);
 		md.addAttribute("car", c);
-		md.addAttribute("rental", r);
 		
 		return "/rental/admin/cars/carUpdate";
 	}
@@ -128,7 +127,7 @@ public class AdminRentalController {
 			
 		int result = adminRentalService.carUpdate(id, carname, price, cartype, fuel, fueleff, files);
 		md.addAttribute(result);
-		md.addAttribute(id);
+		md.addAttribute("id", adminRentalService.getCarById(id).getRental().getId());
 		return "rental/admin/cars/carUpdateOk";
 	}
 	
@@ -136,8 +135,15 @@ public class AdminRentalController {
 	public String carDeleteOk(String id, Model md) {
 		int result = adminRentalService.carDelete(id);
 		md.addAttribute(result);
-		
 		return "rental/admin/cars/carDeleteOk";
 	}
+	
+//	@GetMapping("/rentalDeleteOk")
+//	public String rentalDeleteOk(String id, Model md) {
+//		int result = adminRentalService.rentalDelete(id);
+//		md.addAttribute(result);
+//		
+//		return "rental/admin/rentalDeleteOk";
+//	}
 
 }
