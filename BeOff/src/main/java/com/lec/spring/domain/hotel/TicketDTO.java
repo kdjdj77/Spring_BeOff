@@ -50,6 +50,6 @@ public class TicketDTO {
 	@JsonIgnore
 	public String getRegDateTime() {
 		if(this.regDate == null) return "";
-		return this.regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));		
+		return this.regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));		
 	}
 }
