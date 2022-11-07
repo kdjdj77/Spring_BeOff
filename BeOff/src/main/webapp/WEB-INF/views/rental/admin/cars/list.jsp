@@ -39,10 +39,12 @@
 							</div>
 
 							<div class="d-flex flex-row justify-content-center">
-								<a class="me-3 btn btn-secondary btn-lg"
-									href="carUpdate?id=${c.id }">수정</a> <a
-									class="btn btn-secondary btn-lg"
-									href="carDeleteOk?id=${c.id }">삭제</a>
+								<a class="me-3 btn btn-secondary btn-lg" href="carUpdate?id=${c.id }">
+									수정
+								</a> 
+								<a class="btn btn-secondary btn-lg" href="carDeleteOk?id=${c.id }">
+									삭제
+								</a>
 							</div>
 						</div>
 					</div>

@@ -16,15 +16,12 @@
 <body>
 	<main>
 		<div class="container py-4">
-
 			<div class="p-5 mb-4 bg-light rounded-3">
 				<div class="container h-100">
 					<div
 						class="row d-flex justify-content-center align-items-center h-100">
 						<div class="col-xl-9">
-
 							<h1 class="text-black mb-4">렌트카 수정</h1>
-							
 							<form name="frm" action="carUpdateOk" method="POST" enctype="Multipart/form-data">
 								<div class="row align-items-center py-3">
 									<div class="col-md-3 ps-5">
@@ -111,17 +108,15 @@
 										<hr class="mx-n3">
 										<div class="px-5 py-4">
 											<button class="btn btn-secondary btn-lg">수정완료</button>
-											<a class="btn btn-secondary btn-lg" href="list?id=${rental.id }">렌트카 목록</a>
+											<a class="btn btn-secondary btn-lg" href="list?id=${car.rental.id }">렌트카 목록</a>
 										</div>
 									</div>
 								</div>
-							
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</main>
 <script
