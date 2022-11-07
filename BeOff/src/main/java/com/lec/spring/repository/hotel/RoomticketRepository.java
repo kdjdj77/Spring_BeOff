@@ -19,4 +19,6 @@ public interface RoomticketRepository extends JpaRepository<Roomticket, Long> {
 	
 	List<Roomticket> findByUserOrderByIdDesc(User user);
 
+	List<Roomticket> findByRoom(Room r);
+
 }
