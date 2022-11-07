@@ -30,7 +30,7 @@
 			Long checkout1 = Long.parseLong(checkout.replaceAll("-",""));
 			String price = request.getParameter("price");		
 			Long price1 = Math.round(Double.parseDouble(price));
-		%>
+%>
 <main>
   <div class="container py-4">
     <div class="row align-items-md-stretch">
@@ -55,22 +55,17 @@
                         <input class="form-control" type="email" value="${userdetails.email}" readonly>
                     </div>
                             <div class=" my-3">
-
                                 <p class="dis fw-bold mb-2">체크인</p>
                                 <div class="inputWithcheck">
-
                                     <input class="form-control" type="text" name="checkin" value="<%=checkin %>" readonly>
                                     <span class="fas fa-check"></span>
-
                                 </div>
                             </div>
                             <div class=" my-3">
                                 <p class="dis fw-bold mb-2">체크아웃</p>
                                 <div class="inputWithcheck">
-
                                     <input class="form-control" type="text" name="checkout" value="<%=checkout %>" readonly>
                                     <span class="fas fa-check"></span>
-
                                 </div>
                             </div>
                             <div class="d-flex flex-column dis">
@@ -78,7 +73,7 @@
                                     <p class="fw-bold">Total</p>
                                     <p class="fw-bold"><%=(checkout1-checkin1)*price1 %> won</p>
                                 </div>
-                                <input class="btn btn-secondary" type="button" value="무통장입금">
+                                <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금" onclick="reserveOk()">
                             </div>
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -112,8 +107,14 @@
     </div>
   </div>
 </main>
+<script>
+	function reserveOk() {
 
-
+		alert('예약성공');
+		location.href = "tickets";	
+		
+	}
+</script>
 <script
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
