@@ -77,52 +77,36 @@
 
 										<div class="row align-items-center pt-4 pb-3">
 											<div class="col-md-3 ps-5">
-
 												<h6 class="mb-0">렌트가격(1일기준)</h6>
-
 											</div>
-											<div class="col-md-9 pe-5">
-
+											<div class="col-md-7 pe-5 d-flex">
 												<input type="text" class="form-control form-control-lg"
 													id="price" name="price" placeholder="가격을 입력하세요"
-													required="required" />
-
+													required="required" /><a style="font-size: 30px;">원</a>
 											</div>
-										</div>
-
+										</div>							
 										<hr class="mx-n3">
-
 										<div class="row align-items-center pt-4 pb-3">
 											<div class="col-md-3 ps-5">
-
 												<h6 class="mb-0">렌트카타입</h6>
-
 											</div>
 											<div class="col-md-9 pe-5">
-
-												<select name="cartype" id="cartype">  
+												<select name="cartype" id="cartype" style="font-size:1.3rem;width:200px; height:40px;">  
 													<option value="소형">소형</option>
 													<option value="중형">중형</option>
 													<option value="suv">suv</option>
 													<option value="대형">대형</option>
 												</select>
-
 											</div>
 										</div>
-
 										<hr class="mx-n3">
-
 										<div class="row align-items-center pt-4 pb-3">
 											<div class="col-md-3 ps-5">
-
 												<h6 class="mb-0">연료</h6>
-
 											</div>
 											<div class="col-md-9 pe-5">
-
 												<input type="text" class="form-control form-control-lg"
 													id="fuel" name="fuel" placeholder="연료를 입력하세요" />
-
 											</div>
 										</div>
 
@@ -162,10 +146,10 @@
 		</form>
 	</main>
 
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-		crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+	crossorigin="anonymous">
+</script>
 </body>
 </html>

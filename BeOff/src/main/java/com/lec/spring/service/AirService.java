@@ -298,4 +298,14 @@ public class AirService {
 		return t;
 	}
 
+	public int deleteTickets(String ids) {
+		String[] list = ids.split(", ");
+		List<Long> llist = new ArrayList<Long>();
+		
+		for(String a : list) llist.add(Long.parseLong(a));
+		for(Long i : llist) airticketRepository.delete(airticketRepository.findById(i).orElse(null));
+		
+		return 1;
+	}
+
 } // end Service

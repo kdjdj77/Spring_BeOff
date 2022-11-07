@@ -49,13 +49,13 @@
 		<div style="float: left;">
 			<img style="height: 210px; width:410px" src="${pageContext.request.contextPath }/upload/${hotel.rooms[0].files[0].file}"  alt="...">
 		</div>
-		<div style="margin-left:430px; ">
+		<div style="margin-left:430px;">
 			
 			<div><h3>${hotel.hotelname }</h3></div>
 			<br>
 			<div><%=region %> / ${hotel.content }</div>
 			<br>
-			<div>
+			<div class="fs-4">
 				<span>별점 : </span>
 					<span style="color:#FFB400;">
 						<label><span id="star_cnt"></span>★</label>

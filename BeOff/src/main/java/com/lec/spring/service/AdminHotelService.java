@@ -227,7 +227,7 @@ public class AdminHotelService {
 		
 		List<Double> pList = new ArrayList<Double>();
 		
-		List<Hotel> h = hotelRepository.findByUser(u);
+		List<Hotel> h = hotelRepository.findByUserOrderByIdDesc(u);
 		for(Hotel i : h) {
 			pList.clear();
 			for(Room j : i.getRooms()) {
