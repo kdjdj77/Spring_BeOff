@@ -22,6 +22,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
 	<header> </header>
+	<h1>${days }</h1>
 	<main>
 		<div class="container">
 			<div class="row">
@@ -102,7 +103,7 @@
 		<c:forEach var="i" items="${carList}">
 		<form action="reserv" method="POST">
 				<div class="card" style="width: 18rem;">
-					<img src="/upload/g80.jpg" class="card-img-top" alt="...">
+					<img src="${pageContext.request.contextPath }/upload/${i.files[0].file}" class="card-img-top" alt="...">
 					<div class="card-body">
 						<h5 class="card-title">${i.carname }</h5>
 					</div>
