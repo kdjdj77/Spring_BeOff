@@ -16,5 +16,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
 	List<Hotel> findByUser(User u);
 	List<Hotel> findByRegion(Region region);
 
+	List<Hotel> findByUserOrderByIdDesc(User u);
+
 
 }

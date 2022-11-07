@@ -35,6 +35,7 @@ public class RentalController {
 	
 	@GetMapping("/list") // /rental/list
 	public String list(Model model) {
+		model.addAttribute("method", 0);
 		model.addAttribute("regionList", rentalService.getRegionList());
 		model.addAttribute("rentalList", rentalService.getRentalList());
 		
@@ -53,6 +54,7 @@ out1: 2022-10-28
 			@RequestParam("rentalregion") String region,
 			@RequestParam("in1") String sDate, 
 			@RequestParam("out1") String eDate) {
+		model.addAttribute("method", 1);
 		model.addAttribute("regionList", rentalService.getRegionList());
 		model.addAttribute("rentalList", rentalService.getRentalRList(region, sDate.replace("-", ""), eDate.replace("-", "")));
 		model.addAttribute("sDate", sDate);
