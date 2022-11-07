@@ -77,7 +77,18 @@
 	           <!--TODO : 로그아웃후 다시 돌아오기 -->
 	           <span class="d-flex">
 	             <span class="text-light p-2">
-	             	<span>${userdetails.user.name }</span> 님 
+	             	<span>
+	             		<sec:authorize access="hasRole('ADMIN_AIR')">
+	             			<i class="fa-solid fa-plane m-auto text-primary"></i>
+	             		</sec:authorize>
+	             		<sec:authorize access="hasRole('ADMIN_RENTAL')">
+	             			<i class="fa-solid fa-car m-auto text-primary"></i>
+	             		</sec:authorize>
+	             		<sec:authorize access="hasRole('ADMIN_HOTEL')">
+	             			<i class="fa-solid fa-square-h m-auto text-primary"></i>
+	             		</sec:authorize>
+	             		${userdetails.user.name }
+	             	</span> 님 
 	             	<a href="${pageContext.request.contextPath}/user/userinfo"><i class="fs-5 fa-solid fa-gear mx-1"></i></a>
 	             </span>
 	             <span><button class="btn btn-danger" type="submit">Logout</button></span>

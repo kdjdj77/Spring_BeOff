@@ -10,9 +10,12 @@
 		</script>
 	</c:when>
 	<c:otherwise>
+		<form id="frm" action="${pageContext.request.contextPath}/user/logout" method="POST" TODO="">
+		</form>
 		<script>
 			alert("탈퇴 성공");
-			location.href = "userinfo"; <%-- 수정 성공하면 상세페이지 이동 --%>
+			let frm = document.getElementById("frm");
+			frm.submit();
 		</script>
 	</c:otherwise>
 </c:choose>
