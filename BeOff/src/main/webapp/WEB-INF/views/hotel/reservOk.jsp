@@ -58,7 +58,7 @@
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
                                         <th scope="col">체크인 ~ 체크아웃</th>
-
+										<th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,6 +87,16 @@
                                                 	<c:if test="${s.last }"><span>${s.current} ~ ${s.current+s.index}</span></c:if>
                                             </c:forEach>
                                         </td>
+                                        <td>
+                                        	<form action="ticketDelete" method="POST">
+                                        	<input type="hidden" name="id" value="${list.room.id }"></input>
+                                        	<c:forEach var="j" items="${list.date }">
+                                        		<input type="hidden" name="date" value="${j}"></input>
+                                        	</c:forEach>
+                                        	<button>예약취소</button>
+                                        	</form>
+                                        </td>                                        
+                                        </tr>
                                 </c:forEach>    
                                 </tbody>
                             </table>

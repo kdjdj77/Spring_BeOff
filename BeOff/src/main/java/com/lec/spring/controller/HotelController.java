@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lec.spring.domain.hotel.Hotel;
 import com.lec.spring.domain.hotel.Room;
+import com.lec.spring.repository.hotel.RoomRepository;
 import com.lec.spring.service.HotelService;
 import com.lec.spring.util.U;
 
@@ -125,5 +126,13 @@ public class HotelController {
 	public String pageRows(Integer page, Integer pageRows) {
 		U.getSession().setAttribute("pageRows", pageRows);
 		return "redirect:/hotel/list?page=" + page;
+	}
+	@PostMapping("/ticketDelete") 
+	public String ticketDeleteOk(@RequestParam List<Long> date, Model model,String id) {
+		
+		int result = hotelService.deleteTicket(date, id);
+		model.addAttribute(result);
+		
+		return "hotel/deleteOk";
 	}
 }
