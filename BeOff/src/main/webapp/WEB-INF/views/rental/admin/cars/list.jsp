@@ -37,12 +37,17 @@
 							<div class="text-center mt-1">
 								<h4 class="card-title">${c.carname }<br></h4>
 							</div>
-
+							<div>가격 : ${c.price }</div>
+							<div>타입 : ${c.cartype }</div>
+							<div>연료 : ${c.fuel }</div>
+							<div>연비 : ${c.fueleff }</div>
 							<div class="d-flex flex-row justify-content-center">
-								<a class="me-3 btn btn-secondary btn-lg"
-									href="carUpdate?id=${c.id }">수정</a> <a
-									class="btn btn-secondary btn-lg"
-									href="carDeleteOk?id=${c.id }">삭제</a>
+								<a class="me-3 btn btn-secondary btn-lg" href="carUpdate?id=${c.id }">
+									수정
+								</a> 
+								<a class="btn btn-secondary btn-lg" href="carDeleteOk?id=${c.id }">
+									삭제
+								</a>
 							</div>
 						</div>
 					</div>

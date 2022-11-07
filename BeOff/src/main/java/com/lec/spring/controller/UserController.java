@@ -5,6 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lec.spring.config.PrincipalDetailService;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
@@ -28,12 +33,12 @@ import com.lec.spring.util.U;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	private UserService userService;
-	
 	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+	private UserService userService;
+	@Autowired
+	private PrincipalDetailService principalDetailService;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
 	public UserController() {
 		System.out.println(getClass().getName() + "() 생성");
@@ -138,8 +143,8 @@ public class UserController {
 		if (userService.isExist(id)) return "/user/apiLogin";
 		
 		model.addAttribute("name", name);
-		if (phonenum != null) model.addAttribute("phonenum", phonenum);
-		else model.addAttribute("phonenum", "000-0000-0000");
+		if (phonenum != null) model.addAttribute("phonenum", phonenum.replaceAll("-", ""));
+		else model.addAttribute("phonenum", "00000000000");
 		if (email != null) model.addAttribute("email", email);
 		else model.addAttribute("email", "test@test.com");
 		return "/user/apiRegister";
@@ -164,5 +169,47 @@ public class UserController {
 		userService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
 		
 		return Integer.toString(randomNumber);
+	}
+	
+	@GetMapping("/update")
+	public String usrUpdate(Model model) {
+		User user = U.getLoggedUser();
+		
+		model.addAttribute(user);
+		
+		return "/user/update";
+	}
+	
+	@PostMapping("/updateOk")
+	public String usrUpdateOk(
+			String username, String name, 
+			String email, String num, String pw,
+			Model model) {
+		
+		int result = userService.updateUser(username, name, email, pw);
+		
+		model.addAttribute("result", result);
+		
+		// principal에 유저정보 업데이트
+//		User user = userService.findByUsername(username);
+//		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return "/user/updateOk";
+	}
+	
+	@GetMapping("/deleteOk")
+	public String usrUpdateOk(Model model) {
+		
+		int result = userService.deleteLoggedUser();
+		
+		model.addAttribute("result", result);
+		
+		// principal에 유저정보 업데이트
+//		User user = userService.findByUsername(username);
+//		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return "/user/deleteOk";
 	}
 }

@@ -135,6 +135,15 @@ public class AirController {
 		return "air/tickets";
 	}
 	
+	@PostMapping("/delticket")
+	public String delTicket(String ids, Model model) {
+		int result = 0;
+		result = airService.deleteTickets(ids);
+		
+		model.addAttribute(result);
+		return "air/deleteOk";
+	}
+	
 	@GetMapping("/admin/list")
 	public String adminList(Model model) {		
 		model.addAttribute("regionList", airService.getRegions());
