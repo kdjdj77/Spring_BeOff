@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<%
+
+<c:set var="listSize" value="${fn:length(list)}"/>
+		<%
 			String checkin = request.getParameter("checkin");
 			String checkout = request.getParameter("checkout");
 		%>
@@ -53,7 +57,7 @@
                                         <th scope="col">호텔이름</th>
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
-                                        <th scope="col">며칠?</th>
+                                        <th scope="col">예약일자</th>
                                         <th scope="col">체크인날짜</th>
                                         <th class="text-center" scope="col"></th>
                                     </tr>
@@ -80,11 +84,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="r-no">
-                                            	<c:forEach var="i" items="${list.date }">
-                                                	<h5>${i }</h5>
-                                                </c:forEach>
-                                            </div>
+                                            <c:forEach var="i" items="${list.date }" begin="0" varStatus="s" end="${listSize }" step="1">
+                                                	<c:if test="${s.last }"><span>${s.current} ~ ${s.current+s.index}</span></c:if>
+                                            </c:forEach>
                                         </td>
                                         <td>
                                             <div class="primary-btn">
@@ -96,10 +98,8 @@
                             </table>
                         </div>
                     </div>
-                    <div>${checkin }</div>
-                    <div>${checkout }</div>
                 <div class="primary-btn text-center">
-                    <a href="#" class="btn btn-secondary">돌아가기</a>
+                   <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="돌아가기" onclick="back()">
                 </div>
             </div>
             <!-- /col end-->
@@ -112,5 +112,10 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"></script>
+      <script>
+      	function back(){
+      		history.back();
+      	}
+      </script>
 </body>
 </html>

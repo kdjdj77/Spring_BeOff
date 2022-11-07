@@ -205,7 +205,8 @@ public class HotelService {
 	}
 	public List<TicketDTO> getRoomTickets() {
 		Roomticket rt = new Roomticket();
-		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
+		User user = U.getLoggedUser();	
+		List<Roomticket> list = roomticketRepository.findByUserOrderByIdDesc(user);
 		List<TicketDTO> tickets = new ArrayList<TicketDTO>();
     
 		TicketDTO tk = new TicketDTO();
