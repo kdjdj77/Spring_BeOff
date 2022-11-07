@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <title>수정 - ${dto.subject }</title>
+    <title>BeOff</title>
 </head>
 
 
@@ -43,7 +43,7 @@
             <input type="hidden" name="id" value="${dto.id }"/>
             <div class="mb-3">
                 <label for="name">작성자:</label>
-                <span class="form-control" readonly>${dto.user.username }</span>
+                <span class="form-control" readonly>${dto.user.name }</span>
             </div>    
             <div class="mb-3 mt-3">
                 <label for="subject">제목:</label>

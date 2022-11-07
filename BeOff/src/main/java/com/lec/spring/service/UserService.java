@@ -15,6 +15,7 @@ import com.lec.spring.domain.User;
 import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.AuthreqRepository;
 import com.lec.spring.repository.UserRepository;
+import com.lec.spring.util.U;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -69,6 +70,7 @@ public class UserService {
 		// 신규 회원은 ROLE_MEMBER 권한 기본적으로 부여
 		Authority auth = authorityRepository.findByName("ROLE_MEMBER");
 		user.addAuthority(auth);
+		user.setProvider("normal");
 		userRepository.save(user);
 		return 1;
 	}
@@ -122,5 +124,18 @@ public class UserService {
 	        System.out.println(e.getCode());
 	      }
 	    
+	}
+	public int updateUser(String susername, String sname, String semail, String spw) {
+		User user = userRepository.findByUsername(susername);
+		user.setName(sname);
+		user.setEmail(semail);
+		if (spw != null) user.setPassword(passwordEncoder.encode(spw));
+		user = userRepository.save(user);
+		return 1;
+	}
+	public int deleteLoggedUser() {
+		User user = U.getLoggedUser();
+		userRepository.delete(user);
+		return 1;
 	}
 }

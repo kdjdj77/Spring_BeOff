@@ -23,7 +23,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/list.js"></script>
 
-    <title>목록</title>
+    <title>BeOff</title>
 </head>
 
 <body style="margin-bottom: 200px">
@@ -31,7 +31,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <div class="container mt-3">
-        <h2>목록</h2>
+        <h2>QnA</h2>
         <hr>
         
         <!-- 페이징 헤더 -->
@@ -39,8 +39,15 @@
             <span class="float-start me-2">총 ${cnt }개</span>
             <span class="float-start">page ${page }/${totalPage }</span>
             <span class="float-end">
+            	<form action="list" method="post">
+	            	<input style="height:38px;" type="text" name="search" value="${search}">
+	            	<input type="hidden" name="page" id="ppage">
+	            	<button class="btn btn-outline-dark mb-1">검색</button>
+            	</form>
+            </span>
+            <span class="float-end me-2">
             	<form name="frmPageRows">
-            		<input type="hidden" name="page" value="${page }">
+            		<input type="hidden" id="gpage" name="page" value="${page }">
 	                <select class="form-select" name="pageRows">
 	                    <option value="10" ${pageRows==10 ? 'selected' : '' }>10</option>
 	                    <option value="15" ${pageRows==15 ? 'selected' : '' }>15</option>
@@ -67,7 +74,7 @@
                 <tr>
                     <td>${dto.id }</td>
                     <td><a style="color:black;" href="detail?id=${dto.id }">${dto.subject }</a></td>
-                    <td>${dto.user.username }</td>
+                    <td>${dto.user.name }</td>
                     <td>${dto.viewCnt }</td>
                     <td>${dto.regDateTime}</td>
                 </tr>            
@@ -128,4 +135,9 @@
 
 
 </body>
+<script>
+	let ppage = document.getElementById("ppage");
+	let gpage = document.getElementById("gpage");
+	ppage.value = gpage.value;
+</script>
 </html>

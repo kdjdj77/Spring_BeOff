@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<%
+
+<c:set var="listSize" value="${fn:length(list)}"/>
+		<%
 			String checkin = request.getParameter("checkin");
 			String checkout = request.getParameter("checkout");
 		%>
@@ -49,13 +53,12 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" scope="col">예약날짜</th>
+                                        <th class="col" >예약날짜</th>
                                         <th scope="col">호텔이름</th>
                                         <th scope="col">숙소명</th>
                                         <th scope="col">가격</th>
-                                        <th scope="col">며칠?</th>
-                                        <th scope="col">체크인날짜</th>
-                                        <th class="text-center" scope="col"></th>
+                                        <th scope="col">체크인 ~ 체크아웃</th>
+										<th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,27 +82,28 @@
                                                 <h5>${list.price } won</h5>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="r-no">
-                                            	<c:forEach var="i" items="${list.date }">
-                                                	<h5>${i }</h5>
-                                                </c:forEach>
-                                            </div>
+                                        <td>                                        	
+                                            <c:forEach var="i" items="${list.date }" begin="0" varStatus="s" end="${listSize }" step="1">
+                                                	<c:if test="${s.last }"><span>${s.current} ~ ${s.current+s.index + 1}</span></c:if>
+                                            </c:forEach>
                                         </td>
                                         <td>
-                                            <div class="primary-btn">
-                                                <a class="btn btn-secondary" href="#">예약취소</a>
-                                            </div>
-                                        </td>
+                                        	<form action="ticketDelete" method="POST">
+                                        	<input type="hidden" name="id" value="${list.room.id }"></input>
+                                        	<c:forEach var="j" items="${list.date }">
+                                        		<input type="hidden" name="date" value="${j}"></input>
+                                        	</c:forEach>
+                                        	<button class="bbbb">예약취소</button>
+                                        	</form>
+                                        </td>                                        
+                                        </tr>
                                 </c:forEach>    
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div>${checkin }</div>
-                    <div>${checkout }</div>
                 <div class="primary-btn text-center">
-                    <a href="#" class="btn btn-secondary">돌아가기</a>
+                   <input class="btn btn-secondary btn-xl text-uppercase" type="button" value="처음으로" onclick="location.href='../hotel/list'">
                 </div>
             </div>
             <!-- /col end-->
@@ -113,4 +117,15 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"></script>
 </body>
+<style>
+.bbbb{
+	border-radius:5px;
+	background-color : secondary;
+	color:black;
+}
+.bbbb:hover{
+	background-color: black;
+	color:white;
+}
+</style>
 </html>
