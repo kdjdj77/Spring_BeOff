@@ -33,7 +33,7 @@
 		const logged_id = ${userdetails.user.id };
 	</script>
     <script src="${pageContext.request.contextPath }/js/detail.js"></script>
-    <title>조회 - ${dto.subject}</title>
+    <title>BeOff</title>
 </head>
 
 <script>
@@ -64,7 +64,7 @@ function chkDelete(){
         	</form>
             <div class="mb-3">
                 <label for="name">작성자:</label>
-                <span class="form-control" >${dto.user.username }</span>
+                <span class="form-control" >${dto.user.name }</span>
             </div>    
             <div class="mb-3 mt-3">
                 <label for="subject">제목:</label>
@@ -72,7 +72,7 @@ function chkDelete(){
             </div>    
             <div class="mb-3 mt-3">
                 <label for="content">내용:</label>
-                <span class="form-control" >${dto.content }</span>
+                <span class="form-control" style="height:200px;">${dto.content }</span>
             </div>    
 
 			<!-- 첨부파일목록 -->
