@@ -191,7 +191,7 @@ public class UserController {
 		
 		model.addAttribute("result", result);
 			
-		//유저정보 principal에 업데이트
+		//수정된 유저정보 principal에 업데이트
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userAccount = (UserDetails) authentication.getPrincipal();
 	    SecurityContextHolder.getContext().setAuthentication(

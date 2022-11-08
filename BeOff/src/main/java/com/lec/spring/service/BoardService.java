@@ -248,9 +248,11 @@ public class BoardService {
 		if(pageRows == null) pageRows = C.PAGE_ROWS;   // session 에 없으면 기본값으로
 		session.setAttribute("page", page);  // 현재 페이지 (세션에 저장해두자)
 		
-		// page 의 데이터 읽어오기
-		//Page<Qna> pageWrites = writeRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));
-		Page<Qna> pageWrites = writeRepository.findBySubjectContaining(search, PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));
+		Page<Qna> pageWrites = 
+				writeRepository.findBySubjectContaining(
+						search, 
+						PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id")))
+						);
 		
 		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
 		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
