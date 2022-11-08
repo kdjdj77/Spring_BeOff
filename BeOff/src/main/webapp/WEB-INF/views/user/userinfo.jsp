@@ -94,7 +94,7 @@
     </body>
    	<script>
    		function del() {
-    		if (confirm('정말로 탈퇴하시겠습니까?')) location.href("deleteOk");
+    		if (confirm('정말로 탈퇴하시겠습니까?')) location.href = "deleteOk";
     		else return;
     	}
    	</script>

@@ -49,8 +49,8 @@
 		    color: #fff;
 		}
 		input[type=radio]+label:hover{
-		    background-color: #cff;
-		    color: #333;
+		    background-color: dodgerblue;
+		    color: #fff;
 		}
 	</style>
 </head>
@@ -99,9 +99,9 @@
 					<div>
 						<label>개수: <span id="air_cnt"></span> 개</label>
 						
-						<table id="air_list" width="80%">
+						<div id="air_list" width="80%">
 							<!-- 비행기 리스트(input airplane_id 포함) -->
-						</table>
+						</div>
 						<input type="hidden" name="departdate" value="${departdate}">
 						<input type="hidden" name="num_person" value="${num_person}">
 						
@@ -111,9 +111,9 @@
 					<div>
 						<label>개수: <span id="air_cnt2"></span> 개</label>
 					
-						<table id="air_list2" width="80%">
+						<div id="air_list2" width="80%">
 							<!-- 비행기 리스트(input airplane_id 포함) -->
-						</table>
+						</div>
 						<input type="hidden" name="departdate2" value="${departdate2}">
 						<input type="hidden" name="num_person2" value="${num_person2}">
 						
@@ -123,7 +123,7 @@
 		</table>
 		</form>
 		<div class="container mt-3"style="width:100%;">
-	        <button type="button" onclick="frmsubmit()" style="position:absolute; left:40%; height:60px; width:130px; font-size:1.5rem;" class="btn btn-outline-dark mx-3">다음</button>
+	        <button type="button" onclick="frmsubmit()" style="position:absolute; left:41%; height:60px; width:130px; font-size:1.5rem;" class="btn btn-outline-dark mx-3">다음</button>
 	    </div>
 	</div>
 	<div id="notSend">

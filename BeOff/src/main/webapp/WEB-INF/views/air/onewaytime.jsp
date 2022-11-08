@@ -49,8 +49,8 @@
 		    color: #fff;
 		}
 		input[type=radio]+label:hover{
-		    background-color: #cff;
-		    color: #333;
+		    background-color: dodgerblue;
+		    color: #fff;
 		}
 	</style>
 </head>
@@ -80,13 +80,13 @@
 			<div style="width:100vw">
 				<label><br>개수: <span id="air_cnt"></span> 개</label>
 				<form id="frm" action="onewayReserv" method="post">
-					<table id="air_list" width="40%">
+					<div id="air_list" width="40%">
 						<!-- 비행기 리스트(input airplane_id 포함) -->
-					</table>
+					</div>
 					<input type="hidden" name="departdate" value="${departdate}">
 					<input type="hidden" name="num_person" value="${num_person}">
 					<p><br></p>
-					<button type="button" style="margin-left:15%; width:150px; height:70px; font-size:1.5rem;" class="btn btn-outline-dark" onclick="frmsubmit()">다음</button>
+					<button type="button" style="margin-left:13%; width:150px; height:70px; font-size:1.5rem;" class="btn btn-outline-dark" onclick="frmsubmit()">다음</button>
 
 				</form>
 			</div>

@@ -82,7 +82,7 @@ function chkDelete(){
 					<!--첨부파일 이름, 다운로드 링크 -->
 					<ul class="list-group mb-1">
 						<c:forEach var="fileDto" items="${dto.files }">
-							<li class="list-group-item"><a href="download?id=${fileDto.id }">${fileDto.source }</a></li>
+							<li class="list-group-item"><a style="color:blue; text-decoration:underline;" href="download?id=${fileDto.id }">${fileDto.source }</a></li>
 						</c:forEach>
 					</ul>
 					<%-- 이미지인 경우 보여주기 --%>
