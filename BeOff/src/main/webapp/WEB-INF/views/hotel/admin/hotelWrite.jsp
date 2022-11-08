@@ -53,7 +53,7 @@
                             	<input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="hotelname" placeholder="호텔명을 입력하세요" name="hotelname" required>
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Region</h3>
                                 <!-- 체크용 <script>console.log("${regionList}")</script>  -->
-                                <select name="region">
+                                <select name="region" style="font-size:1.3rem;width:250px; height:30px;">
                                 	<c:forEach var="r" items="${regionList }">
                                 		<option value="${r }">${r }</option>
                                 	</c:forEach>
