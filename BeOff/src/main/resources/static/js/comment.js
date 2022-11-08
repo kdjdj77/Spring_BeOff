@@ -27,8 +27,7 @@ $(function() {
 
         star = score;
 		
-		
-        }
+       }
 })();
 	// 댓글 작성 버튼 누르면 댓글 등록 하기.  
     // 1. 어느글에 대한 댓글인지? --> 위에 id 변수에 담겨있다
@@ -41,10 +40,7 @@ $(function() {
         if(!content){
             alert("댓글 입력을 하세요");
             return;
-        }
-      
-        
-		
+        }	
 		// 전달할 parameter 준비
 		let data = {
 			"hotel_id":id,

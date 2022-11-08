@@ -170,6 +170,7 @@ public class HotelService {
 				Double a = Collections.max(pList);
 				Double b = Collections.min(pList);
 				i.setPriceList(Double.toString(b)+"원  ~ " + Double.toString(a)+"원");
+				
 			}
 		}
 		return list;
@@ -283,6 +284,7 @@ public class HotelService {
 		
 		return 1;
 	} 
+	
 
 	
 }

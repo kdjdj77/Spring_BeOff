@@ -47,7 +47,7 @@
 					         <div class="col-md-9 mb-5 ">
 					           <div class="card h-100 ">
 					              <div class="card-body ">
-					            	<img class="card-img-top" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="..." /><br><br>
+					            	<img class="card-img-top" src="${pageContext.request.contextPath }/upload/${r.files[0].file}" alt="NO IMAGE" /><br><br>
 					            	<!-- Product reviews-->
 									<div
 										class="d-flex justify-content-center small text-warning mb-2">
