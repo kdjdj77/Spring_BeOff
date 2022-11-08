@@ -120,7 +120,16 @@
 							<h4>${dto.region.region }</h4>
 							<h5 class="card-title">${dto.rentalname }</h5>
 							<p class="card-text">${dto.content }</p>
-							<button class="btn btn-outline-secondary">자세히 알아보기</button>
+							<c:choose>
+								<c:when test="${method == 1 }">
+									<button class="btn btn-outline-secondary">자세히 알아보기</button>
+								
+								</c:when>
+								<c:otherwise>
+								<div></div>
+								</c:otherwise>
+							
+							</c:choose>
 						</div>
 					</div>
 				</div>
