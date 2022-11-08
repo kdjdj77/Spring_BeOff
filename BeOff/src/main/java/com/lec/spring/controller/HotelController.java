@@ -41,11 +41,11 @@ public class HotelController {
 	// /hotel/list
 	@GetMapping("/list")
 	public void list(Integer page, Model model) {
+		hotelService.list(page, model);
 		model.addAttribute("regionList", hotelService.getRegionList());	
 //		model.addAttribute("hotelList", hotelService.getHotelList());
 
 		model.addAttribute("method", 0);
-		hotelService.list(page, model);
 			
 		
 	}
