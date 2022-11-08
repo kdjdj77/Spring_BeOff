@@ -77,7 +77,6 @@ out1: 2022-10-28
 		model.addAttribute("rental", rental);
 		model.addAttribute("regionList", rentalService.getRegionList());
 		model.addAttribute("carList", rentalService.getCarList(sDate, eDate, rentalId, sizeOption));
-//		model.addAttribute("carNameList", rentalService.getCarNameList());
 		return "rental/cars/list";
 		
 	}
