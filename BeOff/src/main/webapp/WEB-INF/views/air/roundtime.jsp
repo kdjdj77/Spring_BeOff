@@ -24,6 +24,7 @@
 	
 	<title>BeOff</title>
 	<style>
+		<style>
 		body {
 			overflow-x: hidden;
 		}
@@ -34,23 +35,19 @@
 		    display: inline-block;
 		    cursor: pointer;
 		    height: 40px;
-		    width: 70px;
-		    border: 1px solid #333;
+		    width: 40px;
+		    border:3px solid black;
 		    border-radius:3px;
 		    line-height: 38px;
 		    text-align: center;
-		}
-		input[type=radio]+label{
 		    background-color: #fff;
-		    color: #333;
+		    color: #fff;
 		}
 		input[type=radio]:checked+label{
-		    background-color: #36f;
-		    color: #fff;
+		    color: #000;
 		}
 		input[type=radio]+label:hover{
-		    background-color: dodgerblue;
-		    color: #fff;
+		    border:3px solid gray;
 		}
 	</style>
 </head>
