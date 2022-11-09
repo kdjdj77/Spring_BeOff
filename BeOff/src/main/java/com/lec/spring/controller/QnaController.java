@@ -34,9 +34,11 @@ public class QnaController {
 	// /board/list
 	@GetMapping("/list")
 //	public void list(Model model) {
-	public void glist(Integer page, Model model) {
-//		model.addAttribute("list", boardService.list());
-		boardService.list(page, "", model);
+	public void glist(Integer page, String search, Model model) {
+		String s = "";
+		if (!search.equals(null)) s = search;
+		model.addAttribute("search", s);
+		boardService.list(page, s, model);
 	}
 	
 	@PostMapping("/list")
@@ -99,9 +101,9 @@ public class QnaController {
 	// 페이징
 	// pageRows 변경시 동작
 	@PostMapping("/pageRows")
-	public String pageRows(Integer page, Integer pageRows) {
+	public String pageRows(Integer page, String search, Integer pageRows) {
 		U.getSession().setAttribute("pageRows", pageRows);
-		return "redirect:/board/list?page=" + page;
+		return "redirect:/board/list?page=" + page + "&search=" + search;
 	}
 	
 	

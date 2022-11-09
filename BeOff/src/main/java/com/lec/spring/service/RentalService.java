@@ -142,16 +142,6 @@ public class RentalService {
 		List<TicketDTO> tlist = new ArrayList<TicketDTO>();
 		TicketDTO dto = new TicketDTO();
 		
-		System.out.println("////////////////////////////");
-		System.out.println(allticket.get(0));
-		System.out.println(allticket.get(0).getRegDateTime());
-		System.out.println(allticket.get(1));
-		System.out.println(allticket.get(1).getRegDateTime());
-		System.out.println(allticket.get(2));
-		System.out.println(allticket.get(2).getRegDateTime());
-		
-		System.out.println("////////////////////////////");
-		
 		for (Rentalticket t : allticket) {
 			if (!dto.getRegDateTime().equals(t.getRegDateTime()) ||
 					dto.getCar().getId() != t.getCar().getId()) {
