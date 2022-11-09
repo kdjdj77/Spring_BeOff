@@ -24,6 +24,7 @@
 	
 	<title>BeOff</title>
 	<style>
+		<style>
 		body {
 			overflow-x: hidden;
 		}
@@ -34,23 +35,19 @@
 		    display: inline-block;
 		    cursor: pointer;
 		    height: 40px;
-		    width: 70px;
-		    border: 1px solid #333;
+		    width: 40px;
+		    border:3px solid black;
 		    border-radius:3px;
 		    line-height: 38px;
 		    text-align: center;
-		}
-		input[type=radio]+label{
 		    background-color: #fff;
-		    color: #333;
-		}
-		input[type=radio]:checked+label{
-		    background-color: #36f;
 		    color: #fff;
 		}
+		input[type=radio]:checked+label{
+		    color: #000;
+		}
 		input[type=radio]+label:hover{
-		    background-color: #cff;
-		    color: #333;
+		    border:3px solid gray;
 		}
 	</style>
 </head>
@@ -99,9 +96,9 @@
 					<div>
 						<label>개수: <span id="air_cnt"></span> 개</label>
 						
-						<table id="air_list" width="80%">
+						<div id="air_list" width="80%">
 							<!-- 비행기 리스트(input airplane_id 포함) -->
-						</table>
+						</div>
 						<input type="hidden" name="departdate" value="${departdate}">
 						<input type="hidden" name="num_person" value="${num_person}">
 						
@@ -111,9 +108,9 @@
 					<div>
 						<label>개수: <span id="air_cnt2"></span> 개</label>
 					
-						<table id="air_list2" width="80%">
+						<div id="air_list2" width="80%">
 							<!-- 비행기 리스트(input airplane_id 포함) -->
-						</table>
+						</div>
 						<input type="hidden" name="departdate2" value="${departdate2}">
 						<input type="hidden" name="num_person2" value="${num_person2}">
 						
@@ -123,7 +120,7 @@
 		</table>
 		</form>
 		<div class="container mt-3"style="width:100%;">
-	        <button type="button" onclick="frmsubmit()" style="position:absolute; left:40%; height:60px; width:130px; font-size:1.5rem;" class="btn btn-outline-dark mx-3">다음</button>
+	        <button type="button" onclick="frmsubmit()" style="position:absolute; left:41%; height:60px; width:130px; font-size:1.5rem;" class="btn btn-outline-dark mx-3">다음</button>
 	    </div>
 	</div>
 	<div id="notSend">

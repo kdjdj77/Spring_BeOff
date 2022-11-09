@@ -302,14 +302,12 @@ public class AdminHotelService {
 		List<Roomfile> delfile = roomfileRepository.findByRoom(r.getId());
 		
 		String x = files.get("files").getOriginalFilename(); // 수정된 파일의 이름이 들어옴
-		System.out.println("여기 x 값 "+x); 
 		if (!x.equals("")) { // 비어있지 않으니까 들어옴.
 			for(Roomfile i : delfile) { // 해당하는 룸의 파일을 돌면서
 				delFile(i); // 물리적 삭제
 				roomfileRepository.deleteById(i.getId()); // db 삭제
 			}
 		}
-
 		addFiles(files, r.getId());
 		result = 1;
 		

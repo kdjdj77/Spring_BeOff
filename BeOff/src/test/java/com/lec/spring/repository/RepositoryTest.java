@@ -157,37 +157,55 @@ class RepositoryTest {
 		userRepository.findAll().forEach(System.out::println);
 
 		// 글 Write 작성
+		
+		for (int i = 0; i < 50; i++) {
+			Qna w11 = Qna.builder()
+					.subject("테스트입니다" + i)
+					.content("내용입니다" + i)
+					.user(user1)
+					.build();
+			Qna w22 = Qna.builder()
+					.subject("검색테스트입니다" + i)
+					.content("내용입니다" + i)
+					.user(user1)
+					.build();
+			Qna w33 = Qna.builder()
+					.subject("예매테스트입니다" + i)
+					.content("내용입니다" + i)
+					.user(user1)
+					.build();
+			
+			w11 = writeRepository.save(w11);
+			w22 = writeRepository.save(w22);
+			w33 = writeRepository.save(w33);
+		}
+		writeRepository.findAll().forEach(System.out::println);
+		
 		Qna w1 = Qna.builder()
 				.subject("제목입니다1")
 				.content("내용입니다1")
 				.user(user1)
 				.build();
-		
 		Qna w2 = Qna.builder()
 				.subject("제목입니다2")
 				.content("내용입니다2")
 				.user(user1)
 				.build();
-		
 		Qna w3 = Qna.builder()
 				.subject("제목입니다3")
 				.content("내용입니다3")
-				.user(adminqna)
+				.user(user1)
 				.build();
-		
 		Qna w4 = Qna.builder()
 				.subject("제목입니다4")
 				.content("내용입니다4")
-				.user(adminqna)
+				.user(user1)
 				.build();
 		
 		w1 = writeRepository.save(w1);
 		w2 = writeRepository.save(w2);
 		w3 = writeRepository.save(w3);
 		w4 = writeRepository.save(w4);
-		
-		writeRepository.findAll().forEach(System.out::println);
-		
 		
 		// 댓글 Comment
 		Qcomment c9 = Qcomment.builder()

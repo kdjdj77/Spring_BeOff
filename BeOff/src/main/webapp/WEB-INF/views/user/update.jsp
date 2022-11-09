@@ -15,6 +15,7 @@
 </head>
 <body>
 	<form action="updateOk" method="POST">
+	<input type="hidden" name="id" value="${user.id}">
 		<main>
 			<div class="container py-4">
 
