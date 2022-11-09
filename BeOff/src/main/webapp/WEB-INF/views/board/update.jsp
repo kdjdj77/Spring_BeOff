@@ -107,7 +107,7 @@
             <!-- 하단 링크 -->
             <button type="submit" class="btn btn-outline-dark">수정완료</button>
             <button type="button" class="btn btn-outline-dark" onclick="history.back()">이전으로</button>
-            <a class="btn btn-outline-dark" href="list?page=${empty page ? '' : page}">목록</a>
+            <a class="btn btn-outline-dark" href="list?page=${empty page ? '' : page}&search=">목록</a>
             <!-- 하단 링크 -->
 
         </form>

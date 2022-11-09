@@ -48,3 +48,9 @@ select * from db_hcomment dh ;
 select * from db_hotelfile;
 
 select * from db_rentalticket;
+
+drop table db_itemticket;
+drop table db_itemfile;
+drop table db_icomment;
+drop table db_itemcart;
+drop table db_item;

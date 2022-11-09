@@ -120,6 +120,7 @@
 	totalPrice.innerText = ((e - s + 1)*${car.price}) + " won ";
 	function reserveOk() {
 
+		alert('(주)Be_off님의 계좌로 입금처리 됩니다.');
 		alert('예약성공');
 		location.href = "tickets";	
 		

@@ -27,7 +27,7 @@ public class HcommentController {
 	@GetMapping("/list")
 	public HqryCommentList list(Hotel hotelId) {
 		return hcommentService.list(hotelId);
-		}
+	}
 	
 	@PostMapping("/write")
 	public HqryResult write(

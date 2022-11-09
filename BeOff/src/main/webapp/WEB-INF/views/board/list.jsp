@@ -48,12 +48,6 @@
             <span class="float-end me-2">
             	<form name="frmPageRows">
             		<input type="hidden" id="gpage" name="page" value="${page }">
-	                <select class="form-select" name="pageRows">
-	                    <option value="10" ${pageRows==10 ? 'selected' : '' }>10</option>
-	                    <option value="15" ${pageRows==15 ? 'selected' : '' }>15</option>
-	                    <option value="20" ${pageRows==20 ? 'selected' : '' }>20</option>
-	                    <option value="50" ${pageRows==50 ? 'selected' : '' }>50</option>
-	                </select>
                 </form>
             </span>
         </div>          
@@ -108,7 +102,7 @@
                 <c:forEach var="k" begin="${startPage }" end="${endPage }">
                 <c:choose>
                     <c:when test="${k != page }">
-                        <li class="page-item"><a class="page-link" href="${url }?page=${k }">${k }</a></li>        			
+                        <li class="page-item"><a class="page-link" href="${url }?page=${k }&search=${search}">${k }</a></li>        			
                     </c:when>
                     <c:otherwise>
                         <li class="page-item active"><a class="page-link" href="javascript:void(0);">${k }</a></li>

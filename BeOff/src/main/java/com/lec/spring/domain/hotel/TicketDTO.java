@@ -44,12 +44,27 @@ public class TicketDTO {
 	private Double price;
 	private LocalDateTime regDate;
 	
-	public void addDate(Long date1) { 
-			this.date.add(date1);
+	public void addDate(Long date) { 
+			this.date.add(date);
+	}
+	public List<Long> getDateList(){
+		return this.date;
 	}
 	@JsonIgnore
 	public String getRegDateTime() {
 		if(this.regDate == null) return "";
 		return this.regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));		
 	}
+	
+	public String getDateRange() {
+		Long max = Collections.max(this.date) + 1;
+		Long min = Collections.min(this.date);
+		
+		if (min - max == 0L) {
+			return min + "";
+		} else {
+			return min + " ~ " + max;
+		}
+	}
+	
 }

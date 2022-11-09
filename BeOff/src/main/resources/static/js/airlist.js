@@ -60,17 +60,19 @@ function buildAirList(result) {
 		let strdate = date.substring(0, 4) + "." + date.substring(4, 6) + "." + date.substring(6, 8)
         
 		const row = 
-			`<tr style="border:1px solid black; font-size:1.5rem; background-color:	#e0ffff">
-		        <td><span>&nbsp;${name}<br>&nbsp;출발시각 ${time}<br>&nbsp;가격(1인) ${price}<br>&nbsp;</span></td>
-		        <td><span>&nbsp;${strdate}<br>&nbsp;남은좌석 ${remain}<br>&nbsp;${depart} → ${arrive}</span>
+			`
+			<div class="bg-gradient text-black" style="background-color:#fff; margin-bottom:5px; width:540px; border:2px solid crimson; border-left:50px solid crimson; border-radius:10px;"><table width="100%">
+			<tr style="font-size:1.5rem;">
+		        <td width="50%"><span>&nbsp;${name}<br>&nbsp;출발시각 ${time}<br>&nbsp;가격(1인) ${price}<br>&nbsp;</span></td>
+		        <td width="50%"><span>&nbsp;${strdate}<br>&nbsp;남은좌석 ${remain}<br>&nbsp;${depart} → ${arrive}</span>
 		        <br>
-		        	<div width="100%" class="d-flex justify-content-end">
+		        	<div width="100%" class="d-flex justify-content-end m-1">
 		        		<input type="radio" name="air_id" id="air_id${id}" value="${id}" style="width:20px; height:20px;">
-		        		<label for="air_id${id}">선택</label>
+		        		<label for="air_id${id}"><i class="fa-solid fa-check"></i></label>
 		        	</div>
 		        </td>
 	        </tr>
-	        <tr><td></td><td></td><td></td></tr>
+	        </table></div>
 	        `;
 		out.push(row);
 	});

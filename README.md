@@ -10,6 +10,8 @@
 
 프로젝트 발표 url : 
 
+사이트 주소 : http://localhost:8081/home
+
 ★처음 프로젝트 실행 시 해야 할 것
 
 1. db 설정할 것
@@ -39,5 +41,8 @@
     1) application.properties 에서 spring.jpa.hibernate.ddl-auto=create 로 수정
     2) src/test/java/com/lec/repository/RepositoryTest 를 JUnitTest로 실행
     3) application.properties 에서 spring.jpa.hibernate.ddl-auto=update 로 수정
-    
+    4) src/test/java/com/lec/repository/RegionTest 를 JUnitTest로 실행
+    5) src/test/java/com/lec/repository/AirTest 를 JUnitTest로 실행
+    6) src/test/java/com/lec/repository/HotelRepositoryTest 를 JUnitTest로 실행
+    7) src/test/java/com/lec/repository/CarRepositoryTest 를 JUnitTest로 실행
 
