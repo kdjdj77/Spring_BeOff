@@ -52,7 +52,7 @@
           <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/air/basic">비행기</a></li>
           <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/hotel/list">숙소</a></li>          
           <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/rental/list">렌트카</a></li>
-          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/board/list">QnA</a></li>
+          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/board/list?search=">QnA</a></li>
            
           <sec:authorize access="hasRole('ADMIN_AIR')">
 	          <li class="nav-item me-3"><a class="nav-link active" href="${pageContext.request.contextPath }/air/admin/list">관리자(비행기)</a></li>

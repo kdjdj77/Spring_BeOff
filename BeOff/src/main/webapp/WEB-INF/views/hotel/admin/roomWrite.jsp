@@ -25,6 +25,13 @@
         <link href="/css/styles.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    	<style>
+	    	input[type="number"]::-webkit-outer-spin-button,
+			input[type="number"]::-webkit-inner-spin-button {
+		    -webkit-appearance: none;
+		    margin: 0;
+		}
+    	</style>
     </head>
    
     <body class="d-flex flex-column h-100">
@@ -49,9 +56,9 @@
                             	<h3 class="display-7 fw-bolder text-black mb-2 ">Room Name</h3>
                             	<input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="roomname" placeholder="Room Name을 입력하세요" name="roomname" required>
                                 <h3 class="display-7 fw-bolder text-black mb-2 ">Room Price</h3>
-                                <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="price" placeholder="가격을 입력하세요" name="price" required>
+                                <input type="number" class="form-control display-5 fw-bolder text-black mb-3"  id="price" min="1" max="1000000" placeholder="가격을 입력하세요" name="price" required>
                                 <h3 class="display-7 fw-bolder text-black mb-2 ">Room bed</h3>
-                                <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="bed" placeholder="침대갯수를 입력하세요" name="bed" required>
+                                <input type="number" class="form-control display-5 fw-bolder text-black mb-3"  id="bed" min="1" max="5" placeholder="침대갯수를 입력하세요" name="bed" required>
                     			<input type="hidden" name="id" value="${id }">
                     			
 					            <%-- 상단에 jQuery 추가하기--%>

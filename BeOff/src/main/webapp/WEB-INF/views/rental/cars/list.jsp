@@ -22,6 +22,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <body>
 	<header> </header>
+	<h1>${days }</h1>
 	<main>
 		<div class="container">
 			<div class="row">
@@ -98,31 +99,40 @@
 			</div>
 		</div><br>
 
-			<div class="container">
+	<div style="width:100vw; height:auto;">
 		<c:forEach var="i" items="${carList}">
+		<div class="container" style="float:left; width:543px; height:500px;">
 		<form action="reserv" method="POST">
-				<div class="card" style="width: 18rem;">
-					<img src="/upload/g80.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">${i.carname }</h5>
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<div class="card">
+						<img src="${pageContext.request.contextPath }/upload/${i.files[0].file}" class="card-img-top" 
+						style="width:320px; height:200px; object-fit:fill; float: left;">
+						<div class="card-body">
+							<h5 class="card-title">${i.carname }</h5>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">${i.cartype }</li>
+							<li class="list-group-item">${i.fuel }</li>
+							<li class="list-group-item">${i.fueleff }</li>
+							<li class="list-group-item">${i.price } 원</li>
+						</ul>
+						<div class="card-body" >
+							<input type="hidden" name="carId" value="${i.id }">
+							<input type="hidden" name="sDate" value="${sDate}">
+							<input type="hidden" name="eDate" value="${eDate}">
+							
+							<button class="btn btn-outline-secondary">예약하기</button>
+						</div>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">${i.cartype }</li>
-						<li class="list-group-item">${i.fuel }</li>
-						<li class="list-group-item">${i.fueleff }</li>
-						<li class="list-group-item">${i.price } 원</li>
-					</ul>
-					<div class="card-body" >
-						<input type="hidden" name="carId" value="${i.id }">
-						<input type="hidden" name="sDate" value="${sDate}">
-						<input type="hidden" name="eDate" value="${eDate}">
-						
-						<button class="btn btn-outline-secondary">예약하기</button>
-					</div>
-					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
 					</form>
+				</div>
 		</c:forEach>
-				</div>		
+			</div>			
 
 	</main>
 	

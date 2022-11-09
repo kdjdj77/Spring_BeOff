@@ -47,8 +47,6 @@ public class AdminHotelService {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private RoomticketRepository roomticketRepository;
-	@Autowired
 	private RegionRepository regionRepository;
 	@Autowired
 	private HotelRepository hotelRepository;
@@ -229,7 +227,7 @@ public class AdminHotelService {
 		
 		List<Double> pList = new ArrayList<Double>();
 		
-		List<Hotel> h = hotelRepository.findByUser(u);
+		List<Hotel> h = hotelRepository.findByUserOrderByIdDesc(u);
 		for(Hotel i : h) {
 			pList.clear();
 			for(Room j : i.getRooms()) {
@@ -304,14 +302,12 @@ public class AdminHotelService {
 		List<Roomfile> delfile = roomfileRepository.findByRoom(r.getId());
 		
 		String x = files.get("files").getOriginalFilename(); // 수정된 파일의 이름이 들어옴
-		System.out.println("여기 x 값 "+x); 
 		if (!x.equals("")) { // 비어있지 않으니까 들어옴.
 			for(Roomfile i : delfile) { // 해당하는 룸의 파일을 돌면서
 				delFile(i); // 물리적 삭제
 				roomfileRepository.deleteById(i.getId()); // db 삭제
 			}
 		}
-
 		addFiles(files, r.getId());
 		result = 1;
 		
@@ -359,7 +355,7 @@ public class AdminHotelService {
 		
 		Room r = roomRepository.findById(lId).get();
 		roomRepository.delete(r);
-		delFile(r.getFiles().get(1));
+		delFile(r.getFiles().get(0));
 		System.out.println("서비스에서 id "+id);
 		result = 1;
 		

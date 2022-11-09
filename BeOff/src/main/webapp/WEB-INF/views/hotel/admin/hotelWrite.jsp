@@ -53,7 +53,7 @@
                             	<input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="hotelname" placeholder="호텔명을 입력하세요" name="hotelname" required>
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Region</h3>
                                 <!-- 체크용 <script>console.log("${regionList}")</script>  -->
-                                <select name="region">
+                                <select name="region" style="font-size:1.3rem;width:250px; height:30px;">
                                 	<c:forEach var="r" items="${regionList }">
                                 		<option value="${r }">${r }</option>
                                 	</c:forEach>
@@ -62,8 +62,8 @@
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Content</h3>
                                 <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="content" placeholder="호텔설명을 입력하세요" name="content" required>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                	<button class="btn btn-outline-dark text-white mb-2">등록</button>
-                                	<a class="btn btn-outline-dark text-white mb-2" href="list ">목록</a>
+                                	<button class="bbb" style="margin-left:475px;">등록</button>
+                                	<button class="bbb" onclick="location.href='../admin/list'">목록</button>
                                 </div>
                             </div>
                         </div>
@@ -76,4 +76,16 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
+    <style>
+    	.bbb{
+    		background-color:white;
+    		color:black;
+    		border-radius : 5px;
+    	}
+    	.bbb:hover{
+    		
+    		background-color:black;
+    		color:white;
+    	}
+    </style>
 </html>

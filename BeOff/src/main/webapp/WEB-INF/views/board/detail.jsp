@@ -101,7 +101,7 @@ function chkDelete(){
             <c:if test="${userdetails.user.id == dto.user.id }">
             <a class="btn btn-outline-dark" href="update?id=${dto.id }">수정</a>
             </c:if>
-            <a class="btn btn-outline-dark" href="list?page=${empty page ? '' : page }">목록</a>
+            <a class="btn btn-outline-dark" href="list?page=${empty page ? '' : page }&search=">목록</a>
             <c:if test="${userdetails.user.id == dto.user.id }">
             <button type="button" class="btn btn-outline-dark" onclick="chkDelete()">삭제</button>
             </c:if>

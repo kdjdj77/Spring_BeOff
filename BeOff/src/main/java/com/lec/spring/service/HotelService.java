@@ -75,7 +75,6 @@ public class HotelService {
 		session.setAttribute("page", page);
 		
 		Page<Hotel> pageWrites = hotelRepository.findAll(PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));	
-
 		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
 		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
 		if(page > totalPage) page = totalPage;   // 페이지 보정
@@ -96,8 +95,8 @@ public class HotelService {
 		model.addAttribute("startPage", startPage);  // 페이징 에 표시할 시작 페이지
 		model.addAttribute("endPage", endPage);   // 페이징 에 표시할 마지막 페이지
 
-		List<Double> pList = new ArrayList<Double>();
 		List<Hotel> list = pageWrites.getContent();	
+		List<Double> pList = new ArrayList<Double>();
 		for(Hotel i : list) {
 			pList.clear();
 
@@ -153,10 +152,54 @@ public class HotelService {
 		for(Hotel h : dellist) {
 			list.remove(h);
 		}
+		
+		List<Double> pList = new ArrayList<Double>();
+		for(Hotel i : list) {
+			pList.clear();
+
+			for(Room j : i.getRooms()) {
+	
+				pList.add(j.getPrice());
+			}
+			for(Double p : pList) {
+				if(i.getPriceList() != null) {
+					i.setPriceList(i.getPriceList() + Double.toString(p));
+				}else {
+					i.setPriceList(Double.toString(p));
+				}
+				Double a = Collections.max(pList);
+				Double b = Collections.min(pList);
+				i.setPriceList(Double.toString(b)+"원  ~ " + Double.toString(a)+"원");
+				
+			}
+		}
 		return list;
 	}
-
-
+	
+	public List<Room> getSearchRooms(String id,String inn,String out){
+		List<Room> list = new ArrayList<>();
+		Long s = Long.parseLong(inn);
+		Long e = Long.parseLong(out);
+		Long lid = Long.parseLong(id);
+		Hotel h = hotelRepository.findById(lid).orElse(null);
+		List<Long> dates = new ArrayList<>();
+		for(Long i = s; i < e; i++) {
+			dates.add(i);
+		}
+		for(Room r : h.getRooms()) {
+			boolean check = true;
+			List<Roomticket> tickets = roomticketRepository.findByRoom(r);
+			for(Roomticket rt : tickets) {
+				if(dates.contains(rt.getDate())) {
+					check = false;
+				}
+			}
+			if(check) {
+				list.add(r);
+			}
+		}
+		return list;
+	}
 
 	// 숙소 id 값으로 정보 (hotel, room, comment)
 	// detail 
@@ -205,7 +248,8 @@ public class HotelService {
 	}
 	public List<TicketDTO> getRoomTickets() {
 		Roomticket rt = new Roomticket();
-		List<Roomticket> list = roomticketRepository.findByUser(U.getLoggedUser());
+		User user = U.getLoggedUser();	
+		List<Roomticket> list = roomticketRepository.findByUserOrderByIdDesc(user);
 		List<TicketDTO> tickets = new ArrayList<TicketDTO>();
     
 		TicketDTO tk = new TicketDTO();
@@ -226,7 +270,21 @@ public class HotelService {
 		}
 		tickets.add(tk);
 		return tickets;
+	}
+
+	public int deleteTicket(List<Long> date, String id) {
+		Room room = roomRepository.findById(Long.parseLong(id)).orElse(null);
+		List<Roomticket> list = new ArrayList<>();
+		for(Long d : date) {
+			list.add(roomticketRepository.findByDateAndRoom(d, room).get(0));
+			}
+		for(Roomticket t : list) {
+			roomticketRepository.delete(t);
+		}
+		
+		return 1;
 	} 
+	
 
 	
 }

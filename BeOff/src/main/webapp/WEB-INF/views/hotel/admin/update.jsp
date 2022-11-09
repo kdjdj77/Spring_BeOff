@@ -25,6 +25,13 @@
         <link href="/css/styles.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    	<style>
+	    	input[type="number"]::-webkit-outer-spin-button,
+			input[type="number"]::-webkit-inner-spin-button {
+		    -webkit-appearance: none;
+		    margin: 0;
+		}
+    	</style>
     </head>
    
     <body class="d-flex flex-column h-100">
@@ -73,8 +80,9 @@
                                 <h3 class="display-7 fw-bolder text-white mb-2 ">Hotel Content</h3>
                                 <input type="text" class="form-control display-5 fw-bolder text-black mb-3"  id="content" value="${hotel.content }" name="content" required>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                	
                                 	<button class="btn btn-outline-dark text-white mb-2">수정완료</button>
-                                	<a class="btn btn-outline-dark text-white mb-2" href="delete ">삭제</a>
+                                	<a class="btn btn-outline-dark text-white mb-2" href="delete?id=${hotel.id}">삭제</a>
                                 </div>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start"></div>
                             </div>
@@ -125,8 +133,8 @@
 									</script>
 									 	
 					                <input type="text"  name="roomname" class="form-control display-5 fw-bolder text-black mb-1"  id="roomname" value="${r.roomname}" placeholder="Room Name을 입력하세요" required>
-					                <input type="text" name="price" class="form-control display-5 fw-bolder text-black mb-1"  id="price" value="${r.price}" placeholder="가격을 입력하세요" required>
-					                <input type="number" name="bed" class="form-control display-5 fw-bolder text-black mb-1"  id="bed" value="${r.bed}" placeholder="침대갯수를 입력하세요" required>
+					                <input type="number" name="price" class="form-control display-5 fw-bolder text-black mb-1"  id="price" value="${r.price}" min="1" max="1000000" placeholder="가격을 입력하세요" required>
+					                <input type="number" name="bed" class="form-control display-5 fw-bolder text-black mb-1"  id="bed" value="${r.bed}" min="1" max="5" placeholder="침대갯수를 입력하세요" required>
 					                <input type="hidden" name="id" value="${r.id }">
 					              </div>
 					              <div class="card-footer">

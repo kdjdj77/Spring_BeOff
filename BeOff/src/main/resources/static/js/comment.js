@@ -3,7 +3,6 @@ $(function() {
 	// 현재 글의 id값
 	let id = $("input[name='id']").val();
 	loadHcomment(id);
-	
 	//별점
 	(function () {
     let starEls = document.querySelectorAll('#star span.star');
@@ -27,7 +26,8 @@ $(function() {
         });
 
         star = score;
-        }
+		
+       }
 })();
 	// 댓글 작성 버튼 누르면 댓글 등록 하기.  
     // 1. 어느글에 대한 댓글인지? --> 위에 id 변수에 담겨있다
@@ -40,13 +40,7 @@ $(function() {
         if(!content){
             alert("댓글 입력을 하세요");
             return;
-        }
-        if(!star === "null"){
-			alert("별점등록해주세요")
-			return;
-}
-        
-		
+        }	
 		// 전달할 parameter 준비
 		let data = {
 			"hotel_id":id,
@@ -54,6 +48,7 @@ $(function() {
 			"content":content,
 			"star":star
 		};
+		
 		$.ajax({
 			url:conPath + "/hcomment/write",
 			type:"POST",
@@ -66,7 +61,6 @@ $(function() {
                         alert(data.status) ;
                         return;
                     }
-                    
                     loadHcomment(id); // 댓글 목록 다시 업데이트
                     $("#input_hcomment").val('');
                 }
@@ -102,7 +96,6 @@ function buildHcomment(result) {
 		sum += result.data[i].star;
 	}
 	const sums = (sum/result.count).toFixed(1);
-	console.log(sums);
 	$('#star_cnt').text(sums);
 	
 	const out = [];
@@ -115,7 +108,7 @@ function buildHcomment(result) {
         let user_id = parseInt(hcomment.user.id);
         let username = hcomment.user.username;
         let name = hcomment.user.name;
-        
+      
         // 삭제버튼 여부 : 작성자 본인의 댓글인 경우에만 보이기
         let delBtn = (logged_id !== user_id) ? '' : `
         	<i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip" data-cmtdel-id="${id}" title="삭제"></i>`;

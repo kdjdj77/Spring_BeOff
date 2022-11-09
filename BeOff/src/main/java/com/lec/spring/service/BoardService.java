@@ -313,12 +313,14 @@ public class BoardService {
 			// 첨부파일 추가
 			addFiles(files, write.getId());
 			
-			// 삭제할 첨부파일들 삭제
-			for(Long fileId : delfile) {
-				Qnafile file = fileRepository.findById(fileId).orElse(null);
-				if(file != null) {
-					delFile(file);  // 물리적으로 삭제
-					fileRepository.delete(file);  // DB 에서 삭제
+			if (delfile != null) {
+				// 삭제할 첨부파일들 삭제
+				for(Long fileId : delfile) {
+					Qnafile file = fileRepository.findById(fileId).orElse(null);
+					if(file != null) {
+						delFile(file);  // 물리적으로 삭제
+						fileRepository.delete(file);  // DB 에서 삭제
+					}
 				}
 			}
 			

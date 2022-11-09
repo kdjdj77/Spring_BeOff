@@ -65,7 +65,7 @@
                             <div class="d-flex flex-column dis">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <p class="fw-bold">Total</p>
-                                    <p class="fw-bold">${car.price } won</p>
+                                    <p class="fw-bold" id="totalPrice"></p>
                                 </div>
                                 <input type="hidden" name="carId" value="${car.id }">
                                 <input class="btn btn-secondary btn-xl text-uppercase" type="submit" value="무통장입금" onclick="reserveOk()">
@@ -90,14 +90,13 @@
           <div class="box-inner-1 pb-3 mb-3 ">
                 <div class="d-flex justify-content-between mb-3 userdetails">
                     <p class="fw-bold">${car.carname }</p>
-                    <p class="fw-lighter">${car.price } won</p>
                 </div>
                 <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                     data-bs-interval="2000">
                     
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                            <img src="${pageContext.request.contextPath }/upload/${car.files[0].file}"
                                 class="d-block w-100">
                         </div>
                     </div>
@@ -115,8 +114,13 @@
   </div>
 </main>
 	<script>
+	let totalPrice = document.getElementById("totalPrice"); 
+	let s = ${sDate.replaceAll("-", "")};
+	let e = ${eDate.replaceAll("-", "")};
+	totalPrice.innerText = ((e - s + 1)*${car.price}) + " won ";
 	function reserveOk() {
 
+		alert('(주)Be_off님의 계좌로 입금처리 됩니다.');
 		alert('예약성공');
 		location.href = "tickets";	
 		

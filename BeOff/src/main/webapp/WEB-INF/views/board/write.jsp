@@ -70,7 +70,7 @@
 
 
             <button type="submit" class="btn btn-outline-dark">작성완료</button>
-            <a class="btn btn-outline-dark" href="list?page=${empty page ? '' : page}">목록</a>
+            <a class="btn btn-outline-dark" href="list?page=${empty page ? '' : page}&search=">목록</a>
         </form>
 
     </div>

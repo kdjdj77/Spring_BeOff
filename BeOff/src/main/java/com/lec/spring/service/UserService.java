@@ -80,6 +80,7 @@ public class UserService {
 		// 신규 회원은 ROLE_MEMBER 권한 기본적으로 부여
 		Authority auth = authorityRepository.findByName("ROLE_MEMBER");
 		user.addAuthority(auth);
+		user.setProvider("normal");
 		userRepository.save(user);
 		return 1;
 	}

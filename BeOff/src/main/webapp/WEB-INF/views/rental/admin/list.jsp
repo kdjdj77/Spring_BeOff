@@ -43,10 +43,10 @@
 									<a class="btn btn-secondary btn-lg" href="cars/list?id=${r.id }">
 										차목록
 									</a> 
-									<a class="btn btn-secondary btn-lg"href="rentalUpdate?id=${r.id }">
+									<a class="btn btn-secondary btn-lg" href="rentalUpdate?id=${r.id }">
 										수정
 									</a>
-									<a class="btn btn-secondary btn-lg"href="rentalDeleteOk?id=${r.id }">
+									<a class="btn btn-secondary btn-lg" href="rentalDeleteOk?id=${r.id }">
 										삭제
 									</a>
 								</div>
