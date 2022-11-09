@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lec.spring.config.PrincipalDetailService;
+import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
+import com.lec.spring.repository.UserRepository;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
 
@@ -37,8 +40,6 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private PrincipalDetailService principalDetailService;
-	@Autowired
-	private AuthenticationManager authenticationManager;
 
 	public UserController() {
 		System.out.println(getClass().getName() + "() 생성");
@@ -182,21 +183,35 @@ public class UserController {
 	
 	@PostMapping("/updateOk")
 	public String usrUpdateOk(
-			String username, String name, 
+			String id, String username, String name, 
 			String email, String num, String pw,
 			Model model) {
 		
-		int result = userService.updateUser(username, name, email, pw);
+		int result = userService.updateUser(id, username, name, email, pw);
 		
 		model.addAttribute("result", result);
-		
-		// principal에 유저정보 업데이트
-//		User user = userService.findByUsername(username);
-//		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-//		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-		return "/user/updateOk";
+			
+		//수정된 유저정보 principal에 업데이트
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userAccount = (UserDetails) authentication.getPrincipal();
+	    SecurityContextHolder.getContext().setAuthentication(
+	    		createNewAuthentication(authentication,userAccount.getUsername())
+	    );
+	    
+	    return "/user/updateOk";
 	}
+	protected Authentication createNewAuthentication(Authentication currentAuth, String username) {
+	    UserDetails newPrincipal = principalDetailService.loadUserByUsername(username);
+	    UsernamePasswordAuthenticationToken newAuth = 
+	    		new UsernamePasswordAuthenticationToken(
+	    				newPrincipal, 
+	    				currentAuth.getCredentials(), 
+	    				newPrincipal.getAuthorities()
+	    		);
+	    newAuth.setDetails(currentAuth.getDetails());
+	    return newAuth;
+	}
+	
 	
 	@GetMapping("/deleteOk")
 	public String usrUpdateOk(Model model) {
@@ -204,11 +219,6 @@ public class UserController {
 		int result = userService.deleteLoggedUser();
 		
 		model.addAttribute("result", result);
-		
-		// principal에 유저정보 업데이트
-//		User user = userService.findByUsername(username);
-//		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-//		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		return "/user/deleteOk";
 	}

@@ -82,10 +82,10 @@
                                                 <h5>${list.price } won</h5>
                                             </div>
                                         </td>
-                                        <td>                                        	
-                                            <c:forEach var="i" items="${list.date }" begin="0" varStatus="s" end="${listSize }" step="1">
-                                                	<c:if test="${s.last }"><span>${s.current} ~ ${s.current+s.index + 1}</span></c:if>
-                                            </c:forEach>
+                                        <td>        
+                                            
+                                            <div>${list.dateRange}</div>
+                                            
                                         </td>
                                         <td>
                                         	<form action="ticketDelete" method="POST">

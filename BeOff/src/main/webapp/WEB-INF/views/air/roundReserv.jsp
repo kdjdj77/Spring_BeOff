@@ -198,8 +198,7 @@
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : '항공편' , //결제창에서 보여질 이름
-		    //amount : ${airplane.name.price * num} + ${airplane2.name.price * num2}, 
-		    amount : 1234, //실제 결제되는 가격
+		    amount : ${airplane.name.price * num} + ${airplane2.name.price * num2}, 
 		    buyer_email : '${userdetails.user.email}',
 		    buyer_name : '${userdetails.user.name}',
 		    buyer_tel : '${userdetails.user.phonenum}',

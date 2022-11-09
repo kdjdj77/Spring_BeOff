@@ -6,9 +6,15 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.lec.spring.config.PrincipalDetailService;
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.Authreq;
 import com.lec.spring.domain.User;
@@ -28,6 +34,10 @@ public class UserService {
 	private AuthorityRepository authorityRepository;
 	@Autowired
 	private AuthreqRepository authreqRepository;
+//	@Autowired
+//	private PrincipalDetailService principalDetailService;
+//	@Autowired
+//	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
@@ -125,12 +135,13 @@ public class UserService {
 	      }
 	    
 	}
-	public int updateUser(String susername, String sname, String semail, String spw) {
-		User user = userRepository.findByUsername(susername);
+	public int updateUser(String id, String susername, String sname, String semail, String spw) {
+		Long lid = Long.parseLong(id);
+		User user = userRepository.findById(lid).orElse(null);
 		user.setName(sname);
 		user.setEmail(semail);
 		if (spw != null) user.setPassword(passwordEncoder.encode(spw));
-		user = userRepository.save(user);
+		user = userRepository.saveAndFlush(user);
 		return 1;
 	}
 	public int deleteLoggedUser() {
@@ -138,4 +149,25 @@ public class UserService {
 		userRepository.delete(user);
 		return 1;
 	}
+	public User getUserById(String id) {
+		Long lid = Long.parseLong(id);
+		User user = userRepository.findById(lid).orElse(null);
+		
+		return user;
+	}
+//	//유저정보 principal에 업데이트
+//	public void updatePrincipal() {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		UserDetails userAccount = (UserDetails) authentication.getPrincipal();
+//	    SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication,userAccount.getUsername()));
+//		
+//		
+//	}
+//	//유저정보 principal에 업데이트
+//	protected Authentication createNewAuthentication(Authentication currentAuth, String username) {
+//	    UserDetails newPrincipal = principalDetailService.loadUserByUsername(username);
+//	    UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
+//	    newAuth.setDetails(currentAuth.getDetails());
+//	    return newAuth;
+//	}
 }
