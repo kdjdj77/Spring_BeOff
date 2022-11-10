@@ -10,7 +10,7 @@
 
 프로젝트 발표 url : https://www.youtube.com/playlist?list=PLedGoSru794_QVz2l6M3jL4Kjc5yJ8N8J
 
-사이트 주소 : http://localhost:8081/home
+사이트 : http://localhost:8081/home
 
 ★처음 프로젝트 실행 시 해야 할 것
 
