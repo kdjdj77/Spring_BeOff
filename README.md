@@ -1,5 +1,5 @@
 # BeOff
-# JPA Repository / Spring Security (BcryptPasswordEncoder) / Kakao,Naver,Google 로그인 / 전화번호 인증 / 결제
+# JPA Repository / Spring Security (BcryptPasswordEncoder) / SpringBoot / Kakao,Naver,Google 로그인 / 전화번호 인증 / 결제
 
 팀명 : 떠나자
 
